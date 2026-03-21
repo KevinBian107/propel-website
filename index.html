@@ -21,6 +21,7 @@
     <a href="#vision" data-toc-link>Vision</a>
     <a href="#pipeline" data-toc-link>Pipeline</a>
     <a href="#modes" data-toc-link>Four Modes</a>
+    <a href="#demos" data-toc-link>Demos</a>
     <a href="#features" data-toc-link>Key Features</a>
     <a href="#skills" data-toc-link>Skills</a>
     <a href="#agents" data-toc-link>Agents</a>
@@ -142,6 +143,54 @@
         <h3>Trainer</h3>
         <div class="mode-scope">Gate 4 (runtime)</div>
         <p>Code is ready. Launch training runs, monitor, fix CUDA/OOM/path errors.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Demos ── -->
+  <section id="demos" class="fade-in">
+    <h2>See It In Action</h2>
+    <p>Each mode shapes how the agent interacts with you. Watch simulated sessions for each mode.</p>
+
+    <div class="demo-grid">
+      <!-- Researcher Demo -->
+      <div class="terminal-demo" id="demo-researcher">
+        <div class="term-header">
+          <div class="term-dots"><span></span><span></span><span></span></div>
+          <div class="term-title">Researcher Mode</div>
+          <button class="demo-replay">replay</button>
+        </div>
+        <div class="term-body"></div>
+      </div>
+
+      <!-- Engineer Demo -->
+      <div class="terminal-demo" id="demo-engineer">
+        <div class="term-header">
+          <div class="term-dots"><span></span><span></span><span></span></div>
+          <div class="term-title">Engineer Mode</div>
+          <button class="demo-replay">replay</button>
+        </div>
+        <div class="term-body"></div>
+      </div>
+
+      <!-- Debugger Demo -->
+      <div class="terminal-demo" id="demo-debugger">
+        <div class="term-header">
+          <div class="term-dots"><span></span><span></span><span></span></div>
+          <div class="term-title">Debugger Mode</div>
+          <button class="demo-replay">replay</button>
+        </div>
+        <div class="term-body"></div>
+      </div>
+
+      <!-- Trainer Demo -->
+      <div class="terminal-demo" id="demo-trainer">
+        <div class="term-header">
+          <div class="term-dots"><span></span><span></span><span></span></div>
+          <div class="term-title">Trainer Mode</div>
+          <button class="demo-replay">replay</button>
+        </div>
+        <div class="term-body"></div>
       </div>
     </div>
   </section>
@@ -284,8 +333,7 @@ propel init</code></pre>
     <p>Propel combines ideas from multiple sources:</p>
     <ul class="ack-list">
       <li><a href="https://github.com/obra/superpowers" target="_blank" rel="noopener"><strong>obra/superpowers</strong></a> &mdash; Plugin architecture, discipline enforcement, verification gates, micro-task planning.</li>
-      <li><a href="https://github.com/KevinBian107/code-manual" target="_blank" rel="noopener"><strong>code-manual</strong></a> &mdash; Research methodology, investigation skills, domain-specific agents, paper-alignment auditing.</li>
-      <li><a href="https://github.com/scott-yj-yang/new-prompt" target="_blank" rel="noopener"><strong>scott-yj-yang/new-prompt</strong></a> &mdash; Session management CLI, auto-detection of project root, investigation artifact linking.</li>
+<li><a href="https://github.com/scott-yj-yang/new-prompt" target="_blank" rel="noopener"><strong>scott-yj-yang/new-prompt</strong></a> &mdash; Session management CLI, auto-detection of project root, investigation artifact linking.</li>
       <li><a href="https://github.com/talmolab/sleap-io" target="_blank" rel="noopener"><strong>Talmo's sleap-io</strong></a> &mdash; Investigation skill template with structured scratch/ patterns and living READMEs.</li>
       <li><a href="https://huggingface.co/blog/sionic-ai/claude-code-skills-training" target="_blank" rel="noopener"><strong>Sionic AI's experiment registry</strong></a> &mdash; Retrospective skill and experiment learning workflow.</li>
       <li><a href="https://github.com/brunoasm/my_claude_skills" target="_blank" rel="noopener"><strong>brunoasm's claude skills</strong></a> &mdash; Think-deeply anti-sycophancy skill and PDF extraction.</li>
@@ -304,5 +352,6 @@ propel init</code></pre>
 </footer>
 
 <script src="main.js"></script>
+<script src="demo.js"></script>
 </body>
 </html>

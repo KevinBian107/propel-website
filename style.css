@@ -448,6 +448,141 @@ tr:last-child td {
   font-weight: bold;
 }
 
+/* ── Terminal Demos ── */
+.demo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+@media (max-width: 900px) {
+  .demo-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.terminal-demo {
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+}
+
+.term-header {
+  background: #2d2d2d;
+  padding: 0.5rem 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.term-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.term-dots span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.term-dots span:nth-child(1) { background: #ff5f57; }
+.term-dots span:nth-child(2) { background: #febc2e; }
+.term-dots span:nth-child(3) { background: #28c840; }
+
+.term-title {
+  flex: 1;
+  text-align: center;
+  font-size: 0.75rem;
+  color: #999;
+  font-family: var(--font-mono);
+}
+
+.demo-replay {
+  background: none;
+  border: 1px solid #555;
+  color: #999;
+  font-size: 0.7rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.demo-replay:hover {
+  color: #fff;
+  border-color: #999;
+}
+
+.term-body {
+  background: #1a1a1a;
+  padding: 0.75rem 1rem;
+  min-height: 280px;
+  max-height: 380px;
+  overflow-y: auto;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  line-height: 1.55;
+}
+
+.term-body::-webkit-scrollbar {
+  width: 4px;
+}
+
+.term-body::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 2px;
+}
+
+.term-line {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.term-user {
+  color: #e2e8f0;
+}
+
+.term-prompt {
+  color: #10b981;
+  font-weight: 600;
+}
+
+.term-typed {
+  color: #f1f5f9;
+}
+
+.term-output {
+  color: #94a3b8;
+}
+
+.term-output.term-accent {
+  color: #60a5fa;
+  font-weight: 600;
+}
+
+.term-output.term-dim {
+  color: #64748b;
+  font-style: italic;
+}
+
+.term-output.term-box {
+  color: #fbbf24;
+  font-size: 0.72rem;
+  line-height: 1.4;
+}
+
+.term-cursor {
+  color: #10b981;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
 /* ── Footer ── */
 footer {
   border-top: 1px solid var(--color-border);
