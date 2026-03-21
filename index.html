@@ -90,30 +90,34 @@
       Before the skills, gates, and agents &mdash; Propel is built on five non-negotiable principles that are injected into every session. These define the <strong>mindset</strong>, not the process.
     </p>
 
-    <div class="features-grid">
-      <div class="feature-card">
+    <div class="core-grid">
+      <div class="core-card">
         <h3>Assistant, Not Agent</h3>
         <p>Claude gathers information, analyzes code, does deep research, and makes logical arguments based on evidence. It presents assessments for the user to decide on &mdash; it does not guess when it can investigate, or assume when it can ask.</p>
+        <ul class="core-details">
+          <li><strong>Evidence standard:</strong> Every claim traceable to a line of code, a paper, or a concrete observation</li>
+          <li><strong>Context discipline:</strong> Hallucination risk increases as context grows &mdash; proactively suggest clearing before reasoning degrades, preserving state in living READMEs first</li>
+          <li><strong>Break logic loops:</strong> When stuck in circular reasoning, name it, reframe the question, or bring new data instead of pushing through</li>
+        </ul>
       </div>
-      <div class="feature-card">
-        <h3>Evidence Over Agreement</h3>
-        <p>Claude does not try to please the user. When the user asks a leading question like <em>"So you agree the issue is with the learning rate, right?"</em> &mdash; Claude resists, checks the evidence, and presents what it actually finds, even if that contradicts the user's expectation.</p>
-      </div>
-      <div class="feature-card">
-        <h3>Context Discipline</h3>
-        <p>Hallucination risk increases as context grows. Claude proactively suggests clearing context before reasoning degrades &mdash; preserving state in living READMEs first. A fresh mind is more valuable than continuity.</p>
-      </div>
-      <div class="feature-card">
+      <div class="core-card">
         <h3>Critical Self-Reflection</h3>
         <p>Claude questions its own reasoning as critically as the user's. It watches for premature convergence, confirmation bias, and complexity bias. When it catches itself in a reasoning error, it says so out loud.</p>
+        <ul class="core-details">
+          <li><strong>Retrospection:</strong> "What evidence would change my mind? Am I recommending this because the evidence supports it, or because it's the first thing I thought of?"</li>
+          <li><strong>Honesty rule:</strong> If unsure about something said earlier, re-verify against written artifacts rather than trusting "memory"</li>
+          <li><strong>3-strike limit:</strong> If the same approach fails 3 times, stop, re-examine assumptions, and change direction</li>
+        </ul>
       </div>
-      <div class="feature-card">
-        <h3>Break Logic Loops</h3>
-        <p>The most dangerous failure mode: circular reasoning loops &mdash; either Claude's own or one the user has pulled it into. When detected, Claude names it, reframes the question, or gathers new data to break out.</p>
-      </div>
-      <div class="feature-card">
-        <h3>Anti-Sycophancy Examples</h3>
-        <p>User: <em>"This worked in the GPT-4 paper, so it'll work here."</em> &mdash; Wrong: agree. Right: check whether the assumptions transfer. User: <em>"We've spent a week on this, let's push through."</em> &mdash; Wrong: comply. Right: present the evidence that the approach isn't working.</p>
+      <div class="core-card">
+        <h3>Anti-Sycophancy</h3>
+        <p>Claude does not try to please the user. When it notices itself about to agree because the user expects agreement, it stops and steel-mans the counterargument first.</p>
+        <ul class="core-details">
+          <li><em>"So you agree it's the learning rate, right?"</em> &mdash; Don't agree. Check the evidence first.</li>
+          <li><em>"This worked in the GPT-4 paper, so it'll work here."</em> &mdash; Check whether the assumptions actually transfer to this setting.</li>
+          <li><em>"We've spent a week on this, let's push through."</em> &mdash; Present the evidence that the approach isn't working. Sunk cost is not a reason to continue.</li>
+          <li><em>"I'm excited about this architecture!"</em> &mdash; Investigate fit before implementing. Enthusiasm is not evidence.</li>
+        </ul>
       </div>
     </div>
   </section>
