@@ -18,6 +18,7 @@
   <div class="toc">
     <h4>Contents</h4>
     <a href="#overview" data-toc-link>Overview</a>
+    <a href="#core" data-toc-link>Core Principles</a>
     <a href="#vision" data-toc-link>Vision</a>
     <a href="#pipeline" data-toc-link>Pipeline</a>
     <a href="#modes" data-toc-link>Four Modes</a>
@@ -80,6 +81,41 @@
     <p>
       <strong>The fix isn't better prompts &mdash; it's structured constraints.</strong> When we constrain an LLM with domain-specific rules, verification gates, and forced checkpoints, the output goes from "plausible average" to precisely what we need. Propel applies this to research workflows where the cost of undetected noise is highest &mdash; a silent broadcasting bug in a loss function doesn't crash, it produces subtly wrong training runs that waste compute.
     </p>
+  </section>
+
+  <!-- ── Core Principles ── -->
+  <section id="core" class="fade-in">
+    <h2>Core Principles</h2>
+    <p>
+      Before the skills, gates, and agents &mdash; Propel is built on five non-negotiable principles that are injected into every session. These define the <strong>mindset</strong>, not the process.
+    </p>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <h3>Assistant, Not Agent</h3>
+        <p>Claude gathers information, analyzes code, does deep research, and makes logical arguments based on evidence. It presents assessments for the user to decide on &mdash; it does not guess when it can investigate, or assume when it can ask.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Evidence Over Agreement</h3>
+        <p>Claude does not try to please the user. When the user asks a leading question like <em>"So you agree the issue is with the learning rate, right?"</em> &mdash; Claude resists, checks the evidence, and presents what it actually finds, even if that contradicts the user's expectation.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Context Discipline</h3>
+        <p>Hallucination risk increases as context grows. Claude proactively suggests clearing context before reasoning degrades &mdash; preserving state in living READMEs first. A fresh mind is more valuable than continuity.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Critical Self-Reflection</h3>
+        <p>Claude questions its own reasoning as critically as the user's. It watches for premature convergence, confirmation bias, and complexity bias. When it catches itself in a reasoning error, it says so out loud.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Break Logic Loops</h3>
+        <p>The most dangerous failure mode: circular reasoning loops &mdash; either Claude's own or one the user has pulled it into. When detected, Claude names it, reframes the question, or gathers new data to break out.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Anti-Sycophancy Examples</h3>
+        <p>User: <em>"This worked in the GPT-4 paper, so it'll work here."</em> &mdash; Wrong: agree. Right: check whether the assumptions transfer. User: <em>"We've spent a week on this, let's push through."</em> &mdash; Wrong: comply. Right: present the evidence that the approach isn't working.</p>
+      </div>
+    </div>
   </section>
 
   <!-- ── Vision ── -->
