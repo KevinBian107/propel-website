@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Propel &mdash; Structured Constraint Framework for Research Code Agents</title>
+  <meta name="description" content="Propel is a structured constraint framework that turns unconstrained LLM output into precise, paper-aligned research code through human-in-the-loop gates, domain-specific auditors, and investigation-first methodology." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&family=Noto+Sans+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="assets/logo-c.svg" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ── Table of Contents (sidebar, large screens) ── -->
+<nav class="toc-wrapper" aria-label="Table of Contents">
+  <div class="toc">
+    <h4>Contents</h4>
+    <a href="#overview" data-toc-link>Overview</a>
+    <a href="#vision" data-toc-link>Vision</a>
+    <a href="#pipeline" data-toc-link>Pipeline</a>
+    <a href="#modes" data-toc-link>Three Modes</a>
+    <a href="#features" data-toc-link>Key Features</a>
+    <a href="#skills" data-toc-link>Skills</a>
+    <a href="#agents" data-toc-link>Agents</a>
+    <a href="#installation" data-toc-link>Installation</a>
+    <a href="#acknowledgments" data-toc-link>Acknowledgments</a>
+  </div>
+</nav>
+
+<main class="container">
+
+  <!-- ── Hero ── -->
+  <header class="hero" id="top">
+    <img src="assets/logo-c.svg" alt="Propel Logo" class="hero-logo" />
+    <h1>Propel</h1>
+    <p class="subtitle">
+      A structured constraint framework for Claude Code in research workflows &mdash;
+      turning unconstrained LLM output into precise, paper-aligned research code.
+    </p>
+    <p class="author">
+      <a href="https://kbian.org" target="_blank" rel="noopener">Kevin Bian</a> &middot;
+      <a href="https://yuertang.dev/" target="_blank" rel="noopener">Yuer Tang</a>
+    </p>
+
+    <div class="quick-links">
+      <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        Code
+      </a>
+      <a href="https://github.com/KevinBian107/propel#installation" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8.878.392a1.75 1.75 0 00-1.756 0l-5.25 3.045A1.75 1.75 0 001 4.951v6.098c0 .624.332 1.2.872 1.514l5.25 3.045a1.75 1.75 0 001.756 0l5.25-3.045c.54-.313.872-.89.872-1.514V4.951c0-.624-.332-1.2-.872-1.514L8.878.392zM7.875 1.69a.25.25 0 01.25 0l4.63 2.685L8 7.133 3.245 4.375l4.63-2.685zM2.5 5.677l5 2.9v5.765l-4.63-2.685A.25.25 0 012.5 11.4V5.677zm6 8.665V8.577l5-2.9V11.4a.25.25 0 01-.13.216L8.5 14.342z"/></svg>
+        Install
+      </a>
+      <a href="https://github.com/KevinBian107/propel/tree/master/docs" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M0 1.75A.75.75 0 01.75 1h4.253c1.227 0 2.317.59 3 1.501A3.744 3.744 0 0111.006 1h4.245a.75.75 0 01.75.75v10.5a.75.75 0 01-.75.75h-4.507a2.25 2.25 0 00-1.591.659l-.622.621a.75.75 0 01-1.06 0l-.622-.621A2.25 2.25 0 005.258 13H.75a.75.75 0 01-.75-.75V1.75zm7.251 10.324V2.922A2.25 2.25 0 005.003 2.5H1.5v9h3.757a3.75 3.75 0 011.994.574zM8.75 12.074V2.922A2.25 2.25 0 0111.006 2.5h3.495v9h-3.757a3.75 3.75 0 00-1.994.574z"/></svg>
+        Docs
+      </a>
+      <a href="https://kbian.org/Kaiwen-Wiki/articles/vibe_coding/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M0 1.75A.75.75 0 01.75 1h4.253c1.227 0 2.317.59 3 1.501A3.744 3.744 0 0111.006 1h4.245a.75.75 0 01.75.75v10.5a.75.75 0 01-.75.75h-4.507a2.25 2.25 0 00-1.591.659l-.622.621a.75.75 0 01-1.06 0l-.622-.621A2.25 2.25 0 005.258 13H.75a.75.75 0 01-.75-.75V1.75zm7.251 10.324V2.922A2.25 2.25 0 005.003 2.5H1.5v9h3.757a3.75 3.75 0 011.994.574zM8.75 12.074V2.922A2.25 2.25 0 0111.006 2.5h3.495v9h-3.757a3.75 3.75 0 00-1.994.574z"/></svg>
+        Vibe Coding Articles
+      </a>
+    </div>
+
+    <!-- Development Banner -->
+    <div class="dev-banner">
+      <strong>Under Active Development.</strong>
+      Propel currently serves as a <strong>Claude Code plugin</strong>, but the pipeline and logic are designed to be <strong>agent-agnostic</strong> &mdash; the structured constraint framework generalizes to any research code agent assistant.
+    </div>
+  </header>
+
+  <!-- ── Overview ── -->
+  <section id="overview" class="fade-in">
+    <h2>Overview</h2>
+    <p>
+      Claude Code can be a powerful boost to research workflows &mdash; if used correctly and carefully. Without structure, an unconstrained LLM produces the <em>mean of its training data</em>: ask it to "implement RVQ" and you get a plausible-looking average of every RVQ implementation it has seen, not the one that matches your paper, your architecture, your constraints. The output compiles, but it's noisy &mdash; wrong assumptions baked in, silent numerical bugs, design decisions made without asking.
+    </p>
+    <p>
+      <strong>The fix isn't better prompts &mdash; it's structured constraints.</strong> When we constrain an LLM with domain-specific rules, verification gates, and forced checkpoints, the output goes from "plausible average" to precisely what we need. Propel applies this to research workflows where the cost of undetected noise is highest &mdash; a silent broadcasting bug in a loss function doesn't crash, it produces subtly wrong training runs that waste compute.
+    </p>
+  </section>
+
+  <!-- ── Vision ── -->
+  <section id="vision" class="fade-in">
+    <h2>Vision: Beyond Claude Code</h2>
+    <p>
+      While Propel is currently implemented as a Claude Code plugin, its core design &mdash; structured gates, investigation-first methodology, domain-specific auditors, and living documentation &mdash; is not tied to any particular agent platform. The pipeline encodes <strong>how researchers should interact with code-generating agents</strong>, regardless of the underlying model or tool.
+    </p>
+    <blockquote>
+      The same constraint framework that prevents Claude Code from producing noisy averages can prevent <em>any</em> research code agent from doing the same. Propel's gates, questioners, and auditors represent a general protocol for human-AI collaboration in research engineering.
+    </blockquote>
+    <p>
+      The goal is a portable specification: structured intake, grounding questioners, investigation scaffolds, paper-alignment auditing, and experiment registries that work across agent systems &mdash; Claude Code, Cursor, Copilot Workspace, Devin, or whatever comes next.
+    </p>
+  </section>
+
+  <!-- ── Pipeline ── -->
+  <section id="pipeline" class="fade-in">
+    <h2>The Pipeline</h2>
+    <p>
+      Propel enforces five human-in-the-loop gates, two questioner checkpoints, and automatic auditor dispatch after every code change. The pipeline ensures investigation happens before implementation, design decisions are explicit, and silent bugs are caught before they reach training.
+    </p>
+
+    <figure class="pipeline-figure">
+      <img src="assets/propel_pipeline.svg" alt="Propel Pipeline: Human-in-the-Loop Research Workflow with Gates, Questioners, and Auditors" />
+      <figcaption>Figure 1. The Propel pipeline &mdash; seven stages, five human-in-the-loop gates, and two questioner checkpoints.</figcaption>
+    </figure>
+
+    <div class="pipeline-text">Intake &rarr; Q0 &rarr; Investigation &rarr; Gate 1 &rarr; Q1 &rarr; Design &rarr; Implementation &rarr; Debug &rarr; Training &rarr; Retrospective
+ G0    ground      G1        findings  detail   G2          G3          G4      Trainer      All</div>
+
+    <p>
+      At each gate, the agent stops and asks structured questions that reveal design assumptions &mdash; never "shall I proceed?" but "should we [A] or [B]? A means [trade-off], B means [trade-off]." The questioners (Q0, Q1) ground the work in concrete reference implementations and specific implementation details before the agent acts.
+    </p>
+  </section>
+
+  <!-- ── Three Modes ── -->
+  <section id="modes" class="fade-in">
+    <h2>Three Modes</h2>
+    <p>
+      Not every session needs the full pipeline. Choose a mode at the start of each session to filter which skills and gates are active.
+    </p>
+
+    <div class="modes-grid">
+      <div class="mode-card mode-researcher">
+        <h3>Researcher</h3>
+        <div class="mode-scope">Gates 0 &amp; 1</div>
+        <p>Literature, investigation, deep research. Understanding the problem space before building anything.</p>
+      </div>
+      <div class="mode-card mode-engineer">
+        <h3>Engineer</h3>
+        <div class="mode-scope">All Gates (0&ndash;4)</div>
+        <p>Full pipeline. Investigation through implementation with all auditors. The default mode.</p>
+      </div>
+      <div class="mode-card mode-trainer">
+        <h3>Trainer</h3>
+        <div class="mode-scope">Gate 4 (runtime)</div>
+        <p>Code is ready. Launch training runs, monitor, fix CUDA/OOM/path errors.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Key Features ── -->
+  <section id="features" class="fade-in">
+    <h2>Key Features</h2>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <h3>Human-in-the-Loop Gates</h3>
+        <p>Five mandatory checkpoints that extract your specific insight before the agent acts. No rubber-stamping &mdash; every question is disjunctive and assumption-exposing.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Investigation-First</h3>
+        <p>No implementation without a documented investigation in <code>scratch/</code>. Living READMEs preserve knowledge across sessions and <code>/clear</code> boundaries.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Paper-Alignment Auditing</h3>
+        <p>Every paper-derived component is automatically cross-referenced against source equations. Catches mismatches between what the paper says and what the code does.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Silent Bug Detection</h3>
+        <p>Active scanning for 11 categories of silent failures after every code change &mdash; broadcasting bugs, wrong reductions, detached gradients, and more.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Questioner Checkpoints</h3>
+        <p>Q0 grounds work in concrete references before investigation. Q1 nails down implementation details before design. Prevents the agent from filling gaps with training-data averages.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Experiment Registry</h3>
+        <p>Retrospectives capture what worked, what failed, and why. The failed attempts table is more valuable than the working solution &mdash; prevents repeating mistakes.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Skills ── -->
+  <section id="skills" class="fade-in">
+    <h2>Skills</h2>
+    <p>Propel includes 15+ skills organized by workflow phase. Each skill activates on specific triggers and guides the agent through a structured process.</p>
+
+    <table>
+      <thead>
+        <tr><th>Category</th><th>Skill</th><th>Trigger</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Meta</td><td><strong>using-propel</strong></td><td>Always active &mdash; routes to correct skill</td></tr>
+        <tr><td rowspan="2">Literature</td><td><strong>deep-research</strong></td><td>"survey", "literature review", "compare methods"</td></tr>
+        <tr><td><strong>paper-extraction</strong></td><td>"process these papers", "build paper database"</td></tr>
+        <tr><td>Investigation</td><td><strong>investigation</strong></td><td>"start investigation", "trace X", "what touches X"</td></tr>
+        <tr><td rowspan="2">Design</td><td><strong>research-design</strong></td><td>"propose how to", "design the implementation"</td></tr>
+        <tr><td><strong>writing-plans</strong></td><td>"write the plan", "break into tasks"</td></tr>
+        <tr><td>Implementation</td><td><strong>subagent-driven-research</strong></td><td>User says "go" after plan approval</td></tr>
+        <tr><td rowspan="2">Validation</td><td><strong>research-validation</strong></td><td>"validate this", "test the implementation"</td></tr>
+        <tr><td><strong>verification-before-completion</strong></td><td>Before claiming "done"</td></tr>
+        <tr><td>Debugging</td><td><strong>systematic-debugging</strong></td><td>Bug reports, training failures</td></tr>
+        <tr><td>Learning</td><td><strong>retrospective</strong></td><td>"retrospective", auto-suggests at ~20 turns</td></tr>
+        <tr><td rowspan="2">Cross-cutting</td><td><strong>think-deeply</strong></td><td>Confirmation-seeking statements</td></tr>
+        <tr><td><strong>context-hygiene</strong></td><td>&gt;15 turns, "getting long"</td></tr>
+        <tr><td>Training</td><td><strong>trainer-mode</strong></td><td>"train", "launch training" (Trainer Mode)</td></tr>
+        <tr><td>Customization</td><td><strong>project-customization</strong></td><td>"customize Propel", "detect conventions"</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ── Agents ── -->
+  <section id="agents" class="fade-in">
+    <h2>Agents (Auditors)</h2>
+    <p>Domain-specific auditors auto-dispatch after code changes. They run as subagents with separate context windows and read-only access.</p>
+
+    <table>
+      <thead>
+        <tr><th>Agent</th><th>Purpose</th><th>Auto?</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>paper-alignment-auditor</strong></td><td>Cross-reference code against paper equations</td><td>Yes</td></tr>
+        <tr><td><strong>jax-logic-auditor</strong></td><td>Trace shapes through JAX transforms</td><td>Yes</td></tr>
+        <tr><td><strong>silent-bug-detector</strong></td><td>Scan for 11 silent failure categories</td><td>Yes</td></tr>
+        <tr><td><strong>data-flow-tracer</strong></td><td>End-to-end tensor annotation</td><td>No</td></tr>
+        <tr><td><strong>regression-guard</strong></td><td>Verify existing configs unchanged</td><td>Yes</td></tr>
+        <tr><td><strong>env-researcher</strong></td><td>Deep-dive simulation env docs</td><td>Yes</td></tr>
+        <tr><td><strong>failure-mode-researcher</strong></td><td>Internet search for training failures</td><td>No</td></tr>
+        <tr><td><strong>code-reviewer</strong></td><td>General code quality with research awareness</td><td>No</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ── Installation ── -->
+  <section id="installation" class="fade-in">
+    <h2>Installation</h2>
+
+    <div class="install-steps">
+      <div class="install-step">
+        <div>
+          <p><strong>Clone and install</strong></p>
+          <pre><code>git clone https://github.com/KevinBian107/propel.git
+cd propel && pip install -e .</code></pre>
+        </div>
+      </div>
+      <div class="install-step">
+        <div>
+          <p><strong>Initialize in any project</strong></p>
+          <pre><code>cd /path/to/your/project
+propel init</code></pre>
+          <p>Copies all skills, agents, commands, and hooks into your project's <code>.claude/</code> directory.</p>
+        </div>
+      </div>
+      <div class="install-step">
+        <div>
+          <p><strong>Start Claude and run <code>/intro</code></strong></p>
+          <pre><code>claude</code></pre>
+          <p>Then inside Claude, run <code>/intro</code> to select a mode, draft your CLAUDE.md, and optionally generate a project profile.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── What Only You Can Provide ── -->
+  <section id="human-input" class="fade-in">
+    <h2>What Only You Can Provide</h2>
+    <p>
+      Propel's constraints are necessary but not sufficient. The framework forces the agent to stop and ask structured questions at every phase transition, but <strong>the quality of the output depends entirely on what you bring to those checkpoints</strong>:
+    </p>
+    <table>
+      <thead>
+        <tr><th>Your Input</th><th>Why It Matters</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Research question</strong></td><td>Not "implement X" but "test whether X improves Y under condition Z." The more specific, the less the agent guesses.</td></tr>
+        <tr><td><strong>Hypothesis</strong></td><td>What do you expect and why? This is what auditors verify against.</td></tr>
+        <tr><td><strong>Method</strong></td><td>Which paper, which equations, which algorithmic choices. The agent cannot infer "use stop-gradient on the codebook as in Section 3.2."</td></tr>
+        <tr><td><strong>Domain knowledge</strong></td><td>Pitfalls not in any paper, configs that silently fail, things that only work in your setup.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ── Acknowledgments ── -->
+  <section id="acknowledgments" class="fade-in">
+    <h2>Acknowledgments</h2>
+    <p>Propel combines ideas from multiple sources:</p>
+    <ul class="ack-list">
+      <li><a href="https://github.com/obra/superpowers" target="_blank" rel="noopener"><strong>obra/superpowers</strong></a> &mdash; Plugin architecture, discipline enforcement, verification gates, micro-task planning.</li>
+      <li><a href="https://github.com/KevinBian107/code-manual" target="_blank" rel="noopener"><strong>code-manual</strong></a> &mdash; Research methodology, investigation skills, domain-specific agents, paper-alignment auditing.</li>
+      <li><a href="https://github.com/scott-yj-yang/new-prompt" target="_blank" rel="noopener"><strong>scott-yj-yang/new-prompt</strong></a> &mdash; Session management CLI, auto-detection of project root, investigation artifact linking.</li>
+      <li><a href="https://github.com/talmolab/sleap-io" target="_blank" rel="noopener"><strong>Talmo's sleap-io</strong></a> &mdash; Investigation skill template with structured scratch/ patterns and living READMEs.</li>
+      <li><a href="https://huggingface.co/blog/sionic-ai/claude-code-skills-training" target="_blank" rel="noopener"><strong>Sionic AI's experiment registry</strong></a> &mdash; Retrospective skill and experiment learning workflow.</li>
+      <li><a href="https://github.com/brunoasm/my_claude_skills" target="_blank" rel="noopener"><strong>brunoasm's claude skills</strong></a> &mdash; Think-deeply anti-sycophancy skill and PDF extraction.</li>
+      <li><a href="https://github.com/Weizhena/Deep-Research-skills" target="_blank" rel="noopener"><strong>Weizhena's Deep-Research</strong></a> &mdash; Structured literature review with human-in-the-loop checkpoints.</li>
+      <li><a href="https://github.com/coleam00/context-engineering-intro" target="_blank" rel="noopener"><strong>Context Engineering Template</strong></a> &mdash; Basic Claude Code usage patterns and context engineering principles.</li>
+    </ul>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <p>Propel is open source under the <a href="https://github.com/KevinBian107/propel/blob/master/LICENSE" target="_blank" rel="noopener">MIT License</a>.</p>
+    <p>Built by <a href="https://kbian.org" target="_blank" rel="noopener">Kevin Bian</a> and <a href="https://yuertang.dev/" target="_blank" rel="noopener">Yuer Tang</a>.</p>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
