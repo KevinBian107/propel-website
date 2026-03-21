@@ -347,7 +347,7 @@ tr:last-child td {
 /* ── Modes ── */
 .modes-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
   margin: 1.5rem 0;
 }
@@ -380,6 +380,10 @@ tr:last-child td {
 
 .mode-card.mode-engineer {
   border-top: 3px solid var(--color-accent);
+}
+
+.mode-card.mode-debugger {
+  border-top: 3px solid #dc2626;
 }
 
 .mode-card.mode-trainer {
