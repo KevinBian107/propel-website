@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Paper Alignment Auditor &mdash; Propel Documentation</title>
+  <meta name="description" content="Paper Alignment Auditor: equation-to-code verification, architecture alignment, algorithm flow verification, and hyperparameter cross-checking." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&family=Noto+Sans+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="../../assets/logo-c.svg" />
+  <link rel="stylesheet" href="../docs.css" />
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header class="docs-header">
+  <button class="sidebar-toggle" aria-label="Toggle navigation">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+  </button>
+  <a href="../../index.html" class="docs-header-logo">
+    <img src="../../assets/logo-c.svg" alt="Propel" />
+    Propel
+    <span class="logo-tag">docs</span>
+  </a>
+  <nav class="docs-header-nav">
+    <a href="../../index.html">Home</a>
+    <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">GitHub</a>
+  </nav>
+  <div class="docs-header-search">
+    <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"/></svg>
+    Search
+    <kbd>/</kbd>
+  </div>
+</header>
+
+<!-- ── Layout ── -->
+<div class="docs-layout">
+
+  <!-- ── Left Sidebar ── -->
+  <nav class="docs-sidebar" aria-label="Documentation navigation">
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Getting Started</div>
+      <a href="../index.html" class="sidebar-link">Overview</a>
+      <a href="../getting-started.html" class="sidebar-link">Installation &amp; Setup</a>
+      <a href="../core-principles.html" class="sidebar-link">Core Principles</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Pipeline</div>
+      <a href="../pipeline/index.html" class="sidebar-link">Pipeline Overview</a>
+      <a href="../pipeline/gates.html" class="sidebar-link">Gates &amp; Questioners</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Modes</div>
+      <a href="../modes/index.html" class="sidebar-link">Mode System</a>
+      <a href="../modes/researcher.html" class="sidebar-link sub">Researcher</a>
+      <a href="../modes/engineer.html" class="sidebar-link sub">Engineer</a>
+      <a href="../modes/debugger.html" class="sidebar-link sub">Debugger</a>
+      <a href="../modes/trainer.html" class="sidebar-link sub">Trainer</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Skills</div>
+      <a href="../skills/index.html" class="sidebar-link">Skills Overview</a>
+      <a href="../skills/investigation.html" class="sidebar-link sub">Investigation</a>
+      <a href="../skills/research-design.html" class="sidebar-link sub">Research Design</a>
+      <a href="../skills/subagent-driven-research.html" class="sidebar-link sub">Implementation</a>
+      <a href="../skills/systematic-debugging.html" class="sidebar-link sub">Systematic Debugging</a>
+      <a href="../skills/research-validation.html" class="sidebar-link sub">Validation</a>
+      <a href="../skills/deep-research.html" class="sidebar-link sub">Deep Research</a>
+      <a href="../skills/think-deeply.html" class="sidebar-link sub">Think Deeply</a>
+      <a href="../skills/context-hygiene.html" class="sidebar-link sub">Context Hygiene</a>
+      <a href="../skills/trainer-mode.html" class="sidebar-link sub">Trainer Mode</a>
+      <a href="../skills/retrospective.html" class="sidebar-link sub">Retrospective</a>
+      <a href="../skills/other.html" class="sidebar-link sub">Other Skills</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Agents</div>
+      <a href="index.html" class="sidebar-link">Agents Overview</a>
+      <a href="paper-alignment-auditor.html" class="sidebar-link sub active">Paper Alignment</a>
+      <a href="silent-bug-detector.html" class="sidebar-link sub">Silent Bug Detector</a>
+      <a href="jax-logic-auditor.html" class="sidebar-link sub">JAX Logic Auditor</a>
+      <a href="regression-guard.html" class="sidebar-link sub">Regression Guard</a>
+      <a href="data-flow-tracer.html" class="sidebar-link sub">Data Flow Tracer</a>
+      <a href="failure-mode-researcher.html" class="sidebar-link sub">Failure Mode Researcher</a>
+      <a href="env-researcher.html" class="sidebar-link sub">Env Researcher</a>
+      <a href="code-reviewer.html" class="sidebar-link sub">Code Reviewer</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Reference</div>
+      <a href="../customization.html" class="sidebar-link">Customization</a>
+      <a href="../pitfalls.html" class="sidebar-link">Common Pitfalls</a>
+    </div>
+
+  </nav>
+
+  <!-- ── Main Content ── -->
+  <article class="docs-content">
+
+    <div class="breadcrumbs">
+      <a href="../index.html">Docs</a>
+      <span class="sep">&#8250;</span>
+      <a href="index.html">Agents</a>
+      <span class="sep">&#8250;</span>
+      Paper Alignment Auditor
+    </div>
+
+    <h1 class="page-title">Paper Alignment Auditor</h1>
+    <p class="page-subtitle">
+      Rigorous cross-referencing of code implementations against their source paper's equations, algorithms, and architecture descriptions.
+    </p>
+
+    <!-- ── Overview ── -->
+    <h2 id="overview">Overview</h2>
+    <p>
+      The Paper Alignment Auditor is a specialized subagent that verifies whether your code faithfully implements what a research paper describes. It maps equations to code, checks architecture details, traces algorithm flows, and cross-checks hyperparameters &mdash; catching subtle misalignments before they waste training cycles.
+    </p>
+    <p>
+      Provide this agent with the paper (as PNGs for figures) and the relevant source files. It produces a structured discrepancy report covering what matches, what diverges, and what remains ambiguous.
+    </p>
+
+    <table>
+      <thead>
+        <tr><th>Property</th><th>Details</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Tools</strong></td><td>Read, Grep, Glob (read-only)</td></tr>
+        <tr><td><strong>Auto-Dispatch</strong></td><td>Yes &mdash; after implementing components from a paper</td></tr>
+        <tr><td><strong>Trigger</strong></td><td>Model architecture or loss function changes; new paper implementations</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ── Equation-to-Code ── -->
+    <h2 id="equation-to-code">Equation-to-Code Verification</h2>
+    <p>The auditor maps each equation in the paper to its code implementation and verifies mathematical fidelity:</p>
+    <ul>
+      <li><strong>Mathematical operations</strong> &mdash; checks signs, indices, normalization constants, and reduction axes</li>
+      <li><strong>Loss function terms</strong> &mdash; verifies each term matches the paper's objective exactly</li>
+      <li><strong>Intentional deviations</strong> &mdash; flags any "simplifications" the implementer may have introduced, even if they seem reasonable. The user decides whether those are acceptable.</li>
+    </ul>
+
+    <div class="admonition note">
+      <div class="admonition-title">Precision Required</div>
+      <p style="margin-bottom: 0">The auditor references exact equation numbers, figure numbers, and section numbers from the paper, paired with exact file paths and line numbers from the code. Vague references like "the loss function" are not acceptable.</p>
+    </div>
+
+    <!-- ── Architecture ── -->
+    <h2 id="architecture">Architecture Alignment</h2>
+    <p>Structural verification of the model against the paper's described architecture:</p>
+    <ul>
+      <li><strong>Layer ordering</strong> &mdash; verifies the sequence of layers matches the paper's description</li>
+      <li><strong>Activation functions</strong> &mdash; checks that the correct activation is used at each point (ReLU vs GELU vs SiLU matters)</li>
+      <li><strong>Normalization layers</strong> &mdash; confirms type (BatchNorm, LayerNorm, RMSNorm) and placement (pre-norm vs post-norm)</li>
+      <li><strong>Skip connections</strong> &mdash; verifies residual connections match the paper's diagram</li>
+      <li><strong>Dimensions</strong> &mdash; confirms hidden dimensions, number of heads, and bottleneck sizes against the paper's specifications</li>
+      <li><strong>Encoder/decoder structure</strong> &mdash; validates the overall architecture matches the paper's diagram</li>
+    </ul>
+
+    <!-- ── Algorithm Flow ── -->
+    <h2 id="algorithm-flow">Algorithm Flow Verification</h2>
+    <p>The auditor traces the training loop against the paper's algorithm pseudocode:</p>
+    <ul>
+      <li><strong>Operation ordering</strong> &mdash; does the code update in the same sequence as the paper describes?</li>
+      <li><strong>Gradient operations</strong> &mdash; are <code>stop_gradient</code> / <code>detach</code> operations placed where the paper intends? This is especially important for VAE/VQ-VAE methods, RL policy gradients, and actor-critic architectures.</li>
+      <li><strong>Sampling procedures</strong> &mdash; validates reparameterization tricks and stochastic components</li>
+      <li><strong>Update rules</strong> &mdash; verifies that target network updates, codebook updates, and other non-gradient updates follow the paper's specification</li>
+    </ul>
+
+    <!-- ── Hyperparameter ── -->
+    <h2 id="hyperparameters">Hyperparameter Cross-Check</h2>
+    <p>Compares default hyperparameters in code and config against the paper's reported values:</p>
+    <ul>
+      <li>Flags any hyperparameters mentioned in the paper that are <strong>missing from the config</strong></li>
+      <li>Notes hyperparameters in the code that <strong>aren't mentioned in the paper</strong> (may indicate undocumented implementation choices)</li>
+      <li>Checks that default values match the paper's reported settings</li>
+    </ul>
+
+    <!-- ── Common Misalignments ── -->
+    <h2 id="common-misalignments">Common Misalignment Patterns</h2>
+    <p>These are the patterns the auditor specifically watches for &mdash; each one has caused real bugs in research code:</p>
+
+    <table>
+      <thead>
+        <tr><th>Pattern</th><th>What Goes Wrong</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Wrong softmax axis</strong></td><td>Softmax applied over the wrong dimension &mdash; output looks like probabilities but they sum to 1 along the wrong axis</td></tr>
+        <tr><td><strong>Missing temperature/scaling</strong></td><td>A temperature or scaling parameter from the paper is omitted, changing the sharpness of distributions</td></tr>
+        <tr><td><strong>KL direction reversed</strong></td><td><code>KL(q||p)</code> vs <code>KL(p||q)</code> &mdash; mode-seeking vs mode-covering behavior. Papers often specify one; code implements the other.</td></tr>
+        <tr><td><strong>Mean vs sum reduction</strong></td><td>Using <code>mean</code> where the paper uses <code>sum</code> (or vice versa) in losses changes the effective learning rate</td></tr>
+        <tr><td><strong>Off-by-one in sequences</strong></td><td>Sequence indexing shifted by one position &mdash; the model attends to or predicts the wrong time step</td></tr>
+        <tr><td><strong>Missing positional encoding</strong></td><td>Positional encoding described in the paper but absent or incorrectly implemented in code</td></tr>
+        <tr><td><strong>Wrong commitment loss coefficient</strong></td><td>VQ-VAE style methods with incorrect beta for the commitment loss term</td></tr>
+        <tr><td><strong>Wrong reward discounting</strong></td><td>RL components with incorrect discount factor application &mdash; especially in multi-step returns</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ── Output Format ── -->
+    <h2 id="output-format">Output Format</h2>
+    <p>The auditor produces a structured report with four sections:</p>
+
+    <h3 id="verified">Verified Alignments</h3>
+    <p>Components confirmed to match the paper, with specific equation/section references paired to code locations.</p>
+
+    <h3 id="discrepancies">Discrepancies</h3>
+    <p>Each discrepancy includes:</p>
+    <ul>
+      <li>What the <strong>paper says</strong> (with equation/section reference)</li>
+      <li>What the <strong>code does</strong> (with file path and line number)</li>
+      <li><strong>Severity</strong>: Critical (wrong results), Medium (suboptimal), or Minor (cosmetic)</li>
+      <li>A specific <strong>recommendation</strong> for what to change</li>
+    </ul>
+
+    <h3 id="ambiguities">Ambiguities</h3>
+    <p>Cases where the paper is unclear and the code makes an assumption. The auditor flags these for the user to verify with the paper's authors or resolve through ablation.</p>
+
+    <h3 id="unverified">Not Verified</h3>
+    <p>Components that couldn't be checked with the available information &mdash; for example, figures that weren't provided as PNGs, or implementation details not covered in the paper.</p>
+
+    <div class="admonition tip">
+      <div class="admonition-title">Context Is Key</div>
+      <p style="margin-bottom: 0">Some deviations from the paper are intentional improvements. The auditor flags them but does not assume they are bugs &mdash; it lets the user decide whether each deviation is acceptable.</p>
+    </div>
+
+    <!-- ── Prev/Next ── -->
+    <nav class="docs-pager">
+      <a href="index.html">
+        <span class="pager-label">&larr; Previous</span>
+        <span class="pager-title">Agents Overview</span>
+      </a>
+      <a href="silent-bug-detector.html" class="next">
+        <span class="pager-label">Next &rarr;</span>
+        <span class="pager-title">Silent Bug Detector</span>
+      </a>
+    </nav>
+
+    <footer class="docs-footer">
+      <p>
+        <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">Propel</a> is open source under the MIT License.
+        Built by <a href="https://kbian.org" target="_blank" rel="noopener">Kaiwen Bian</a> &amp; <a href="https://yuertang.dev/" target="_blank" rel="noopener">Yuer Tang</a>.
+      </p>
+    </footer>
+
+  </article>
+
+  <!-- ── Right ToC ── -->
+  <aside class="docs-toc">
+    <div class="docs-toc-title">On This Page</div>
+    <a href="#overview">Overview</a>
+    <a href="#equation-to-code">Equation-to-Code Verification</a>
+    <a href="#architecture">Architecture Alignment</a>
+    <a href="#algorithm-flow">Algorithm Flow Verification</a>
+    <a href="#hyperparameters">Hyperparameter Cross-Check</a>
+    <a href="#common-misalignments">Common Misalignment Patterns</a>
+    <a href="#output-format">Output Format</a>
+    <a href="#verified" class="toc-h3">Verified Alignments</a>
+    <a href="#discrepancies" class="toc-h3">Discrepancies</a>
+    <a href="#ambiguities" class="toc-h3">Ambiguities</a>
+    <a href="#unverified" class="toc-h3">Not Verified</a>
+  </aside>
+
+</div>
+
+<script src="../docs.js"></script>
+</body>
+</html>

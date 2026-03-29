@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trainer Mode &mdash; Propel Documentation</title>
+  <meta name="description" content="Trainer Mode: training execution, screen session management, and runtime debugging. Launch, monitor, and fix runtime errors." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&family=Noto+Sans+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="../../assets/logo-c.svg" />
+  <link rel="stylesheet" href="../docs.css" />
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header class="docs-header">
+  <button class="sidebar-toggle" aria-label="Toggle navigation">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+  </button>
+  <a href="../../index.html" class="docs-header-logo">
+    <img src="../../assets/logo-c.svg" alt="Propel" />
+    Propel
+    <span class="logo-tag">docs</span>
+  </a>
+  <nav class="docs-header-nav">
+    <a href="../../index.html">Home</a>
+    <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">GitHub</a>
+  </nav>
+  <div class="docs-header-search">
+    <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"/></svg>
+    Search
+    <kbd>/</kbd>
+  </div>
+</header>
+
+<!-- ── Layout ── -->
+<div class="docs-layout">
+
+  <!-- ── Left Sidebar ── -->
+  <nav class="docs-sidebar" aria-label="Documentation navigation">
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Getting Started</div>
+      <a href="../index.html" class="sidebar-link">Overview</a>
+      <a href="../getting-started.html" class="sidebar-link">Installation &amp; Setup</a>
+      <a href="../core-principles.html" class="sidebar-link">Core Principles</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Pipeline</div>
+      <a href="../pipeline/index.html" class="sidebar-link">Pipeline Overview</a>
+      <a href="../pipeline/gates.html" class="sidebar-link">Gates &amp; Questioners</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Modes</div>
+      <a href="index.html" class="sidebar-link">Mode System</a>
+      <a href="researcher.html" class="sidebar-link sub">Researcher</a>
+      <a href="engineer.html" class="sidebar-link sub">Engineer</a>
+      <a href="debugger.html" class="sidebar-link sub">Debugger</a>
+      <a href="trainer.html" class="sidebar-link sub active">Trainer</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Skills</div>
+      <a href="../skills/index.html" class="sidebar-link">Skills Overview</a>
+      <a href="../skills/investigation.html" class="sidebar-link sub">Investigation</a>
+      <a href="../skills/research-design.html" class="sidebar-link sub">Research Design</a>
+      <a href="../skills/subagent-driven-research.html" class="sidebar-link sub">Implementation</a>
+      <a href="../skills/systematic-debugging.html" class="sidebar-link sub">Systematic Debugging</a>
+      <a href="../skills/research-validation.html" class="sidebar-link sub">Validation</a>
+      <a href="../skills/deep-research.html" class="sidebar-link sub">Deep Research</a>
+      <a href="../skills/think-deeply.html" class="sidebar-link sub">Think Deeply</a>
+      <a href="../skills/context-hygiene.html" class="sidebar-link sub">Context Hygiene</a>
+      <a href="../skills/trainer-mode.html" class="sidebar-link sub">Trainer Mode</a>
+      <a href="../skills/retrospective.html" class="sidebar-link sub">Retrospective</a>
+      <a href="../skills/other.html" class="sidebar-link sub">Other Skills</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Agents</div>
+      <a href="../agents/index.html" class="sidebar-link">Agents Overview</a>
+      <a href="../agents/paper-alignment-auditor.html" class="sidebar-link sub">Paper Alignment</a>
+      <a href="../agents/silent-bug-detector.html" class="sidebar-link sub">Silent Bug Detector</a>
+      <a href="../agents/jax-logic-auditor.html" class="sidebar-link sub">JAX Logic Auditor</a>
+      <a href="../agents/regression-guard.html" class="sidebar-link sub">Regression Guard</a>
+      <a href="../agents/data-flow-tracer.html" class="sidebar-link sub">Data Flow Tracer</a>
+      <a href="../agents/failure-mode-researcher.html" class="sidebar-link sub">Failure Mode Researcher</a>
+      <a href="../agents/env-researcher.html" class="sidebar-link sub">Env Researcher</a>
+      <a href="../agents/code-reviewer.html" class="sidebar-link sub">Code Reviewer</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Reference</div>
+      <a href="../customization.html" class="sidebar-link">Customization</a>
+      <a href="../pitfalls.html" class="sidebar-link">Common Pitfalls</a>
+    </div>
+
+  </nav>
+
+  <!-- ── Main Content ── -->
+  <article class="docs-content">
+
+    <div class="breadcrumbs">
+      <a href="../index.html">Docs</a>
+      <span class="sep">&#8250;</span>
+      <a href="index.html">Modes</a>
+      <span class="sep">&#8250;</span>
+      Trainer
+    </div>
+
+    <h1 class="page-title">
+      <span class="mode-badge trainer">Trainer</span> Mode
+    </h1>
+    <p class="page-subtitle">
+      Code is ready, time to launch and monitor training. Runtime debugging without logic changes.
+    </p>
+
+    <!-- ── Overview ── -->
+    <h2 id="overview">Overview</h2>
+    <p>
+      Trainer Mode handles the full training lifecycle: <strong>finding training commands, launching them in persistent screen sessions, and fixing runtime errors</strong> that prevent training from running. It does not modify training logic &mdash; no architecture changes, no loss function edits, no data pipeline rewrites.
+    </p>
+
+    <table>
+      <thead>
+        <tr><th>Property</th><th>Details</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Active Gates</strong></td><td><span class="gate-tag">G4</span> <small>(runtime bugs only)</small></td></tr>
+        <tr><td><strong>Active Skills</strong></td><td>trainer-mode, systematic-debugging (runtime only), context-hygiene, verification-before-completion, project-customization</td></tr>
+        <tr><td><strong>Not Available</strong></td><td>investigation, deep-research, paper-extraction, research-design, writing-plans, subagent-driven-research, research-validation, using-git-worktrees</td></tr>
+        <tr><td><strong>Switch Command</strong></td><td><code>/switch trainer</code></td></tr>
+      </tbody>
+    </table>
+
+    <!-- ── Phases ── -->
+    <h2 id="phases">Trainer Mode Phases</h2>
+    <p>When Trainer Mode activates, it immediately begins scanning your project. The workflow proceeds through four phases:</p>
+
+    <div class="workflow-steps">
+      <div class="workflow-step">
+        <div class="workflow-step-content">
+          <h4>Phase 1: Scan</h4>
+          <p>Claude scans the project to detect training entry points:</p>
+          <ul>
+            <li><strong>Training scripts</strong> &mdash; <code>train*.py</code>, <code>run*.py</code>, <code>main*.py</code> in root and <code>scripts/</code>, <code>tools/</code>, <code>bin/</code></li>
+            <li><strong>Shell scripts</strong> &mdash; <code>*.sh</code> in root, <code>scripts/</code>, <code>bin/</code></li>
+            <li><strong>Package entry points</strong> &mdash; <code>pyproject.toml</code> scripts, <code>setup.py</code> console_scripts, <code>Makefile</code> targets</li>
+            <li><strong>Config files</strong> &mdash; YAML/JSON/TOML in <code>configs/</code>, <code>conf/</code>, <code>config/</code></li>
+            <li><strong>README instructions</strong> &mdash; grep for "train", "run", "usage" in documented commands</li>
+          </ul>
+          <p>Results are presented as a structured table with detected commands, config files, environment details (Python version, framework, CUDA, GPUs, wandb). Claude then asks which command to launch.</p>
+        </div>
+      </div>
+      <div class="workflow-step">
+        <div class="workflow-step-content">
+          <h4>Phase 2: Pre-flight</h4>
+          <p>Before launching, Claude proactively checks for common issues:</p>
+          <ul>
+            <li>Are all file paths in the config valid?</li>
+            <li>Is GPU available and CUDA configured correctly?</li>
+            <li>Are all dependencies installed (no missing imports)?</li>
+            <li>Is there enough disk space for checkpoints and logs?</li>
+            <li>Is wandb/tensorboard configured for monitoring?</li>
+          </ul>
+          <p>Claude also prompts useful thinking: target metrics, smoke test completion, checkpoint resumption, and logging configuration.</p>
+        </div>
+      </div>
+      <div class="workflow-step">
+        <div class="workflow-step-content">
+          <h4>Phase 3: Launch</h4>
+          <p>Training is launched in a persistent <code>screen</code> (or <code>tmux</code>) session using the <strong>exact command the user confirmed</strong>:</p>
+          <pre><code>screen -dmS propel-train-{timestamp} bash -c '{COMMAND}; exec bash'</code></pre>
+          <p>Claude reports the session name and provides attach, detach, list, and kill commands. Critical rules: no modifications to the confirmed command, no temporary folders, no disabling of wandb or logging, no wrapper scripts.</p>
+        </div>
+      </div>
+      <div class="workflow-step">
+        <div class="workflow-step-content">
+          <h4>Phase 4: Runtime Debugging <span class="gate-tag">G4</span></h4>
+          <p>When training crashes, Claude reads the traceback, classifies the error as runtime or logic, and applies Gate 4 lite for runtime bugs:</p>
+          <pre><code>"The error is [X] because [Y]. I'll fix it by [Z].
+This changes [file:line]. Okay?"</code></pre>
+          <p>If the same error recurs after 2 fixes, Claude stops and reassesses rather than trying another variation.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Runtime Bugs ── -->
+    <h2 id="runtime-bugs">What Trainer Mode CAN Fix</h2>
+    <p>Trainer Mode fixes runtime errors &mdash; things that prevent the training command from executing:</p>
+
+    <table>
+      <thead>
+        <tr><th>Category</th><th>Examples</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>GPU / CUDA</strong></td><td><code>RuntimeError: CUDA error</code>, device mismatch, NCCL timeouts, DDP rank errors</td></tr>
+        <tr><td><strong>OOM</strong></td><td><code>CUDA out of memory</code>, <code>torch.cuda.OutOfMemoryError</code></td></tr>
+        <tr><td><strong>Path errors</strong></td><td><code>FileNotFoundError</code>, missing checkpoint paths, <code>NotADirectoryError</code></td></tr>
+        <tr><td><strong>Dependencies</strong></td><td><code>ImportError</code>, <code>ModuleNotFoundError</code>, version conflicts</td></tr>
+        <tr><td><strong>Config</strong></td><td>Misspelled keys, wrong types, missing required fields</td></tr>
+        <tr><td><strong>Environment</strong></td><td>Wrong Python version, missing env vars, venv not activated</td></tr>
+        <tr><td><strong>Permissions</strong></td><td><code>PermissionError</code> on log dirs, checkpoint dirs</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ── Screen Sessions ── -->
+    <h2 id="screen-sessions">Screen Session Management</h2>
+    <p>Training runs in persistent screen sessions that survive terminal disconnects. Key commands:</p>
+
+    <table>
+      <thead>
+        <tr><th>Action</th><th>Command</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Attach to session</td><td><code>screen -r propel-train-{timestamp}</code></td></tr>
+        <tr><td>Detach from session</td><td><kbd>Ctrl+A</kbd>, then <kbd>D</kbd></td></tr>
+        <tr><td>List all sessions</td><td><code>screen -ls</code></td></tr>
+        <tr><td>Kill a session</td><td><code>screen -X -S propel-train-{timestamp} quit</code></td></tr>
+      </tbody>
+    </table>
+
+    <p>If <code>screen</code> is not available, Trainer Mode falls back to <code>tmux</code> with equivalent commands.</p>
+
+    <!-- ── What It Does NOT Do ── -->
+    <h2 id="not-available">What Trainer Mode Does NOT Do</h2>
+    <p>Trainer Mode has a strict scope boundary. It does not make logic changes:</p>
+
+    <ul>
+      <li><strong>No model architecture changes</strong> &mdash; "add a layer", "change the backbone"</li>
+      <li><strong>No loss function modifications</strong> &mdash; "try a different loss", "add regularization"</li>
+      <li><strong>No feature additions</strong> &mdash; "add gradient clipping", "add LR scheduling"</li>
+      <li><strong>No algorithm changes</strong> &mdash; "switch from Adam to SGD", "add warmup"</li>
+      <li><strong>No data pipeline changes</strong> &mdash; "augment differently", "change the dataloader"</li>
+      <li><strong>No hyperparameter tuning in code</strong> &mdash; suggesting values is okay, but changing code is not</li>
+    </ul>
+
+    <div class="admonition warning">
+      <div class="admonition-title">Scope Boundary</div>
+      <p style="margin-bottom: 0">If a training failure turns out to be caused by a logic bug (not a runtime error), Trainer Mode will identify this but will not fix it. Instead: "That's a logic change, not a runtime bug. Switch to Engineer Mode with <code>/switch engineer</code> to get the full investigation-design-implement workflow for that change."</p>
+    </div>
+
+    <!-- ── Redirect Rules ── -->
+    <h2 id="redirects">Redirect Rules</h2>
+    <table>
+      <thead>
+        <tr><th>If You Ask For...</th><th>Redirect</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Logic bugs (architecture, loss, data pipeline)</td><td><code>/switch engineer</code> &mdash; investigation-design-implement workflow</td></tr>
+        <tr><td>Design issues or new features</td><td><code>/switch engineer</code> &mdash; full pipeline with all gates</td></tr>
+        <tr><td>Literature review or investigation</td><td><code>/switch researcher</code> &mdash; research-focused skills</td></tr>
+        <tr><td>Root-cause diagnosis for non-runtime bugs</td><td><code>/switch debugger</code> &mdash; evidence-backed diagnosis</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ── Monitoring Prompts ── -->
+    <h2 id="monitoring">Proactive Monitoring Prompts</h2>
+    <p>Trainer Mode does not wait passively for problems. When you check in during training, Claude proactively flags common issues:</p>
+
+    <ul>
+      <li><strong>Loss plateau</strong> &mdash; "Loss hasn't moved in N steps. Common causes: learning rate too low, data not shuffled, or a bug in the loss computation."</li>
+      <li><strong>Throughput</strong> &mdash; "What's your steps/second? If it's lower than expected, check DataLoader num_workers and pin_memory."</li>
+      <li><strong>Checkpointing</strong> &mdash; "Are checkpoints being saved? If training crashes at hour 8 without a checkpoint, you lose everything."</li>
+      <li><strong>Mixed precision</strong> &mdash; "If you're using fp16/bf16, watch for NaN in the first 100 steps. bf16 is more stable."</li>
+      <li><strong>Multi-GPU scaling</strong> &mdash; "With N GPUs, effective batch size is Nx. You may need to scale learning rate accordingly."</li>
+      <li><strong>Gradient accumulation</strong> &mdash; "With gradient_accumulation_steps=N, effective batch size is batch_size * N * num_gpus."</li>
+    </ul>
+
+    <!-- ── Example ── -->
+    <h2 id="example">Example Session</h2>
+    <p>A typical Trainer Mode session launching and monitoring a training run:</p>
+
+    <pre><code><span style="color:#10b981">User:</span>  /switch trainer
+<span style="color:#60a5fa">Claude:</span> Trainer Mode active. Gate 4 (runtime bugs only).
+        Let me scan your project for training commands...
+
+        <span style="color:#fbbf24">[Phase 1 — Scan]</span>
+        Training Commands Detected:
+
+        | Source     | Command                                      |
+        |------------|----------------------------------------------|
+        | Script     | python train.py --config configs/rvq.yaml    |
+        | Makefile   | make train CONFIG=configs/rvq.yaml           |
+
+        Configs Found:
+        • configs/default.yaml
+        • configs/rvq.yaml
+
+        Environment:
+        • Python 3.11, JAX 0.4.25, CUDA 12.3
+        • 2x A100 (nvidia-smi)
+        • wandb configured
+
+        Which command should I launch?
+
+<span style="color:#10b981">User:</span>  python train.py --config configs/rvq.yaml
+
+<span style="color:#60a5fa">Claude:</span> <span style="color:#fbbf24">[Phase 2 — Pre-flight]</span>
+        Checking paths, dependencies, GPU...
+        All clear. Target metric for this run?
+
+<span style="color:#10b981">User:</span>  Reconstruction loss below 0.05 by 50k steps.
+
+<span style="color:#60a5fa">Claude:</span> <span style="color:#fbbf24">[Phase 3 — Launch]</span>
+        Training launched in screen session: propel-train-20260328-1430
+
+        Attach:  screen -r propel-train-20260328-1430
+        Detach:  Ctrl+A, then D
+        List:    screen -ls
+        Kill:    screen -X -S propel-train-20260328-1430 quit
+
+        Monitoring first 1000 steps...
+
+<span style="color:#10b981">User:</span>  It crashed. CUDA out of memory.
+
+<span style="color:#60a5fa">Claude:</span> <span style="color:#fbbf24">[Phase 4 — Runtime Debug]</span>
+        Reading traceback...
+
+        The error is OOM at model forward pass because batch_size=64
+        exceeds A100 40GB VRAM for this model size. I'll fix it by
+        reducing batch_size to 32 in configs/rvq.yaml (line 12).
+        This changes only the config file. Okay?
+
+<span style="color:#10b981">User:</span>  Yes.
+
+<span style="color:#60a5fa">Claude:</span> Fixed. Relaunching in the same screen session...
+        propel-train-20260328-1430 running. Monitoring...</code></pre>
+
+    <!-- ── Prev/Next ── -->
+    <nav class="docs-pager">
+      <a href="debugger.html">
+        <span class="pager-label">&larr; Previous</span>
+        <span class="pager-title">Debugger Mode</span>
+      </a>
+      <a href="../skills/index.html" class="next">
+        <span class="pager-label">Next &rarr;</span>
+        <span class="pager-title">Skills Overview</span>
+      </a>
+    </nav>
+
+    <footer class="docs-footer">
+      <p>
+        <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">Propel</a> is open source under the MIT License.
+        Built by <a href="https://kbian.org" target="_blank" rel="noopener">Kaiwen Bian</a> &amp; <a href="https://yuertang.dev/" target="_blank" rel="noopener">Yuer Tang</a>.
+      </p>
+    </footer>
+
+  </article>
+
+  <!-- ── Right ToC ── -->
+  <aside class="docs-toc">
+    <div class="docs-toc-title">On This Page</div>
+    <a href="#overview">Overview</a>
+    <a href="#phases">Trainer Mode Phases</a>
+    <a href="#runtime-bugs">What It CAN Fix</a>
+    <a href="#screen-sessions">Screen Session Management</a>
+    <a href="#not-available">What It Does NOT Do</a>
+    <a href="#redirects">Redirect Rules</a>
+    <a href="#monitoring">Proactive Monitoring</a>
+    <a href="#example">Example Session</a>
+  </aside>
+
+</div>
+
+<script src="../docs.js"></script>
+</body>
+</html>

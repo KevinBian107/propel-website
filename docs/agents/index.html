@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agents Overview &mdash; Propel Documentation</title>
+  <meta name="description" content="Overview of Propel's specialized auditor agents: subagents with separate context, read-only access, and focused prompts for automated code quality assurance." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&family=Noto+Sans+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="../../assets/logo-c.svg" />
+  <link rel="stylesheet" href="../docs.css" />
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header class="docs-header">
+  <button class="sidebar-toggle" aria-label="Toggle navigation">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+  </button>
+  <a href="../../index.html" class="docs-header-logo">
+    <img src="../../assets/logo-c.svg" alt="Propel" />
+    Propel
+    <span class="logo-tag">docs</span>
+  </a>
+  <nav class="docs-header-nav">
+    <a href="../../index.html">Home</a>
+    <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">GitHub</a>
+  </nav>
+  <div class="docs-header-search">
+    <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"/></svg>
+    Search
+    <kbd>/</kbd>
+  </div>
+</header>
+
+<!-- ── Layout ── -->
+<div class="docs-layout">
+
+  <!-- ── Left Sidebar ── -->
+  <nav class="docs-sidebar" aria-label="Documentation navigation">
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Getting Started</div>
+      <a href="../index.html" class="sidebar-link">Overview</a>
+      <a href="../getting-started.html" class="sidebar-link">Installation &amp; Setup</a>
+      <a href="../core-principles.html" class="sidebar-link">Core Principles</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Pipeline</div>
+      <a href="../pipeline/index.html" class="sidebar-link">Pipeline Overview</a>
+      <a href="../pipeline/gates.html" class="sidebar-link">Gates &amp; Questioners</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Modes</div>
+      <a href="../modes/index.html" class="sidebar-link">Mode System</a>
+      <a href="../modes/researcher.html" class="sidebar-link sub">Researcher</a>
+      <a href="../modes/engineer.html" class="sidebar-link sub">Engineer</a>
+      <a href="../modes/debugger.html" class="sidebar-link sub">Debugger</a>
+      <a href="../modes/trainer.html" class="sidebar-link sub">Trainer</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Skills</div>
+      <a href="../skills/index.html" class="sidebar-link">Skills Overview</a>
+      <a href="../skills/investigation.html" class="sidebar-link sub">Investigation</a>
+      <a href="../skills/research-design.html" class="sidebar-link sub">Research Design</a>
+      <a href="../skills/subagent-driven-research.html" class="sidebar-link sub">Implementation</a>
+      <a href="../skills/systematic-debugging.html" class="sidebar-link sub">Systematic Debugging</a>
+      <a href="../skills/research-validation.html" class="sidebar-link sub">Validation</a>
+      <a href="../skills/deep-research.html" class="sidebar-link sub">Deep Research</a>
+      <a href="../skills/think-deeply.html" class="sidebar-link sub">Think Deeply</a>
+      <a href="../skills/context-hygiene.html" class="sidebar-link sub">Context Hygiene</a>
+      <a href="../skills/trainer-mode.html" class="sidebar-link sub">Trainer Mode</a>
+      <a href="../skills/retrospective.html" class="sidebar-link sub">Retrospective</a>
+      <a href="../skills/other.html" class="sidebar-link sub">Other Skills</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Agents</div>
+      <a href="index.html" class="sidebar-link active">Agents Overview</a>
+      <a href="paper-alignment-auditor.html" class="sidebar-link sub">Paper Alignment</a>
+      <a href="silent-bug-detector.html" class="sidebar-link sub">Silent Bug Detector</a>
+      <a href="jax-logic-auditor.html" class="sidebar-link sub">JAX Logic Auditor</a>
+      <a href="regression-guard.html" class="sidebar-link sub">Regression Guard</a>
+      <a href="data-flow-tracer.html" class="sidebar-link sub">Data Flow Tracer</a>
+      <a href="failure-mode-researcher.html" class="sidebar-link sub">Failure Mode Researcher</a>
+      <a href="env-researcher.html" class="sidebar-link sub">Env Researcher</a>
+      <a href="code-reviewer.html" class="sidebar-link sub">Code Reviewer</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Reference</div>
+      <a href="../customization.html" class="sidebar-link">Customization</a>
+      <a href="../pitfalls.html" class="sidebar-link">Common Pitfalls</a>
+    </div>
+
+  </nav>
+
+  <!-- ── Main Content ── -->
+  <article class="docs-content">
+
+    <div class="breadcrumbs">
+      <a href="../index.html">Docs</a>
+      <span class="sep">&#8250;</span>
+      <a href="index.html">Agents</a>
+      <span class="sep">&#8250;</span>
+      Overview
+    </div>
+
+    <h1 class="page-title">Agents Overview</h1>
+    <p class="page-subtitle">
+      Specialized subagents that audit code automatically &mdash; separate context windows, read-only access, and focused prompts for catching what humans miss.
+    </p>
+
+    <!-- ── What Are Agents ── -->
+    <h2 id="what-are-agents">What Are Agents?</h2>
+    <p>
+      Propel agents (also called <strong>auditors</strong>) are specialized subagents, each with its own <strong>separate context window</strong>, <strong>read-only file access</strong>, and a <strong>tightly focused system prompt</strong>. They exist for one reason: to catch problems that the main Claude session might miss because its attention is on implementation, not verification.
+    </p>
+    <p>
+      Each agent is defined by a markdown file in the <code>agents/</code> directory. The file contains the agent's name, description, allowed tools, and a detailed system prompt that tells it exactly what to look for and how to report findings.
+    </p>
+
+    <div class="admonition note">
+      <div class="admonition-title">One-Shot Context</div>
+      <p style="margin-bottom: 0">Agents have <strong>no conversation history</strong>. Every invocation starts from scratch with only the system prompt and the files provided. This means prompts must be completely self-contained &mdash; include all context the agent needs in the invocation, because it cannot ask follow-up questions.</p>
+    </div>
+
+    <!-- ── Auto-Dispatch ── -->
+    <h2 id="auto-dispatch">How Auto-Dispatch Works</h2>
+    <p>
+      Agents are not invoked manually in normal usage. They are <strong>automatically dispatched</strong> by the main Propel pipeline after code changes, based on what type of component was modified. This happens at <strong>Gate 3</strong> (the auditor gate) in the Engineer Mode pipeline, and during the investigation phase in Debugger Mode.
+    </p>
+    <p>
+      The dispatch logic examines the changed files and the nature of the change, then selects the relevant subset of agents. Not every agent runs on every change &mdash; only those whose expertise is relevant.
+    </p>
+
+    <h3 id="dispatch-rules">Dispatch Rules</h3>
+    <table>
+      <thead>
+        <tr><th>If the change involves...</th><th>Agents dispatched</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Model architecture or loss functions</td><td>Paper Alignment Auditor, Silent Bug Detector, JAX Logic Auditor</td></tr>
+        <tr><td>Training loop or optimizer</td><td>Silent Bug Detector, Regression Guard, Code Reviewer</td></tr>
+        <tr><td>Data pipeline or preprocessing</td><td>Data Flow Tracer, Silent Bug Detector</td></tr>
+        <tr><td>JAX transformations (vmap, scan, jit)</td><td>JAX Logic Auditor, Silent Bug Detector</td></tr>
+        <tr><td>Environment integration or wrappers</td><td>Env Researcher, Data Flow Tracer</td></tr>
+        <tr><td>Any feature branch before merge</td><td>Regression Guard, Code Reviewer</td></tr>
+        <tr><td>Unexplained training failure</td><td>Failure Mode Researcher (+ delegates to others)</td></tr>
+        <tr><td>New paper implementation</td><td>Paper Alignment Auditor, Silent Bug Detector, Code Reviewer</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ── Agent Summary ── -->
+    <h2 id="agent-summary">All Agents</h2>
+    <p>Propel ships with 8 specialized agents. Each is documented in detail on its own page.</p>
+
+    <table>
+      <thead>
+        <tr><th>Agent</th><th>Purpose</th><th>Auto-Dispatch?</th><th>Key Capability</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><a href="paper-alignment-auditor.html"><strong>Paper Alignment Auditor</strong></a></td>
+          <td>Verify code matches the source paper</td>
+          <td>Yes</td>
+          <td>Equation-to-code cross-referencing</td>
+        </tr>
+        <tr>
+          <td><a href="silent-bug-detector.html"><strong>Silent Bug Detector</strong></a></td>
+          <td>Find bugs that don't crash</td>
+          <td>Yes</td>
+          <td>11-category silent failure catalog</td>
+        </tr>
+        <tr>
+          <td><a href="jax-logic-auditor.html"><strong>JAX Logic Auditor</strong></a></td>
+          <td>Audit JAX transformations and data flow</td>
+          <td>Yes</td>
+          <td>End-to-end axis/dimension tracking</td>
+        </tr>
+        <tr>
+          <td><a href="regression-guard.html"><strong>Regression Guard</strong></a></td>
+          <td>Prevent breaking existing pipelines</td>
+          <td>Yes</td>
+          <td>Displaced fix detection</td>
+        </tr>
+        <tr>
+          <td><a href="data-flow-tracer.html"><strong>Data Flow Tracer</strong></a></td>
+          <td>Map data from input to output</td>
+          <td>Yes</td>
+          <td>Framework-agnostic semantic tracing</td>
+        </tr>
+        <tr>
+          <td><a href="failure-mode-researcher.html"><strong>Failure Mode Researcher</strong></a></td>
+          <td>Research unexplained failures</td>
+          <td>On demand</td>
+          <td>Cross-domain literature search + delegation</td>
+        </tr>
+        <tr>
+          <td><a href="env-researcher.html"><strong>Env Researcher</strong></a></td>
+          <td>Deep-dive simulation environment docs</td>
+          <td>On demand</td>
+          <td>API reference compilation and gotcha detection</td>
+        </tr>
+        <tr>
+          <td><a href="code-reviewer.html"><strong>Code Reviewer</strong></a></td>
+          <td>General code quality + research awareness</td>
+          <td>Yes</td>
+          <td>Research-specific review checklist</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- ── Gate 3 ── -->
+    <h2 id="gate-3">Auditor Results at Gate 3</h2>
+    <p>
+      In Engineer Mode, agent results are collected and presented at <strong>Gate 3</strong> &mdash; the auditor checkpoint before final approval. The main session aggregates findings from all dispatched agents into a unified report:
+    </p>
+    <ul>
+      <li><strong>Critical findings</strong> block progress &mdash; they must be addressed before continuing</li>
+      <li><strong>Medium findings</strong> are presented for the user to decide whether to fix now or defer</li>
+      <li><strong>Minor findings</strong> and suggestions are listed for awareness</li>
+    </ul>
+    <p>
+      The user reviews the aggregated report and either approves the implementation or sends it back for revisions. This is the quality gate that catches issues the implementer missed.
+    </p>
+
+    <!-- ── One-Shot Principle ── -->
+    <h2 id="one-shot">The One-Shot Context Principle</h2>
+    <p>
+      Unlike the main Propel session which maintains a conversation, agents operate on a <strong>one-shot basis</strong>. Each invocation is independent &mdash; the agent receives its system prompt, the files to audit, and a description of what to check. It produces a structured report and terminates.
+    </p>
+    <p>This design has important implications:</p>
+    <ul>
+      <li><strong>Prompts must be self-contained</strong> &mdash; include all relevant context (what changed, what to look for, which files matter) because the agent cannot ask clarifying questions</li>
+      <li><strong>No memory across invocations</strong> &mdash; if you run the same agent twice, it starts fresh each time. Previous findings are not remembered.</li>
+      <li><strong>Focused scope</strong> &mdash; each agent is specialized for one type of analysis. This prevents context dilution and keeps the audit thorough within its domain.</li>
+      <li><strong>Parallel execution</strong> &mdash; because agents are independent, multiple agents can run simultaneously on different aspects of the same code change</li>
+    </ul>
+
+    <!-- ── Prev/Next ── -->
+    <nav class="docs-pager">
+      <a href="../skills/other.html">
+        <span class="pager-label">&larr; Previous</span>
+        <span class="pager-title">Other Skills</span>
+      </a>
+      <a href="paper-alignment-auditor.html" class="next">
+        <span class="pager-label">Next &rarr;</span>
+        <span class="pager-title">Paper Alignment Auditor</span>
+      </a>
+    </nav>
+
+    <footer class="docs-footer">
+      <p>
+        <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">Propel</a> is open source under the MIT License.
+        Built by <a href="https://kbian.org" target="_blank" rel="noopener">Kaiwen Bian</a> &amp; <a href="https://yuertang.dev/" target="_blank" rel="noopener">Yuer Tang</a>.
+      </p>
+    </footer>
+
+  </article>
+
+  <!-- ── Right ToC ── -->
+  <aside class="docs-toc">
+    <div class="docs-toc-title">On This Page</div>
+    <a href="#what-are-agents">What Are Agents?</a>
+    <a href="#auto-dispatch">How Auto-Dispatch Works</a>
+    <a href="#dispatch-rules" class="toc-h3">Dispatch Rules</a>
+    <a href="#agent-summary">All Agents</a>
+    <a href="#gate-3">Auditor Results at Gate 3</a>
+    <a href="#one-shot">One-Shot Context Principle</a>
+  </aside>
+
+</div>
+
+<script src="../docs.js"></script>
+</body>
+</html>

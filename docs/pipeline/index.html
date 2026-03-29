@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pipeline Overview &mdash; Propel Documentation</title>
+  <meta name="description" content="The complete Propel pipeline: how intake, gates, questioners, investigation, design, implementation, validation, debugging, and retrospective phases work together." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&family=Noto+Sans+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="../../assets/logo-c.svg" />
+  <link rel="stylesheet" href="../docs.css" />
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header class="docs-header">
+  <button class="sidebar-toggle" aria-label="Toggle navigation">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+  </button>
+  <a href="../../index.html" class="docs-header-logo">
+    <img src="../../assets/logo-c.svg" alt="Propel" />
+    Propel
+    <span class="logo-tag">docs</span>
+  </a>
+  <nav class="docs-header-nav">
+    <a href="../../index.html">Home</a>
+    <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">GitHub</a>
+  </nav>
+  <div class="docs-header-search">
+    <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"/></svg>
+    Search
+    <kbd>/</kbd>
+  </div>
+</header>
+
+<!-- ── Layout ── -->
+<div class="docs-layout">
+
+  <!-- ── Left Sidebar ── -->
+  <nav class="docs-sidebar" aria-label="Documentation navigation">
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Getting Started</div>
+      <a href="../index.html" class="sidebar-link">Overview</a>
+      <a href="../getting-started.html" class="sidebar-link">Installation &amp; Setup</a>
+      <a href="../core-principles.html" class="sidebar-link">Core Principles</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Pipeline</div>
+      <a href="index.html" class="sidebar-link active">Pipeline Overview</a>
+      <a href="gates.html" class="sidebar-link">Gates &amp; Questioners</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Modes</div>
+      <a href="../modes/index.html" class="sidebar-link">Mode System</a>
+      <a href="../modes/researcher.html" class="sidebar-link sub">Researcher</a>
+      <a href="../modes/engineer.html" class="sidebar-link sub">Engineer</a>
+      <a href="../modes/debugger.html" class="sidebar-link sub">Debugger</a>
+      <a href="../modes/trainer.html" class="sidebar-link sub">Trainer</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Skills</div>
+      <a href="../skills/index.html" class="sidebar-link">Skills Overview</a>
+      <a href="../skills/investigation.html" class="sidebar-link sub">Investigation</a>
+      <a href="../skills/research-design.html" class="sidebar-link sub">Research Design</a>
+      <a href="../skills/subagent-driven-research.html" class="sidebar-link sub">Implementation</a>
+      <a href="../skills/systematic-debugging.html" class="sidebar-link sub">Systematic Debugging</a>
+      <a href="../skills/research-validation.html" class="sidebar-link sub">Validation</a>
+      <a href="../skills/deep-research.html" class="sidebar-link sub">Deep Research</a>
+      <a href="../skills/think-deeply.html" class="sidebar-link sub">Think Deeply</a>
+      <a href="../skills/context-hygiene.html" class="sidebar-link sub">Context Hygiene</a>
+      <a href="../skills/trainer-mode.html" class="sidebar-link sub">Trainer Mode</a>
+      <a href="../skills/retrospective.html" class="sidebar-link sub">Retrospective</a>
+      <a href="../skills/other.html" class="sidebar-link sub">Other Skills</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Agents</div>
+      <a href="../agents/index.html" class="sidebar-link">Agents Overview</a>
+      <a href="../agents/paper-alignment-auditor.html" class="sidebar-link sub">Paper Alignment</a>
+      <a href="../agents/silent-bug-detector.html" class="sidebar-link sub">Silent Bug Detector</a>
+      <a href="../agents/jax-logic-auditor.html" class="sidebar-link sub">JAX Logic Auditor</a>
+      <a href="../agents/regression-guard.html" class="sidebar-link sub">Regression Guard</a>
+      <a href="../agents/data-flow-tracer.html" class="sidebar-link sub">Data Flow Tracer</a>
+      <a href="../agents/failure-mode-researcher.html" class="sidebar-link sub">Failure Mode Researcher</a>
+      <a href="../agents/env-researcher.html" class="sidebar-link sub">Env Researcher</a>
+      <a href="../agents/code-reviewer.html" class="sidebar-link sub">Code Reviewer</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Reference</div>
+      <a href="../customization.html" class="sidebar-link">Customization</a>
+      <a href="../pitfalls.html" class="sidebar-link">Common Pitfalls</a>
+    </div>
+
+  </nav>
+
+  <!-- ── Main Content ── -->
+  <article class="docs-content">
+
+    <div class="breadcrumbs">
+      <a href="../index.html">Docs</a>
+      <span class="sep">&#8250;</span>
+      <a href="index.html">Pipeline</a>
+      <span class="sep">&#8250;</span>
+      Overview
+    </div>
+
+    <h1 class="page-title">Pipeline Overview</h1>
+    <p class="page-subtitle">
+      The end-to-end Propel workflow: from user idea to validated implementation, with human checkpoints at every phase transition.
+    </p>
+
+    <!-- ── The Problem ── -->
+    <h2 id="the-problem">The Problem Propel Solves</h2>
+    <p>
+      An unconstrained LLM will skip straight to implementation when you say "implement X." Without guardrails, Claude fills in gaps with the <strong>mean of its training data</strong> &mdash; plausible-looking but often wrong implementations built from averaged patterns rather than project-specific knowledge.
+    </p>
+    <p>
+      Vague requests like "build a can transport task with robosuite" lead to implementations that look reasonable but silently diverge from what you actually need. Claude fills architectural gaps with defaults instead of asking. The result: hours of debugging code that was wrong from the start because the problem was never properly scoped.
+    </p>
+    <p>
+      Propel solves this by injecting a structured workflow into every Claude session &mdash; a pipeline of gates, questioners, investigations, and auditors that forces investigation before implementation and human approval before phase transitions.
+    </p>
+
+    <!-- ── End-to-End Flow ── -->
+    <h2 id="end-to-end-flow">End-to-End Flow</h2>
+    <p>The complete Propel pipeline has 12 phases, connected by 5 gates and 2 questioner checkpoints:</p>
+
+    <pre><code>User idea &rarr; <strong>Gate 0</strong> &rarr; <strong>Q0</strong> &rarr; Investigation &rarr; <strong>Gate 1</strong> &rarr; <strong>Q1</strong> &rarr; Design &rarr; <strong>Gate 2</strong> &rarr; Implementation &rarr; <strong>Gate 3</strong> (loop) &rarr; Validation &rarr; Debugging &rarr; <strong>Gate 4</strong> &rarr; Training &rarr; Retrospective</code></pre>
+
+    <p>Each phase serves a distinct purpose in the pipeline:</p>
+
+    <table>
+      <thead>
+        <tr><th>Phase</th><th>Purpose</th><th>Key Output</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Intake</strong></td><td>Scope the work with disjunctive questions</td><td>Confirmed scope statement</td></tr>
+        <tr><td><strong>Gate 0</strong></td><td>Human approves scope before any work begins</td><td>Go/no-go decision</td></tr>
+        <tr><td><strong>Questioner Q0</strong></td><td>Ground the work in concrete references</td><td>Reference sources, architecture patterns, benchmarks</td></tr>
+        <tr><td><strong>Investigation</strong></td><td>Trace code paths, document architecture, discover risks</td><td>Living <code>scratch/</code> README with findings</td></tr>
+        <tr><td><strong>Gate 1</strong></td><td>Human reviews findings, makes design decisions</td><td>Approved findings + design decisions</td></tr>
+        <tr><td><strong>Questioner Q1</strong></td><td>Nail down implementation details</td><td>Binding implementation constraints</td></tr>
+        <tr><td><strong>Design</strong></td><td>Paper-to-code mapping, regression risk analysis</td><td>Component list with equation mappings</td></tr>
+        <tr><td><strong>Gate 2</strong></td><td>Human reviews and approves implementation plan</td><td>Approved plan with scope estimate</td></tr>
+        <tr><td><strong>Implementation</strong></td><td>Build each component with auditor review</td><td>Implemented + audited components</td></tr>
+        <tr><td><strong>Gate 3</strong></td><td>Per-component audit results presented to human</td><td>Clean pass or issue resolution</td></tr>
+        <tr><td><strong>Validation</strong></td><td>Shape, gradient, overfit, and regression gates</td><td>Validation evidence</td></tr>
+        <tr><td><strong>Debugging</strong></td><td>Root-cause analysis with evidence-backed diagnosis</td><td>Classified diagnosis (code bug / design issue / config)</td></tr>
+        <tr><td><strong>Gate 4</strong></td><td>Human approves diagnosis before fix is applied</td><td>Approved fix plan</td></tr>
+        <tr><td><strong>Training</strong></td><td>Launch and monitor training runs</td><td>Training results</td></tr>
+        <tr><td><strong>Retrospective</strong></td><td>Capture learnings and failed attempts</td><td>Registry entry with failed attempts table</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ── Pipeline Diagram ── -->
+    <h2 id="pipeline-diagram">Pipeline Diagram</h2>
+    <p>The following diagram shows which phases are active in each mode. Filled blocks (<code>&#9608;</code>) indicate active phases; diamond blocks (<code>&#9670;</code>) indicate questioner checkpoints:</p>
+
+    <pre><code>                    Researcher          Engineer            Debugger            Trainer
+                    ──────────          ────────            ────────            ───────
+Gate 0  Intake      ██████████          ██████████          ██████████
+                        |                   |                   |
+  Q0    Questioner      ◆◆◆◆◆◆◆◆◆◆          ◆◆◆◆◆◆◆◆◆◆
+        (grounding)     |                   |
+        Investigation   ██████████          ██████████          ██████████
+                        |                   |                   |
+Gate 1  Post-Invest.    ██████████          ██████████          ██████████
+                        |                   |                   |
+  Q1    Questioner      ◆◆◆◆◆◆◆◆◆◆          ◆◆◆◆◆◆◆◆◆◆          |
+        (details)                           |                   |
+        Design                              ██████████          |
+                                            |                   |
+Gate 2  Post-Design                         ██████████          |
+                                            |                   |
+        Implementation                      ██████████          |
+                                            |               ┌────┴─────┐
+Gate 3  Mid-Impl.                           ██████████      | classify |
+                                            |               | evidence |
+        Validation                          ██████████      | lit srch |
+                                                            └────┬─────┘
+        Training                            ██████████           |         ┌──────────┐
+                                            |                   |         | scan,    |
+        Debugging                           ██████████          ██████████ | launch,  |
+                                            |                   |         | monitor  |
+Gate 4  Post-Debug                          ██████████          ██████████ └────┬─────┘
+                                            |                   |              |
+        Retrospective   ██████████          ██████████          ██████████ ██████████
+                                                                          (runtime only)</code></pre>
+
+    <!-- ── Mode Filtering ── -->
+    <h2 id="mode-filtering">Mode Filtering</h2>
+    <p>
+      Not every session uses the full pipeline. Propel's four modes filter which phases and gates are active, so you only engage the checkpoints relevant to your task.
+    </p>
+
+    <h3 id="gates-by-mode">Gates by Mode</h3>
+    <table>
+      <thead>
+        <tr><th>Gate / Questioner</th><th>Researcher</th><th>Engineer</th><th>Debugger</th><th>Trainer</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Gate 0</strong> (Intake)</td><td>Active</td><td>Active</td><td>Active</td><td>&mdash;</td></tr>
+        <tr><td><strong>Q0</strong> (Grounding)</td><td>Active</td><td>Active</td><td>&mdash;</td><td>&mdash;</td></tr>
+        <tr><td><strong>Gate 1</strong> (Post-Investigation)</td><td>Active</td><td>Active</td><td>Active</td><td>&mdash;</td></tr>
+        <tr><td><strong>Q1</strong> (Details)</td><td>Active</td><td>Active</td><td>&mdash;</td><td>&mdash;</td></tr>
+        <tr><td><strong>Gate 2</strong> (Post-Design)</td><td>&mdash;</td><td>Active</td><td>&mdash;</td><td>&mdash;</td></tr>
+        <tr><td><strong>Gate 3</strong> (Mid-Implementation)</td><td>&mdash;</td><td>Active</td><td>&mdash;</td><td>&mdash;</td></tr>
+        <tr><td><strong>Gate 4</strong> (Post-Debug)</td><td>&mdash;</td><td>Active</td><td>Active</td><td>Active <em>(runtime only)</em></td></tr>
+      </tbody>
+    </table>
+
+    <h3 id="phases-by-mode">Phases by Mode</h3>
+    <table>
+      <thead>
+        <tr><th>Phase</th><th>Researcher</th><th>Engineer</th><th>Debugger</th><th>Trainer</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Intake</td><td>Active</td><td>Active</td><td>Active</td><td>&mdash;</td></tr>
+        <tr><td>Investigation</td><td>Active</td><td>Active</td><td>Active</td><td>&mdash;</td></tr>
+        <tr><td>Design</td><td>&mdash;</td><td>Active</td><td>&mdash;</td><td>&mdash;</td></tr>
+        <tr><td>Implementation</td><td>&mdash;</td><td>Active</td><td>&mdash;</td><td>&mdash;</td></tr>
+        <tr><td>Validation</td><td>&mdash;</td><td>Active</td><td>&mdash;</td><td>&mdash;</td></tr>
+        <tr><td>Training</td><td>&mdash;</td><td>Active</td><td>&mdash;</td><td>Active</td></tr>
+        <tr><td>Debugging</td><td>&mdash;</td><td>Active</td><td>Active</td><td>Active <em>(runtime only)</em></td></tr>
+        <tr><td>Retrospective</td><td>Active</td><td>Active</td><td>Active</td><td>Active</td></tr>
+      </tbody>
+    </table>
+
+    <div class="admonition note">
+      <div class="admonition-title">Mode Summary</div>
+      <p style="margin-bottom: 0">
+        <strong>Researcher</strong>: Stays in the understanding phase &mdash; literature, investigation, and retrospective only. <strong>Engineer</strong>: Full pipeline with all phases and gates. <strong>Debugger</strong>: Focused on root-cause analysis with classify-evidence-diagnose protocol. <strong>Trainer</strong>: Skips to training execution, fixes runtime bugs only.
+      </p>
+    </div>
+
+    <!-- ── Injection Mechanism ── -->
+    <h2 id="injection-mechanism">The Injection Mechanism</h2>
+    <p>
+      An unconstrained Claude will ignore the pipeline and skip to implementation. Propel prevents this through a <strong>hook-based injection system</strong> that loads the full workflow into Claude's context before it sees your first message.
+    </p>
+
+    <h3 id="how-injection-works">How It Works</h3>
+    <pre><code>propel init
+  &darr;
+Copies skills/, agents/, commands/, hooks/ into .claude/
+Merges hook config into .claude/settings.local.json
+  &darr;
+User starts `claude`
+  &darr;
+<strong>SessionStart hook fires</strong> &rarr; runs session-start.sh
+  &darr;
+Injects full using-propel/SKILL.md content as JSON into Claude's context
+(Also injects: active investigations, project profile, registry entries)
+  &darr;
+Claude's context now contains:
+  1. Core principles (core/CORE.md &mdash; non-negotiable mindset rules)
+  2. The gate protocol (5 mandatory gates)
+  3. The skill routing table (which skill for which trigger)
+  4. The auditor dispatch rules (which agent after which code change)
+  5. Active investigation state (scratch/ READMEs)
+  6. Project profile (.propel/profile.md, if it exists)
+  7. Current mode + mode_selection_needed (.propel/mode.json)
+  8. Empty repo flag (whether to use progressive CLAUDE.md building)</code></pre>
+
+    <h3 id="injection-layers">What Each Layer Provides</h3>
+    <table>
+      <thead>
+        <tr><th>Layer</th><th>What It Provides</th><th>How It Enters Context</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Core principles</strong></td><td>Non-negotiable mindset rules: evidence over agreement, anti-sycophancy, context discipline, self-reflection, loop-breaking</td><td>SessionStart hook injects <code>core/CORE.md</code></td></tr>
+        <tr><td><strong>SessionStart hook</strong></td><td>Injects core + using-propel skill + investigation state on every session start, resume, and compaction</td><td><code>.claude/settings.local.json</code> hooks config</td></tr>
+        <tr><td><strong>PreCompact hook</strong></td><td>Re-injects context before Claude compresses old messages, so instructions survive compaction</td><td>Same hook, different trigger</td></tr>
+        <tr><td><strong>Skill descriptions</strong></td><td>Claude Code loads all <code>.claude/skills/*/SKILL.md</code> descriptions &mdash; Claude matches triggers against user input</td><td>Built-in Claude Code feature</td></tr>
+        <tr><td><strong>Agent descriptions</strong></td><td>Claude Code loads all <code>.claude/agents/*.md</code> descriptions &mdash; Claude dispatches based on description match</td><td>Built-in Claude Code feature</td></tr>
+        <tr><td><strong>CLAUDE.md</strong></td><td>Project-level instructions read on every session</td><td>Built-in Claude Code feature</td></tr>
+        <tr><td><strong>Project profile</strong></td><td><code>.propel/profile.md</code> &mdash; conventions Claude should follow silently</td><td>SessionStart hook reads it</td></tr>
+        <tr><td><strong>Mode state</strong></td><td><code>.propel/mode.json</code> &mdash; controls which skills and gates are active</td><td>SessionStart hook reads it</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ── Redundant Constraint Layers ── -->
+    <h2 id="redundant-constraints">Redundant Constraint Layers</h2>
+    <p>
+      Propel's reliability comes from <strong>redundancy</strong>. No single layer is critical &mdash; if one fails, the others still constrain Claude. This is the difference between "please follow this process" and having the process embedded in every layer of context.
+    </p>
+
+    <pre><code>Skill description match  &rarr;  "activates before any action"
+Hook injection           &rarr;  full routing table in context
+CLAUDE.md                &rarr;  "This project uses the Propel research workflow"
+Auditor dispatch rules   &rarr;  agents auto-run after code changes</code></pre>
+
+    <p>The system is <strong>prompt-based, not mechanically enforced</strong>. There is no code-level gate that blocks Claude from skipping a step. Claude follows the workflow because:</p>
+    <ol>
+      <li>The hook injects the full routing table into context <strong>before</strong> Claude sees your first message</li>
+      <li>The using-propel skill description says "activates before any action" &mdash; Claude Code's skill matching prioritizes this</li>
+      <li>The instructions are specific and structured (routing tables, not vague guidelines)</li>
+      <li>The PreCompact hook re-injects on compaction, so instructions survive long sessions</li>
+    </ol>
+
+    <div class="admonition warning">
+      <div class="admonition-title">When It Might Slip</div>
+      <p style="margin-bottom: 0">
+        Very long sessions where context is heavily compressed (the PreCompact hook mitigates this). If the user explicitly says "skip the gates." Ambiguous requests that don't clearly match any routing table trigger. If Claude skips a gate, say: "You skipped Gate 0 &mdash; go back and ask scoping questions." Claude will see the instructions in its context and correct.
+      </p>
+    </div>
+
+    <!-- ── Prev/Next ── -->
+    <nav class="docs-pager">
+      <a href="../core-principles.html">
+        <span class="pager-label">&larr; Previous</span>
+        <span class="pager-title">Core Principles</span>
+      </a>
+      <a href="gates.html" class="next">
+        <span class="pager-label">Next &rarr;</span>
+        <span class="pager-title">Gates &amp; Questioners</span>
+      </a>
+    </nav>
+
+    <footer class="docs-footer">
+      <p>
+        <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">Propel</a> is open source under the MIT License.
+        Built by <a href="https://kbian.org" target="_blank" rel="noopener">Kaiwen Bian</a> &amp; <a href="https://yuertang.dev/" target="_blank" rel="noopener">Yuer Tang</a>.
+      </p>
+    </footer>
+
+  </article>
+
+  <!-- ── Right ToC ── -->
+  <aside class="docs-toc">
+    <div class="docs-toc-title">On This Page</div>
+    <a href="#the-problem">The Problem Propel Solves</a>
+    <a href="#end-to-end-flow">End-to-End Flow</a>
+    <a href="#pipeline-diagram">Pipeline Diagram</a>
+    <a href="#mode-filtering">Mode Filtering</a>
+    <a href="#gates-by-mode" class="toc-h3">Gates by Mode</a>
+    <a href="#phases-by-mode" class="toc-h3">Phases by Mode</a>
+    <a href="#injection-mechanism">The Injection Mechanism</a>
+    <a href="#how-injection-works" class="toc-h3">How It Works</a>
+    <a href="#injection-layers" class="toc-h3">Layer Breakdown</a>
+    <a href="#redundant-constraints">Redundant Constraint Layers</a>
+  </aside>
+
+</div>
+
+<script src="../docs.js"></script>
+</body>
+</html>

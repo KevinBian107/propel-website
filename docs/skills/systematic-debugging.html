@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Systematic Debugging &mdash; Propel Documentation</title>
+  <meta name="description" content="Systematic Debugging skill: root-cause-first debugging with a 3-strike limit, ML-specific diagnostics, and Gate 4 diagnosis format." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&family=Noto+Sans+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="../../assets/logo-c.svg" />
+  <link rel="stylesheet" href="../docs.css" />
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header class="docs-header">
+  <button class="sidebar-toggle" aria-label="Toggle navigation">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+  </button>
+  <a href="../../index.html" class="docs-header-logo">
+    <img src="../../assets/logo-c.svg" alt="Propel" />
+    Propel
+    <span class="logo-tag">docs</span>
+  </a>
+  <nav class="docs-header-nav">
+    <a href="../../index.html">Home</a>
+    <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">GitHub</a>
+  </nav>
+  <div class="docs-header-search">
+    <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"/></svg>
+    Search
+    <kbd>/</kbd>
+  </div>
+</header>
+
+<!-- ── Layout ── -->
+<div class="docs-layout">
+
+  <!-- ── Left Sidebar ── -->
+  <nav class="docs-sidebar" aria-label="Documentation navigation">
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Getting Started</div>
+      <a href="../index.html" class="sidebar-link">Overview</a>
+      <a href="../getting-started.html" class="sidebar-link">Installation &amp; Setup</a>
+      <a href="../core-principles.html" class="sidebar-link">Core Principles</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Pipeline</div>
+      <a href="../pipeline/index.html" class="sidebar-link">Pipeline Overview</a>
+      <a href="../pipeline/gates.html" class="sidebar-link">Gates &amp; Questioners</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Modes</div>
+      <a href="../modes/index.html" class="sidebar-link">Mode System</a>
+      <a href="../modes/researcher.html" class="sidebar-link sub">Researcher</a>
+      <a href="../modes/engineer.html" class="sidebar-link sub">Engineer</a>
+      <a href="../modes/debugger.html" class="sidebar-link sub">Debugger</a>
+      <a href="../modes/trainer.html" class="sidebar-link sub">Trainer</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Skills</div>
+      <a href="index.html" class="sidebar-link">Skills Overview</a>
+      <a href="investigation.html" class="sidebar-link sub">Investigation</a>
+      <a href="research-design.html" class="sidebar-link sub">Research Design</a>
+      <a href="subagent-driven-research.html" class="sidebar-link sub">Implementation</a>
+      <a href="systematic-debugging.html" class="sidebar-link sub active">Systematic Debugging</a>
+      <a href="research-validation.html" class="sidebar-link sub">Validation</a>
+      <a href="deep-research.html" class="sidebar-link sub">Deep Research</a>
+      <a href="think-deeply.html" class="sidebar-link sub">Think Deeply</a>
+      <a href="context-hygiene.html" class="sidebar-link sub">Context Hygiene</a>
+      <a href="trainer-mode.html" class="sidebar-link sub">Trainer Mode</a>
+      <a href="retrospective.html" class="sidebar-link sub">Retrospective</a>
+      <a href="other.html" class="sidebar-link sub">Other Skills</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Agents</div>
+      <a href="../agents/index.html" class="sidebar-link">Agents Overview</a>
+      <a href="../agents/paper-alignment-auditor.html" class="sidebar-link sub">Paper Alignment</a>
+      <a href="../agents/silent-bug-detector.html" class="sidebar-link sub">Silent Bug Detector</a>
+      <a href="../agents/jax-logic-auditor.html" class="sidebar-link sub">JAX Logic Auditor</a>
+      <a href="../agents/regression-guard.html" class="sidebar-link sub">Regression Guard</a>
+      <a href="../agents/data-flow-tracer.html" class="sidebar-link sub">Data Flow Tracer</a>
+      <a href="../agents/failure-mode-researcher.html" class="sidebar-link sub">Failure Mode Researcher</a>
+      <a href="../agents/env-researcher.html" class="sidebar-link sub">Env Researcher</a>
+      <a href="../agents/code-reviewer.html" class="sidebar-link sub">Code Reviewer</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Reference</div>
+      <a href="../customization.html" class="sidebar-link">Customization</a>
+      <a href="../pitfalls.html" class="sidebar-link">Common Pitfalls</a>
+    </div>
+
+  </nav>
+
+  <!-- ── Main Content ── -->
+  <article class="docs-content">
+
+    <div class="breadcrumbs">
+      <a href="../index.html">Docs</a>
+      <span class="sep">&#8250;</span>
+      <a href="index.html">Skills</a>
+      <span class="sep">&#8250;</span>
+      Systematic Debugging
+    </div>
+
+    <h1 class="page-title">Systematic Debugging</h1>
+    <p class="page-subtitle">
+      Root-cause-first debugging with a 3-strike limit and ML-specific diagnostics. Diagnose before you fix &mdash; always.
+    </p>
+
+    <!-- ── Core Rule ── -->
+    <h2 id="core-rule">Core Rule</h2>
+    <div class="admonition danger">
+      <div class="admonition-title">Diagnose Before You Fix</div>
+      <p style="margin-bottom: 0">NEVER apply a fix without first presenting the diagnosis to the user. This is Gate 4 &mdash; it is mandatory. The user may have domain knowledge that changes the interpretation of the root cause.</p>
+    </div>
+
+    <table>
+      <thead>
+        <tr><th>Property</th><th>Details</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Trigger</strong></td><td>Bug reports, training failures, unexpected behavior, NaN/divergence issues</td></tr>
+        <tr><td><strong>Active Modes</strong></td><td><span class="mode-badge engineer">Engineer</span> <span class="mode-badge debugger">Debugger</span></td></tr>
+        <tr><td><strong>Checkpoint</strong></td><td><span class="gate-tag">G4</span> fires after diagnosis, before any fix</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ── 5-Step Process ── -->
+    <h2 id="process">5-Step Debugging Process</h2>
+
+    <div class="workflow-steps">
+      <div class="workflow-step">
+        <div class="workflow-step-content">
+          <h4>Step 1: Characterize the Symptom</h4>
+          <p>Before investigating, write down exactly what's happening:</p>
+          <ul>
+            <li>What is the observed behavior?</li>
+            <li>What is the expected behavior?</li>
+            <li>When did this start? What changed?</li>
+            <li>Is it reproducible? Always or intermittent?</li>
+          </ul>
+        </div>
+      </div>
+      <div class="workflow-step">
+        <div class="workflow-step-content">
+          <h4>Step 2: Form Hypotheses (Ranked)</h4>
+          <p>Generate 3&ndash;5 hypotheses for the root cause, ranked by likelihood. For each hypothesis, state what evidence would confirm or rule it out.</p>
+        </div>
+      </div>
+      <div class="workflow-step">
+        <div class="workflow-step-content">
+          <h4>Step 3: Gather Evidence</h4>
+          <p>For each hypothesis (in order of likelihood): write targeted diagnostic checks, gather concrete evidence (specific values, shapes, line numbers), and confirm or rule out the hypothesis before moving to the next.</p>
+        </div>
+      </div>
+      <div class="workflow-step">
+        <div class="workflow-step-content">
+          <h4>Step 4: Present Diagnosis <span class="gate-tag">G4</span></h4>
+          <p>After identifying the root cause, present in the <a href="#gate-4-format">Gate 4 format</a>. Wait for user approval before changing any code.</p>
+        </div>
+      </div>
+      <div class="workflow-step">
+        <div class="workflow-step-content">
+          <h4>Step 5: Apply Fix &amp; Verify</h4>
+          <p>After user approves: apply the fix, run relevant validation, present evidence that the fix works. Ask whether to capture a retrospective entry.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Gate 4 Format ── -->
+    <h2 id="gate-4-format">Gate 4: Diagnosis Format</h2>
+    <p>Gate 4 is the mandatory checkpoint before any fix is applied. The diagnosis must follow this structure:</p>
+
+    <pre><code>## Diagnosis
+
+### Symptom
+[What the user reported]
+
+### Root Cause
+[What's actually happening, with evidence &mdash;
+ specific line numbers, values, shapes]
+
+### Why This Happens
+[Explanation of the mechanism, not just the symptom]
+
+### Proposed Fix
+[Exact changes, with file paths and line numbers]
+
+### What This Fix Will Change
+[Side effects, if any &mdash; other behavior
+ that will be affected]
+
+### What This Fix Will NOT Fix
+[Other issues that might look related but
+ have different causes]</code></pre>
+
+    <p>After presenting the diagnosis, ask the user:</p>
+    <ul>
+      <li>"I believe the root cause is [X] because [evidence]. Does this match what you're seeing?"</li>
+      <li>"I can fix this by [A: targeted fix] or [B: broader refactor]. A is faster but doesn't address the underlying fragility. Which do you prefer?"</li>
+      <li>If applicable: "This fix will also change the behavior of [Y]. Is that acceptable?"</li>
+    </ul>
+
+    <!-- ── 3-Strike Limit ── -->
+    <h2 id="three-strike">The 3-Strike Limit</h2>
+    <p>If the same debugging approach fails three times, something is fundamentally wrong with the assumptions:</p>
+    <ol>
+      <li><strong>Strike 1:</strong> Apply fix based on diagnosis. If it doesn't resolve the symptom, gather more evidence.</li>
+      <li><strong>Strike 2:</strong> Revised fix based on new evidence. If still failing, question whether the root cause hypothesis is correct.</li>
+      <li><strong>Strike 3:</strong> Stop. Present what was learned from all three attempts. Ask the user: "My assumption about the root cause may be wrong. Here's what I've learned from the failures. Should I try a fundamentally different approach?"</li>
+    </ol>
+
+    <div class="admonition danger">
+      <div class="admonition-title">Never Ignore the 3-Strike Limit</div>
+      <p style="margin-bottom: 0">The temptation is to try "one more variation." This is almost always wrong. Three failed attempts of the same approach is strong evidence that the mental model is incorrect, not that the fix needs tweaking.</p>
+    </div>
+
+    <!-- ── ML-Specific Diagnostics ── -->
+    <h2 id="ml-diagnostics">ML-Specific Diagnostics</h2>
+    <p>When debugging training issues, check these systematically. Diagnostic scripts are written to <code>scratch/debug/</code>.</p>
+
+    <h3 id="loss-components">Loss Component Magnitudes</h3>
+    <ul>
+      <li>Log each loss component individually</li>
+      <li>Is one term dominating? (commitment loss >> reconstruction loss = codebook never learns)</li>
+      <li>Are any terms exactly zero? (missing term, incorrect masking)</li>
+      <li>Are magnitudes reasonable? (loss of 1e6 suggests numerical issue, loss of 0.0 suggests dead path)</li>
+    </ul>
+
+    <h3 id="gradient-norms">Gradient Norms Per Module</h3>
+    <ul>
+      <li>Log gradient norms for each module separately</li>
+      <li><strong>Vanishing gradients:</strong> norm &lt; 1e-8 (dead path, too many layers without residuals, <code>stop_gradient</code> in wrong place)</li>
+      <li><strong>Exploding gradients:</strong> norm &gt; 1e3 (missing clipping, bad initialization, numerical instability)</li>
+      <li><strong>Imbalanced gradients:</strong> one module's gradients 100x another's (loss weighting issue)</li>
+    </ul>
+
+    <h3 id="codebook-metrics">Codebook / Discrete Metrics</h3>
+    <p>For VQ-VAE, FSQ, and similar discrete representation models:</p>
+    <ul>
+      <li><strong>Codebook utilization:</strong> what fraction of codes are being used? (&lt;10% = collapse)</li>
+      <li><strong>Perplexity:</strong> effective number of codes used per batch (should be close to codebook size)</li>
+      <li><strong>Commitment loss:</strong> is the encoder being pushed toward codebook entries?</li>
+      <li><strong>Code frequency histogram:</strong> are some codes monopolizing? (mode collapse in discrete space)</li>
+    </ul>
+
+    <!-- ── Anti-Patterns ── -->
+    <h2 id="anti-patterns">Anti-Patterns</h2>
+    <table>
+      <thead>
+        <tr><th>Anti-Pattern</th><th>What It Looks Like</th><th>What to Do Instead</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Symptom Patching</strong></td>
+          <td>Fixing the symptom without understanding the cause. "Loss is NaN &rarr; add gradient clipping" is a band-aid if the real issue is a <code>log(0)</code> in the loss.</td>
+          <td>Trace the NaN to its source. The clamp masks the real problem.</td>
+        </tr>
+        <tr>
+          <td><strong>Shotgun Debugging</strong></td>
+          <td>Changing 5 things at once to see if something works. Makes it impossible to know which change actually fixed the issue.</td>
+          <td>Change one thing. Verify. Then change the next.</td>
+        </tr>
+        <tr>
+          <td><strong>Displaced Fix</strong></td>
+          <td>Fixing in module B what's actually broken in module A. The regression-guard catches these, but avoid creating them.</td>
+          <td>Fix the code where the bug actually is, not where it's convenient.</td>
+        </tr>
+        <tr>
+          <td><strong>Ignoring 3-Strike</strong></td>
+          <td>"Let me try one more variation of the same approach."</td>
+          <td>Stop. Re-examine assumptions. Change direction.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- ── Delegation ── -->
+    <h2 id="delegation">Delegation Rules</h2>
+    <p>When the debugging investigation crosses into a different domain, delegate to the appropriate agent:</p>
+
+    <table>
+      <thead>
+        <tr><th>If the failure involves...</th><th>Delegate to</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>A known issue or documented failure mode</td><td>failure-mode-researcher (internet search)</td></tr>
+        <tr><td>Subtle data flow or shape propagation</td><td>data-flow-tracer</td></tr>
+        <tr><td>JAX-specific semantics (vmap, scan, jit)</td><td>jax-logic-auditor</td></tr>
+        <tr><td>Paper/algorithm misalignment</td><td>paper-alignment-auditor</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ── Prev/Next ── -->
+    <nav class="docs-pager">
+      <a href="subagent-driven-research.html">
+        <span class="pager-label">&larr; Previous</span>
+        <span class="pager-title">Implementation</span>
+      </a>
+      <a href="research-validation.html" class="next">
+        <span class="pager-label">Next &rarr;</span>
+        <span class="pager-title">Validation</span>
+      </a>
+    </nav>
+
+    <footer class="docs-footer">
+      <p>
+        <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">Propel</a> is open source under the MIT License.
+        Built by <a href="https://kbian.org" target="_blank" rel="noopener">Kaiwen Bian</a> &amp; <a href="https://yuertang.dev/" target="_blank" rel="noopener">Yuer Tang</a>.
+      </p>
+    </footer>
+
+  </article>
+
+  <!-- ── Right ToC ── -->
+  <aside class="docs-toc">
+    <div class="docs-toc-title">On This Page</div>
+    <a href="#core-rule">Core Rule</a>
+    <a href="#process">5-Step Process</a>
+    <a href="#gate-4-format">Gate 4: Diagnosis Format</a>
+    <a href="#three-strike">The 3-Strike Limit</a>
+    <a href="#ml-diagnostics">ML-Specific Diagnostics</a>
+    <a href="#loss-components" class="toc-h3">Loss Components</a>
+    <a href="#gradient-norms" class="toc-h3">Gradient Norms</a>
+    <a href="#codebook-metrics" class="toc-h3">Codebook Metrics</a>
+    <a href="#anti-patterns">Anti-Patterns</a>
+    <a href="#delegation">Delegation Rules</a>
+  </aside>
+
+</div>
+
+<script src="../docs.js"></script>
+</body>
+</html>

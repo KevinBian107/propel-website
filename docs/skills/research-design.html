@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Research Design &mdash; Propel Documentation</title>
+  <meta name="description" content="Research Design skill: converts investigation findings into implementation plans with paper-to-code mapping and regression risk assessment." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&family=Noto+Sans+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="../../assets/logo-c.svg" />
+  <link rel="stylesheet" href="../docs.css" />
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header class="docs-header">
+  <button class="sidebar-toggle" aria-label="Toggle navigation">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+  </button>
+  <a href="../../index.html" class="docs-header-logo">
+    <img src="../../assets/logo-c.svg" alt="Propel" />
+    Propel
+    <span class="logo-tag">docs</span>
+  </a>
+  <nav class="docs-header-nav">
+    <a href="../../index.html">Home</a>
+    <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">GitHub</a>
+  </nav>
+  <div class="docs-header-search">
+    <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"/></svg>
+    Search
+    <kbd>/</kbd>
+  </div>
+</header>
+
+<!-- ── Layout ── -->
+<div class="docs-layout">
+
+  <!-- ── Left Sidebar ── -->
+  <nav class="docs-sidebar" aria-label="Documentation navigation">
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Getting Started</div>
+      <a href="../index.html" class="sidebar-link">Overview</a>
+      <a href="../getting-started.html" class="sidebar-link">Installation &amp; Setup</a>
+      <a href="../core-principles.html" class="sidebar-link">Core Principles</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Pipeline</div>
+      <a href="../pipeline/index.html" class="sidebar-link">Pipeline Overview</a>
+      <a href="../pipeline/gates.html" class="sidebar-link">Gates &amp; Questioners</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Modes</div>
+      <a href="../modes/index.html" class="sidebar-link">Mode System</a>
+      <a href="../modes/researcher.html" class="sidebar-link sub">Researcher</a>
+      <a href="../modes/engineer.html" class="sidebar-link sub">Engineer</a>
+      <a href="../modes/debugger.html" class="sidebar-link sub">Debugger</a>
+      <a href="../modes/trainer.html" class="sidebar-link sub">Trainer</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Skills</div>
+      <a href="index.html" class="sidebar-link">Skills Overview</a>
+      <a href="investigation.html" class="sidebar-link sub">Investigation</a>
+      <a href="research-design.html" class="sidebar-link sub active">Research Design</a>
+      <a href="subagent-driven-research.html" class="sidebar-link sub">Implementation</a>
+      <a href="systematic-debugging.html" class="sidebar-link sub">Systematic Debugging</a>
+      <a href="research-validation.html" class="sidebar-link sub">Validation</a>
+      <a href="deep-research.html" class="sidebar-link sub">Deep Research</a>
+      <a href="think-deeply.html" class="sidebar-link sub">Think Deeply</a>
+      <a href="context-hygiene.html" class="sidebar-link sub">Context Hygiene</a>
+      <a href="trainer-mode.html" class="sidebar-link sub">Trainer Mode</a>
+      <a href="retrospective.html" class="sidebar-link sub">Retrospective</a>
+      <a href="other.html" class="sidebar-link sub">Other Skills</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Agents</div>
+      <a href="../agents/index.html" class="sidebar-link">Agents Overview</a>
+      <a href="../agents/paper-alignment-auditor.html" class="sidebar-link sub">Paper Alignment</a>
+      <a href="../agents/silent-bug-detector.html" class="sidebar-link sub">Silent Bug Detector</a>
+      <a href="../agents/jax-logic-auditor.html" class="sidebar-link sub">JAX Logic Auditor</a>
+      <a href="../agents/regression-guard.html" class="sidebar-link sub">Regression Guard</a>
+      <a href="../agents/data-flow-tracer.html" class="sidebar-link sub">Data Flow Tracer</a>
+      <a href="../agents/failure-mode-researcher.html" class="sidebar-link sub">Failure Mode Researcher</a>
+      <a href="../agents/env-researcher.html" class="sidebar-link sub">Env Researcher</a>
+      <a href="../agents/code-reviewer.html" class="sidebar-link sub">Code Reviewer</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Reference</div>
+      <a href="../customization.html" class="sidebar-link">Customization</a>
+      <a href="../pitfalls.html" class="sidebar-link">Common Pitfalls</a>
+    </div>
+
+  </nav>
+
+  <!-- ── Main Content ── -->
+  <article class="docs-content">
+
+    <div class="breadcrumbs">
+      <a href="../index.html">Docs</a>
+      <span class="sep">&#8250;</span>
+      <a href="index.html">Skills</a>
+      <span class="sep">&#8250;</span>
+      Research Design
+    </div>
+
+    <h1 class="page-title">Research Design</h1>
+    <p class="page-subtitle">
+      From investigation to implementation plan. Maps paper equations to code components, assesses regression risk, and fires Gate 2 before any implementation begins.
+    </p>
+
+    <!-- ── Overview ── -->
+    <h2 id="overview">Overview</h2>
+    <p>
+      The Research Design skill bridges the gap between understanding a problem (investigation) and building a solution (implementation). It reads the investigation README and paper notes, then produces a concrete implementation plan with explicit paper-to-code mappings and regression risk assessment.
+    </p>
+
+    <div class="admonition warning">
+      <div class="admonition-title">Requires Completed Investigation</div>
+      <p style="margin-bottom: 0">This skill refuses to proceed without a completed investigation in <code>scratch/</code> that has passed Gate 1. If no investigation exists, Claude will redirect: "I need to investigate before I can design."</p>
+    </div>
+
+    <table>
+      <thead>
+        <tr><th>Property</th><th>Details</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Trigger</strong></td><td>"propose how to", "design the implementation", "plan the architecture", "how should we implement"</td></tr>
+        <tr><td><strong>Active Modes</strong></td><td><span class="mode-badge engineer">Engineer</span></td></tr>
+        <tr><td><strong>Prerequisite</strong></td><td>Investigation with Gate 1 completed</td></tr>
+        <tr><td><strong>Output</strong></td><td><code>scratch/{investigation-name}/design.md</code></td></tr>
+      </tbody>
+    </table>
+
+    <!-- ── Design Process ── -->
+    <h2 id="process">Design Process</h2>
+    <p>The design process follows five sequential steps, each building on the previous.</p>
+
+    <div class="workflow-steps">
+      <div class="workflow-step">
+        <div class="workflow-step-content">
+          <h4>Step 1: Read Context</h4>
+          <ul>
+            <li>Read the investigation README including "Design Decisions (Human-Approved)"</li>
+            <li>Read any referenced paper notes from <code>scratch/paper-notes/</code></li>
+            <li>Read any relevant registry entries from <code>scratch/registry/</code></li>
+          </ul>
+        </div>
+      </div>
+      <div class="workflow-step">
+        <div class="workflow-step-content">
+          <h4>Step 2: Paper-to-Code Mapping</h4>
+          <p>Create an explicit mapping for each new component (see <a href="#paper-mapping">format below</a>).</p>
+        </div>
+      </div>
+      <div class="workflow-step">
+        <div class="workflow-step-content">
+          <h4>Step 3: Regression Risk Assessment</h4>
+          <p>Identify what existing behavior must remain unchanged (see <a href="#regression-risk">details below</a>).</p>
+        </div>
+      </div>
+      <div class="workflow-step">
+        <div class="workflow-step-content">
+          <h4>Step 4: Design Proposal</h4>
+          <p>Write the full design with component order, paper references, and explicit "will NOT change" statements.</p>
+        </div>
+      </div>
+      <div class="workflow-step">
+        <div class="workflow-step-content">
+          <h4>Step 5: Gate 2 <span class="gate-tag">G2</span></h4>
+          <p>Present the plan to the user and ask design questions before proceeding to implementation.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Paper-to-Code Mapping ── -->
+    <h2 id="paper-mapping">Paper-to-Code Mapping</h2>
+    <p>For each new component, create an explicit mapping between the paper reference and the code it will become. This table is the contract between the paper and the implementation.</p>
+
+    <table>
+      <thead>
+        <tr><th>Paper Reference</th><th>Code Component</th><th>Files Affected</th><th>New/Modified</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Eq. 3 (commitment loss)</td>
+          <td><code>compute_commitment_loss()</code></td>
+          <td>model/losses.py</td>
+          <td>New</td>
+        </tr>
+        <tr>
+          <td>Fig. 2 (encoder architecture)</td>
+          <td><code>ResidualEncoder</code> class</td>
+          <td>model/encoder.py</td>
+          <td>Modified</td>
+        </tr>
+        <tr>
+          <td>Alg. 1, line 5 (codebook update)</td>
+          <td><code>update_codebook()</code></td>
+          <td>model/vq.py</td>
+          <td>New</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>This mapping serves two purposes: it ensures every paper element is accounted for in the implementation, and it gives the paper-alignment-auditor a checklist to verify against after implementation.</p>
+
+    <!-- ── Regression Risk ── -->
+    <h2 id="regression-risk">Regression Risk Assessment</h2>
+    <p>Before proposing any changes, identify what existing behavior must remain unchanged:</p>
+    <ul>
+      <li><strong>Which existing configs</strong> must produce identical results?</li>
+      <li><strong>Which code paths</strong> are shared between old and new functionality?</li>
+      <li><strong>Where are the coupling points</strong> between new and existing code?</li>
+      <li><strong>Config flags for new features</strong> &mdash; new features are opt-in, existing configs unchanged</li>
+    </ul>
+
+    <div class="admonition tip">
+      <div class="admonition-title">Component Ordering</div>
+      <p style="margin-bottom: 0">Order components to minimize regression risk: new code paths first, then modifications to existing paths. This way, if something goes wrong during implementation, existing functionality is still intact.</p>
+    </div>
+
+    <!-- ── Gate 2 ── -->
+    <h2 id="gate-2">Gate 2: Post-Design Checkpoint</h2>
+    <p>Gate 2 is the mandatory checkpoint before any implementation begins. Claude must present the plan and ask questions.</p>
+
+    <pre><code>## Implementation Plan Summary
+
+### Components (in order)
+1. [Component] &mdash; maps to paper eq. [X] &mdash; touches files [Y, Z]
+2. ...
+
+### Regression Risk Assessment
+- [What existing behavior could break, and
+  how we're protecting against it]
+
+### What I'm Uncertain About
+1. [Specific uncertainty + two options +
+   why I can't decide without your input]
+2. ...
+
+### Estimated Scope
+- [N] components, [M] files modified, [K] new files
+- [Which components are independent vs. sequential]</code></pre>
+
+    <h3 id="gate-2-questions">Gate 2 Question Guidelines</h3>
+    <p>Gate 2 questions must be about specific, actionable concerns:</p>
+    <ul>
+      <li><strong>Implementation order:</strong> "I've ordered to minimize regression risk, but the most interesting part comes third. Do you want to see the core component first instead?"</li>
+      <li><strong>Uncertainty resolution:</strong> "The paper doesn't specify [X]. I see two options: [A] or [B]. [A] is [trade-off]. [B] is [trade-off]. Which do you prefer?"</li>
+      <li><strong>Scope confirmation:</strong> "This plan modifies [N] files. I've kept [these files] untouched. Should any of the modified files also be off-limits?"</li>
+    </ul>
+
+    <h3 id="gate-2-rules">Gate 2 Rules</h3>
+    <ul>
+      <li>The plan must be specific enough that the user can reject individual steps</li>
+      <li>Claude must explicitly state what it will NOT change</li>
+      <li>If the plan is more than ~10 tasks, ask whether to split into multiple sessions</li>
+      <li>User approves the plan (possibly with modifications) &rarr; proceed to writing-plans for micro-task breakdown, then to implementation</li>
+    </ul>
+
+    <!-- ── Prev/Next ── -->
+    <nav class="docs-pager">
+      <a href="investigation.html">
+        <span class="pager-label">&larr; Previous</span>
+        <span class="pager-title">Investigation</span>
+      </a>
+      <a href="subagent-driven-research.html" class="next">
+        <span class="pager-label">Next &rarr;</span>
+        <span class="pager-title">Implementation</span>
+      </a>
+    </nav>
+
+    <footer class="docs-footer">
+      <p>
+        <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">Propel</a> is open source under the MIT License.
+        Built by <a href="https://kbian.org" target="_blank" rel="noopener">Kaiwen Bian</a> &amp; <a href="https://yuertang.dev/" target="_blank" rel="noopener">Yuer Tang</a>.
+      </p>
+    </footer>
+
+  </article>
+
+  <!-- ── Right ToC ── -->
+  <aside class="docs-toc">
+    <div class="docs-toc-title">On This Page</div>
+    <a href="#overview">Overview</a>
+    <a href="#process">Design Process</a>
+    <a href="#paper-mapping">Paper-to-Code Mapping</a>
+    <a href="#regression-risk">Regression Risk Assessment</a>
+    <a href="#gate-2">Gate 2: Post-Design</a>
+    <a href="#gate-2-questions" class="toc-h3">Question Guidelines</a>
+    <a href="#gate-2-rules" class="toc-h3">Gate 2 Rules</a>
+  </aside>
+
+</div>
+
+<script src="../docs.js"></script>
+</body>
+</html>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Flow Tracer &mdash; Propel Documentation</title>
+  <meta name="description" content="Data Flow Tracer: framework-agnostic tracing of data from input to output, with semantic annotation, boundary analysis, and mutation tracking." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&family=Noto+Sans+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="../../assets/logo-c.svg" />
+  <link rel="stylesheet" href="../docs.css" />
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header class="docs-header">
+  <button class="sidebar-toggle" aria-label="Toggle navigation">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+  </button>
+  <a href="../../index.html" class="docs-header-logo">
+    <img src="../../assets/logo-c.svg" alt="Propel" />
+    Propel
+    <span class="logo-tag">docs</span>
+  </a>
+  <nav class="docs-header-nav">
+    <a href="../../index.html">Home</a>
+    <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">GitHub</a>
+  </nav>
+  <div class="docs-header-search">
+    <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"/></svg>
+    Search
+    <kbd>/</kbd>
+  </div>
+</header>
+
+<!-- ── Layout ── -->
+<div class="docs-layout">
+
+  <!-- ── Left Sidebar ── -->
+  <nav class="docs-sidebar" aria-label="Documentation navigation">
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Getting Started</div>
+      <a href="../index.html" class="sidebar-link">Overview</a>
+      <a href="../getting-started.html" class="sidebar-link">Installation &amp; Setup</a>
+      <a href="../core-principles.html" class="sidebar-link">Core Principles</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Pipeline</div>
+      <a href="../pipeline/index.html" class="sidebar-link">Pipeline Overview</a>
+      <a href="../pipeline/gates.html" class="sidebar-link">Gates &amp; Questioners</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Modes</div>
+      <a href="../modes/index.html" class="sidebar-link">Mode System</a>
+      <a href="../modes/researcher.html" class="sidebar-link sub">Researcher</a>
+      <a href="../modes/engineer.html" class="sidebar-link sub">Engineer</a>
+      <a href="../modes/debugger.html" class="sidebar-link sub">Debugger</a>
+      <a href="../modes/trainer.html" class="sidebar-link sub">Trainer</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Skills</div>
+      <a href="../skills/index.html" class="sidebar-link">Skills Overview</a>
+      <a href="../skills/investigation.html" class="sidebar-link sub">Investigation</a>
+      <a href="../skills/research-design.html" class="sidebar-link sub">Research Design</a>
+      <a href="../skills/subagent-driven-research.html" class="sidebar-link sub">Implementation</a>
+      <a href="../skills/systematic-debugging.html" class="sidebar-link sub">Systematic Debugging</a>
+      <a href="../skills/research-validation.html" class="sidebar-link sub">Validation</a>
+      <a href="../skills/deep-research.html" class="sidebar-link sub">Deep Research</a>
+      <a href="../skills/think-deeply.html" class="sidebar-link sub">Think Deeply</a>
+      <a href="../skills/context-hygiene.html" class="sidebar-link sub">Context Hygiene</a>
+      <a href="../skills/trainer-mode.html" class="sidebar-link sub">Trainer Mode</a>
+      <a href="../skills/retrospective.html" class="sidebar-link sub">Retrospective</a>
+      <a href="../skills/other.html" class="sidebar-link sub">Other Skills</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Agents</div>
+      <a href="index.html" class="sidebar-link">Agents Overview</a>
+      <a href="paper-alignment-auditor.html" class="sidebar-link sub">Paper Alignment</a>
+      <a href="silent-bug-detector.html" class="sidebar-link sub">Silent Bug Detector</a>
+      <a href="jax-logic-auditor.html" class="sidebar-link sub">JAX Logic Auditor</a>
+      <a href="regression-guard.html" class="sidebar-link sub">Regression Guard</a>
+      <a href="data-flow-tracer.html" class="sidebar-link sub active">Data Flow Tracer</a>
+      <a href="failure-mode-researcher.html" class="sidebar-link sub">Failure Mode Researcher</a>
+      <a href="env-researcher.html" class="sidebar-link sub">Env Researcher</a>
+      <a href="code-reviewer.html" class="sidebar-link sub">Code Reviewer</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Reference</div>
+      <a href="../customization.html" class="sidebar-link">Customization</a>
+      <a href="../pitfalls.html" class="sidebar-link">Common Pitfalls</a>
+    </div>
+
+  </nav>
+
+  <!-- ── Main Content ── -->
+  <article class="docs-content">
+
+    <div class="breadcrumbs">
+      <a href="../index.html">Docs</a>
+      <span class="sep">&#8250;</span>
+      <a href="index.html">Agents</a>
+      <span class="sep">&#8250;</span>
+      Data Flow Tracer
+    </div>
+
+    <h1 class="page-title">Data Flow Tracer</h1>
+    <p class="page-subtitle">
+      Builds a complete, annotated map of how data enters a system, transforms step by step, and exits &mdash; across any framework, language, or paradigm.
+    </p>
+
+    <!-- ── Overview ── -->
+    <h2 id="overview">Overview</h2>
+    <p>
+      The Data Flow Tracer follows data, not code structure. Code is organized by module, class, and function &mdash; but data doesn't respect those boundaries. This agent traces the data's actual path, crossing whatever boundaries it crosses, through PyTorch, NumPy, TensorFlow, JAX, C++ pipelines, ROS nodes, or any combination.
+    </p>
+
+    <table>
+      <thead>
+        <tr><th>Property</th><th>Details</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Tools</strong></td><td>Read, Grep, Glob (read-only)</td></tr>
+        <tr><td><strong>Auto-Dispatch</strong></td><td>Yes &mdash; when data pipeline or preprocessing changes</td></tr>
+        <tr><td><strong>Trigger</strong></td><td>Data pipeline changes, environment integration, model input/output modifications</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ── Input-to-Output ── -->
+    <h2 id="input-to-output">Input-to-Output Tracing</h2>
+    <p>The tracer's primary job is complete end-to-end tracing:</p>
+    <ul>
+      <li><strong>True source identification</strong> &mdash; not "the dataloader" but specifically "a HDF5 file containing joint angles as float64 arrays of shape <code>(N, T, 7)</code>"</li>
+      <li><strong>Every transformation documented</strong> &mdash; function/operation applied, input shape/dtype/range, output shape/dtype/range, what changed semantically, file path and line number</li>
+      <li><strong>True sink identification</strong> &mdash; traces all the way to the final destination: loss function, action sent to motor, logged metric, saved checkpoint</li>
+    </ul>
+
+    <!-- ── Semantic Annotation ── -->
+    <h2 id="semantic-annotation">Semantic Annotation</h2>
+    <p>Shapes and dtypes are not enough. The tracer tracks <strong>meaning</strong>:</p>
+    <ul>
+      <li><strong>Axis labels</strong> &mdash; every axis labeled: <code>(batch, time, joints, xyz, channels, envs, agents, ...)</code>. Never leaves an axis unlabeled.</li>
+      <li><strong>Units</strong> &mdash; radians vs degrees, meters vs millimeters, normalized <code>[-1,1]</code> vs raw sensor range</li>
+      <li><strong>Coordinate frames</strong> &mdash; world frame, body frame, camera frame, end-effector frame. A <code>(3,)</code> vector in the wrong frame is a bug no shape check catches.</li>
+      <li><strong>Value range constraints</strong> &mdash; quaternions should be unit norm, probabilities should sum to 1, joint angles should be within limits</li>
+    </ul>
+
+    <!-- ── Branching/Merging ── -->
+    <h2 id="branching">Branching and Merging</h2>
+    <p>Real pipelines aren't linear. The tracer tracks:</p>
+    <ul>
+      <li><strong>Fan-out</strong> &mdash; where one tensor feeds multiple downstream consumers (e.g., observation goes to both policy and value networks)</li>
+      <li><strong>Fan-in</strong> &mdash; where multiple tensors merge. Verifies concat axis and ordering is correct.</li>
+      <li><strong>Residual/skip connections</strong> &mdash; traces what gets added back, verifies shapes and semantics match at the addition point</li>
+      <li><strong>Conditional paths</strong> &mdash; if data flows through different branches based on mode (train vs eval, sim vs real), traces both paths</li>
+    </ul>
+
+    <!-- ── Boundary Analysis ── -->
+    <h2 id="boundaries">Boundary Analysis</h2>
+    <p>Special attention at boundaries where data crosses between systems:</p>
+    <table>
+      <thead>
+        <tr><th>Boundary</th><th>What to Verify</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Data loading &rarr; preprocessing</strong></td><td>File formats parsed correctly? Dtypes preserved or silently cast?</td></tr>
+        <tr><td><strong>Preprocessing &rarr; model input</strong></td><td>Does the model expect the exact format that preprocessing produces?</td></tr>
+        <tr><td><strong>Model output &rarr; postprocessing</strong></td><td>Outputs denormalized/decoded correctly?</td></tr>
+        <tr><td><strong>Software &rarr; hardware</strong></td><td>Actions clipped, scaled, and in correct units before actuators?</td></tr>
+        <tr><td><strong>Between processes/nodes</strong></td><td>Serialization/deserialization preserves data correctly?</td></tr>
+        <tr><td><strong>Between frameworks</strong></td><td>NumPy/PyTorch/JAX conversions handle memory layouts, dtypes, device placement?</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ── Mutation Tracking ── -->
+    <h2 id="mutation">Mutation Tracking</h2>
+    <p>Tracks where data gets modified in place:</p>
+    <ul>
+      <li>In-place operations (<code>x *= 2</code>, <code>x[idx] = val</code>, <code>x.fill_()</code>)</li>
+      <li>Buffer updates (running mean/var in BatchNorm, replay buffer overwrites)</li>
+      <li>Shared references where modifying one variable silently modifies another</li>
+      <li>Flags in-place mutation that could affect upstream consumers expecting original data</li>
+    </ul>
+
+    <!-- ── Missing Transformations ── -->
+    <h2 id="missing">Missing Transformations</h2>
+    <p>Flags where important transformations are absent:</p>
+    <ul>
+      <li>Raw sensor data used without normalization</li>
+      <li>Model outputs used without denormalization</li>
+      <li>Missing clipping on actions before hardware execution</li>
+      <li>Missing dtype conversion (float64 data entering a float32 model &mdash; silent precision loss)</li>
+      <li>Missing device transfer (CPU tensor where GPU expected, or vice versa)</li>
+    </ul>
+
+    <!-- ── Output Format ── -->
+    <h2 id="output-format">Output Format</h2>
+    <p>The tracer produces a structured report containing:</p>
+    <ul>
+      <li><strong>Overview</strong> &mdash; what the pipeline does, input source, output destination</li>
+      <li><strong>Flow Diagram</strong> &mdash; ASCII/text diagram showing high-level flow with branches and merges</li>
+      <li><strong>Detailed Trace</strong> &mdash; every stage with input/output shape, dtype, axes, range, units, and notes</li>
+      <li><strong>Boundary Crossings</strong> &mdash; what crosses each boundary and any concerns</li>
+      <li><strong>Issues Found</strong> &mdash; location, severity, concrete consequence</li>
+      <li><strong>Assumptions Made</strong> &mdash; things that couldn't be verified from static analysis, with suggested runtime checks</li>
+    </ul>
+
+    <div class="admonition note">
+      <div class="admonition-title">Key Principles</div>
+      <p style="margin-bottom: 0"><strong>No gaps in the trace</strong> &mdash; a gap is a finding, not something to skip. <strong>Read the code, don't infer from names</strong> &mdash; a function called <code>normalize()</code> might do anything. <strong>The bugs are in the transitions</strong> &mdash; most data flow bugs are in the hand-offs between stages. <strong>Units and frames matter</strong> &mdash; a perfectly shaped tensor in the wrong coordinate frame will produce plausible-looking but wrong behavior.</p>
+    </div>
+
+    <!-- ── Prev/Next ── -->
+    <nav class="docs-pager">
+      <a href="regression-guard.html">
+        <span class="pager-label">&larr; Previous</span>
+        <span class="pager-title">Regression Guard</span>
+      </a>
+      <a href="failure-mode-researcher.html" class="next">
+        <span class="pager-label">Next &rarr;</span>
+        <span class="pager-title">Failure Mode Researcher</span>
+      </a>
+    </nav>
+
+    <footer class="docs-footer">
+      <p>
+        <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">Propel</a> is open source under the MIT License.
+        Built by <a href="https://kbian.org" target="_blank" rel="noopener">Kaiwen Bian</a> &amp; <a href="https://yuertang.dev/" target="_blank" rel="noopener">Yuer Tang</a>.
+      </p>
+    </footer>
+
+  </article>
+
+  <!-- ── Right ToC ── -->
+  <aside class="docs-toc">
+    <div class="docs-toc-title">On This Page</div>
+    <a href="#overview">Overview</a>
+    <a href="#input-to-output">Input-to-Output Tracing</a>
+    <a href="#semantic-annotation">Semantic Annotation</a>
+    <a href="#branching">Branching and Merging</a>
+    <a href="#boundaries">Boundary Analysis</a>
+    <a href="#mutation">Mutation Tracking</a>
+    <a href="#missing">Missing Transformations</a>
+    <a href="#output-format">Output Format</a>
+  </aside>
+
+</div>
+
+<script src="../docs.js"></script>
+</body>
+</html>

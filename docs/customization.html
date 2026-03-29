@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Customization &mdash; Propel Documentation</title>
+  <meta name="description" content="How to customize Propel: project profiling, custom agents, skills, commands, gate overrides, and auditor dispatch." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&family=Noto+Sans+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="../assets/logo-c.svg" />
+  <link rel="stylesheet" href="docs.css" />
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header class="docs-header">
+  <button class="sidebar-toggle" aria-label="Toggle navigation">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+  </button>
+  <a href="../index.html" class="docs-header-logo">
+    <img src="../assets/logo-c.svg" alt="Propel" />
+    Propel
+    <span class="logo-tag">docs</span>
+  </a>
+  <nav class="docs-header-nav">
+    <a href="../index.html">Home</a>
+    <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">GitHub</a>
+  </nav>
+  <div class="docs-header-search">
+    <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"/></svg>
+    Search
+    <kbd>/</kbd>
+  </div>
+</header>
+
+<!-- ── Layout ── -->
+<div class="docs-layout">
+
+  <!-- ── Left Sidebar ── -->
+  <nav class="docs-sidebar" aria-label="Documentation navigation">
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Getting Started</div>
+      <a href="index.html" class="sidebar-link">Overview</a>
+      <a href="getting-started.html" class="sidebar-link">Installation &amp; Setup</a>
+      <a href="core-principles.html" class="sidebar-link">Core Principles</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Pipeline</div>
+      <a href="pipeline/index.html" class="sidebar-link">Pipeline Overview</a>
+      <a href="pipeline/gates.html" class="sidebar-link">Gates &amp; Questioners</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Modes</div>
+      <a href="modes/index.html" class="sidebar-link">Mode System</a>
+      <a href="modes/researcher.html" class="sidebar-link sub">Researcher</a>
+      <a href="modes/engineer.html" class="sidebar-link sub">Engineer</a>
+      <a href="modes/debugger.html" class="sidebar-link sub">Debugger</a>
+      <a href="modes/trainer.html" class="sidebar-link sub">Trainer</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Skills</div>
+      <a href="skills/index.html" class="sidebar-link">Skills Overview</a>
+      <a href="skills/investigation.html" class="sidebar-link sub">Investigation</a>
+      <a href="skills/research-design.html" class="sidebar-link sub">Research Design</a>
+      <a href="skills/subagent-driven-research.html" class="sidebar-link sub">Implementation</a>
+      <a href="skills/systematic-debugging.html" class="sidebar-link sub">Systematic Debugging</a>
+      <a href="skills/research-validation.html" class="sidebar-link sub">Validation</a>
+      <a href="skills/deep-research.html" class="sidebar-link sub">Deep Research</a>
+      <a href="skills/think-deeply.html" class="sidebar-link sub">Think Deeply</a>
+      <a href="skills/context-hygiene.html" class="sidebar-link sub">Context Hygiene</a>
+      <a href="skills/trainer-mode.html" class="sidebar-link sub">Trainer Mode</a>
+      <a href="skills/retrospective.html" class="sidebar-link sub">Retrospective</a>
+      <a href="skills/other.html" class="sidebar-link sub">Other Skills</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Agents</div>
+      <a href="agents/index.html" class="sidebar-link">Agents Overview</a>
+      <a href="agents/paper-alignment-auditor.html" class="sidebar-link sub">Paper Alignment</a>
+      <a href="agents/silent-bug-detector.html" class="sidebar-link sub">Silent Bug Detector</a>
+      <a href="agents/jax-logic-auditor.html" class="sidebar-link sub">JAX Logic Auditor</a>
+      <a href="agents/regression-guard.html" class="sidebar-link sub">Regression Guard</a>
+      <a href="agents/data-flow-tracer.html" class="sidebar-link sub">Data Flow Tracer</a>
+      <a href="agents/failure-mode-researcher.html" class="sidebar-link sub">Failure Mode Researcher</a>
+      <a href="agents/env-researcher.html" class="sidebar-link sub">Env Researcher</a>
+      <a href="agents/code-reviewer.html" class="sidebar-link sub">Code Reviewer</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Reference</div>
+      <a href="customization.html" class="sidebar-link active">Customization</a>
+      <a href="pitfalls.html" class="sidebar-link">Common Pitfalls</a>
+    </div>
+
+  </nav>
+
+  <!-- ── Main Content ── -->
+  <article class="docs-content">
+
+    <div class="breadcrumbs">
+      <a href="index.html">Docs</a>
+      <span class="sep">&#8250;</span>
+      Customization
+    </div>
+
+    <h1 class="page-title">Customization</h1>
+    <p class="page-subtitle">
+      How to add project-specific agents, skills, commands, and gate overrides to Propel.
+    </p>
+
+    <!-- ── Project Profile ── -->
+    <h2 id="project-profile">Automatic Project Profiling</h2>
+    <p>
+      Propel can auto-detect your project's coding conventions, domain context, and development patterns, creating a persistent profile that Claude references on every session start. The profile lives in <code>.propel/</code> (gitignored).
+    </p>
+
+    <h3 id="how-profiling-works">How It Works</h3>
+    <p>
+      Run <code>/intro</code> and accept the Part 3 offer, or say "customize Propel" at any time. Propel runs six phases:
+    </p>
+    <ol>
+      <li><strong>Scan project structure</strong> &mdash; language, framework, dependencies, directory layout, build tools</li>
+      <li><strong>Analyze code style</strong> &mdash; naming conventions, import patterns, formatting, type hints, docstrings (from 5&ndash;10 source files)</li>
+      <li><strong>Detect domain</strong> &mdash; classify from imports; optionally delegate to env-researcher or deep-research agents for detailed context</li>
+      <li><strong>Analyze git history</strong> &mdash; commit style, branch naming, active areas, team size</li>
+      <li><strong>Read existing conventions</strong> &mdash; CLAUDE.md, CONTRIBUTING.md, CI configs, linter configs, editor configs</li>
+      <li><strong>Present profile for confirmation</strong> &mdash; you review and approve before anything is written</li>
+    </ol>
+
+    <h3 id="profile-output">Output Files</h3>
+    <p>All output goes to <code>.propel/</code> (gitignored):</p>
+    <table>
+      <thead><tr><th>File</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><code>config.json</code></td><td>Enabled/disabled flag, timestamps, analysis hash, detected domain/framework</td></tr>
+        <tr><td><code>profile.md</code></td><td>Main reference (~100 lines) &mdash; project identity, style, patterns, active areas</td></tr>
+        <tr><td><code>conventions.md</code></td><td>Detailed naming, import, formatting, type hint, and testing conventions with examples</td></tr>
+        <tr><td><code>domain-context.md</code></td><td>Domain-specific context from agent delegation (only if applicable)</td></tr>
+      </tbody>
+    </table>
+
+    <div class="admonition note">
+      <div class="admonition-title">Session Integration</div>
+      <p style="margin-bottom: 0">The session-start hook reads <code>.propel/profile.md</code> and injects it as context automatically. You never need to re-explain your project conventions &mdash; Claude already knows them.</p>
+    </div>
+
+    <h3 id="detection-details">What Gets Detected</h3>
+    <p>The analysis covers the following categories in detail:</p>
+    <table>
+      <thead><tr><th>Category</th><th>Signals Analyzed</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Language &amp; Framework</strong></td><td><code>pyproject.toml</code>, <code>package.json</code>, <code>Cargo.toml</code>, <code>go.mod</code>, <code>CMakeLists.txt</code></td></tr>
+        <tr><td><strong>Code Style</strong></td><td>Naming (snake_case vs camelCase), imports, formatting, type hints, docstrings, string style</td></tr>
+        <tr><td><strong>Domain</strong></td><td>JAX/ML, PyTorch/ML, Robotics/RL, Frontend, Backend/API, Scientific computing, ROS</td></tr>
+        <tr><td><strong>Git Patterns</strong></td><td>Commit style, branch naming, active areas, team size, commit frequency</td></tr>
+        <tr><td><strong>Existing Rules</strong></td><td>CLAUDE.md, CONTRIBUTING.md, CI configs, linter/formatter configs, .editorconfig</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ── Delta Updates ── -->
+    <h2 id="delta-updates">Delta Updates</h2>
+    <p>
+      On subsequent runs, Propel hashes key project files and compares against the stored hash. If nothing changed, it confirms the profile is current. If files changed, it re-analyzes only the affected categories and shows you a diff before updating.
+    </p>
+
+    <table>
+      <thead><tr><th>What Changed</th><th>Re-Analysis</th></tr></thead>
+      <tbody>
+        <tr><td>Dependency file (<code>pyproject.toml</code>, etc.)</td><td>Phase 1 (structure scan)</td></tr>
+        <tr><td>Linter config (<code>ruff.toml</code>, <code>.eslintrc</code>)</td><td>Phase 2 (code style)</td></tr>
+        <tr><td>Source files changed significantly</td><td>Phase 2 (code style)</td></tr>
+        <tr><td>CI config</td><td>Phase 5 (existing conventions)</td></tr>
+        <tr><td><code>CLAUDE.md</code></td><td>Phase 5 (existing conventions)</td></tr>
+      </tbody>
+    </table>
+
+    <div class="admonition tip">
+      <div class="admonition-title">Toggle or Remove</div>
+      <p style="margin-bottom: 0"><strong>Disable</strong>: Set <code>"enabled": false</code> in <code>.propel/config.json</code>. <strong>Remove</strong>: Delete the <code>.propel/</code> directory entirely. <strong>Re-enable</strong>: Say "customize Propel" to run a fresh analysis.</p>
+    </div>
+
+    <!-- ── Custom Agents ── -->
+    <h2 id="custom-agents">Adding Custom Agents</h2>
+    <p>
+      Propel's agents are defaults. You can add project-specific agents in your own <code>.claude/agents/</code> directory &mdash; they take precedence over Propel's built-in agents.
+    </p>
+
+    <h3 id="agent-example">Example: PyTorch Logic Auditor</h3>
+    <p>If your project uses PyTorch instead of JAX, create <code>.claude/agents/torch-logic-auditor.md</code>:</p>
+    <pre><code>---
+name: torch-logic-auditor
+description: "PyTorch-specific logic auditor. Replaces jax-logic-auditor."
+tools: Read, Grep, Glob
+---
+
+You are a PyTorch logic auditor...
+[Your PyTorch-specific checks here]</code></pre>
+
+    <h3 id="agent-example-domain">Example: Domain-Specific Auditor</h3>
+    <p>For robotics projects, you might add <code>.claude/agents/sim-real-gap-auditor.md</code>:</p>
+    <pre><code>---
+name: sim-real-gap-auditor
+description: "Checks for sim-to-real transfer issues..."
+tools: Read, Grep, Glob
+---
+
+[Auditor content]</code></pre>
+
+    <h3 id="agent-design">Agent Design Principles</h3>
+    <ol>
+      <li><strong>One-shot context</strong> &mdash; Agents have no conversation history. Their prompt must be self-contained.</li>
+      <li><strong>Read-only by default</strong> &mdash; Auditors should only read code, not modify it.</li>
+      <li><strong>Structured output</strong> &mdash; Use the output format template from existing agents.</li>
+      <li><strong>Specific trigger conditions</strong> &mdash; The <code>description</code> field determines when the agent gets dispatched.</li>
+    </ol>
+
+    <!-- ── Custom Skills ── -->
+    <h2 id="custom-skills">Adding Custom Skills</h2>
+    <p>
+      Add skills to <code>.claude/skills/</code> in your project. They integrate with Propel's existing workflow. Each skill has a <code>SKILL.md</code> file with YAML frontmatter (<code>name</code>, <code>description</code>) and markdown body.
+    </p>
+
+    <h3 id="skill-example">Example: Hardware Deployment Skill</h3>
+    <p>Create <code>.claude/skills/hardware-deployment/SKILL.md</code>:</p>
+    <pre><code>---
+name: hardware-deployment
+description: >
+  Guides the deployment of trained policies to physical hardware.
+  Use when the user says "deploy to robot", "run on hardware",
+  "sim to real".
+---
+
+# Hardware Deployment
+
+## Pre-Deployment Checklist
+- [ ] Policy verified in simulation
+- [ ] Action scaling verified (sim units -> hardware units)
+- [ ] Safety limits configured
+- [ ] Fallback behavior defined</code></pre>
+
+    <div class="admonition note">
+      <div class="admonition-title">Skill Activation</div>
+      <p style="margin-bottom: 0">Skills activate based on their <code>description</code> field. Include natural-language trigger phrases (e.g., "deploy to robot", "run on hardware") so Propel knows when to activate the skill.</p>
+    </div>
+
+    <!-- ── Custom Commands ── -->
+    <h2 id="custom-commands">Adding Custom Commands</h2>
+    <p>
+      Add slash commands to <code>.claude/commands/</code> in your project. Use <code>$ARGUMENTS</code> for parameterization.
+    </p>
+
+    <h3 id="command-example">Example: Run Training</h3>
+    <p>Create <code>.claude/commands/train.md</code>:</p>
+    <pre><code>Run a training experiment with the configuration in $ARGUMENTS.
+
+## Process
+1. Verify the config exists and is valid
+2. Run a 100-step smoke test first
+3. If smoke test passes, launch full training
+4. Monitor the first 1000 steps for NaN/explosion</code></pre>
+    <p>Then invoke it with <code>/train configs/rvq-base.yaml</code>.</p>
+
+    <!-- ── Gate Behavior ── -->
+    <h2 id="gate-overrides">Customizing Gate Behavior</h2>
+    <p>
+      You can adjust gate behavior by adding instructions to your project's <code>CLAUDE.md</code>. Gates can be expanded (stricter) or abbreviated (lighter) depending on context.
+    </p>
+
+    <h3 id="gate-example">Example: Gate Overrides</h3>
+    <pre><code>## Propel Overrides
+
+### Gate 0 (Intake)
+- For routine experiments (hyperparameter sweeps), Gate 0 can
+  be abbreviated to a single scope confirmation.
+- For novel implementations, full Gate 0 is mandatory.
+
+### Gate 3 (Mid-Implementation)
+- For this project, always include the sim-real-gap-auditor
+  in the audit dispatch.</code></pre>
+
+    <h3 id="mode-overrides">Mode-Specific Overrides</h3>
+    <p>
+      Propel's four modes (Researcher, Engineer, Debugger, Trainer) have default skill/gate assignments, but you can override these per-project:
+    </p>
+    <table>
+      <thead><tr><th>Override</th><th>Example</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Expand Trainer Mode</strong></td><td>Allow config-only changes (learning rate, batch size) without switching to Engineer</td></tr>
+        <tr><td><strong>Abbreviate Researcher Gates</strong></td><td>For follow-up questions in an active investigation, Gate 0 becomes a single confirmation</td></tr>
+        <tr><td><strong>Add skills to a mode</strong></td><td>Activate <code>using-git-worktrees</code> in Researcher Mode for branch isolation</td></tr>
+        <tr><td><strong>Restrict Engineer Mode</strong></td><td>Require retrospectives after every session, enforce full Gate 0 for all tasks</td></tr>
+        <tr><td><strong>Set default mode</strong></td><td>Default to Trainer Mode during training phase &mdash; skips mode selection</td></tr>
+      </tbody>
+    </table>
+
+    <pre><code>## Propel Mode Overrides
+
+### Trainer Mode
+- Allow Trainer Mode to adjust hyperparameters in config files
+- Architecture, loss, and data pipeline changes still require
+  /switch engineer
+
+### Default Mode
+- Default to trainer mode &mdash; this project is in the training phase</code></pre>
+
+    <!-- ── Auditor Dispatch ── -->
+    <h2 id="auditor-dispatch">Customizing Auditor Dispatch</h2>
+    <p>
+      The <code>subagent-driven-research/auditor-dispatch.md</code> file contains the dispatch rules. To add your project-specific auditor to the dispatch:
+    </p>
+    <ol>
+      <li>Add the agent file to your <code>.claude/agents/</code> directory</li>
+      <li>Add a dispatch rule in your <code>CLAUDE.md</code>:</li>
+    </ol>
+    <pre><code>## Auditor Dispatch Override
+After modifying any file in `envs/` or `controllers/`,
+also dispatch sim-real-gap-auditor.</code></pre>
+
+    <!-- ── CLAUDE.md Integration ── -->
+    <h2 id="claude-md-integration">Project CLAUDE.md Integration</h2>
+    <p>
+      Reference Propel in your project's <code>CLAUDE.md</code> to tie everything together:
+    </p>
+    <pre><code>## Workflow
+This project uses the Propel research workflow.
+Skills, agents, and commands are in .claude/ (installed via `propel init`).
+See propel docs for the investigation -> design -> implement -> validate pipeline.
+
+## Project-Specific Notes
+- Our configs are in `configs/` &mdash; existing configs must not change behavior
+- Paper references are in `docs/papers/` &mdash; use /read-paper to extract them
+- Training scripts expect wandb to be configured</code></pre>
+
+    <!-- ── Prev/Next ── -->
+    <nav class="docs-pager">
+      <a href="agents/code-reviewer.html">
+        <span class="pager-label">&larr; Previous</span>
+        <span class="pager-title">Code Reviewer</span>
+      </a>
+      <a href="pitfalls.html" class="next">
+        <span class="pager-label">Next &rarr;</span>
+        <span class="pager-title">Common Pitfalls</span>
+      </a>
+    </nav>
+
+    <footer class="docs-footer">
+      <p>
+        <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">Propel</a> is open source under the MIT License.
+        Built by <a href="https://kbian.org" target="_blank" rel="noopener">Kaiwen Bian</a> &amp; <a href="https://yuertang.dev/" target="_blank" rel="noopener">Yuer Tang</a>.
+      </p>
+    </footer>
+
+  </article>
+
+  <!-- ── Right ToC ── -->
+  <aside class="docs-toc">
+    <div class="docs-toc-title">On This Page</div>
+    <a href="#project-profile">Automatic Project Profiling</a>
+    <a href="#how-profiling-works" class="toc-h3">How It Works</a>
+    <a href="#profile-output" class="toc-h3">Output Files</a>
+    <a href="#detection-details" class="toc-h3">What Gets Detected</a>
+    <a href="#delta-updates">Delta Updates</a>
+    <a href="#custom-agents">Adding Custom Agents</a>
+    <a href="#agent-design" class="toc-h3">Agent Design Principles</a>
+    <a href="#custom-skills">Adding Custom Skills</a>
+    <a href="#custom-commands">Adding Custom Commands</a>
+    <a href="#gate-overrides">Customizing Gate Behavior</a>
+    <a href="#mode-overrides" class="toc-h3">Mode-Specific Overrides</a>
+    <a href="#auditor-dispatch">Customizing Auditor Dispatch</a>
+    <a href="#claude-md-integration">CLAUDE.md Integration</a>
+  </aside>
+
+</div>
+
+<script src="docs.js"></script>
+</body>
+</html>

@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Other Skills &mdash; Propel Documentation</title>
+  <meta name="description" content="Additional Propel skills: using-propel meta-skill, writing plans, paper extraction, verification, git worktrees, and project customization." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&family=Noto+Sans+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="../../assets/logo-c.svg" />
+  <link rel="stylesheet" href="../docs.css" />
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header class="docs-header">
+  <button class="sidebar-toggle" aria-label="Toggle navigation">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+  </button>
+  <a href="../../index.html" class="docs-header-logo">
+    <img src="../../assets/logo-c.svg" alt="Propel" />
+    Propel
+    <span class="logo-tag">docs</span>
+  </a>
+  <nav class="docs-header-nav">
+    <a href="../../index.html">Home</a>
+    <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">GitHub</a>
+  </nav>
+  <div class="docs-header-search">
+    <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"/></svg>
+    Search
+    <kbd>/</kbd>
+  </div>
+</header>
+
+<!-- ── Layout ── -->
+<div class="docs-layout">
+
+  <!-- ── Left Sidebar ── -->
+  <nav class="docs-sidebar" aria-label="Documentation navigation">
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Getting Started</div>
+      <a href="../index.html" class="sidebar-link">Overview</a>
+      <a href="../getting-started.html" class="sidebar-link">Installation &amp; Setup</a>
+      <a href="../core-principles.html" class="sidebar-link">Core Principles</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Pipeline</div>
+      <a href="../pipeline/index.html" class="sidebar-link">Pipeline Overview</a>
+      <a href="../pipeline/gates.html" class="sidebar-link">Gates &amp; Questioners</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Modes</div>
+      <a href="../modes/index.html" class="sidebar-link">Mode System</a>
+      <a href="../modes/researcher.html" class="sidebar-link sub">Researcher</a>
+      <a href="../modes/engineer.html" class="sidebar-link sub">Engineer</a>
+      <a href="../modes/debugger.html" class="sidebar-link sub">Debugger</a>
+      <a href="../modes/trainer.html" class="sidebar-link sub">Trainer</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Skills</div>
+      <a href="index.html" class="sidebar-link">Skills Overview</a>
+      <a href="investigation.html" class="sidebar-link sub">Investigation</a>
+      <a href="research-design.html" class="sidebar-link sub">Research Design</a>
+      <a href="subagent-driven-research.html" class="sidebar-link sub">Implementation</a>
+      <a href="systematic-debugging.html" class="sidebar-link sub">Systematic Debugging</a>
+      <a href="research-validation.html" class="sidebar-link sub">Validation</a>
+      <a href="deep-research.html" class="sidebar-link sub">Deep Research</a>
+      <a href="think-deeply.html" class="sidebar-link sub">Think Deeply</a>
+      <a href="context-hygiene.html" class="sidebar-link sub">Context Hygiene</a>
+      <a href="trainer-mode.html" class="sidebar-link sub">Trainer Mode</a>
+      <a href="retrospective.html" class="sidebar-link sub">Retrospective</a>
+      <a href="other.html" class="sidebar-link sub active">Other Skills</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Agents</div>
+      <a href="../agents/index.html" class="sidebar-link">Agents Overview</a>
+      <a href="../agents/paper-alignment-auditor.html" class="sidebar-link sub">Paper Alignment</a>
+      <a href="../agents/silent-bug-detector.html" class="sidebar-link sub">Silent Bug Detector</a>
+      <a href="../agents/jax-logic-auditor.html" class="sidebar-link sub">JAX Logic Auditor</a>
+      <a href="../agents/regression-guard.html" class="sidebar-link sub">Regression Guard</a>
+      <a href="../agents/data-flow-tracer.html" class="sidebar-link sub">Data Flow Tracer</a>
+      <a href="../agents/failure-mode-researcher.html" class="sidebar-link sub">Failure Mode Researcher</a>
+      <a href="../agents/env-researcher.html" class="sidebar-link sub">Env Researcher</a>
+      <a href="../agents/code-reviewer.html" class="sidebar-link sub">Code Reviewer</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Reference</div>
+      <a href="../customization.html" class="sidebar-link">Customization</a>
+      <a href="../pitfalls.html" class="sidebar-link">Common Pitfalls</a>
+    </div>
+
+  </nav>
+
+  <!-- ── Main Content ── -->
+  <article class="docs-content">
+
+    <div class="breadcrumbs">
+      <a href="../index.html">Docs</a>
+      <span class="sep">&#8250;</span>
+      <a href="index.html">Skills</a>
+      <span class="sep">&#8250;</span>
+      Other Skills
+    </div>
+
+    <h1 class="page-title">Other Skills</h1>
+    <p class="page-subtitle">
+      Additional skills that support the Propel workflow: meta-skill routing, plan writing, paper processing, verification, worktrees, and project profiling.
+    </p>
+
+    <!-- ── Using Propel ── -->
+    <h2 id="using-propel">Using Propel</h2>
+    <p>
+      The <strong>using-propel</strong> skill is the meta-skill &mdash; the entry point for the entire Propel research workflow. It activates before any action to check for applicable Propel skills, ensuring the correct skill is activated for every user request.
+    </p>
+
+    <h3 id="using-propel-routing">Mode-Aware Skill Routing</h3>
+    <p>Before routing to any skill, using-propel checks the current mode. If the triggered skill is not active in the current mode, it informs the user and suggests the appropriate mode with <code>/switch</code>.</p>
+
+    <table>
+      <thead>
+        <tr><th>Skill</th><th>Researcher</th><th>Engineer</th><th>Debugger</th><th>Trainer</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>investigation</td><td>Yes</td><td>Yes</td><td>Yes</td><td>&mdash;</td></tr>
+        <tr><td>deep-research</td><td>Yes</td><td>Yes</td><td>Yes</td><td>&mdash;</td></tr>
+        <tr><td>think-deeply</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+        <tr><td>retrospective</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+        <tr><td>context-hygiene</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+        <tr><td>research-design</td><td>&mdash;</td><td>Yes</td><td>&mdash;</td><td>&mdash;</td></tr>
+        <tr><td>writing-plans</td><td>&mdash;</td><td>Yes</td><td>&mdash;</td><td>&mdash;</td></tr>
+        <tr><td>trainer-mode</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>Yes</td></tr>
+      </tbody>
+    </table>
+
+    <h3 id="using-propel-gates">Gate Enforcement</h3>
+    <p>Propel enforces five human-in-the-loop gates plus two Questioner checkpoints. The using-propel skill ensures no gate is skipped. At each gate, Claude stops, presents structured findings, and asks questions that reveal design assumptions &mdash; never "shall I proceed?" but specific, disjunctive questions.</p>
+
+    <table>
+      <thead>
+        <tr><th>Mode</th><th>Active Gates</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Researcher</td><td>Gate 0, Gate 1</td></tr>
+        <tr><td>Engineer</td><td>All gates (0, 1, 2, 3, 4)</td></tr>
+        <tr><td>Debugger</td><td>Gate 0, Gate 1, Gate 4</td></tr>
+        <tr><td>Trainer</td><td>Gate 4 (runtime bugs only)</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ── Writing Plans ── -->
+    <h2 id="writing-plans">Writing Plans</h2>
+    <p>
+      The <strong>writing-plans</strong> skill converts an approved design proposal into a sequence of small, precise implementation tasks. It activates after research-design has produced an approved design (Gate 2 passed).
+    </p>
+
+    <h3 id="writing-plans-format">Micro-Task Breakdown</h3>
+    <p>Each task is 2&ndash;5 minutes of work with clear verification criteria. For each task, the plan specifies:</p>
+    <ul>
+      <li><strong>What</strong>: Exactly what to implement &mdash; specific functions, classes, or changes</li>
+      <li><strong>Where</strong>: Exact file paths and approximate line numbers</li>
+      <li><strong>Maps to</strong>: Paper equation/section or design component</li>
+      <li><strong>Dependencies</strong>: Which tasks must be done first</li>
+      <li><strong>Steps</strong>: Specific enough to implement without ambiguity</li>
+      <li><strong>Verification</strong>: Concrete checks (shape checks, paper alignment, gradient flow, regression)</li>
+      <li><strong>Auditors</strong>: Which auditors run after completion (this fires Gate 3)</li>
+    </ul>
+
+    <h3 id="writing-plans-principles">Key Principles</h3>
+    <table>
+      <thead>
+        <tr><th>Principle</th><th>Details</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>2&ndash;5 minutes per task</strong></td><td>If it takes longer to implement than to describe, break it down further.</td></tr>
+        <tr><td><strong>Exact file paths</strong></td><td>Never "update the model" &mdash; always "add <code>compute_residual_codes()</code> to <code>model/vq.py</code> after line 145".</td></tr>
+        <tr><td><strong>Verification is mandatory</strong></td><td>Every task must have at least one concrete verification step.</td></tr>
+        <tr><td><strong>Pause points every 3 tasks</strong></td><td>Natural stopping points for <code>/clear</code> and session archival.</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ── Paper Extraction ── -->
+    <h2 id="paper-extraction">Paper Extraction</h2>
+    <p>
+      The <strong>paper-extraction</strong> skill batch-processes multiple papers to build a structured literature database. It activates when you have a set of papers to catalog, not when surveying a topic (use <a href="deep-research.html">Deep Research</a>) or reading a single paper (<code>/read-paper</code>).
+    </p>
+
+    <h3 id="paper-extraction-format">Database Format</h3>
+    <p>Papers are organized in <code>scratch/paper-db/</code>:</p>
+    <pre><code>scratch/paper-db/
+  README.md           # Index of all processed papers, organized by topic
+  entries/            # One file per paper
+    author2024-shortname.md
+    ...
+  tags.md             # Tag index for cross-referencing</code></pre>
+
+    <p>Each entry captures full metadata (authors, year, venue, BibTeX), a structured summary, method details (architecture, I/O, loss, training), quantitative results, tags for cross-referencing, and relevance notes for the current project.</p>
+
+    <h3 id="paper-extraction-principles">Key Principles</h3>
+    <ul>
+      <li><strong>Preserve exact numbers</strong>: Reproduce reported metrics exactly. Don't round or approximate.</li>
+      <li><strong>Flag missing information</strong>: If a paper doesn't report code, hyperparameters, or ablations, note it.</li>
+      <li><strong>Tags enable discovery</strong>: Use specific tags ("vq-vae", "codebook-collapse") not generic ones ("machine learning").</li>
+      <li><strong>This is a database, not a review</strong>: Stay factual. Opinions go in "Relevance Notes" only.</li>
+      <li>After processing a batch, add a <strong>cross-reference analysis</strong> noting connections, common patterns, and gaps.</li>
+    </ul>
+
+    <!-- ── Verification Before Completion ── -->
+    <h2 id="verification">Verification Before Completion</h2>
+    <p>
+      The <strong>verification-before-completion</strong> skill ensures no completion claims are made without fresh verification evidence. It activates when Claude is about to claim something is "done", "working", "fixed", or "ready".
+    </p>
+
+    <div class="admonition danger">
+      <div class="admonition-title">Core Rule</div>
+      <p style="margin-bottom: 0">Never claim something works without showing evidence from THIS session that it works. "I've implemented the feature" is NOT "the feature works." "I fixed the bug" is NOT "the bug is fixed."</p>
+    </div>
+
+    <h3 id="verification-checklist">Fresh Evidence Requirement</h3>
+    <p>Before claiming completion, verify all of the following:</p>
+    <ol>
+      <li><strong>Does it run?</strong> Execute the code or run the test &mdash; don't just read it. If execution is not possible, say so explicitly.</li>
+      <li><strong>Does it produce the right output?</strong> Show actual output, not expected output. For model changes: shapes, loss values, gradient norms from a real pass.</li>
+      <li><strong>Is the evidence fresh?</strong> Evidence from earlier in the session may be stale. Re-run after any code change, even "minor" ones.</li>
+      <li><strong>Is anything else broken?</strong> Run regression checks and existing tests.</li>
+    </ol>
+
+    <h3 id="verification-template">Completion Template</h3>
+    <p>When claiming something is done, the completion report includes: what was changed, evidence it works (real output), what was checked for regressions, and &mdash; crucially &mdash; what was NOT verified (honest about gaps).</p>
+
+    <!-- ── Git Worktrees ── -->
+    <h2 id="git-worktrees">Using Git Worktrees</h2>
+    <p>
+      The <strong>using-git-worktrees</strong> skill guides experiment branch isolation using git worktrees. It activates when starting a new experiment that could break existing functionality, or when you need to work on multiple variants in parallel.
+    </p>
+
+    <h3 id="git-worktrees-setup">Setup Process</h3>
+    <ol>
+      <li><strong>Create the worktree</strong> with a descriptive branch name:
+        <pre><code>git worktree add ../worktrees/{experiment-name} -b experiment/{experiment-name}</code></pre>
+        <p>Naming convention: include the key variables being tested (e.g., <code>rvq-depth2-rotation</code>, <code>fsq-8bit-no-commitment</code>).</p>
+      </li>
+      <li><strong>Verify gitignore</strong>: Ensure <code>worktrees/</code> is in <code>.gitignore</code>.</li>
+      <li><strong>Install dependencies</strong> in the worktree directory.</li>
+      <li><strong>Run baseline</strong>: Before making any changes, verify the baseline works and record baseline metrics.</li>
+    </ol>
+
+    <h3 id="git-worktrees-principles">Key Principles</h3>
+    <table>
+      <thead>
+        <tr><th>Principle</th><th>Details</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Verify baseline first</strong></td><td>If the baseline fails in the worktree, experimental results are meaningless.</td></tr>
+        <tr><td><strong>Keep main clean</strong></td><td>Don't make experimental changes in the main checkout &mdash; it's your known-good reference.</td></tr>
+        <tr><td><strong>One experiment per worktree</strong></td><td>Don't mix unrelated changes &mdash; it's impossible to attribute results to specific changes.</td></tr>
+        <tr><td><strong>Document what changed</strong></td><td>The investigation README should note which worktree/branch contains the experimental code.</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ── Project Customization ── -->
+    <h2 id="project-customization">Project Customization</h2>
+    <p>
+      The <strong>project-customization</strong> skill builds a persistent project profile in <code>.propel/</code> by automatically analyzing code conventions, domain context, and development patterns. Claude references this profile silently on every session start.
+    </p>
+
+    <h3 id="project-customization-detection">Auto-Detection Process</h3>
+    <p>The skill runs six analysis phases on first activation:</p>
+    <ol>
+      <li><strong>Project Structure Scan</strong>: Language, framework, dependencies, directory layout, build tools, package manager</li>
+      <li><strong>Code Style Analysis</strong>: Naming conventions, import style, formatting, type hints, error handling, docstring style</li>
+      <li><strong>Domain Detection</strong>: Classifies the project domain from imports (JAX/ML, PyTorch/ML, Robotics/RL, Frontend, Backend, etc.)</li>
+      <li><strong>Git History Analysis</strong>: Commit style, branch naming, active areas, team size, commit frequency</li>
+      <li><strong>Existing Conventions</strong>: Reads CLAUDE.md, CONTRIBUTING.md, linter configs, CI configs, pre-commit hooks</li>
+      <li><strong>Profile Generation</strong>: Synthesizes all findings into <code>config.json</code>, <code>profile.md</code>, <code>conventions.md</code>, and optionally <code>domain-context.md</code></li>
+    </ol>
+
+    <h3 id="project-customization-update">Subsequent Runs</h3>
+    <p>On subsequent activations, the skill computes a hash over key project files. If nothing changed, the profile is current. If files changed, it runs a delta analysis &mdash; only re-analyzing the categories that changed &mdash; and presents the diff to the user before updating.</p>
+
+    <div class="admonition note">
+      <div class="admonition-title">Integration</div>
+      <p style="margin-bottom: 0">The session-start hook reads <code>.propel/profile.md</code> and injects it as project context. You can disable profiling by setting <code>"enabled": false</code> in <code>.propel/config.json</code>, or remove it entirely by deleting the <code>.propel/</code> directory.</p>
+    </div>
+
+    <!-- ── Prev/Next ── -->
+    <nav class="docs-pager">
+      <a href="retrospective.html">
+        <span class="pager-label">&larr; Previous</span>
+        <span class="pager-title">Retrospective</span>
+      </a>
+      <a href="../agents/index.html" class="next">
+        <span class="pager-label">Next &rarr;</span>
+        <span class="pager-title">Agents Overview</span>
+      </a>
+    </nav>
+
+    <footer class="docs-footer">
+      <p>
+        <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">Propel</a> is open source under the MIT License.
+        Built by <a href="https://kbian.org" target="_blank" rel="noopener">Kaiwen Bian</a> &amp; <a href="https://yuertang.dev/" target="_blank" rel="noopener">Yuer Tang</a>.
+      </p>
+    </footer>
+
+  </article>
+
+  <!-- ── Right ToC ── -->
+  <aside class="docs-toc">
+    <div class="docs-toc-title">On This Page</div>
+    <a href="#using-propel">Using Propel</a>
+    <a href="#using-propel-routing" class="toc-h3">Mode-Aware Routing</a>
+    <a href="#using-propel-gates" class="toc-h3">Gate Enforcement</a>
+    <a href="#writing-plans">Writing Plans</a>
+    <a href="#writing-plans-format" class="toc-h3">Micro-Task Breakdown</a>
+    <a href="#writing-plans-principles" class="toc-h3">Key Principles</a>
+    <a href="#paper-extraction">Paper Extraction</a>
+    <a href="#paper-extraction-format" class="toc-h3">Database Format</a>
+    <a href="#paper-extraction-principles" class="toc-h3">Key Principles</a>
+    <a href="#verification">Verification Before Completion</a>
+    <a href="#verification-checklist" class="toc-h3">Fresh Evidence Requirement</a>
+    <a href="#verification-template" class="toc-h3">Completion Template</a>
+    <a href="#git-worktrees">Using Git Worktrees</a>
+    <a href="#git-worktrees-setup" class="toc-h3">Setup Process</a>
+    <a href="#git-worktrees-principles" class="toc-h3">Key Principles</a>
+    <a href="#project-customization">Project Customization</a>
+    <a href="#project-customization-detection" class="toc-h3">Auto-Detection</a>
+    <a href="#project-customization-update" class="toc-h3">Subsequent Runs</a>
+  </aside>
+
+</div>
+
+<script src="../docs.js"></script>
+</body>
+</html>

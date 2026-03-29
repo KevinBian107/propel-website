@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Regression Guard &mdash; Propel Documentation</title>
+  <meta name="description" content="Regression Guard: backward compatibility and regression auditor. Ensures new code changes don't break existing pipelines or alter established behavior." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&family=Noto+Sans+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="../../assets/logo-c.svg" />
+  <link rel="stylesheet" href="../docs.css" />
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header class="docs-header">
+  <button class="sidebar-toggle" aria-label="Toggle navigation">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+  </button>
+  <a href="../../index.html" class="docs-header-logo">
+    <img src="../../assets/logo-c.svg" alt="Propel" />
+    Propel
+    <span class="logo-tag">docs</span>
+  </a>
+  <nav class="docs-header-nav">
+    <a href="../../index.html">Home</a>
+    <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">GitHub</a>
+  </nav>
+  <div class="docs-header-search">
+    <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"/></svg>
+    Search
+    <kbd>/</kbd>
+  </div>
+</header>
+
+<!-- ── Layout ── -->
+<div class="docs-layout">
+
+  <!-- ── Left Sidebar ── -->
+  <nav class="docs-sidebar" aria-label="Documentation navigation">
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Getting Started</div>
+      <a href="../index.html" class="sidebar-link">Overview</a>
+      <a href="../getting-started.html" class="sidebar-link">Installation &amp; Setup</a>
+      <a href="../core-principles.html" class="sidebar-link">Core Principles</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Pipeline</div>
+      <a href="../pipeline/index.html" class="sidebar-link">Pipeline Overview</a>
+      <a href="../pipeline/gates.html" class="sidebar-link">Gates &amp; Questioners</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Modes</div>
+      <a href="../modes/index.html" class="sidebar-link">Mode System</a>
+      <a href="../modes/researcher.html" class="sidebar-link sub">Researcher</a>
+      <a href="../modes/engineer.html" class="sidebar-link sub">Engineer</a>
+      <a href="../modes/debugger.html" class="sidebar-link sub">Debugger</a>
+      <a href="../modes/trainer.html" class="sidebar-link sub">Trainer</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Skills</div>
+      <a href="../skills/index.html" class="sidebar-link">Skills Overview</a>
+      <a href="../skills/investigation.html" class="sidebar-link sub">Investigation</a>
+      <a href="../skills/research-design.html" class="sidebar-link sub">Research Design</a>
+      <a href="../skills/subagent-driven-research.html" class="sidebar-link sub">Implementation</a>
+      <a href="../skills/systematic-debugging.html" class="sidebar-link sub">Systematic Debugging</a>
+      <a href="../skills/research-validation.html" class="sidebar-link sub">Validation</a>
+      <a href="../skills/deep-research.html" class="sidebar-link sub">Deep Research</a>
+      <a href="../skills/think-deeply.html" class="sidebar-link sub">Think Deeply</a>
+      <a href="../skills/context-hygiene.html" class="sidebar-link sub">Context Hygiene</a>
+      <a href="../skills/trainer-mode.html" class="sidebar-link sub">Trainer Mode</a>
+      <a href="../skills/retrospective.html" class="sidebar-link sub">Retrospective</a>
+      <a href="../skills/other.html" class="sidebar-link sub">Other Skills</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Agents</div>
+      <a href="index.html" class="sidebar-link">Agents Overview</a>
+      <a href="paper-alignment-auditor.html" class="sidebar-link sub">Paper Alignment</a>
+      <a href="silent-bug-detector.html" class="sidebar-link sub">Silent Bug Detector</a>
+      <a href="jax-logic-auditor.html" class="sidebar-link sub">JAX Logic Auditor</a>
+      <a href="regression-guard.html" class="sidebar-link sub active">Regression Guard</a>
+      <a href="data-flow-tracer.html" class="sidebar-link sub">Data Flow Tracer</a>
+      <a href="failure-mode-researcher.html" class="sidebar-link sub">Failure Mode Researcher</a>
+      <a href="env-researcher.html" class="sidebar-link sub">Env Researcher</a>
+      <a href="code-reviewer.html" class="sidebar-link sub">Code Reviewer</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Reference</div>
+      <a href="../customization.html" class="sidebar-link">Customization</a>
+      <a href="../pitfalls.html" class="sidebar-link">Common Pitfalls</a>
+    </div>
+
+  </nav>
+
+  <!-- ── Main Content ── -->
+  <article class="docs-content">
+
+    <div class="breadcrumbs">
+      <a href="../index.html">Docs</a>
+      <span class="sep">&#8250;</span>
+      <a href="index.html">Agents</a>
+      <span class="sep">&#8250;</span>
+      Regression Guard
+    </div>
+
+    <h1 class="page-title">Regression Guard</h1>
+    <p class="page-subtitle">
+      Ensures new code additions or modifications don't silently break, alter, or degrade existing pipelines. A silent regression can invalidate weeks of experiments.
+    </p>
+
+    <!-- ── Overview ── -->
+    <h2 id="overview">Overview</h2>
+    <p>
+      The Regression Guard audits new code changes to ensure backward compatibility. It traces every touchpoint between new and existing code to find unintended side effects &mdash; before they reach a training run.
+    </p>
+
+    <table>
+      <thead>
+        <tr><th>Property</th><th>Details</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Tools</strong></td><td>Read, Grep, Glob, Bash</td></tr>
+        <tr><td><strong>Auto-Dispatch</strong></td><td>Yes &mdash; before merging any feature branch</td></tr>
+        <tr><td><strong>Trigger</strong></td><td>Any feature branch with code changes; training loop or optimizer modifications</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ── Change Scope ── -->
+    <h2 id="change-scope">Change Scope Analysis</h2>
+    <p>Before anything else, the guard understands exactly what changed:</p>
+    <ul>
+      <li>Reads the full diff of all modified files</li>
+      <li>Identifies every function, class, and module that was added, modified, or deleted</li>
+      <li>Classifies each change: <strong>new addition</strong>, <strong>modification</strong>, <strong>refactor</strong> (same behavior, different structure), or <strong>deletion</strong></li>
+      <li>Maps the <strong>intended scope</strong> vs the <strong>actual scope</strong> of the change</li>
+    </ul>
+
+    <!-- ── Interface ── -->
+    <h2 id="interface">Interface Compatibility</h2>
+    <p>Checks that existing code calling into modified code still works:</p>
+    <ul>
+      <li><strong>Function signatures</strong> &mdash; were arguments added, removed, reordered, or re-typed? Are new arguments optional with backward-compatible defaults?</li>
+      <li><strong>Return types and shapes</strong> &mdash; does any modified function return a different shape, dtype, or structure? Traces all callers to verify they handle the new return correctly.</li>
+      <li><strong>Config/YAML schemas</strong> &mdash; were config fields added, removed, or renamed? Do existing config files still parse?</li>
+      <li><strong>Checkpoint compatibility</strong> &mdash; if model architecture changed, can old checkpoints still be loaded?</li>
+      <li><strong>Import paths</strong> &mdash; were modules moved or renamed? Does anything still import from the old location?</li>
+    </ul>
+
+    <!-- ── Pipeline ── -->
+    <h2 id="pipeline">Pipeline Regression Tracing</h2>
+    <p>Traces the full pipeline end-to-end to find where new code touches existing code:</p>
+    <ul>
+      <li><strong>Data pipeline</strong> &mdash; if loading/preprocessing changed, does it still produce the same output format for downstream consumers?</li>
+      <li><strong>Training loop</strong> &mdash; does update logic still work identically for all existing model configs?</li>
+      <li><strong>Evaluation/inference</strong> &mdash; does the evaluation pipeline still produce valid results with metrics computed the same way?</li>
+      <li><strong>Logging and checkpointing</strong> &mdash; do wandb/tensorboard logs still capture the same keys? Can the checkpoint loader restore from existing saved states?</li>
+    </ul>
+
+    <!-- ── Behavioral Equivalence ── -->
+    <h2 id="behavioral-equivalence">Behavioral Equivalence</h2>
+    <p>For code that was refactored but should behave identically, the guard checks for subtle behavioral changes:</p>
+    <ul>
+      <li><strong>Random seed consumption order</strong> &mdash; adding a new random call upstream shifts all downstream randomness</li>
+      <li><strong>Numerical precision</strong> &mdash; switching float64 to float32 intermediates, reordering operations that affect floating point accumulation</li>
+      <li><strong>Default values</strong> &mdash; new argument with a default that doesn't match the old implicit behavior</li>
+      <li><strong>Iteration order</strong> &mdash; changing dict to OrderedDict or different sorting</li>
+    </ul>
+
+    <!-- ── Dependencies ── -->
+    <h2 id="dependencies">Dependency and Side Effect Analysis</h2>
+    <ul>
+      <li><strong>Shared mutable state</strong> &mdash; does new code modify any global state, class variables, or module-level variables that existing code reads?</li>
+      <li><strong>Import side effects</strong> &mdash; does importing the new module trigger side effects (registering classes, modifying globals, monkey-patching)?</li>
+      <li><strong>File system effects</strong> &mdash; does new code write to paths that existing code reads from? Could it overwrite outputs, logs, or checkpoints?</li>
+      <li><strong>Environment changes</strong> &mdash; does new code set environment variables, modify <code>sys.path</code>, or change process state?</li>
+    </ul>
+
+    <!-- ── Displaced Fix ── -->
+    <h2 id="displaced-fix">Displaced Fix Detection</h2>
+
+    <div class="admonition danger">
+      <div class="admonition-title">Critical Check</div>
+      <p style="margin-bottom: 0">One of the most dangerous patterns in research code: fixing a problem in module A by changing module B. This creates hidden coupling, makes the codebase fragile, and often introduces new bugs.</p>
+    </div>
+
+    <p>The guard looks for these displaced fix patterns:</p>
+
+    <table>
+      <thead>
+        <tr><th>Pattern</th><th>Example</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Fix location doesn't match bug location</strong></td><td>Bug is in the loss function but the "fix" changes data preprocessing. Bug is in the decoder but the "fix" normalizes the encoder output.</td></tr>
+        <tr><td><strong>Compensating hacks</strong></td><td>Adding <code>* 0.5</code> upstream to counteract a doubled value downstream. Adding a transpose to "undo" a wrong axis convention from another module.</td></tr>
+        <tr><td><strong>Workarounds in shared code</strong></td><td>Fixing a problem specific to one model variant by changing shared infrastructure, forcing all other variants to live with the workaround.</td></tr>
+        <tr><td><strong>Config-level fixes for code bugs</strong></td><td>Adding <code>loss_scale=0.5</code> because the loss is accidentally doubled somewhere. The correct fix is to fix the doubling.</td></tr>
+        <tr><td><strong>Shape manipulation papering over mismatches</strong></td><td>Adding reshapes, squeezes, or transposes at module boundaries when the real issue is one module produces the wrong shape.</td></tr>
+      </tbody>
+    </table>
+
+    <p>For each change, the guard asks:</p>
+    <ol>
+      <li>Is the change in the same module/function where the problem originates?</li>
+      <li>If not, why? Is there a legitimate architectural reason, or is this working around a root cause?</li>
+      <li>Would this fix survive if the "other" module changed?</li>
+      <li>Does this introduce an implicit contract between two modules that isn't enforced by tests?</li>
+    </ol>
+
+    <div class="admonition warning">
+      <div class="admonition-title">Fix the Bug Where the Bug Is</div>
+      <p style="margin-bottom: 0">If a fix changes module B to compensate for a problem in module A, reject it. When module A is later fixed properly, module B's workaround becomes a new bug. Always fix the root cause directly.</p>
+    </div>
+
+    <!-- ── Conditional Path ── -->
+    <h2 id="conditional-paths">Conditional Path Verification</h2>
+    <p>When new code adds branches (<code>if</code>/<code>else</code>, new model types, new loss terms):</p>
+    <ul>
+      <li>Verify the <strong>existing branch still triggers</strong> for existing configs</li>
+      <li>Check the new branch is <strong>only entered when explicitly opted into</strong> (via config flag, new argument)</li>
+      <li>Verify shared code after the branch point receives compatible outputs from both branches</li>
+    </ul>
+
+    <!-- ── Output Format ── -->
+    <h2 id="output-format">Output Format</h2>
+    <p>The guard produces a structured report containing:</p>
+    <ul>
+      <li><strong>Change Summary</strong> &mdash; files modified, intended scope vs actual scope</li>
+      <li><strong>Interface Changes</strong> &mdash; what changed, backward compatibility status, callers affected</li>
+      <li><strong>Pipeline Impact</strong> &mdash; data pipeline, training loop, evaluation, checkpoints</li>
+      <li><strong>Displaced Fixes Detected</strong> &mdash; change location vs bug location, what's dangerous, correct fix</li>
+      <li><strong>Regressions Found</strong> &mdash; before/after behavior, severity, how to fix</li>
+      <li><strong>Recommended Tests</strong> &mdash; tests to add to catch this class of regression in the future</li>
+    </ul>
+
+    <div class="admonition note">
+      <div class="admonition-title">Core Principle</div>
+      <p style="margin-bottom: 0">The default behavior must not change. If someone runs the exact same config and command as before the change, they must get the same results. New behavior should only activate when explicitly requested. "It still runs" is not "it still works" &mdash; a pipeline can run without errors but produce silently different results.</p>
+    </div>
+
+    <!-- ── Prev/Next ── -->
+    <nav class="docs-pager">
+      <a href="jax-logic-auditor.html">
+        <span class="pager-label">&larr; Previous</span>
+        <span class="pager-title">JAX Logic Auditor</span>
+      </a>
+      <a href="data-flow-tracer.html" class="next">
+        <span class="pager-label">Next &rarr;</span>
+        <span class="pager-title">Data Flow Tracer</span>
+      </a>
+    </nav>
+
+    <footer class="docs-footer">
+      <p>
+        <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">Propel</a> is open source under the MIT License.
+        Built by <a href="https://kbian.org" target="_blank" rel="noopener">Kaiwen Bian</a> &amp; <a href="https://yuertang.dev/" target="_blank" rel="noopener">Yuer Tang</a>.
+      </p>
+    </footer>
+
+  </article>
+
+  <!-- ── Right ToC ── -->
+  <aside class="docs-toc">
+    <div class="docs-toc-title">On This Page</div>
+    <a href="#overview">Overview</a>
+    <a href="#change-scope">Change Scope Analysis</a>
+    <a href="#interface">Interface Compatibility</a>
+    <a href="#pipeline">Pipeline Regression Tracing</a>
+    <a href="#behavioral-equivalence">Behavioral Equivalence</a>
+    <a href="#dependencies">Dependency / Side Effects</a>
+    <a href="#displaced-fix">Displaced Fix Detection</a>
+    <a href="#conditional-paths">Conditional Path Verification</a>
+    <a href="#output-format">Output Format</a>
+  </aside>
+
+</div>
+
+<script src="../docs.js"></script>
+</body>
+</html>

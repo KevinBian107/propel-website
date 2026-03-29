@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Common Pitfalls &mdash; Propel Documentation</title>
+  <meta name="description" content="Known failure modes when working with Claude, and how Propel's pipeline prevents each one." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&family=Noto+Sans+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="../assets/logo-c.svg" />
+  <link rel="stylesheet" href="docs.css" />
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header class="docs-header">
+  <button class="sidebar-toggle" aria-label="Toggle navigation">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+  </button>
+  <a href="../index.html" class="docs-header-logo">
+    <img src="../assets/logo-c.svg" alt="Propel" />
+    Propel
+    <span class="logo-tag">docs</span>
+  </a>
+  <nav class="docs-header-nav">
+    <a href="../index.html">Home</a>
+    <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">GitHub</a>
+  </nav>
+  <div class="docs-header-search">
+    <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"/></svg>
+    Search
+    <kbd>/</kbd>
+  </div>
+</header>
+
+<!-- ── Layout ── -->
+<div class="docs-layout">
+
+  <!-- ── Left Sidebar ── -->
+  <nav class="docs-sidebar" aria-label="Documentation navigation">
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Getting Started</div>
+      <a href="index.html" class="sidebar-link">Overview</a>
+      <a href="getting-started.html" class="sidebar-link">Installation &amp; Setup</a>
+      <a href="core-principles.html" class="sidebar-link">Core Principles</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Pipeline</div>
+      <a href="pipeline/index.html" class="sidebar-link">Pipeline Overview</a>
+      <a href="pipeline/gates.html" class="sidebar-link">Gates &amp; Questioners</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Modes</div>
+      <a href="modes/index.html" class="sidebar-link">Mode System</a>
+      <a href="modes/researcher.html" class="sidebar-link sub">Researcher</a>
+      <a href="modes/engineer.html" class="sidebar-link sub">Engineer</a>
+      <a href="modes/debugger.html" class="sidebar-link sub">Debugger</a>
+      <a href="modes/trainer.html" class="sidebar-link sub">Trainer</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Skills</div>
+      <a href="skills/index.html" class="sidebar-link">Skills Overview</a>
+      <a href="skills/investigation.html" class="sidebar-link sub">Investigation</a>
+      <a href="skills/research-design.html" class="sidebar-link sub">Research Design</a>
+      <a href="skills/subagent-driven-research.html" class="sidebar-link sub">Implementation</a>
+      <a href="skills/systematic-debugging.html" class="sidebar-link sub">Systematic Debugging</a>
+      <a href="skills/research-validation.html" class="sidebar-link sub">Validation</a>
+      <a href="skills/deep-research.html" class="sidebar-link sub">Deep Research</a>
+      <a href="skills/think-deeply.html" class="sidebar-link sub">Think Deeply</a>
+      <a href="skills/context-hygiene.html" class="sidebar-link sub">Context Hygiene</a>
+      <a href="skills/trainer-mode.html" class="sidebar-link sub">Trainer Mode</a>
+      <a href="skills/retrospective.html" class="sidebar-link sub">Retrospective</a>
+      <a href="skills/other.html" class="sidebar-link sub">Other Skills</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Agents</div>
+      <a href="agents/index.html" class="sidebar-link">Agents Overview</a>
+      <a href="agents/paper-alignment-auditor.html" class="sidebar-link sub">Paper Alignment</a>
+      <a href="agents/silent-bug-detector.html" class="sidebar-link sub">Silent Bug Detector</a>
+      <a href="agents/jax-logic-auditor.html" class="sidebar-link sub">JAX Logic Auditor</a>
+      <a href="agents/regression-guard.html" class="sidebar-link sub">Regression Guard</a>
+      <a href="agents/data-flow-tracer.html" class="sidebar-link sub">Data Flow Tracer</a>
+      <a href="agents/failure-mode-researcher.html" class="sidebar-link sub">Failure Mode Researcher</a>
+      <a href="agents/env-researcher.html" class="sidebar-link sub">Env Researcher</a>
+      <a href="agents/code-reviewer.html" class="sidebar-link sub">Code Reviewer</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Reference</div>
+      <a href="customization.html" class="sidebar-link">Customization</a>
+      <a href="pitfalls.html" class="sidebar-link active">Common Pitfalls</a>
+    </div>
+
+  </nav>
+
+  <!-- ── Main Content ── -->
+  <article class="docs-content">
+
+    <div class="breadcrumbs">
+      <a href="index.html">Docs</a>
+      <span class="sep">&#8250;</span>
+      Common Pitfalls
+    </div>
+
+    <h1 class="page-title">Common Pitfalls</h1>
+    <p class="page-subtitle">
+      Known failure modes when working with Claude &mdash; and how Propel's pipeline prevents each one.
+    </p>
+
+    <!-- ── Pitfall 1 ── -->
+    <h2 id="unconstrained-implementation">Pitfall 1: Unconstrained Implementation</h2>
+
+    <div class="admonition danger">
+      <div class="admonition-title">The Fundamental Problem</div>
+      <p style="margin-bottom: 0">Giving Claude a vague, open-ended implementation request leads to plausible-looking but fundamentally wrong code. This is the single most common failure mode and the primary reason Propel's gate system exists.</p>
+    </div>
+
+    <h3 id="what-goes-wrong">What Goes Wrong</h3>
+    <p>
+      When Claude receives an unconstrained problem like "I want to build a can transport task with robosuite", three things happen:
+    </p>
+    <ol>
+      <li><strong>Gaps are filled with training-data averages</strong> &mdash; Claude picks the most likely architecture, reward structure, and API usage based on what it has seen, not what your project needs.</li>
+      <li><strong>Confident but arbitrary choices are made silently</strong> &mdash; Claude won't tell you it's guessing about the reward function, the observation space, or the controller interface.</li>
+      <li><strong>The code compiles but is subtly wrong</strong> &mdash; the implementation looks reasonable and passes cursory review, but embeds wrong assumptions that surface much later (e.g., during training).</li>
+    </ol>
+
+    <h3 id="why-it-happens">Why It Happens</h3>
+    <p>
+      Claude is fundamentally a pattern-matching system. When given a specific example to morph ("take PickPlace and add a transport phase"), it produces excellent results because the constraints are tight. When given an open-ended request ("build a can transport task"), it has to fill in every design decision from its training distribution &mdash; and the mean of all possible implementations is rarely the correct one for your specific use case.
+    </p>
+
+    <div class="admonition note">
+      <div class="admonition-title">Key Insight</div>
+      <p style="margin-bottom: 0"><strong>Claude is great at</strong>: looking at one thing and morphing it into something you want.<br/><strong>Claude is bad at</strong>: creating something new from scratch when the problem is unconstrained.</p>
+    </div>
+
+    <h3 id="symptoms">Symptoms</h3>
+    <ul>
+      <li>Claude produces a complete implementation without asking clarifying questions about architecture or reference implementations</li>
+      <li>The code uses a plausible but wrong API (e.g., an older version of a library, or a different framework's conventions)</li>
+      <li>Reward functions look reasonable but don't match any known working design</li>
+      <li>The implementation doesn't follow patterns established in the rest of the codebase</li>
+      <li>After training, the agent doesn't learn &mdash; and debugging reveals fundamental design issues, not just hyperparameter problems</li>
+    </ul>
+
+    <h3 id="the-fix">How Propel Prevents This</h3>
+
+    <div class="admonition tip">
+      <div class="admonition-title">The Questioner Gates</div>
+      <p>The Questioner checkpoints (Q0 and Q1) in the Propel pipeline exist specifically to prevent unconstrained implementation. The cost of 5 minutes of scoping questions is negligible. The cost of an unconstrained implementation that compiles but trains wrong is hours of debugging and wasted compute.</p>
+    </div>
+
+    <p><strong>Q0 (before investigation)</strong> forces the user to provide:</p>
+    <ul>
+      <li>A reference codebase or repo to start from</li>
+      <li>An architecture or design pattern to follow</li>
+      <li>An existing example to study and adapt</li>
+      <li>A benchmark or ground truth to verify against</li>
+      <li>Specific APIs or framework conventions to use</li>
+    </ul>
+
+    <p><strong>Q1 (before design)</strong> forces the user to specify:</p>
+    <ul>
+      <li>Interface contracts and data formats</li>
+      <li>Configuration approach and defaults</li>
+      <li>Edge case handling</li>
+      <li>Integration points with existing code</li>
+      <li>Minimal vs. extended scope</li>
+    </ul>
+
+    <p>If the user cannot provide any reference implementation, Q0 flags this as a <strong>high-risk unconstrained implementation</strong> so that investigation is extra thorough.</p>
+
+    <h3 id="example-comparison">Example: Bad vs. Good</h3>
+
+    <pre><code><span style="color:#ef4444">Bad (unconstrained):</span>
+<span style="color:#10b981">User:</span>  Build a can transport task with robosuite.
+<span style="color:#60a5fa">Claude:</span> [produces 300 lines of code with arbitrary choices
+        for reward, obs space, controller, etc.]
+
+<span style="color:#10b981">Good (constrained with Q0):</span>
+<span style="color:#10b981">User:</span>  Build a can transport task with robosuite.
+<span style="color:#60a5fa">Claude:</span> <span style="color:#fbbf24">[Q0]</span> Is there an existing task I should use as a
+        starting point?
+<span style="color:#10b981">User:</span>  Yes, look at PickPlace in robosuite/environments/manipulation/
+<span style="color:#60a5fa">Claude:</span> <span style="color:#fbbf24">[Q0]</span> What architecture should I follow &mdash; same reward
+        phases as PickPlace?
+<span style="color:#10b981">User:</span>  Same structure, but add a transport phase between
+        pick and place.
+<span style="color:#60a5fa">Claude:</span> <span style="color:#fbbf24">[Q0]</span> What benchmark should I verify against?
+<span style="color:#10b981">User:</span>  PickPlace test suite as baseline.
+<span style="color:#60a5fa">[Claude now has concrete anchors and produces correct code]</span></code></pre>
+
+    <!-- ── Pitfall 2 ── -->
+    <h2 id="symptom-patching">Pitfall 2: Symptom Patching</h2>
+
+    <div class="admonition danger">
+      <div class="admonition-title">Masking the Real Problem</div>
+      <p style="margin-bottom: 0">Applying a surface-level fix that suppresses a symptom without addressing the root cause. The problem appears "fixed" but the underlying bug remains, often manifesting in a different and harder-to-debug way later.</p>
+    </div>
+
+    <h3 id="symptom-patching-example">What It Looks Like</h3>
+    <table>
+      <thead><tr><th>Symptom</th><th>Patch (Wrong)</th><th>Actual Fix</th></tr></thead>
+      <tbody>
+        <tr><td>Loss goes to NaN</td><td>Add <code>torch.clamp()</code> to prevent NaN</td><td>Trace the NaN to its source &mdash; the clamp masks the real problem</td></tr>
+        <tr><td>Test fails intermittently</td><td>Add <code>@retry(3)</code> decorator</td><td>Find the race condition or state leak causing flakiness</td></tr>
+        <tr><td>Shape mismatch error</td><td>Add a <code>.reshape()</code> at the error site</td><td>Fix the upstream operation that produces the wrong shape</td></tr>
+      </tbody>
+    </table>
+
+    <h3 id="symptom-patching-prevention">How Propel Prevents This</h3>
+    <div class="admonition tip">
+      <div class="admonition-title">Debugger Mode's Diagnosis-First Rule</div>
+      <p style="margin-bottom: 0">Debugger Mode enforces <strong>diagnosis before fixing</strong>. Gate 4 requires presenting the root cause, the mechanism, proposed fix, side effects, and &mdash; critically &mdash; what <em>won't</em> fix the problem and why. This format makes symptom patches obvious because they can't fill in the "Root Cause" and "Why This Happens" fields convincingly.</p>
+    </div>
+
+    <!-- ── Pitfall 3 ── -->
+    <h2 id="shotgun-debugging">Pitfall 3: Shotgun Debugging</h2>
+
+    <div class="admonition danger">
+      <div class="admonition-title">Changing Everything at Once</div>
+      <p style="margin-bottom: 0">Making multiple changes simultaneously and hoping the problem goes away. Even if it works, you don't know which change fixed it &mdash; and you may have introduced new bugs with the other changes.</p>
+    </div>
+
+    <h3 id="shotgun-signs">Signs You're Doing This</h3>
+    <ul>
+      <li>A commit touches 5+ files for a "bug fix" with no clear hypothesis</li>
+      <li>"I changed the learning rate, the loss function, and the data augmentation and now it works"</li>
+      <li>The fix works but nobody can explain why</li>
+    </ul>
+
+    <h3 id="shotgun-prevention">How Propel Prevents This</h3>
+    <div class="admonition tip">
+      <div class="admonition-title">Investigation Skills + 3-Strike Limit</div>
+      <p style="margin-bottom: 0">The investigation skill forces structured evidence gathering before any changes. The 3-strike limit stops repeated attempts of the same approach &mdash; after three failures, Claude must re-examine its assumptions rather than try "one more variation."</p>
+    </div>
+
+    <!-- ── Pitfall 4 ── -->
+    <h2 id="context-window-degradation">Pitfall 4: Context Window Degradation</h2>
+
+    <div class="admonition danger">
+      <div class="admonition-title">Working Too Long Without Clearing</div>
+      <p style="margin-bottom: 0">As a conversation grows, Claude's ability to recall and reason about earlier context degrades. Quality drops subtly &mdash; Claude starts repeating itself, forgetting constraints, or making mistakes it wouldn't make in a fresh session.</p>
+    </div>
+
+    <h3 id="degradation-signs">Symptoms</h3>
+    <ul>
+      <li>Claude re-introduces a bug it already fixed earlier in the session</li>
+      <li>Claude forgets constraints you specified 20+ messages ago</li>
+      <li>Responses become more generic and less specific to your codebase</li>
+      <li>Claude stops referencing the investigation findings it generated earlier</li>
+    </ul>
+
+    <h3 id="degradation-prevention">How Propel Prevents This</h3>
+    <div class="admonition tip">
+      <div class="admonition-title">Context Hygiene Skill + scratch/ Directories</div>
+      <p style="margin-bottom: 0">The context-hygiene skill prompts <code>/clear</code> at regular intervals. Investigation findings are written to <code>scratch/</code> directories with a living README, so context survives across clears. The retrospective skill captures session learnings before clearing. Nothing important lives only in the conversation &mdash; it's always persisted to files.</p>
+    </div>
+
+    <!-- ── Pitfall 5 ── -->
+    <h2 id="displaced-fixes">Pitfall 5: Displaced Fixes</h2>
+
+    <div class="admonition danger">
+      <div class="admonition-title">Fixing the Wrong File</div>
+      <p style="margin-bottom: 0">The bug is in the loss function, but the "fix" is in the data pipeline. The code where the symptom appears is not always the code where the bug lives.</p>
+    </div>
+
+    <h3 id="displaced-prevention">How Propel Prevents This</h3>
+    <div class="admonition tip">
+      <div class="admonition-title">Data Flow Tracer + Bug Classification</div>
+      <p style="margin-bottom: 0">Debugger Mode's bug classification forces identifying <em>where</em> the bug actually is (specific file and line), not just where the symptom appears. The data-flow-tracer agent traces values through the pipeline to find the real source. Gate 4 requires "Root Cause" with specific line numbers &mdash; vague locations are rejected.</p>
+    </div>
+
+    <!-- ── Pitfall 6 ── -->
+    <h2 id="skipping-investigation">Pitfall 6: Skipping Investigation</h2>
+
+    <div class="admonition danger">
+      <div class="admonition-title">Jumping Straight to Implementation</div>
+      <p style="margin-bottom: 0">The most natural instinct: "I know what I want, just build it." This skips the investigation phase where Claude would discover that the existing codebase already has a pattern for this, or that the approach you have in mind conflicts with established conventions.</p>
+    </div>
+
+    <h3 id="skipping-signs">What Gets Missed</h3>
+    <ul>
+      <li>Existing utilities that already solve the problem (now you have duplicated code)</li>
+      <li>Naming conventions that the new code should follow but doesn't</li>
+      <li>Edge cases that the existing codebase handles but the new implementation ignores</li>
+      <li>Integration points that will break when the new code is connected</li>
+    </ul>
+
+    <h3 id="skipping-prevention">How Propel Prevents This</h3>
+    <div class="admonition tip">
+      <div class="admonition-title">Mandatory Gate 0 + Gate 1</div>
+      <p style="margin-bottom: 0">Gate 0 (intake) and Gate 1 (investigation) cannot be skipped in Engineer Mode. Even if you're confident, the investigation phase catches mismatches between your mental model and the actual codebase state. This takes minutes and prevents hours of rework.</p>
+    </div>
+
+    <!-- ── Summary ── -->
+    <h2 id="summary">Summary</h2>
+    <p>Every pitfall follows the same pattern: <strong>skipping a step that feels unnecessary but prevents expensive mistakes</strong>. Propel's pipeline encodes these steps as mandatory gates so they can't be skipped by habit or impatience.</p>
+
+    <table>
+      <thead><tr><th>Pitfall</th><th>Propel Prevention</th></tr></thead>
+      <tbody>
+        <tr><td>Unconstrained Implementation</td><td>Q0/Q1 questioner gates force scoping and references</td></tr>
+        <tr><td>Symptom Patching</td><td>Gate 4 diagnosis format requires root cause evidence</td></tr>
+        <tr><td>Shotgun Debugging</td><td>Investigation skill + 3-strike limit</td></tr>
+        <tr><td>Context Window Degradation</td><td>Context hygiene skill + scratch/ persistence</td></tr>
+        <tr><td>Displaced Fixes</td><td>Data flow tracer + bug classification with line numbers</td></tr>
+        <tr><td>Skipping Investigation</td><td>Mandatory Gate 0 + Gate 1 in all implementation modes</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ── Prev/Next ── -->
+    <nav class="docs-pager">
+      <a href="customization.html">
+        <span class="pager-label">&larr; Previous</span>
+        <span class="pager-title">Customization</span>
+      </a>
+    </nav>
+
+    <footer class="docs-footer">
+      <p>
+        <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">Propel</a> is open source under the MIT License.
+        Built by <a href="https://kbian.org" target="_blank" rel="noopener">Kaiwen Bian</a> &amp; <a href="https://yuertang.dev/" target="_blank" rel="noopener">Yuer Tang</a>.
+      </p>
+    </footer>
+
+  </article>
+
+  <!-- ── Right ToC ── -->
+  <aside class="docs-toc">
+    <div class="docs-toc-title">On This Page</div>
+    <a href="#unconstrained-implementation">Unconstrained Implementation</a>
+    <a href="#what-goes-wrong" class="toc-h3">What Goes Wrong</a>
+    <a href="#why-it-happens" class="toc-h3">Why It Happens</a>
+    <a href="#the-fix" class="toc-h3">How Propel Prevents This</a>
+    <a href="#example-comparison" class="toc-h3">Example: Bad vs. Good</a>
+    <a href="#symptom-patching">Symptom Patching</a>
+    <a href="#shotgun-debugging">Shotgun Debugging</a>
+    <a href="#context-window-degradation">Context Window Degradation</a>
+    <a href="#displaced-fixes">Displaced Fixes</a>
+    <a href="#skipping-investigation">Skipping Investigation</a>
+    <a href="#summary">Summary</a>
+  </aside>
+
+</div>
+
+<script src="docs.js"></script>
+</body>
+</html>

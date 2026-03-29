@@ -26,7 +26,7 @@
     <a href="#features" data-toc-link>Key Features</a>
     <a href="#skills" data-toc-link>Skills</a>
     <a href="#agents" data-toc-link>Agents</a>
-    <a href="#installation" data-toc-link>Installation</a>
+    <a href="#installation" data-toc-link>Get Started</a>
     <a href="#acknowledgments" data-toc-link>Acknowledgments</a>
   </div>
 </nav>
@@ -55,7 +55,7 @@
         <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8.878.392a1.75 1.75 0 00-1.756 0l-5.25 3.045A1.75 1.75 0 001 4.951v6.098c0 .624.332 1.2.872 1.514l5.25 3.045a1.75 1.75 0 001.756 0l5.25-3.045c.54-.313.872-.89.872-1.514V4.951c0-.624-.332-1.2-.872-1.514L8.878.392zM7.875 1.69a.25.25 0 01.25 0l4.63 2.685L8 7.133 3.245 4.375l4.63-2.685zM2.5 5.677l5 2.9v5.765l-4.63-2.685A.25.25 0 012.5 11.4V5.677zm6 8.665V8.577l5-2.9V11.4a.25.25 0 01-.13.216L8.5 14.342z"/></svg>
         Install
       </a>
-      <a href="https://github.com/KevinBian107/propel/tree/master/docs" target="_blank" rel="noopener">
+      <a href="docs/index.html">
         <svg viewBox="0 0 16 16" fill="currentColor"><path d="M0 1.75A.75.75 0 01.75 1h4.253c1.227 0 2.317.59 3 1.501A3.744 3.744 0 0111.006 1h4.245a.75.75 0 01.75.75v10.5a.75.75 0 01-.75.75h-4.507a2.25 2.25 0 00-1.591.659l-.622.621a.75.75 0 01-1.06 0l-.622-.621A2.25 2.25 0 005.258 13H.75a.75.75 0 01-.75-.75V1.75zm7.251 10.324V2.922A2.25 2.25 0 005.003 2.5H1.5v9h3.757a3.75 3.75 0 011.994.574zM8.75 12.074V2.922A2.25 2.25 0 0111.006 2.5h3.495v9h-3.757a3.75 3.75 0 00-1.994.574z"/></svg>
         Docs
       </a>
@@ -319,32 +319,18 @@
 
   <!-- ── Installation ── -->
   <section id="installation" class="fade-in">
-    <h2>Installation</h2>
+    <h2>Get Started</h2>
 
-    <div class="install-steps">
-      <div class="install-step">
-        <div>
-          <p><strong>Clone and install</strong></p>
-          <pre><code>git clone https://github.com/KevinBian107/propel.git
-cd propel && pip install -e .</code></pre>
-        </div>
-      </div>
-      <div class="install-step">
-        <div>
-          <p><strong>Initialize in any project</strong></p>
-          <pre><code>cd /path/to/your/project
+    <pre><code>git clone https://github.com/KevinBian107/propel.git
+cd propel && pip install -e .
+
+cd /path/to/your/project
 propel init</code></pre>
-          <p>Copies all skills, agents, commands, and hooks into your project's <code>.claude/</code> directory.</p>
-        </div>
-      </div>
-      <div class="install-step">
-        <div>
-          <p><strong>Start Claude and run <code>/intro</code></strong></p>
-          <pre><code>claude</code></pre>
-          <p>Then inside Claude, run <code>/intro</code> to select a mode, draft your CLAUDE.md, and optionally generate a project profile.</p>
-        </div>
-      </div>
-    </div>
+
+    <p>
+      Then start Claude and run <code>/intro</code> to select a mode and set up your project.
+      See the <a href="docs/getting-started.html">full Getting Started guide</a> for a complete walkthrough.
+    </p>
   </section>
 
   <!-- ── What Only You Can Provide ── -->

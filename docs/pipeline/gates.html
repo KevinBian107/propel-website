@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gates &amp; Questioners &mdash; Propel Documentation</title>
+  <meta name="description" content="Detailed reference for every Propel gate and questioner: Gate 0 through Gate 4, Questioner Q0 and Q1. Formats, question types, and mode availability." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&family=Noto+Sans+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="../../assets/logo-c.svg" />
+  <link rel="stylesheet" href="../docs.css" />
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header class="docs-header">
+  <button class="sidebar-toggle" aria-label="Toggle navigation">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+  </button>
+  <a href="../../index.html" class="docs-header-logo">
+    <img src="../../assets/logo-c.svg" alt="Propel" />
+    Propel
+    <span class="logo-tag">docs</span>
+  </a>
+  <nav class="docs-header-nav">
+    <a href="../../index.html">Home</a>
+    <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">GitHub</a>
+  </nav>
+  <div class="docs-header-search">
+    <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"/></svg>
+    Search
+    <kbd>/</kbd>
+  </div>
+</header>
+
+<!-- ── Layout ── -->
+<div class="docs-layout">
+
+  <!-- ── Left Sidebar ── -->
+  <nav class="docs-sidebar" aria-label="Documentation navigation">
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Getting Started</div>
+      <a href="../index.html" class="sidebar-link">Overview</a>
+      <a href="../getting-started.html" class="sidebar-link">Installation &amp; Setup</a>
+      <a href="../core-principles.html" class="sidebar-link">Core Principles</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Pipeline</div>
+      <a href="index.html" class="sidebar-link">Pipeline Overview</a>
+      <a href="gates.html" class="sidebar-link active">Gates &amp; Questioners</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Modes</div>
+      <a href="../modes/index.html" class="sidebar-link">Mode System</a>
+      <a href="../modes/researcher.html" class="sidebar-link sub">Researcher</a>
+      <a href="../modes/engineer.html" class="sidebar-link sub">Engineer</a>
+      <a href="../modes/debugger.html" class="sidebar-link sub">Debugger</a>
+      <a href="../modes/trainer.html" class="sidebar-link sub">Trainer</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Skills</div>
+      <a href="../skills/index.html" class="sidebar-link">Skills Overview</a>
+      <a href="../skills/investigation.html" class="sidebar-link sub">Investigation</a>
+      <a href="../skills/research-design.html" class="sidebar-link sub">Research Design</a>
+      <a href="../skills/subagent-driven-research.html" class="sidebar-link sub">Implementation</a>
+      <a href="../skills/systematic-debugging.html" class="sidebar-link sub">Systematic Debugging</a>
+      <a href="../skills/research-validation.html" class="sidebar-link sub">Validation</a>
+      <a href="../skills/deep-research.html" class="sidebar-link sub">Deep Research</a>
+      <a href="../skills/think-deeply.html" class="sidebar-link sub">Think Deeply</a>
+      <a href="../skills/context-hygiene.html" class="sidebar-link sub">Context Hygiene</a>
+      <a href="../skills/trainer-mode.html" class="sidebar-link sub">Trainer Mode</a>
+      <a href="../skills/retrospective.html" class="sidebar-link sub">Retrospective</a>
+      <a href="../skills/other.html" class="sidebar-link sub">Other Skills</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Agents</div>
+      <a href="../agents/index.html" class="sidebar-link">Agents Overview</a>
+      <a href="../agents/paper-alignment-auditor.html" class="sidebar-link sub">Paper Alignment</a>
+      <a href="../agents/silent-bug-detector.html" class="sidebar-link sub">Silent Bug Detector</a>
+      <a href="../agents/jax-logic-auditor.html" class="sidebar-link sub">JAX Logic Auditor</a>
+      <a href="../agents/regression-guard.html" class="sidebar-link sub">Regression Guard</a>
+      <a href="../agents/data-flow-tracer.html" class="sidebar-link sub">Data Flow Tracer</a>
+      <a href="../agents/failure-mode-researcher.html" class="sidebar-link sub">Failure Mode Researcher</a>
+      <a href="../agents/env-researcher.html" class="sidebar-link sub">Env Researcher</a>
+      <a href="../agents/code-reviewer.html" class="sidebar-link sub">Code Reviewer</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Reference</div>
+      <a href="../customization.html" class="sidebar-link">Customization</a>
+      <a href="../pitfalls.html" class="sidebar-link">Common Pitfalls</a>
+    </div>
+
+  </nav>
+
+  <!-- ── Main Content ── -->
+  <article class="docs-content">
+
+    <div class="breadcrumbs">
+      <a href="../index.html">Docs</a>
+      <span class="sep">&#8250;</span>
+      <a href="index.html">Pipeline</a>
+      <span class="sep">&#8250;</span>
+      Gates &amp; Questioners
+    </div>
+
+    <h1 class="page-title">Gates &amp; Questioners</h1>
+    <p class="page-subtitle">
+      The seven human-in-the-loop checkpoints that prevent Claude from skipping ahead. Every gate has a mandatory format, every questioner has specific questions, and every one must be passed before the next phase begins.
+    </p>
+
+    <!-- ── Overview ── -->
+    <h2 id="overview">Overview</h2>
+    <p>
+      Propel enforces <strong>5 gates</strong> and <strong>2 questioner checkpoints</strong>. Gates are hard stops where Claude presents structured findings and waits for human approval. Questioners are structured question sets that ground the next phase in concrete details rather than plausible defaults.
+    </p>
+
+    <table>
+      <thead>
+        <tr><th>Checkpoint</th><th>When</th><th>Purpose</th><th>Researcher</th><th>Engineer</th><th>Debugger</th><th>Trainer</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Gate 0</strong></td><td>User describes task</td><td>Scope the work</td><td>Active</td><td>Active</td><td>Active</td><td>&mdash;</td></tr>
+        <tr><td><strong>Q0</strong></td><td>After Gate 0</td><td>Ground in references</td><td>Active</td><td>Active</td><td>&mdash;</td><td>&mdash;</td></tr>
+        <tr><td><strong>Gate 1</strong></td><td>Investigation complete</td><td>Review findings</td><td>Active</td><td>Active</td><td>Active</td><td>&mdash;</td></tr>
+        <tr><td><strong>Q1</strong></td><td>After Gate 1</td><td>Nail down details</td><td>Active</td><td>Active</td><td>&mdash;</td><td>&mdash;</td></tr>
+        <tr><td><strong>Gate 2</strong></td><td>Design complete</td><td>Review plan</td><td>&mdash;</td><td>Active</td><td>&mdash;</td><td>&mdash;</td></tr>
+        <tr><td><strong>Gate 3</strong></td><td>After each component</td><td>Audit results</td><td>&mdash;</td><td>Active</td><td>&mdash;</td><td>&mdash;</td></tr>
+        <tr><td><strong>Gate 4</strong></td><td>Root cause identified</td><td>Approve diagnosis</td><td>&mdash;</td><td>Active</td><td>Active</td><td>Active*</td></tr>
+      </tbody>
+    </table>
+    <p><small>* Trainer Mode uses Gate 4 for runtime bugs only &mdash; logic changes redirect to Engineer Mode.</small></p>
+
+    <div class="admonition note">
+      <div class="admonition-title">Question Quality Rule</div>
+      <p style="margin-bottom: 0">
+        Gate questions must be <strong>disjunctive</strong> (A or B?), <strong>assumption-exposing</strong>, <strong>design-revealing</strong>, and <strong>evidence-based</strong>. Never ask "shall I proceed?" or "is this okay?" &mdash; these invite rubber-stamping. Questioner questions must be <strong>concrete and reference-seeking</strong>, grounding the work in existing examples.
+      </p>
+    </div>
+
+    <!-- ── Gate 0 ── -->
+    <h2 id="gate-0">Gate 0: Intake</h2>
+    <p>
+      <strong>When:</strong> The user describes what they want to build or fix.<br />
+      <strong>Active in:</strong> <span class="gate-tag">Researcher</span> <span class="gate-tag">Engineer</span> <span class="gate-tag">Debugger</span>
+    </p>
+    <p>
+      Gate 0 is the first line of defense against "just do it" requests. When a user describes a task, Claude does <strong>not</strong> start working immediately. Instead, it asks 3&ndash;5 scoping questions, <strong>one at a time</strong>, to expose assumptions and define boundaries before any investigation begins.
+    </p>
+
+    <h3 id="gate-0-format">Format</h3>
+    <ol>
+      <li>Ask one clarifying question at a time. Wait for the answer.</li>
+      <li>Questions cover: scope boundaries, success criteria, implicit assumptions, what NOT to do, priority.</li>
+      <li>Questions must be specific to <em>this</em> project &mdash; not generic "what are your requirements?"</li>
+      <li>After enough answers, write a <strong>one-paragraph scope statement</strong>.</li>
+      <li>Ask: "Is this what you want?" &mdash; user confirms before proceeding.</li>
+    </ol>
+
+    <h3 id="gate-0-question-types">Question Types</h3>
+    <table>
+      <thead>
+        <tr><th>Type</th><th>Example</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Assumption-exposing</strong></td><td>"You mentioned depth=2. Is that a hard design choice, or do you want arbitrary depth?"</td></tr>
+        <tr><td><strong>Priority-revealing</strong></td><td>"If we discover the paper's approach has a known failure mode, do you want alternatives or implement it anyway?"</td></tr>
+        <tr><td><strong>Scope boundary</strong></td><td>"Should the new quantizer support the existing stickiness bias, or is this a chance to remove it?"</td></tr>
+        <tr><td><strong>Disjunctive</strong></td><td>"Is the loss exploding (going to NaN/inf) or collapsing (going to zero/constant)?"</td></tr>
+        <tr><td><strong>Temporal</strong></td><td>"Did this break after a specific commit, or has it always been this way?"</td></tr>
+      </tbody>
+    </table>
+
+    <div class="admonition tip">
+      <div class="admonition-title">Handling "Just Do It"</div>
+      <p style="margin-bottom: 0">
+        If the user says "just do it," Claude pushes back once: "I want to make sure I build what you actually need. These questions will save us a <code>/clear</code> cycle later." If the user insists, proceed with the most conservative interpretation and document assumptions explicitly.
+      </p>
+    </div>
+
+    <h3 id="gate-0-output">Output</h3>
+    <p>A confirmed one-paragraph scope statement that becomes the reference for all subsequent phases. This scope statement is recorded in the investigation README.</p>
+
+    <!-- ── Questioner Q0 ── -->
+    <h2 id="q0">Questioner Q0: Grounding Before Investigation</h2>
+    <p>
+      <strong>When:</strong> After Gate 0 confirms scope, before investigation begins.<br />
+      <strong>Active in:</strong> <span class="gate-tag">Researcher</span> <span class="gate-tag">Engineer</span>
+    </p>
+
+    <div class="admonition warning">
+      <div class="admonition-title">Why Q0 Exists</div>
+      <p style="margin-bottom: 0">
+        Claude is great at looking at one thing and morphing it into what you want, but bad at creating from scratch when the problem is unconstrained. Vague requests lead to plausible-looking but wrong implementations &mdash; Claude fills gaps with training-data averages instead of asking. Q0 forces the user to provide concrete reference points before investigation.
+      </p>
+    </div>
+
+    <h3 id="q0-questions">The 5 Grounding Questions</h3>
+    <p>Asked <strong>one at a time</strong>, skipping any already answered during Gate 0:</p>
+
+    <table>
+      <thead>
+        <tr><th>#</th><th>Category</th><th>Question</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td><strong>Reference implementation</strong></td><td>"Is there an existing codebase or repo I should use as a starting point? If so, which files or modules are most relevant?"</td></tr>
+        <tr><td>2</td><td><strong>Architecture pattern</strong></td><td>"Is there a known architecture or design pattern you want to follow? (e.g., a specific paper's approach, an existing task implementation, a framework's canonical example)"</td></tr>
+        <tr><td>3</td><td><strong>Example to study</strong></td><td>"Is there a similar task/feature already implemented in this project or another project that I should study and adapt from?"</td></tr>
+        <tr><td>4</td><td><strong>Benchmark / ground truth</strong></td><td>"What benchmark, test case, or expected behavior should I use to verify correctness? Is there a known-good output I can compare against?"</td></tr>
+        <tr><td>5</td><td><strong>Framework constraints</strong></td><td>"Are there specific APIs, libraries, or framework conventions I must use? (e.g., 'use robosuite's SingleArmEnv base class', 'follow the MuJoCo MJX wrapper pattern')"</td></tr>
+      </tbody>
+    </table>
+
+    <h3 id="q0-behavior">What Happens After Q0</h3>
+    <ul>
+      <li>All answers are recorded in the investigation README under <strong>"Reference Sources"</strong>.</li>
+      <li>If the user provides a reference codebase, Claude records it and focuses investigation on those files.</li>
+      <li>If the user says "no reference, build from scratch" &mdash; Claude flags this as <strong>high-risk unconstrained implementation</strong> in the README. Investigation will be more thorough to compensate.</li>
+      <li>The answers directly shape what gets investigated in the next phase.</li>
+    </ul>
+
+    <h3 id="q0-example">Example</h3>
+    <pre><code><span style="color:#10b981">User:</span>  I want to build a can transport task with robosuite.
+<span style="color:#64748b">[Gate 0 confirms scope: single-arm can transport, dense reward, sim only]</span>
+
+<span style="color:#60a5fa">Claude (Q0-1):</span> Is there an existing task in robosuite I should use as a
+               starting point? For example, PickPlace or Lift?
+<span style="color:#10b981">User:</span>  Yeah, look at PickPlace in robosuite/environments/manipulation/
+
+<span style="color:#60a5fa">Claude (Q0-2):</span> Got it. Is there a specific architecture pattern &mdash; should this
+               follow the same reward structure as PickPlace, or do you have
+               a different reward design in mind?
+<span style="color:#10b981">User:</span>  Same structure, but add a transport phase between pick and place.
+
+<span style="color:#60a5fa">Claude (Q0-3):</span> For verification &mdash; is there a known trajectory or benchmark
+               I should test against, or should I use the PickPlace test suite
+               as a baseline?
+<span style="color:#10b981">User:</span>  Use PickPlace tests as baseline, plus a manual trajectory I'll provide.
+
+<span style="color:#64748b">[Claude records all three reference points in scratch/README.md]</span></code></pre>
+
+    <!-- ── Gate 1 ── -->
+    <h2 id="gate-1">Gate 1: Post-Investigation</h2>
+    <p>
+      <strong>When:</strong> Investigation is complete.<br />
+      <strong>Active in:</strong> <span class="gate-tag">Researcher</span> <span class="gate-tag">Engineer</span> <span class="gate-tag">Debugger</span>
+    </p>
+    <p>
+      Gate 1 is where Claude presents what it found during investigation and the human makes design decisions. Claude does <strong>not</strong> proceed to design or implementation without explicit approval of the findings.
+    </p>
+
+    <h3 id="gate-1-format">Mandatory Presentation Format</h3>
+    <pre><code><strong>## Investigation Summary</strong>
+
+<strong>### What I Found</strong>
+- [3-5 bullet findings, concrete and specific]
+
+<strong>### Surprises / Risks</strong>
+- [Unexpected complications discovered during investigation]
+
+<strong>### Open Questions &mdash; I Need Your Input</strong>
+1. [Trade-off question &mdash; disjunctive, not yes/no]
+2. [Architecture choice]
+3. [Priority question]</code></pre>
+
+    <div class="admonition note">
+      <div class="admonition-title">Findings Must Be Concrete</div>
+      <p style="margin-bottom: 0">
+        "The codebase is complex" is not a finding. "The loss function in <code>model/vq.py:89-124</code> computes commitment loss across all depth levels without per-level scaling" is a finding. Every bullet must reference specific files, line numbers, or concrete observations.
+      </p>
+    </div>
+
+    <h3 id="gate-1-output">Output</h3>
+    <p>The human's design decisions are recorded in the investigation README under <strong>"Design Decisions (Human-Approved)"</strong>. These decisions are binding for all subsequent phases.</p>
+
+    <!-- ── Questioner Q1 ── -->
+    <h2 id="q1">Questioner Q1: Before Design</h2>
+    <p>
+      <strong>When:</strong> After Gate 1 confirms investigation findings, before design begins.<br />
+      <strong>Active in:</strong> <span class="gate-tag">Researcher</span> <span class="gate-tag">Engineer</span>
+    </p>
+
+    <div class="admonition warning">
+      <div class="admonition-title">Why Q1 Exists</div>
+      <p style="margin-bottom: 0">
+        After investigation, Claude has findings and the user has made high-level design decisions. But there is a dangerous gap: Claude may still fill in <strong>critical implementation details</strong> with plausible defaults instead of asking. Q1 catches these before design begins, turning vague intent into binding constraints.
+      </p>
+    </div>
+
+    <h3 id="q1-questions">The 6 Detail Questions</h3>
+    <p>Asked <strong>one at a time</strong>, only the questions relevant to what was discovered during investigation:</p>
+
+    <table>
+      <thead>
+        <tr><th>#</th><th>Category</th><th>Question</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td><strong>Interface contracts</strong></td><td>"Based on the investigation, here are the key interfaces I found: [list]. Should the new code match these exactly, or are we changing the API?"</td></tr>
+        <tr><td>2</td><td><strong>Data formats</strong></td><td>"The reference uses [format/shape/convention]. Should we follow the same convention, or does your use case need something different?"</td></tr>
+        <tr><td>3</td><td><strong>Configuration</strong></td><td>"Should this be configurable via [config file / constructor args / env vars]? What should the defaults be?"</td></tr>
+        <tr><td>4</td><td><strong>Edge cases</strong></td><td>"During investigation I found these edge cases: [list]. How should each be handled &mdash; error, fallback, or ignore?"</td></tr>
+        <tr><td>5</td><td><strong>Integration points</strong></td><td>"This will need to connect to [existing modules]. Should I modify those modules or create adapters?"</td></tr>
+        <tr><td>6</td><td><strong>Scope confirmation</strong></td><td>"Based on what I found, the minimal implementation needs [X, Y, Z]. Should I also include [A, B] which I noticed in the reference, or keep it minimal?"</td></tr>
+      </tbody>
+    </table>
+
+    <h3 id="q1-behavior">What Happens After Q1</h3>
+    <ul>
+      <li>Answers are recorded under <strong>"Implementation Decisions (Human-Approved)"</strong> in the investigation README.</li>
+      <li>These answers become <strong>binding constraints</strong> &mdash; Claude must not deviate from them without asking.</li>
+      <li>If the user is unsure about a detail, Claude flags it as an <strong>open question</strong> to revisit during implementation (Gate 3).</li>
+    </ul>
+
+    <h3 id="q1-example">Example</h3>
+    <pre><code><span style="color:#10b981">User:</span>  <span style="color:#64748b">[After Gate 1, approved investigation findings for can transport task]</span>
+
+<span style="color:#60a5fa">Claude (Q1-1):</span> PickPlace uses a 4-phase reward: reach &rarr; grasp &rarr; lift &rarr; place.
+               For can transport, I'd add a "transport" phase between lift and
+               place. Should I keep the same reward scale (0-1 per phase) or
+               re-weight for 5 phases?
+<span style="color:#10b981">User:</span>  Keep 0-1 per phase, so total reward range becomes 0-5 instead of 0-4.
+
+<span style="color:#60a5fa">Claude (Q1-2):</span> PickPlace accepts a single placement target. Transport implies
+               a waypoint. Should the waypoint be a constructor parameter, or
+               computed from start/end positions?
+<span style="color:#10b981">User:</span>  Constructor parameter. I want to be able to set it per episode.
+
+<span style="color:#60a5fa">Claude (Q1-3):</span> The PickPlace test suite checks gripper-to-object distance.
+               For transport, should I also check object-to-waypoint distance
+               during the transport phase?
+<span style="color:#10b981">User:</span>  Yes, that's the key metric for the new phase.
+
+<span style="color:#64748b">[Claude records all decisions and proceeds to design with concrete constraints]</span></code></pre>
+
+    <!-- ── Gate 2 ── -->
+    <h2 id="gate-2">Gate 2: Post-Design</h2>
+    <p>
+      <strong>When:</strong> Design and implementation plan are ready.<br />
+      <strong>Active in:</strong> <span class="gate-tag">Engineer</span>
+    </p>
+    <p>
+      Gate 2 presents the full implementation plan for human review. The human can approve, modify, or reject parts of the plan. Implementation does not begin until the human says "go."
+    </p>
+
+    <h3 id="gate-2-format">Mandatory Presentation Format</h3>
+    <pre><code><strong>## Implementation Plan Summary</strong>
+
+<strong>### Components (in order)</strong>
+1. [Component name] &mdash; maps to paper eq. [X] &mdash; touches files [Y, Z]
+2. [Component name] &mdash; maps to paper eq. [X] &mdash; touches files [Y, Z]
+
+<strong>### Paper-to-Code Mapping</strong>
+| Paper Reference | Code Location | Status |
+|----------------|--------------|--------|
+| Eq. 3 (VQ loss) | model/vq.py:compute_loss() | New |
+| Algorithm 1 (codebook update) | model/vq.py:update_codebook() | Modified |
+
+<strong>### Regression Risk Assessment</strong>
+- [What could break and how we're protecting it]
+
+<strong>### What I'm Uncertain About</strong>
+1. [Uncertainty + two options + trade-offs]
+2. [Uncertainty + two options + trade-offs]
+
+<strong>### Estimated Scope</strong>
+- [N components, M files modified, K new files]</code></pre>
+
+    <div class="admonition note">
+      <div class="admonition-title">Component Order Matters</div>
+      <p style="margin-bottom: 0">
+        Components must be listed in implementation order. Dependencies flow downward &mdash; component 2 can depend on component 1, but not the reverse. If the human wants to change the order, Claude must re-check dependency chains.
+      </p>
+    </div>
+
+    <h3 id="gate-2-key-elements">Key Elements</h3>
+    <table>
+      <thead>
+        <tr><th>Element</th><th>Purpose</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Components list</strong></td><td>What will be built, in what order, with paper equation mappings</td></tr>
+        <tr><td><strong>Paper-to-code mapping</strong></td><td>Explicit link between paper equations/algorithms and code locations</td></tr>
+        <tr><td><strong>Regression risk</strong></td><td>What existing functionality could break and how it will be protected</td></tr>
+        <tr><td><strong>Uncertainties</strong></td><td>Open questions with concrete options and trade-offs for the human to decide</td></tr>
+        <tr><td><strong>Estimated scope</strong></td><td>Concrete count of components, files, and changes to set expectations</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ── Gate 3 ── -->
+    <h2 id="gate-3">Gate 3: Mid-Implementation</h2>
+    <p>
+      <strong>When:</strong> After each component is implemented.<br />
+      <strong>Active in:</strong> <span class="gate-tag">Engineer</span>
+    </p>
+    <p>
+      Gate 3 is a per-component checkpoint during implementation. After Claude implements each component, auditors run automatically and results are presented to the human. This is the most frequently triggered gate &mdash; it fires once per component.
+    </p>
+
+    <h3 id="gate-3-auditor-review">Auditor Review Format</h3>
+    <p>Each component goes through three stages before Gate 3:</p>
+    <ol>
+      <li><strong>Implement</strong> &mdash; Subagent implements the specific task from the approved plan.</li>
+      <li><strong>Review</strong> &mdash; Spec compliance (does it match the plan?) and paper alignment (does it match the source equations?).</li>
+      <li><strong>Audit</strong> &mdash; Parallel auditors check for paper mismatches, JAX bugs, silent failures, and regressions.</li>
+    </ol>
+
+    <h3 id="gate-3-clean">Clean Pass Format</h3>
+    <pre><code>"All auditors passed for component 3. Spec &#10003;, Paper &#10003;, JAX &#10003;, Silent bugs &#10003;, Regression &#10003;. Moving to component 4?"</code></pre>
+
+    <h3 id="gate-3-issues">Issues Found Format</h3>
+    <pre><code><strong>## Component 3 Audit Results</strong>
+
+<strong>### Issues Found</strong>
+- &#10007; Silent Bug Detector: commitment loss applied to combined residual, not per-depth
+  - Paper specifies per-depth (Section 3.2, Eq. 5)
+  - Severity: Critical
+
+<strong>### Question</strong>
+Should I fix this to match the paper (per-depth commitment), or was the
+combined approach an intentional simplification?</code></pre>
+
+    <div class="admonition tip">
+      <div class="admonition-title">Context Management at Gate 3</div>
+      <p style="margin-bottom: 0">
+        Every 3 components, Claude offers a pause point for <code>/clear</code>. Long implementation sessions accumulate context rapidly. The living README in <code>scratch/</code> ensures no findings are lost across context boundaries.
+      </p>
+    </div>
+
+    <h3 id="gate-3-auditors">Auditor Dispatch Table</h3>
+    <table>
+      <thead>
+        <tr><th>What Changed</th><th>Auditors That Run</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Paper-derived component</td><td>paper-alignment-auditor</td></tr>
+        <tr><td>JAX code (scan, vmap, pmap, jit)</td><td>jax-logic-auditor</td></tr>
+        <tr><td>Model / loss / data code</td><td>silent-bug-detector</td></tr>
+        <tr><td>Any code change</td><td>regression-guard</td></tr>
+        <tr><td>Environment interaction code</td><td>env-researcher</td></tr>
+        <tr><td>Deep trace needed (explicit only)</td><td>data-flow-tracer</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ── Gate 4 ── -->
+    <h2 id="gate-4">Gate 4: Before Bug Fix</h2>
+    <p>
+      <strong>When:</strong> Root cause of a bug has been identified.<br />
+      <strong>Active in:</strong> <span class="gate-tag">Engineer</span> <span class="gate-tag">Debugger</span> <span class="gate-tag">Trainer</span> <small>(runtime only)</small>
+    </p>
+    <p>
+      Gate 4 is the mandatory checkpoint before any fix is applied. Claude must present its diagnosis in a structured format and get human approval. This prevents shotgun debugging, symptom patching, and displaced fixes.
+    </p>
+
+    <div class="admonition danger">
+      <div class="admonition-title">The Core Rule</div>
+      <p style="margin-bottom: 0">
+        <strong>Diagnose before fixing.</strong> Never apply a fix without presenting the diagnosis first and getting human approval. No exceptions. If you don't understand the root cause well enough to fill in every field below, you haven't investigated enough.
+      </p>
+    </div>
+
+    <h3 id="gate-4-format">Mandatory Diagnosis Format</h3>
+    <pre><code><strong>Symptom:</strong>         What is observed (concrete, measurable)
+<strong>Root Cause:</strong>      What is actually wrong (with evidence)
+<strong>Why This Happens:</strong> The mechanism that produces the symptom from the root cause
+<strong>Proposed Fix:</strong>    What to change and where (specific files and lines)
+<strong>Side Effects:</strong>    What else this fix touches (other components, training dynamics)
+<strong>What Won't Fix:</strong>  Approaches that look promising but won't work (and why)</code></pre>
+
+    <h3 id="gate-4-fields">Field-by-Field Breakdown</h3>
+    <table>
+      <thead>
+        <tr><th>Field</th><th>Required Content</th><th>Anti-Pattern</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Symptom</strong></td>
+          <td>Measurable observation: "NaN at step ~500 in commitment loss"</td>
+          <td>"Training doesn't work" (too vague)</td>
+        </tr>
+        <tr>
+          <td><strong>Root Cause</strong></td>
+          <td>Specific location + evidence: "RVQ commitment loss sums across depth levels without per-level scaling at <code>model/rvq.py:89</code>"</td>
+          <td>"Something is wrong with the loss" (no location)</td>
+        </tr>
+        <tr>
+          <td><strong>Why This Happens</strong></td>
+          <td>Causal chain: "VQ commitment loss assumes single codebook. RVQ adds levels but reuses same loss unchanged."</td>
+          <td>Restating the symptom</td>
+        </tr>
+        <tr>
+          <td><strong>Proposed Fix</strong></td>
+          <td>Concrete change: "Scale commitment loss by <code>1/num_levels</code> per level"</td>
+          <td>"Fix the loss function" (not actionable)</td>
+        </tr>
+        <tr>
+          <td><strong>Side Effects</strong></td>
+          <td>Impact analysis: "Changes training dynamics. May need LR adjustment."</td>
+          <td>"No side effects" (almost never true)</td>
+        </tr>
+        <tr>
+          <td><strong>What Won't Fix</strong></td>
+          <td>Dead ends with reasons: "Gradient clipping masks symptom but doesn't fix imbalanced scaling"</td>
+          <td>Omitting this section</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="admonition tip">
+      <div class="admonition-title">The "What Won't Fix" Section</div>
+      <p style="margin-bottom: 0">
+        This is often the most valuable part of the diagnosis. It documents dead ends so neither the user nor a future session wastes time re-exploring them. Include every approach you considered and rejected, with the specific reason each one fails.
+      </p>
+    </div>
+
+    <h3 id="gate-4-classification">Bug Classification at Gate 4</h3>
+    <p>Every issue must be classified before the diagnosis is presented. The classification determines the evidence standard:</p>
+
+    <table>
+      <thead>
+        <tr><th>Classification</th><th>Evidence Required</th><th>What Happens Next</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Code Bug</strong></td>
+          <td>Specific line numbers, concrete values (expected vs. actual), traceback or reproduction steps</td>
+          <td>Fix is applied after Gate 4 approval</td>
+        </tr>
+        <tr>
+          <td><strong>Design Issue</strong></td>
+          <td>Literature backing mandatory &mdash; papers, known failure modes, established best practices that show why the current design is wrong</td>
+          <td>Actual redesign is <strong>redirected to Engineer Mode</strong> (<code>/switch engineer</code>) for the full pipeline</td>
+        </tr>
+        <tr>
+          <td><strong>Environment / Config</strong></td>
+          <td>Specific config values, version mismatches, environment state</td>
+          <td>Config change applied after Gate 4 approval</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="admonition warning">
+      <div class="admonition-title">Design Issues Need Literature</div>
+      <p style="margin-bottom: 0">
+        "I think the architecture is wrong" is not sufficient for a design issue classification. You must cite <em>why</em> it is wrong with references to papers, documented failure modes, or established best practices. If you cannot find literature backing, say so explicitly: "I believe this may be a design issue, but I haven't found literature confirming this."
+      </p>
+    </div>
+
+    <h3 id="gate-4-three-strike">The 3-Strike Limit</h3>
+    <p>If the same debugging approach fails three times, the assumptions are wrong. This rule is absolute:</p>
+
+    <table>
+      <thead>
+        <tr><th>Strike</th><th>Action</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Strike 1</strong></td><td>Apply fix based on diagnosis. If it doesn't resolve the symptom, gather more evidence.</td></tr>
+        <tr><td><strong>Strike 2</strong></td><td>Revised fix based on new evidence. If still failing, question whether the root cause hypothesis is correct.</td></tr>
+        <tr><td><strong>Strike 3</strong></td><td><strong>Stop.</strong> Present what was learned from all three attempts. Ask: "My assumption about the root cause may be wrong. Here's what I've learned. Should I investigate a fundamentally different direction?"</td></tr>
+      </tbody>
+    </table>
+
+    <div class="admonition danger">
+      <div class="admonition-title">Never Ignore the 3-Strike Limit</div>
+      <p style="margin-bottom: 0">
+        The temptation is to try "one more variation." This is almost always wrong. Three failed attempts of the same approach is strong evidence that the mental model is incorrect, not that the fix needs tweaking.
+      </p>
+    </div>
+
+    <!-- ── Summary Table ── -->
+    <h2 id="summary">Quick Reference</h2>
+    <table>
+      <thead>
+        <tr><th>Checkpoint</th><th>Key Output</th><th>Must Include</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Gate 0</strong></td><td>Scope statement</td><td>3-5 disjunctive questions, confirmed scope paragraph</td></tr>
+        <tr><td><strong>Q0</strong></td><td>Reference sources</td><td>Reference impl, architecture pattern, example, benchmark, framework constraints</td></tr>
+        <tr><td><strong>Gate 1</strong></td><td>Approved findings</td><td>3-5 bullet findings, surprises/risks, open questions</td></tr>
+        <tr><td><strong>Q1</strong></td><td>Binding constraints</td><td>Interface contracts, data formats, config, edge cases, integration points, scope</td></tr>
+        <tr><td><strong>Gate 2</strong></td><td>Approved plan</td><td>Components, paper-to-code mapping, regression risk, uncertainties, scope estimate</td></tr>
+        <tr><td><strong>Gate 3</strong></td><td>Audit results</td><td>Per-component: spec compliance, paper alignment, auditor findings</td></tr>
+        <tr><td><strong>Gate 4</strong></td><td>Approved diagnosis</td><td>Symptom, root cause, why, fix, side effects, what won't fix</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ── Prev/Next ── -->
+    <nav class="docs-pager">
+      <a href="index.html">
+        <span class="pager-label">&larr; Previous</span>
+        <span class="pager-title">Pipeline Overview</span>
+      </a>
+      <a href="../modes/index.html" class="next">
+        <span class="pager-label">Next &rarr;</span>
+        <span class="pager-title">Mode System</span>
+      </a>
+    </nav>
+
+    <footer class="docs-footer">
+      <p>
+        <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">Propel</a> is open source under the MIT License.
+        Built by <a href="https://kbian.org" target="_blank" rel="noopener">Kaiwen Bian</a> &amp; <a href="https://yuertang.dev/" target="_blank" rel="noopener">Yuer Tang</a>.
+      </p>
+    </footer>
+
+  </article>
+
+  <!-- ── Right ToC ── -->
+  <aside class="docs-toc">
+    <div class="docs-toc-title">On This Page</div>
+    <a href="#overview">Overview</a>
+    <a href="#gate-0">Gate 0: Intake</a>
+    <a href="#gate-0-format" class="toc-h3">Format</a>
+    <a href="#gate-0-question-types" class="toc-h3">Question Types</a>
+    <a href="#q0">Questioner Q0: Grounding</a>
+    <a href="#q0-questions" class="toc-h3">The 5 Questions</a>
+    <a href="#q0-example" class="toc-h3">Example</a>
+    <a href="#gate-1">Gate 1: Post-Investigation</a>
+    <a href="#gate-1-format" class="toc-h3">Presentation Format</a>
+    <a href="#q1">Questioner Q1: Before Design</a>
+    <a href="#q1-questions" class="toc-h3">The 6 Questions</a>
+    <a href="#q1-example" class="toc-h3">Example</a>
+    <a href="#gate-2">Gate 2: Post-Design</a>
+    <a href="#gate-2-format" class="toc-h3">Presentation Format</a>
+    <a href="#gate-3">Gate 3: Mid-Implementation</a>
+    <a href="#gate-3-auditor-review" class="toc-h3">Auditor Review</a>
+    <a href="#gate-3-auditors" class="toc-h3">Dispatch Table</a>
+    <a href="#gate-4">Gate 4: Before Bug Fix</a>
+    <a href="#gate-4-format" class="toc-h3">Diagnosis Format</a>
+    <a href="#gate-4-classification" class="toc-h3">Bug Classification</a>
+    <a href="#gate-4-three-strike" class="toc-h3">3-Strike Limit</a>
+    <a href="#summary">Quick Reference</a>
+  </aside>
+
+</div>
+
+<script src="../docs.js"></script>
+</body>
+</html>

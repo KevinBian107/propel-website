@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Silent Bug Detector &mdash; Propel Documentation</title>
+  <meta name="description" content="Silent Bug Detector: finds bugs that don't crash but produce wrong results. 11 categories of silent failures in AI and robotics code." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&family=Noto+Sans+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="../../assets/logo-c.svg" />
+  <link rel="stylesheet" href="../docs.css" />
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header class="docs-header">
+  <button class="sidebar-toggle" aria-label="Toggle navigation">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+  </button>
+  <a href="../../index.html" class="docs-header-logo">
+    <img src="../../assets/logo-c.svg" alt="Propel" />
+    Propel
+    <span class="logo-tag">docs</span>
+  </a>
+  <nav class="docs-header-nav">
+    <a href="../../index.html">Home</a>
+    <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">GitHub</a>
+  </nav>
+  <div class="docs-header-search">
+    <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"/></svg>
+    Search
+    <kbd>/</kbd>
+  </div>
+</header>
+
+<!-- ── Layout ── -->
+<div class="docs-layout">
+
+  <!-- ── Left Sidebar ── -->
+  <nav class="docs-sidebar" aria-label="Documentation navigation">
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Getting Started</div>
+      <a href="../index.html" class="sidebar-link">Overview</a>
+      <a href="../getting-started.html" class="sidebar-link">Installation &amp; Setup</a>
+      <a href="../core-principles.html" class="sidebar-link">Core Principles</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Pipeline</div>
+      <a href="../pipeline/index.html" class="sidebar-link">Pipeline Overview</a>
+      <a href="../pipeline/gates.html" class="sidebar-link">Gates &amp; Questioners</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Modes</div>
+      <a href="../modes/index.html" class="sidebar-link">Mode System</a>
+      <a href="../modes/researcher.html" class="sidebar-link sub">Researcher</a>
+      <a href="../modes/engineer.html" class="sidebar-link sub">Engineer</a>
+      <a href="../modes/debugger.html" class="sidebar-link sub">Debugger</a>
+      <a href="../modes/trainer.html" class="sidebar-link sub">Trainer</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Skills</div>
+      <a href="../skills/index.html" class="sidebar-link">Skills Overview</a>
+      <a href="../skills/investigation.html" class="sidebar-link sub">Investigation</a>
+      <a href="../skills/research-design.html" class="sidebar-link sub">Research Design</a>
+      <a href="../skills/subagent-driven-research.html" class="sidebar-link sub">Implementation</a>
+      <a href="../skills/systematic-debugging.html" class="sidebar-link sub">Systematic Debugging</a>
+      <a href="../skills/research-validation.html" class="sidebar-link sub">Validation</a>
+      <a href="../skills/deep-research.html" class="sidebar-link sub">Deep Research</a>
+      <a href="../skills/think-deeply.html" class="sidebar-link sub">Think Deeply</a>
+      <a href="../skills/context-hygiene.html" class="sidebar-link sub">Context Hygiene</a>
+      <a href="../skills/trainer-mode.html" class="sidebar-link sub">Trainer Mode</a>
+      <a href="../skills/retrospective.html" class="sidebar-link sub">Retrospective</a>
+      <a href="../skills/other.html" class="sidebar-link sub">Other Skills</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Agents</div>
+      <a href="index.html" class="sidebar-link">Agents Overview</a>
+      <a href="paper-alignment-auditor.html" class="sidebar-link sub">Paper Alignment</a>
+      <a href="silent-bug-detector.html" class="sidebar-link sub active">Silent Bug Detector</a>
+      <a href="jax-logic-auditor.html" class="sidebar-link sub">JAX Logic Auditor</a>
+      <a href="regression-guard.html" class="sidebar-link sub">Regression Guard</a>
+      <a href="data-flow-tracer.html" class="sidebar-link sub">Data Flow Tracer</a>
+      <a href="failure-mode-researcher.html" class="sidebar-link sub">Failure Mode Researcher</a>
+      <a href="env-researcher.html" class="sidebar-link sub">Env Researcher</a>
+      <a href="code-reviewer.html" class="sidebar-link sub">Code Reviewer</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Reference</div>
+      <a href="../customization.html" class="sidebar-link">Customization</a>
+      <a href="../pitfalls.html" class="sidebar-link">Common Pitfalls</a>
+    </div>
+
+  </nav>
+
+  <!-- ── Main Content ── -->
+  <article class="docs-content">
+
+    <div class="breadcrumbs">
+      <a href="../index.html">Docs</a>
+      <span class="sep">&#8250;</span>
+      <a href="index.html">Agents</a>
+      <span class="sep">&#8250;</span>
+      Silent Bug Detector
+    </div>
+
+    <h1 class="page-title">Silent Bug Detector</h1>
+    <p class="page-subtitle">
+      Finds bugs that don't crash &mdash; the code runs, the loss decreases, training completes, but the results are wrong. A hard crash is a gift. A silent bug is a trap.
+    </p>
+
+    <!-- ── Overview ── -->
+    <h2 id="overview">Overview</h2>
+    <p>
+      The Silent Bug Detector systematically scans code for every known pattern of silent failure in AI and robotics research. These are the most dangerous bugs because they waste compute and produce misleading results that get reported in papers or deployed to hardware.
+    </p>
+    <p>
+      The detector doesn't wait for symptoms &mdash; it checks proactively against a catalog of 11 failure categories, each representing a class of bugs that has burned real research time.
+    </p>
+
+    <table>
+      <thead>
+        <tr><th>Property</th><th>Details</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Tools</strong></td><td>Read, Grep, Glob (read-only)</td></tr>
+        <tr><td><strong>Auto-Dispatch</strong></td><td>Yes &mdash; after implementing or modifying model components, loss functions, data pipelines, or training loops</td></tr>
+        <tr><td><strong>Trigger</strong></td><td>Any code change touching model, loss, data, or training logic</td></tr>
+      </tbody>
+    </table>
+
+    <div class="admonition danger">
+      <div class="admonition-title">Core Principle</div>
+      <p style="margin-bottom: 0">If it doesn't crash, it's not safe. Every bug in this catalog produces code that runs successfully. The absence of errors means nothing. "The loss is decreasing" proves nothing &mdash; a model can minimize a wrong loss, overfit to leaked data, or learn a degenerate solution while the loss curve looks healthy.</p>
+    </div>
+
+    <!-- ── Category 1: Broadcasting ── -->
+    <h2 id="broadcasting">1. Broadcasting Bugs</h2>
+    <p>The #1 source of silent errors. Two tensors interact with compatible but wrong shapes.</p>
+
+    <table>
+      <thead>
+        <tr><th>Pattern</th><th>What Happens</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>(B, 1) + (1, T)</code></td><td>Did you mean element-wise or outer product? Check intent.</td></tr>
+        <tr><td><code>(B, T, F) * (F,)</code></td><td>Broadcasting works, but did you want per-feature scaling or a matmul?</td></tr>
+        <tr><td>Scalar promotion</td><td>A tensor that should be <code>(B,)</code> accidentally becomes <code>()</code> after a wrong reduction &mdash; then broadcasts against everything silently.</td></tr>
+        <tr><td>Missing <code>keepdims</code></td><td><code>mean(axis=1)</code> reduces <code>(B, T, F)</code> to <code>(B, F)</code>, but if you needed <code>(B, 1, F)</code> for subsequent broadcasting, the missing <code>keepdims=True</code> causes a silent shape shift.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="admonition tip">
+      <div class="admonition-title">Verification</div>
+      <p style="margin-bottom: 0">For every binary operation between two tensors of different ranks, verify the broadcast semantics are intentional.</p>
+    </div>
+
+    <!-- ── Category 2: Reduction Axis ── -->
+    <h2 id="reduction-axis">2. Wrong Reduction Axis</h2>
+    <p>Loss looks fine, gradients flow, but the learning signal is wrong.</p>
+
+    <table>
+      <thead>
+        <tr><th>Pattern</th><th>What Happens</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Mean vs sum over batch</td><td><code>loss.mean()</code> vs <code>loss.sum()</code> changes the effective learning rate by a factor of <code>batch_size</code>. Many papers don't specify which they use.</td></tr>
+        <tr><td>Mean over wrong axis</td><td><code>loss.mean(axis=0)</code> averages over batch (correct), but <code>loss.mean(axis=1)</code> averages over time &mdash; should time steps be weighted equally?</td></tr>
+        <tr><td>Reduction inside vs outside vmap/scan</td><td>Reducing before or after a JAX transform changes what gets averaged. Check that reductions happen at the intended scope.</td></tr>
+        <tr><td>Per-element vs per-sample loss</td><td>Is the loss computed per element then averaged, or per sample? This affects how the model weighs short vs long sequences.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="admonition tip">
+      <div class="admonition-title">Verification</div>
+      <p style="margin-bottom: 0">For every <code>.mean()</code>, <code>.sum()</code>, <code>.max()</code>, verify which axis is being reduced and whether that matches the paper/intent.</p>
+    </div>
+
+    <!-- ── Category 3: Data Leakage ── -->
+    <h2 id="data-leakage">3. Data Leakage</h2>
+    <p>Model gets access to information it shouldn't have &mdash; artificially inflates metrics.</p>
+
+    <table>
+      <thead>
+        <tr><th>Pattern</th><th>What Happens</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Future leaking into past</td><td>In sequential/temporal data, the model at time <code>t</code> sees information from <code>t+1</code> or later. Check attention masks, convolution padding (should be causal), and data loading.</td></tr>
+        <tr><td>Train leaking into val/test</td><td>Normalization statistics (mean, std) computed on the full dataset including val/test. Augmentations using parameters fit on the full dataset.</td></tr>
+        <tr><td>Target leaking into input</td><td>The label or ground truth accidentally included in input features. Off-by-one tensor slicing can include the target.</td></tr>
+        <tr><td>Cross-episode leakage (RL)</td><td>Observation at the start of a new episode contains information from the previous episode. Check auto-reset logic and observation buffers.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="admonition tip">
+      <div class="admonition-title">Verification</div>
+      <p style="margin-bottom: 0">At every point where data is filtered, masked, or split, verify that no future/test/target information crosses the boundary.</p>
+    </div>
+
+    <!-- ── Category 4: Normalization ── -->
+    <h2 id="normalization">4. Normalization Bugs</h2>
+    <p>Statistics look reasonable, outputs are in range, but they're wrong.</p>
+
+    <table>
+      <thead>
+        <tr><th>Pattern</th><th>What Happens</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Stale running statistics</td><td>BatchNorm/LayerNorm running mean/var not updated because model is stuck in eval mode, or updated at the wrong point in the pipeline.</td></tr>
+        <tr><td>Wrong normalization axis</td><td>LayerNorm over <code>(features,)</code> vs <code>(time, features)</code> vs <code>(batch, features)</code> &mdash; all run without error, but only one is correct.</td></tr>
+        <tr><td>Normalizing after clipping</td><td>If you clip then normalize, statistics are biased. If you normalize then clip, the distribution is distorted. Check the order.</td></tr>
+        <tr><td>Train vs eval normalization</td><td>Normalization differs between train and eval but eval actually uses batch stats from a single sample instead of running stats.</td></tr>
+        <tr><td>RL observation normalization</td><td>Running stats computed across envs but applied per-env, or vice versa. Stats not updated after initial warmup.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="admonition tip">
+      <div class="admonition-title">Verification</div>
+      <p style="margin-bottom: 0">For every normalization operation, verify: correct axis, correct mode (train vs eval), correct statistics source.</p>
+    </div>
+
+    <!-- ── Category 5: Off-by-One ── -->
+    <h2 id="off-by-one">5. Off-by-One and Indexing Errors</h2>
+    <p>The most classic bug class &mdash; especially dangerous in sequential data.</p>
+
+    <table>
+      <thead>
+        <tr><th>Pattern</th><th>What Happens</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Temporal indexing</td><td><code>obs[t]</code> paired with <code>action[t]</code> and <code>reward[t]</code> &mdash; is <code>reward[t]</code> the reward FOR <code>action[t]</code> or AFTER <code>action[t]</code>? Off-by-one means wrong credit assignment.</td></tr>
+        <tr><td>Sequence slicing</td><td><code>x[:, :-1]</code> for input and <code>x[:, 1:]</code> for target &mdash; does this match your autoregressive convention? Is the shift correct?</td></tr>
+        <tr><td>GAE discount indexing</td><td><code>advantages[t] = delta[t] + gamma * lambda * advantages[t+1]</code> &mdash; is the scan iterating in the right direction (backward from T to 0)?</td></tr>
+        <tr><td>Done mask application</td><td><code>next_value * (1 - done[t])</code> &mdash; is <code>done[t]</code> the done flag for the transition that produced <code>obs[t]</code> or the one starting from <code>obs[t]</code>?</td></tr>
+      </tbody>
+    </table>
+
+    <div class="admonition tip">
+      <div class="admonition-title">Verification</div>
+      <p style="margin-bottom: 0">For every index <code>[t]</code>, <code>[t+1]</code>, <code>[:-1]</code>, <code>[1:]</code>, verify the temporal semantics explicitly. Draw out a timeline if needed.</p>
+    </div>
+
+    <!-- ── Category 6: Gradient Flow ── -->
+    <h2 id="gradient-flow">6. Gradient Flow Bugs</h2>
+    <p>Gradients technically exist, but they don't carry the right signal.</p>
+
+    <table>
+      <thead>
+        <tr><th>Pattern</th><th>What Happens</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Accidental <code>stop_gradient</code></td><td>A <code>.detach()</code> or <code>jax.lax.stop_gradient</code> on a tensor that should receive gradients. Model still trains via other paths but the blocked path doesn't learn.</td></tr>
+        <tr><td>Missing <code>stop_gradient</code></td><td>Gradients flow through the target network, codebook, or value baseline when they shouldn't. Optimization is wrong but training continues.</td></tr>
+        <tr><td>Dead branches</td><td>A conditional branch (e.g., temperature annealed to 0 = argmax) that cuts off gradients. The dead branch never learns.</td></tr>
+        <tr><td>Straight-through estimator bugs</td><td>Forward pass uses quantized value while backward pass uses un-quantized value (or vice versa). Check both directions.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="admonition tip">
+      <div class="admonition-title">Verification</div>
+      <p style="margin-bottom: 0">For every tensor in the loss, verify whether gradient should flow through it. For every <code>stop_gradient</code>/<code>detach</code>, verify it's intentional.</p>
+    </div>
+
+    <!-- ── Category 7: Loss Function ── -->
+    <h2 id="loss-function">7. Loss Function Bugs</h2>
+    <p>Loss decreases during training, but it's optimizing the wrong thing.</p>
+
+    <table>
+      <thead>
+        <tr><th>Pattern</th><th>What Happens</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Wrong sign</td><td>Minimizing when you should maximize (or vice versa) on a specific loss term. Model converges to the opposite of what you want.</td></tr>
+        <tr><td>Wrong KL direction</td><td><code>KL(q||p)</code> vs <code>KL(p||q)</code> &mdash; both are valid but have different mode-seeking vs mode-covering behavior.</td></tr>
+        <tr><td>Missing loss term</td><td>A regularization term (KL, commitment loss, entropy bonus) defined but not added to the total loss. Model trains fine without it but produces worse results.</td></tr>
+        <tr><td>Loss term always zero</td><td>A term computed but evaluating to zero due to a bug (masking that zeros everything, a coefficient of <code>0.0</code> instead of <code>1.0</code>).</td></tr>
+        <tr><td>Loss not reaching right parameters</td><td>Loss computed on output A but only parameters B have <code>requires_grad</code>. Loss decreases by chance but intended parameters don't learn.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="admonition tip">
+      <div class="admonition-title">Verification</div>
+      <p style="margin-bottom: 0">Log each loss component individually. Verify all components are non-zero and contribute to the total. Verify the gradient of the total loss w.r.t. each parameter group.</p>
+    </div>
+
+    <!-- ── Category 8: Train/Eval Mode ── -->
+    <h2 id="train-eval">8. Train/Eval Mode Bugs</h2>
+    <p>Model behaves differently in train vs eval, but the switch is wrong.</p>
+
+    <table>
+      <thead>
+        <tr><th>Pattern</th><th>What Happens</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Forgot eval mode</td><td>Dropout still active during evaluation produces noisy metrics. BatchNorm using batch stats instead of running stats gives inconsistent evaluation.</td></tr>
+        <tr><td>Forgot train mode back</td><td>After evaluation, model stays in eval mode for the next epoch. Dropout disabled, BatchNorm frozen &mdash; training degrades silently.</td></tr>
+        <tr><td>Stochastic components uncontrolled</td><td>Eval should be deterministic but random sampling is still active (e.g., VAE sampling without switching to mode/mean).</td></tr>
+      </tbody>
+    </table>
+
+    <div class="admonition tip">
+      <div class="admonition-title">Verification</div>
+      <p style="margin-bottom: 0">Verify <code>model.train()</code> is called before training and <code>model.eval()</code> before evaluation. Check that stochastic components (dropout, sampling, noise injection) respect the mode.</p>
+    </div>
+
+    <!-- ── Category 9: Random Seed ── -->
+    <h2 id="random-seed">9. Random Seed / Reproducibility Bugs</h2>
+    <p>Results vary between runs, or worse, are correlated when they shouldn't be.</p>
+
+    <table>
+      <thead>
+        <tr><th>Pattern</th><th>What Happens</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Same seed for different purposes</td><td>Using the same RNG key for weight initialization and data shuffling &mdash; produces correlated initialization and data ordering.</td></tr>
+        <tr><td>Seed not split in parallel envs</td><td>All environments get the same seed &mdash; identical rollouts, no diversity, model overfits to one trajectory.</td></tr>
+        <tr><td>Seed reuse after checkpoint</td><td>Restoring from checkpoint but not restoring RNG state &mdash; first epoch after resume has same randomness as first epoch of training.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="admonition tip">
+      <div class="admonition-title">Verification</div>
+      <p style="margin-bottom: 0">Verify every random call uses a unique, properly-split key. Verify RNG state is saved/restored with checkpoints.</p>
+    </div>
+
+    <!-- ── Category 10: Action/Observation ── -->
+    <h2 id="action-observation">10. Action and Observation Space Bugs</h2>
+    <p>Robotics-specific: hardware doesn't crash, but the robot does the wrong thing.</p>
+
+    <table>
+      <thead>
+        <tr><th>Pattern</th><th>What Happens</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Wrong action scaling</td><td>Policy outputs in <code>[-1, 1]</code> but actuators expect radians. Missing denormalization produces small, useless movements or saturated commands.</td></tr>
+        <tr><td>Wrong coordinate frame</td><td>Action computed in world frame but applied in body frame (or vice versa). Movement direction is wrong but magnitude is plausible.</td></tr>
+        <tr><td>Observation ordering mismatch</td><td>Observation vector is <code>[pos, vel, orientation]</code> but model expects <code>[orientation, pos, vel]</code>. Shapes match, values are reasonable, semantics are scrambled.</td></tr>
+        <tr><td>Stale observations</td><td>Observation buffer not updated between steps &mdash; model sees the same observation repeatedly, policy looks stuck but there's no error.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="admonition tip">
+      <div class="admonition-title">Verification</div>
+      <p style="margin-bottom: 0">At every sim/real boundary, verify: correct scaling, correct frame, correct ordering, correct freshness.</p>
+    </div>
+
+    <!-- ── Category 11: Masking ── -->
+    <h2 id="masking">11. Masking Bugs</h2>
+    <p>Masks are applied but they mask the wrong thing.</p>
+
+    <table>
+      <thead>
+        <tr><th>Pattern</th><th>What Happens</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Inverted mask</td><td>Using <code>mask</code> where <code>1 - mask</code> was intended (or <code>True</code>/<code>False</code> flipped). Masked tokens get attention, unmasked tokens are ignored.</td></tr>
+        <tr><td>Mask not applied to loss</td><td>Padding tokens contribute to the loss &mdash; model wastes capacity learning to predict padding.</td></tr>
+        <tr><td>Mask at wrong scope</td><td>Mask computed at sequence level but applied at token level, or applied before padding instead of after.</td></tr>
+        <tr><td>Mask shape + broadcasting</td><td>Mask is <code>(B, T)</code> but attention is <code>(B, H, T, T)</code> &mdash; broadcasting may expand the mask incorrectly.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="admonition tip">
+      <div class="admonition-title">Verification</div>
+      <p style="margin-bottom: 0">For every mask, verify: which values are masked vs unmasked, that the mask reaches all places it should (loss, attention, metrics), and that broadcasting expands it correctly.</p>
+    </div>
+
+    <!-- ── Audit Process ── -->
+    <h2 id="audit-process">Audit Process</h2>
+    <p>The detector follows a systematic four-step process:</p>
+    <ol>
+      <li><strong>Full catalog scan</strong> &mdash; go through every category above systematically. Don't skip categories because "it's probably fine."</li>
+      <li><strong>Trace actual values</strong> &mdash; don't just check that the operation exists. Verify what it actually computes given the shapes and values in this specific codebase.</li>
+      <li><strong>Check interactions</strong> &mdash; many silent bugs only manifest when two individually-correct components interact wrong (e.g., normalization followed by clipping, correct mask applied to wrong tensor).</li>
+      <li><strong>Propose verification tests</strong> &mdash; for each potential bug, suggest a small test that would catch it (e.g., <code>assert loss_component_kl > 0</code>, <code>assert obs[t+1] != obs[t] after env.step</code>).</li>
+    </ol>
+
+    <!-- ── Output Format ── -->
+    <h2 id="output-format">Output Format</h2>
+    <p>The detector produces a structured report with three sections:</p>
+    <ul>
+      <li><strong>Bugs Found</strong> &mdash; each with location, category, description of wrong vs correct behavior, severity, specific fix, and verification test</li>
+      <li><strong>Suspicious Patterns</strong> &mdash; things that look off but need runtime confirmation, each with a specific check to confirm or rule out</li>
+      <li><strong>Verified Clean</strong> &mdash; categories confirmed to not have bugs in this code, with reasoning</li>
+    </ul>
+
+    <div class="admonition warning">
+      <div class="admonition-title">One Silent Bug Can Invalidate a Paper</div>
+      <p style="margin-bottom: 0">Shapes matching is not correctness. Two tensors of shape <code>(64, 128)</code> can mean completely different things. Always verify semantic meaning, not just numerical compatibility. Check the boring stuff &mdash; most silent bugs are wrong axis in <code>.mean()</code>, flipped mask, off-by-one in time index.</p>
+    </div>
+
+    <!-- ── Prev/Next ── -->
+    <nav class="docs-pager">
+      <a href="paper-alignment-auditor.html">
+        <span class="pager-label">&larr; Previous</span>
+        <span class="pager-title">Paper Alignment Auditor</span>
+      </a>
+      <a href="jax-logic-auditor.html" class="next">
+        <span class="pager-label">Next &rarr;</span>
+        <span class="pager-title">JAX Logic Auditor</span>
+      </a>
+    </nav>
+
+    <footer class="docs-footer">
+      <p>
+        <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">Propel</a> is open source under the MIT License.
+        Built by <a href="https://kbian.org" target="_blank" rel="noopener">Kaiwen Bian</a> &amp; <a href="https://yuertang.dev/" target="_blank" rel="noopener">Yuer Tang</a>.
+      </p>
+    </footer>
+
+  </article>
+
+  <!-- ── Right ToC ── -->
+  <aside class="docs-toc">
+    <div class="docs-toc-title">On This Page</div>
+    <a href="#overview">Overview</a>
+    <a href="#broadcasting">1. Broadcasting Bugs</a>
+    <a href="#reduction-axis">2. Wrong Reduction Axis</a>
+    <a href="#data-leakage">3. Data Leakage</a>
+    <a href="#normalization">4. Normalization Bugs</a>
+    <a href="#off-by-one">5. Off-by-One Errors</a>
+    <a href="#gradient-flow">6. Gradient Flow Bugs</a>
+    <a href="#loss-function">7. Loss Function Bugs</a>
+    <a href="#train-eval">8. Train/Eval Mode Bugs</a>
+    <a href="#random-seed">9. Random Seed Bugs</a>
+    <a href="#action-observation">10. Action/Observation Bugs</a>
+    <a href="#masking">11. Masking Bugs</a>
+    <a href="#audit-process">Audit Process</a>
+    <a href="#output-format">Output Format</a>
+  </aside>
+
+</div>
+
+<script src="../docs.js"></script>
+</body>
+</html>

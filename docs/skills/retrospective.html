@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Retrospective &mdash; Propel Documentation</title>
+  <meta name="description" content="Retrospective skill: experiment registry, failed attempts table, and reusable learnings captured across sessions." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&family=Noto+Sans+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="../../assets/logo-c.svg" />
+  <link rel="stylesheet" href="../docs.css" />
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header class="docs-header">
+  <button class="sidebar-toggle" aria-label="Toggle navigation">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+  </button>
+  <a href="../../index.html" class="docs-header-logo">
+    <img src="../../assets/logo-c.svg" alt="Propel" />
+    Propel
+    <span class="logo-tag">docs</span>
+  </a>
+  <nav class="docs-header-nav">
+    <a href="../../index.html">Home</a>
+    <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">GitHub</a>
+  </nav>
+  <div class="docs-header-search">
+    <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"/></svg>
+    Search
+    <kbd>/</kbd>
+  </div>
+</header>
+
+<!-- ── Layout ── -->
+<div class="docs-layout">
+
+  <!-- ── Left Sidebar ── -->
+  <nav class="docs-sidebar" aria-label="Documentation navigation">
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Getting Started</div>
+      <a href="../index.html" class="sidebar-link">Overview</a>
+      <a href="../getting-started.html" class="sidebar-link">Installation &amp; Setup</a>
+      <a href="../core-principles.html" class="sidebar-link">Core Principles</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Pipeline</div>
+      <a href="../pipeline/index.html" class="sidebar-link">Pipeline Overview</a>
+      <a href="../pipeline/gates.html" class="sidebar-link">Gates &amp; Questioners</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Modes</div>
+      <a href="../modes/index.html" class="sidebar-link">Mode System</a>
+      <a href="../modes/researcher.html" class="sidebar-link sub">Researcher</a>
+      <a href="../modes/engineer.html" class="sidebar-link sub">Engineer</a>
+      <a href="../modes/debugger.html" class="sidebar-link sub">Debugger</a>
+      <a href="../modes/trainer.html" class="sidebar-link sub">Trainer</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Skills</div>
+      <a href="index.html" class="sidebar-link">Skills Overview</a>
+      <a href="investigation.html" class="sidebar-link sub">Investigation</a>
+      <a href="research-design.html" class="sidebar-link sub">Research Design</a>
+      <a href="subagent-driven-research.html" class="sidebar-link sub">Implementation</a>
+      <a href="systematic-debugging.html" class="sidebar-link sub">Systematic Debugging</a>
+      <a href="research-validation.html" class="sidebar-link sub">Validation</a>
+      <a href="deep-research.html" class="sidebar-link sub">Deep Research</a>
+      <a href="think-deeply.html" class="sidebar-link sub">Think Deeply</a>
+      <a href="context-hygiene.html" class="sidebar-link sub">Context Hygiene</a>
+      <a href="trainer-mode.html" class="sidebar-link sub">Trainer Mode</a>
+      <a href="retrospective.html" class="sidebar-link sub active">Retrospective</a>
+      <a href="other.html" class="sidebar-link sub">Other Skills</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Agents</div>
+      <a href="../agents/index.html" class="sidebar-link">Agents Overview</a>
+      <a href="../agents/paper-alignment-auditor.html" class="sidebar-link sub">Paper Alignment</a>
+      <a href="../agents/silent-bug-detector.html" class="sidebar-link sub">Silent Bug Detector</a>
+      <a href="../agents/jax-logic-auditor.html" class="sidebar-link sub">JAX Logic Auditor</a>
+      <a href="../agents/regression-guard.html" class="sidebar-link sub">Regression Guard</a>
+      <a href="../agents/data-flow-tracer.html" class="sidebar-link sub">Data Flow Tracer</a>
+      <a href="../agents/failure-mode-researcher.html" class="sidebar-link sub">Failure Mode Researcher</a>
+      <a href="../agents/env-researcher.html" class="sidebar-link sub">Env Researcher</a>
+      <a href="../agents/code-reviewer.html" class="sidebar-link sub">Code Reviewer</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Reference</div>
+      <a href="../customization.html" class="sidebar-link">Customization</a>
+      <a href="../pitfalls.html" class="sidebar-link">Common Pitfalls</a>
+    </div>
+
+  </nav>
+
+  <!-- ── Main Content ── -->
+  <article class="docs-content">
+
+    <div class="breadcrumbs">
+      <a href="../index.html">Docs</a>
+      <span class="sep">&#8250;</span>
+      <a href="index.html">Skills</a>
+      <span class="sep">&#8250;</span>
+      Retrospective
+    </div>
+
+    <h1 class="page-title">Retrospective</h1>
+    <p class="page-subtitle">
+      Capture experiment learnings into a reusable skill registry. The failed attempts table is the most valuable artifact.
+    </p>
+
+    <!-- ── Overview ── -->
+    <h2 id="overview">Overview</h2>
+    <p>
+      The Retrospective skill captures what was learned during a session &mdash; what worked, what failed, exact hyperparameters, and key insights &mdash; into a structured registry entry that can be searched and surfaced by future investigations.
+    </p>
+    <p>
+      This is not for mid-session notes (use investigation <code>scratch/</code> for that). Retrospectives are end-of-session artifacts that preserve knowledge across <code>/clear</code> boundaries.
+    </p>
+
+    <!-- ── When It Triggers ── -->
+    <h2 id="triggers">When It Triggers</h2>
+    <table>
+      <thead>
+        <tr><th>Trigger</th><th>Details</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Manual</strong></td><td>"retrospective", "capture what we learned", "save this for next time", "what did we learn", "log this experiment"</td></tr>
+        <tr><td><strong>Auto-suggest</strong></td><td>At approximately 20 substantive turns without a retrospective being captured</td></tr>
+      </tbody>
+    </table>
+
+    <p>The auto-suggestion is a recommendation, not a gate &mdash; the user can decline:</p>
+    <pre><code>"We've been working for a while without capturing learnings.
+Consider running a retrospective before /clear — the failed
+attempts table is the most valuable artifact, and it won't
+survive a context reset."</code></pre>
+
+    <!-- ── Registry Format ── -->
+    <h2 id="registry">The Experiment Registry</h2>
+    <p>Registry entries are stored in <code>scratch/registry/{YYYY-MM-DD}-{experiment-short-name}/SKILL.md</code> and follow a strict format:</p>
+
+    <h3 id="registry-setup">Setup Section</h3>
+    <p>Each entry records the exact experimental configuration:</p>
+    <ul>
+      <li><strong>Model</strong>: architecture, size, variant</li>
+      <li><strong>Dataset</strong>: name, size, preprocessing</li>
+      <li><strong>Framework</strong>: JAX/PyTorch/etc, key libraries and versions</li>
+      <li><strong>Hardware</strong>: GPUs, memory, distributed setup</li>
+      <li><strong>Config</strong>: path to config file or inline key parameters</li>
+    </ul>
+
+    <h3 id="failed-attempts">The Failed Attempts Table</h3>
+    <p>This is the most valuable part of any registry entry. It prevents repeating mistakes across <code>/clear</code> boundaries and across team members.</p>
+
+    <table>
+      <thead>
+        <tr><th>Attempt</th><th>What We Tried</th><th>What Happened</th><th>Why It Failed</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>[specific change]</td><td>[specific result]</td><td>[root cause]</td></tr>
+        <tr><td>2</td><td>[specific change]</td><td>[specific result]</td><td>[root cause]</td></tr>
+      </tbody>
+    </table>
+
+    <div class="admonition tip">
+      <div class="admonition-title">Be Specific</div>
+      <p style="margin-bottom: 0">Exact values, not vague descriptions. "learning_rate: 3e-4" not "small learning rate". "batch_size=256" not "large batch". The whole point is that someone (or a future Claude session) can reproduce or avoid these exact conditions.</p>
+    </div>
+
+    <h3 id="registry-sections">Other Sections</h3>
+    <ul>
+      <li><strong>What Worked</strong>: Specific things that worked with exact hyperparameters, copy-paste ready</li>
+      <li><strong>Key Hyperparameters</strong>: Exact values in a table with the reasoning for each choice</li>
+      <li><strong>Findings</strong>: Key insights from the session</li>
+      <li><strong>Next Steps</strong>: What to try next based on results</li>
+    </ul>
+
+    <!-- ── Registry Structure ── -->
+    <h2 id="structure">Registry Structure</h2>
+    <p>The registry lives in <code>scratch/registry/</code> (gitignored):</p>
+    <pre><code>scratch/registry/
+  2026-03-15-rvq-depth-sweep/SKILL.md
+  2026-03-18-fsq-codebook-size/SKILL.md
+  2026-03-22-commitment-loss-scaling/SKILL.md</code></pre>
+
+    <!-- ── How It Feeds Back ── -->
+    <h2 id="feedback">How It Feeds Back</h2>
+    <p>
+      Registry entries are <strong>searchable by the investigation skill</strong>. When a new investigation starts, matching entries are automatically surfaced based on the description and tags in each entry. This creates a feedback loop:
+    </p>
+    <ol>
+      <li>Session A runs experiments and captures a retrospective</li>
+      <li>Session A ends (or <code>/clear</code> happens)</li>
+      <li>Session B starts a new investigation in a related area</li>
+      <li>The investigation skill finds matching registry entries and surfaces them</li>
+      <li>Session B avoids repeating Session A's failed attempts</li>
+    </ol>
+
+    <div class="admonition note">
+      <div class="admonition-title">Trigger Conditions Matter</div>
+      <p style="margin-bottom: 0">The description field in the registry entry determines when it gets surfaced. Write trigger conditions that are hyper-specific: not "pruning experiments" but "pruning errors on ModelX with ZeRO2". This ensures the entry appears when it is actually relevant.</p>
+    </div>
+
+    <!-- ── Key Principles ── -->
+    <h2 id="principles">Key Principles</h2>
+    <table>
+      <thead>
+        <tr><th>Principle</th><th>Details</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Failed attempts > successes</strong></td><td>They prevent repeating mistakes across <code>/clear</code> boundaries and across team members.</td></tr>
+        <tr><td><strong>Hyperparameters must be exact</strong></td><td>"3e-4" not "small learning rate". "batch_size=256" not "large batch".</td></tr>
+        <tr><td><strong>Trigger conditions must be specific</strong></td><td>The description determines when the entry is surfaced. Make it match the exact scenario.</td></tr>
+        <tr><td><strong>Scratch is temporary</strong></td><td>The registry lives in <code>scratch/</code> (gitignored). When patterns are mature, distill them into the main codebase or docs.</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ── Prev/Next ── -->
+    <nav class="docs-pager">
+      <a href="trainer-mode.html">
+        <span class="pager-label">&larr; Previous</span>
+        <span class="pager-title">Trainer Mode Skill</span>
+      </a>
+      <a href="other.html" class="next">
+        <span class="pager-label">Next &rarr;</span>
+        <span class="pager-title">Other Skills</span>
+      </a>
+    </nav>
+
+    <footer class="docs-footer">
+      <p>
+        <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">Propel</a> is open source under the MIT License.
+        Built by <a href="https://kbian.org" target="_blank" rel="noopener">Kaiwen Bian</a> &amp; <a href="https://yuertang.dev/" target="_blank" rel="noopener">Yuer Tang</a>.
+      </p>
+    </footer>
+
+  </article>
+
+  <!-- ── Right ToC ── -->
+  <aside class="docs-toc">
+    <div class="docs-toc-title">On This Page</div>
+    <a href="#overview">Overview</a>
+    <a href="#triggers">When It Triggers</a>
+    <a href="#registry">The Experiment Registry</a>
+    <a href="#registry-setup" class="toc-h3">Setup Section</a>
+    <a href="#failed-attempts" class="toc-h3">Failed Attempts Table</a>
+    <a href="#registry-sections" class="toc-h3">Other Sections</a>
+    <a href="#structure">Registry Structure</a>
+    <a href="#feedback">How It Feeds Back</a>
+    <a href="#principles">Key Principles</a>
+  </aside>
+
+</div>
+
+<script src="../docs.js"></script>
+</body>
+</html>

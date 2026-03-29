@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Env Researcher &mdash; Propel Documentation</title>
+  <meta name="description" content="Env Researcher: deep-dives simulation environment documentation for MuJoCo, robosuite, Meta-World, Isaac, dm_control, Gymnasium, Brax, and custom environments." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&family=Noto+Sans+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="../../assets/logo-c.svg" />
+  <link rel="stylesheet" href="../docs.css" />
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header class="docs-header">
+  <button class="sidebar-toggle" aria-label="Toggle navigation">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+  </button>
+  <a href="../../index.html" class="docs-header-logo">
+    <img src="../../assets/logo-c.svg" alt="Propel" />
+    Propel
+    <span class="logo-tag">docs</span>
+  </a>
+  <nav class="docs-header-nav">
+    <a href="../../index.html">Home</a>
+    <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">GitHub</a>
+  </nav>
+  <div class="docs-header-search">
+    <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"/></svg>
+    Search
+    <kbd>/</kbd>
+  </div>
+</header>
+
+<!-- ── Layout ── -->
+<div class="docs-layout">
+
+  <!-- ── Left Sidebar ── -->
+  <nav class="docs-sidebar" aria-label="Documentation navigation">
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Getting Started</div>
+      <a href="../index.html" class="sidebar-link">Overview</a>
+      <a href="../getting-started.html" class="sidebar-link">Installation &amp; Setup</a>
+      <a href="../core-principles.html" class="sidebar-link">Core Principles</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Pipeline</div>
+      <a href="../pipeline/index.html" class="sidebar-link">Pipeline Overview</a>
+      <a href="../pipeline/gates.html" class="sidebar-link">Gates &amp; Questioners</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Modes</div>
+      <a href="../modes/index.html" class="sidebar-link">Mode System</a>
+      <a href="../modes/researcher.html" class="sidebar-link sub">Researcher</a>
+      <a href="../modes/engineer.html" class="sidebar-link sub">Engineer</a>
+      <a href="../modes/debugger.html" class="sidebar-link sub">Debugger</a>
+      <a href="../modes/trainer.html" class="sidebar-link sub">Trainer</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Skills</div>
+      <a href="../skills/index.html" class="sidebar-link">Skills Overview</a>
+      <a href="../skills/investigation.html" class="sidebar-link sub">Investigation</a>
+      <a href="../skills/research-design.html" class="sidebar-link sub">Research Design</a>
+      <a href="../skills/subagent-driven-research.html" class="sidebar-link sub">Implementation</a>
+      <a href="../skills/systematic-debugging.html" class="sidebar-link sub">Systematic Debugging</a>
+      <a href="../skills/research-validation.html" class="sidebar-link sub">Validation</a>
+      <a href="../skills/deep-research.html" class="sidebar-link sub">Deep Research</a>
+      <a href="../skills/think-deeply.html" class="sidebar-link sub">Think Deeply</a>
+      <a href="../skills/context-hygiene.html" class="sidebar-link sub">Context Hygiene</a>
+      <a href="../skills/trainer-mode.html" class="sidebar-link sub">Trainer Mode</a>
+      <a href="../skills/retrospective.html" class="sidebar-link sub">Retrospective</a>
+      <a href="../skills/other.html" class="sidebar-link sub">Other Skills</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Agents</div>
+      <a href="index.html" class="sidebar-link">Agents Overview</a>
+      <a href="paper-alignment-auditor.html" class="sidebar-link sub">Paper Alignment</a>
+      <a href="silent-bug-detector.html" class="sidebar-link sub">Silent Bug Detector</a>
+      <a href="jax-logic-auditor.html" class="sidebar-link sub">JAX Logic Auditor</a>
+      <a href="regression-guard.html" class="sidebar-link sub">Regression Guard</a>
+      <a href="data-flow-tracer.html" class="sidebar-link sub">Data Flow Tracer</a>
+      <a href="failure-mode-researcher.html" class="sidebar-link sub">Failure Mode Researcher</a>
+      <a href="env-researcher.html" class="sidebar-link sub active">Env Researcher</a>
+      <a href="code-reviewer.html" class="sidebar-link sub">Code Reviewer</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Reference</div>
+      <a href="../customization.html" class="sidebar-link">Customization</a>
+      <a href="../pitfalls.html" class="sidebar-link">Common Pitfalls</a>
+    </div>
+
+  </nav>
+
+  <!-- ── Main Content ── -->
+  <article class="docs-content">
+
+    <div class="breadcrumbs">
+      <a href="../index.html">Docs</a>
+      <span class="sep">&#8250;</span>
+      <a href="index.html">Agents</a>
+      <span class="sep">&#8250;</span>
+      Env Researcher
+    </div>
+
+    <h1 class="page-title">Env Researcher</h1>
+    <p class="page-subtitle">
+      Deeply researches the simulation environments used in a project &mdash; not at a surface level, but at the level needed to write correct code against the environment's API and physics.
+    </p>
+
+    <!-- ── Overview ── -->
+    <h2 id="overview">Overview</h2>
+    <p>
+      Claude's training data contains averaged, potentially outdated information about simulation environments. The Env Researcher replaces that with precise, current documentation. This is critical because environment APIs have subtle behaviors &mdash; observation ordering, action scaling, frame conventions, reset semantics &mdash; that are not obvious from code and cause silent bugs when assumed incorrectly.
+    </p>
+
+    <table>
+      <thead>
+        <tr><th>Property</th><th>Details</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Tools</strong></td><td>Read, Grep, Glob, WebSearch, WebFetch, Task</td></tr>
+        <tr><td><strong>Auto-Dispatch</strong></td><td>On demand &mdash; at investigation start or when asking about environment behavior</td></tr>
+        <tr><td><strong>Trigger</strong></td><td>Environment integration, wrapper changes, questions about observation/action spaces or physics parameters</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ── Identification ── -->
+    <h2 id="identification">Environment Identification</h2>
+    <p>The researcher scans the codebase to identify which environments are in use:</p>
+
+    <table>
+      <thead>
+        <tr><th>Import Pattern</th><th>Environment</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>mujoco</code>, <code>mujoco.mjx</code></td><td>MuJoCo / MJX (JAX-accelerated MuJoCo)</td></tr>
+        <tr><td><code>robosuite</code></td><td>robosuite (manipulation tasks)</td></tr>
+        <tr><td><code>metaworld</code></td><td>Meta-World (multi-task manipulation)</td></tr>
+        <tr><td><code>isaacgym</code>, <code>isaaclab</code>, <code>omni.isaac</code></td><td>Isaac Gym / Isaac Sim / Isaac Lab</td></tr>
+        <tr><td><code>dm_control</code></td><td>DeepMind Control Suite</td></tr>
+        <tr><td><code>gymnasium</code>, <code>gym</code></td><td>Gymnasium / OpenAI Gym</td></tr>
+        <tr><td><code>brax</code></td><td>Brax (JAX-based physics)</td></tr>
+        <tr><td><code>pybullet</code></td><td>PyBullet</td></tr>
+      </tbody>
+    </table>
+
+    <p>Also identifies: environment version (from pinned dependencies), specific tasks/scenes, custom wrappers, and body models (rodent, fly, humanoid, custom MJCF/URDF).</p>
+
+    <!-- ── Documentation ── -->
+    <h2 id="documentation">Documentation Deep Dive</h2>
+    <p>For each identified environment, the researcher fetches and reads official documentation thoroughly. Key areas for each:</p>
+
+    <h3 id="mujoco">MuJoCo / MJX</h3>
+    <ul>
+      <li><code>mjModel</code> / <code>mjData</code> structure, actuator types, sensor API, contact parameters, solver options</li>
+      <li>MJX-specific: what's supported vs not in JAX compilation, stepping semantics</li>
+      <li>MJCF model format: actuator definitions, tendon routing, equality constraints</li>
+      <li>Known pitfalls: quaternion conventions (<code>wxyz</code> vs <code>xyzw</code>), frame conventions, contact softness defaults</li>
+    </ul>
+
+    <h3 id="robosuite">robosuite</h3>
+    <ul>
+      <li>Observation keys and meanings, action dimensions per robot, controller types (OSC, joint velocity)</li>
+      <li>Known pitfalls: observation normalization assumptions, action space clipping, gripper action conventions</li>
+    </ul>
+
+    <h3 id="metaworld">Meta-World</h3>
+    <ul>
+      <li>Task distribution, goal representation, observation/action space per task, success metrics</li>
+      <li>Known pitfalls: goal-conditioned vs fixed-goal, observation space changes between versions</li>
+    </ul>
+
+    <h3 id="isaac">Isaac Gym / Isaac Lab</h3>
+    <ul>
+      <li>Tensor API vs scene API, GPU pipeline, observation/action buffers, domain randomization API</li>
+      <li>Known pitfalls: GPU vs CPU pipeline behavior differences, reset indexing, parallel env semantics</li>
+    </ul>
+
+    <h3 id="dm-control">dm_control</h3>
+    <ul>
+      <li>Physics timestep vs control timestep, observation spec, action spec, task rewards</li>
+      <li>Known pitfalls: <code>physics.data</code> vs <code>physics.named.data</code>, <code>time_limit</code> behavior</li>
+    </ul>
+
+    <h3 id="brax">Brax</h3>
+    <ul>
+      <li><code>brax.envs</code> API, pipeline backends (Spring, Positional, MJX), state representation</li>
+      <li>Known pitfalls: backend differences in contact handling, auto-reset semantics</li>
+    </ul>
+
+    <!-- ── Universal Checklist ── -->
+    <h2 id="universal-checklist">Universal Research Checklist</h2>
+    <p>For <strong>any</strong> environment, the researcher always researches:</p>
+    <ol>
+      <li><strong>Observation space</strong> &mdash; what each element means, ordering, normalization, coordinate frames</li>
+      <li><strong>Action space</strong> &mdash; dimensions, meaning, scaling, clipping behavior</li>
+      <li><strong>Reset semantics</strong> &mdash; what state is randomized, how, initial distribution</li>
+      <li><strong>Stepping</strong> &mdash; what <code>step()</code> actually does (sub-steps, integration method, contact resolution)</li>
+      <li><strong>Reward</strong> &mdash; how it's computed, dense/sparse, any shaping</li>
+      <li><strong>Termination</strong> &mdash; what triggers done, truncation vs termination distinction</li>
+      <li><strong>Physics parameters</strong> &mdash; timestep, gravity, friction defaults, solver iterations</li>
+      <li><strong>API gotchas</strong> &mdash; version-specific behavior changes, deprecated features</li>
+    </ol>
+
+    <!-- ── Cross-Reference ── -->
+    <h2 id="cross-reference">Codebase Cross-Reference</h2>
+    <p>After reading docs, the researcher verifies the codebase against them:</p>
+    <ul>
+      <li><strong>Observation usage matches docs</strong> &mdash; if the env returns <code>obs[0:3]</code> as position and the code treats it as velocity, flags it</li>
+      <li><strong>Action scaling matches docs</strong> &mdash; if the env expects <code>[-1, 1]</code> but policy outputs unbounded, flags it</li>
+      <li><strong>Reset handling matches docs</strong> &mdash; auto-reset correctness, truncation vs termination distinction</li>
+      <li><strong>Wrapper chain is correct</strong> &mdash; traces full wrapper stack and verifies ordering</li>
+      <li><strong>Physics parameters match intent</strong> &mdash; solver iterations, timestep, contact parameters appropriate for the task</li>
+    </ul>
+
+    <!-- ── Gotchas ── -->
+    <h2 id="gotchas">Implementation Gotchas</h2>
+    <p>The researcher compiles environment-specific pitfalls. Examples:</p>
+
+    <div class="admonition warning">
+      <div class="admonition-title">Common RL Environment Gotchas</div>
+      <p style="margin-bottom: 0">Auto-reset envs return the NEW episode's first observation on the terminal step, not the final observation. Use <code>info["final_observation"]</code> to get the actual last obs. Vectorized envs may have different reset semantics than single envs. Frame stacking wrappers change observation shape and semantics.</p>
+    </div>
+
+    <table>
+      <thead>
+        <tr><th>Environment</th><th>Common Gotcha</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>MuJoCo</td><td>Quaternion convention is <code>[w, x, y, z]</code> &mdash; many frameworks use <code>[x, y, z, w]</code></td></tr>
+        <tr><td>MuJoCo</td><td><code>mj_step</code> does <code>mj_step1</code> + <code>mj_step2</code> &mdash; calling them separately changes when forces apply</td></tr>
+        <tr><td>MJX</td><td><code>mjx.step()</code> does not support all MuJoCo features &mdash; check actuator/sensor compatibility</td></tr>
+        <tr><td>robosuite</td><td>OSC controller clips internally &mdash; policy output range doesn't map linearly to end-effector movement</td></tr>
+        <tr><td>robosuite</td><td><code>env.step()</code> may call <code>physics.step()</code> multiple times per control step</td></tr>
+        <tr><td>Isaac</td><td>GPU vs CPU pipeline behavior differences in contact handling</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ── Output Format ── -->
+    <h2 id="output-format">Output Format</h2>
+    <p>The researcher produces a structured report containing:</p>
+    <ul>
+      <li><strong>Environment Stack</strong> &mdash; base environment, version, tasks, body model, wrappers, framework integration</li>
+      <li><strong>API Reference Summary</strong> &mdash; observation space table, action space table, step semantics, reset behavior, reward structure</li>
+      <li><strong>Codebase Cross-Reference</strong> &mdash; checklist of verified/flagged items</li>
+      <li><strong>Implementation Gotchas</strong> &mdash; specific pitfalls with evidence from docs</li>
+      <li><strong>Documentation Sources</strong> &mdash; links to all referenced docs pages</li>
+    </ul>
+
+    <div class="admonition note">
+      <div class="admonition-title">Key Principles</div>
+      <p style="margin-bottom: 0"><strong>Read the actual docs, don't guess</strong> &mdash; training data may be outdated. <strong>Observation semantics are everything</strong> &mdash; the #1 source of silent RL bugs is misinterpreting observation elements. <strong>Action scaling is #2</strong>. <strong>Version matters</strong> &mdash; <code>Gymnasium</code> vs <code>gym</code>, MuJoCo 3.x vs 2.x, APIs change between versions.</p>
+    </div>
+
+    <!-- ── Prev/Next ── -->
+    <nav class="docs-pager">
+      <a href="failure-mode-researcher.html">
+        <span class="pager-label">&larr; Previous</span>
+        <span class="pager-title">Failure Mode Researcher</span>
+      </a>
+      <a href="code-reviewer.html" class="next">
+        <span class="pager-label">Next &rarr;</span>
+        <span class="pager-title">Code Reviewer</span>
+      </a>
+    </nav>
+
+    <footer class="docs-footer">
+      <p>
+        <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">Propel</a> is open source under the MIT License.
+        Built by <a href="https://kbian.org" target="_blank" rel="noopener">Kaiwen Bian</a> &amp; <a href="https://yuertang.dev/" target="_blank" rel="noopener">Yuer Tang</a>.
+      </p>
+    </footer>
+
+  </article>
+
+  <!-- ── Right ToC ── -->
+  <aside class="docs-toc">
+    <div class="docs-toc-title">On This Page</div>
+    <a href="#overview">Overview</a>
+    <a href="#identification">Environment Identification</a>
+    <a href="#documentation">Documentation Deep Dive</a>
+    <a href="#mujoco" class="toc-h3">MuJoCo / MJX</a>
+    <a href="#robosuite" class="toc-h3">robosuite</a>
+    <a href="#metaworld" class="toc-h3">Meta-World</a>
+    <a href="#isaac" class="toc-h3">Isaac Gym / Isaac Lab</a>
+    <a href="#dm-control" class="toc-h3">dm_control</a>
+    <a href="#brax" class="toc-h3">Brax</a>
+    <a href="#universal-checklist">Universal Checklist</a>
+    <a href="#cross-reference">Codebase Cross-Reference</a>
+    <a href="#gotchas">Implementation Gotchas</a>
+    <a href="#output-format">Output Format</a>
+  </aside>
+
+</div>
+
+<script src="../docs.js"></script>
+</body>
+</html>

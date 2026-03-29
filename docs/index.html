@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Documentation &mdash; Propel</title>
+  <meta name="description" content="Comprehensive documentation for Propel, a structured constraint framework for research code agents." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&family=Noto+Sans+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="../assets/logo-c.svg" />
+  <link rel="stylesheet" href="docs.css" />
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header class="docs-header">
+  <button class="sidebar-toggle" aria-label="Toggle navigation">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+  </button>
+  <a href="../index.html" class="docs-header-logo">
+    <img src="../assets/logo-c.svg" alt="Propel" />
+    Propel
+    <span class="logo-tag">docs</span>
+  </a>
+  <nav class="docs-header-nav">
+    <a href="../index.html">Home</a>
+    <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">GitHub</a>
+  </nav>
+  <div class="docs-header-search">
+    <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"/></svg>
+    Search
+    <kbd>/</kbd>
+  </div>
+</header>
+
+<!-- ── Layout ── -->
+<div class="docs-layout">
+
+  <!-- ── Left Sidebar ── -->
+  <nav class="docs-sidebar" aria-label="Documentation navigation">
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Getting Started</div>
+      <a href="index.html" class="sidebar-link active">Overview</a>
+      <a href="getting-started.html" class="sidebar-link">Installation &amp; Setup</a>
+      <a href="core-principles.html" class="sidebar-link">Core Principles</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Pipeline</div>
+      <a href="pipeline/index.html" class="sidebar-link">Pipeline Overview</a>
+      <a href="pipeline/gates.html" class="sidebar-link">Gates &amp; Questioners</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Modes</div>
+      <a href="modes/index.html" class="sidebar-link">Mode System</a>
+      <a href="modes/researcher.html" class="sidebar-link sub">Researcher</a>
+      <a href="modes/engineer.html" class="sidebar-link sub">Engineer</a>
+      <a href="modes/debugger.html" class="sidebar-link sub">Debugger</a>
+      <a href="modes/trainer.html" class="sidebar-link sub">Trainer</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Skills</div>
+      <a href="skills/index.html" class="sidebar-link">Skills Overview</a>
+      <a href="skills/investigation.html" class="sidebar-link sub">Investigation</a>
+      <a href="skills/research-design.html" class="sidebar-link sub">Research Design</a>
+      <a href="skills/subagent-driven-research.html" class="sidebar-link sub">Implementation</a>
+      <a href="skills/systematic-debugging.html" class="sidebar-link sub">Systematic Debugging</a>
+      <a href="skills/research-validation.html" class="sidebar-link sub">Validation</a>
+      <a href="skills/deep-research.html" class="sidebar-link sub">Deep Research</a>
+      <a href="skills/think-deeply.html" class="sidebar-link sub">Think Deeply</a>
+      <a href="skills/context-hygiene.html" class="sidebar-link sub">Context Hygiene</a>
+      <a href="skills/trainer-mode.html" class="sidebar-link sub">Trainer Mode</a>
+      <a href="skills/retrospective.html" class="sidebar-link sub">Retrospective</a>
+      <a href="skills/other.html" class="sidebar-link sub">Other Skills</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Agents</div>
+      <a href="agents/index.html" class="sidebar-link">Agents Overview</a>
+      <a href="agents/paper-alignment-auditor.html" class="sidebar-link sub">Paper Alignment</a>
+      <a href="agents/silent-bug-detector.html" class="sidebar-link sub">Silent Bug Detector</a>
+      <a href="agents/jax-logic-auditor.html" class="sidebar-link sub">JAX Logic Auditor</a>
+      <a href="agents/regression-guard.html" class="sidebar-link sub">Regression Guard</a>
+      <a href="agents/data-flow-tracer.html" class="sidebar-link sub">Data Flow Tracer</a>
+      <a href="agents/failure-mode-researcher.html" class="sidebar-link sub">Failure Mode Researcher</a>
+      <a href="agents/env-researcher.html" class="sidebar-link sub">Env Researcher</a>
+      <a href="agents/code-reviewer.html" class="sidebar-link sub">Code Reviewer</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Reference</div>
+      <a href="customization.html" class="sidebar-link">Customization</a>
+      <a href="pitfalls.html" class="sidebar-link">Common Pitfalls</a>
+    </div>
+
+  </nav>
+
+  <!-- ── Main Content ── -->
+  <article class="docs-content">
+
+    <!-- Landing Hero -->
+    <div class="landing-hero">
+      <img src="../assets/logo-c.svg" alt="Propel" class="logo-large" />
+      <h1>Propel Documentation</h1>
+      <p>A structured constraint framework that turns unconstrained LLM output into precise, paper-aligned research code.</p>
+    </div>
+
+    <!-- Getting Started -->
+    <h2 id="start">Getting Started</h2>
+    <p class="section-intro">New to Propel? Start here to understand what it does and how to set it up.</p>
+
+    <div class="cards-grid">
+      <a href="getting-started.html" class="doc-card">
+        <h3>Installation &amp; Setup</h3>
+        <p>Install Propel, initialize it in your project, and run your first workflow in under 5 minutes.</p>
+      </a>
+      <a href="core-principles.html" class="doc-card">
+        <h3>Core Principles</h3>
+        <p>The five non-negotiable principles injected into every session &mdash; the mindset beneath all mechanisms.</p>
+      </a>
+    </div>
+
+    <!-- Pipeline -->
+    <h2 id="pipeline">The Pipeline</h2>
+    <p class="section-intro">Understand the end-to-end workflow: gates, questioners, and phase transitions.</p>
+
+    <div class="cards-grid">
+      <a href="pipeline/index.html" class="doc-card">
+        <h3>Pipeline Overview</h3>
+        <p>The full seven-stage workflow from intake to retrospective &mdash; how each phase connects and why ordering matters.</p>
+      </a>
+      <a href="pipeline/gates.html" class="doc-card">
+        <h3>Gates &amp; Questioners</h3>
+        <p>Deep dive into Gate 0&ndash;4 and Questioners Q0&ndash;Q1. What each checkpoint asks, why, and what format.</p>
+      </a>
+    </div>
+
+    <!-- Modes -->
+    <h2 id="modes">Modes</h2>
+    <p class="section-intro">Not every session needs the full pipeline. Each mode filters which skills and gates are active.</p>
+
+    <div class="cards-grid">
+      <a href="modes/researcher.html" class="doc-card">
+        <h3><span class="mode-badge researcher">Researcher</span> Mode</h3>
+        <p>Literature review, investigation, deep research. Understanding the problem space before building anything.</p>
+      </a>
+      <a href="modes/engineer.html" class="doc-card">
+        <h3><span class="mode-badge engineer">Engineer</span> Mode</h3>
+        <p>Full pipeline with all gates and auditors. The default mode for implementing paper-derived code.</p>
+      </a>
+      <a href="modes/debugger.html" class="doc-card">
+        <h3><span class="mode-badge debugger">Debugger</span> Mode</h3>
+        <p>Root-cause analysis with evidence-backed diagnosis. Classifies code bugs vs. design issues vs. config problems.</p>
+      </a>
+      <a href="modes/trainer.html" class="doc-card">
+        <h3><span class="mode-badge trainer">Trainer</span> Mode</h3>
+        <p>Launch training runs, monitor progress, fix CUDA/OOM/path errors. Code is ready &mdash; time to train.</p>
+      </a>
+    </div>
+
+    <!-- Skills -->
+    <h2 id="skills">Skills</h2>
+    <p class="section-intro">17 specialized skills organized by workflow phase. Each activates on specific triggers and guides the agent through structured processes.</p>
+
+    <div class="cards-grid">
+      <a href="skills/investigation.html" class="doc-card">
+        <h3>Investigation</h3>
+        <p>Scaffolds <code>scratch/</code> directories with living READMEs that persist across sessions.</p>
+      </a>
+      <a href="skills/research-design.html" class="doc-card">
+        <h3>Research Design</h3>
+        <p>Paper-to-code mapping, regression risk assessment, and explicit design decisions before implementation.</p>
+      </a>
+      <a href="skills/systematic-debugging.html" class="doc-card">
+        <h3>Systematic Debugging</h3>
+        <p>Diagnosis-first methodology with 3-strike limit. Never apply a fix without presenting the root cause.</p>
+      </a>
+      <a href="skills/index.html" class="doc-card">
+        <h3>All Skills &rarr;</h3>
+        <p>Complete reference of all 17 skills: triggers, active modes, and detailed workflow descriptions.</p>
+      </a>
+    </div>
+
+    <!-- Agents -->
+    <h2 id="agents">Agents (Auditors)</h2>
+    <p class="section-intro">Domain-specific auditors that auto-dispatch after code changes. They run as subagents with separate context windows and read-only access.</p>
+
+    <div class="cards-grid">
+      <a href="agents/silent-bug-detector.html" class="doc-card">
+        <h3>Silent Bug Detector</h3>
+        <p>Scans for 11 categories of silent failures &mdash; broadcasting bugs, wrong reductions, detached gradients, and more.</p>
+      </a>
+      <a href="agents/paper-alignment-auditor.html" class="doc-card">
+        <h3>Paper Alignment Auditor</h3>
+        <p>Cross-references code against paper equations and algorithms to catch implementation mismatches.</p>
+      </a>
+      <a href="agents/jax-logic-auditor.html" class="doc-card">
+        <h3>JAX Logic Auditor</h3>
+        <p>Traces tensor shapes through JAX transforms (vmap, jit, scan) to catch shape mismatches.</p>
+      </a>
+      <a href="agents/index.html" class="doc-card">
+        <h3>All Agents &rarr;</h3>
+        <p>Complete reference of all 8 auditors: dispatch rules, auto-trigger conditions, and output formats.</p>
+      </a>
+    </div>
+
+    <!-- Reference -->
+    <h2 id="reference">Reference</h2>
+
+    <div class="cards-grid">
+      <a href="customization.html" class="doc-card">
+        <h3>Customization</h3>
+        <p>Add project-specific agents, skills, and commands. Generate a project profile for convention detection.</p>
+      </a>
+      <a href="pitfalls.html" class="doc-card">
+        <h3>Common Pitfalls</h3>
+        <p>Known failure modes, anti-patterns, and the problems Propel is specifically designed to prevent.</p>
+      </a>
+    </div>
+
+    <!-- Footer -->
+    <footer class="docs-footer">
+      <p>
+        <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">Propel</a> is open source under the MIT License.
+        Built by <a href="https://kbian.org" target="_blank" rel="noopener">Kaiwen Bian</a> &amp; <a href="https://yuertang.dev/" target="_blank" rel="noopener">Yuer Tang</a>.
+      </p>
+    </footer>
+
+  </article>
+
+  <!-- ── Right ToC (not used on landing page) ── -->
+
+</div>
+
+<script src="docs.js"></script>
+</body>
+</html>

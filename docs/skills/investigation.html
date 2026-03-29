@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Investigation &mdash; Propel Documentation</title>
+  <meta name="description" content="Investigation skill: scaffolds structured investigations in scratch/ with living READMEs, task checklists, and findings documentation." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&family=Noto+Sans+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="../../assets/logo-c.svg" />
+  <link rel="stylesheet" href="../docs.css" />
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header class="docs-header">
+  <button class="sidebar-toggle" aria-label="Toggle navigation">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+  </button>
+  <a href="../../index.html" class="docs-header-logo">
+    <img src="../../assets/logo-c.svg" alt="Propel" />
+    Propel
+    <span class="logo-tag">docs</span>
+  </a>
+  <nav class="docs-header-nav">
+    <a href="../../index.html">Home</a>
+    <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">GitHub</a>
+  </nav>
+  <div class="docs-header-search">
+    <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"/></svg>
+    Search
+    <kbd>/</kbd>
+  </div>
+</header>
+
+<!-- ── Layout ── -->
+<div class="docs-layout">
+
+  <!-- ── Left Sidebar ── -->
+  <nav class="docs-sidebar" aria-label="Documentation navigation">
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Getting Started</div>
+      <a href="../index.html" class="sidebar-link">Overview</a>
+      <a href="../getting-started.html" class="sidebar-link">Installation &amp; Setup</a>
+      <a href="../core-principles.html" class="sidebar-link">Core Principles</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Pipeline</div>
+      <a href="../pipeline/index.html" class="sidebar-link">Pipeline Overview</a>
+      <a href="../pipeline/gates.html" class="sidebar-link">Gates &amp; Questioners</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Modes</div>
+      <a href="../modes/index.html" class="sidebar-link">Mode System</a>
+      <a href="../modes/researcher.html" class="sidebar-link sub">Researcher</a>
+      <a href="../modes/engineer.html" class="sidebar-link sub">Engineer</a>
+      <a href="../modes/debugger.html" class="sidebar-link sub">Debugger</a>
+      <a href="../modes/trainer.html" class="sidebar-link sub">Trainer</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Skills</div>
+      <a href="index.html" class="sidebar-link">Skills Overview</a>
+      <a href="investigation.html" class="sidebar-link sub active">Investigation</a>
+      <a href="research-design.html" class="sidebar-link sub">Research Design</a>
+      <a href="subagent-driven-research.html" class="sidebar-link sub">Implementation</a>
+      <a href="systematic-debugging.html" class="sidebar-link sub">Systematic Debugging</a>
+      <a href="research-validation.html" class="sidebar-link sub">Validation</a>
+      <a href="deep-research.html" class="sidebar-link sub">Deep Research</a>
+      <a href="think-deeply.html" class="sidebar-link sub">Think Deeply</a>
+      <a href="context-hygiene.html" class="sidebar-link sub">Context Hygiene</a>
+      <a href="trainer-mode.html" class="sidebar-link sub">Trainer Mode</a>
+      <a href="retrospective.html" class="sidebar-link sub">Retrospective</a>
+      <a href="other.html" class="sidebar-link sub">Other Skills</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Agents</div>
+      <a href="../agents/index.html" class="sidebar-link">Agents Overview</a>
+      <a href="../agents/paper-alignment-auditor.html" class="sidebar-link sub">Paper Alignment</a>
+      <a href="../agents/silent-bug-detector.html" class="sidebar-link sub">Silent Bug Detector</a>
+      <a href="../agents/jax-logic-auditor.html" class="sidebar-link sub">JAX Logic Auditor</a>
+      <a href="../agents/regression-guard.html" class="sidebar-link sub">Regression Guard</a>
+      <a href="../agents/data-flow-tracer.html" class="sidebar-link sub">Data Flow Tracer</a>
+      <a href="../agents/failure-mode-researcher.html" class="sidebar-link sub">Failure Mode Researcher</a>
+      <a href="../agents/env-researcher.html" class="sidebar-link sub">Env Researcher</a>
+      <a href="../agents/code-reviewer.html" class="sidebar-link sub">Code Reviewer</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Reference</div>
+      <a href="../customization.html" class="sidebar-link">Customization</a>
+      <a href="../pitfalls.html" class="sidebar-link">Common Pitfalls</a>
+    </div>
+
+  </nav>
+
+  <!-- ── Main Content ── -->
+  <article class="docs-content">
+
+    <div class="breadcrumbs">
+      <a href="../index.html">Docs</a>
+      <span class="sep">&#8250;</span>
+      <a href="index.html">Skills</a>
+      <span class="sep">&#8250;</span>
+      Investigation
+    </div>
+
+    <h1 class="page-title">Investigation</h1>
+    <p class="page-subtitle">
+      Scaffolds a structured investigation in <code>scratch/</code> for empirical research and documentation. The foundation of every Propel workflow.
+    </p>
+
+    <!-- ── Overview ── -->
+    <h2 id="overview">Overview</h2>
+    <p>
+      The Investigation skill activates when the user wants to explore, trace, or document a system before making changes. It creates a dated folder in <code>scratch/</code> with a living README that accumulates findings across the session. Every non-trivial task in Propel starts with an investigation.
+    </p>
+
+    <div class="admonition note">
+      <div class="admonition-title">Gate 0 Must Fire First</div>
+      <p style="margin-bottom: 0">Before starting any investigation, Gate 0 (Intake) must have been completed. If the user has not been asked scoping questions and approved a scope statement, the investigation skill refuses to proceed.</p>
+    </div>
+
+    <table>
+      <thead>
+        <tr><th>Property</th><th>Details</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Trigger</strong></td><td>"start an investigation", "trace X to Y", "what touches X", "follow the wiring", "archeology", "figure out why X happens"</td></tr>
+        <tr><td><strong>Active Modes</strong></td><td><span class="mode-badge researcher">Researcher</span> <span class="mode-badge engineer">Engineer</span> <span class="mode-badge debugger">Debugger</span></td></tr>
+        <tr><td><strong>Output</strong></td><td><code>scratch/{YYYY-MM-DD}-{name}/README.md</code></td></tr>
+        <tr><td><strong>Prerequisite</strong></td><td>Gate 0 (Intake) completed</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ── Scratch Scaffolding ── -->
+    <h2 id="scaffolding">Scratch Scaffolding</h2>
+    <p>When the investigation skill activates, it performs these steps in order:</p>
+    <ol>
+      <li><strong>Check for past experiments.</strong> Before creating a new investigation, check <code>scratch/registry/</code> for past entries with matching keywords. If found, inject them as context.</li>
+      <li><strong>Create a dated folder</strong> in <code>{REPO_ROOT}/scratch/</code> with the format <code>{YYYY-MM-DD}-{descriptive-name}</code>.</li>
+      <li><strong>Create a <code>README.md</code></strong> in this folder using the template below.</li>
+      <li><strong>Create scripts and data files</strong> as needed for empirical work.</li>
+      <li><strong>Split into sub-documents</strong> as patterns emerge for complex investigations.</li>
+    </ol>
+
+    <div class="admonition tip">
+      <div class="admonition-title">Scratch is Gitignored</div>
+      <p style="margin-bottom: 0">The <code>scratch/</code> directory is in <code>.gitignore</code> and will NOT be committed. Never delete anything from scratch &mdash; it doesn't need cleanup. When distilling findings into PRs, include all relevant info inline; PRs must be self-contained.</p>
+    </div>
+
+    <!-- ── README Template ── -->
+    <h2 id="readme-template">README Template</h2>
+    <p>Every investigation README follows this structure. The sections are filled progressively as findings accumulate.</p>
+
+    <pre><code># Investigation: {descriptive-name}
+
+## Scope (Human-Approved)
+{One paragraph scope statement from Gate 0.
+ This is what the user confirmed they want.}
+
+## Paper References
+{Links to any extracted paper notes in scratch/paper-notes/
+ that are relevant to this investigation.}
+- [paper-name](../paper-notes/paper-name.md) &mdash; relevance note
+
+## Task Checklist
+- [ ] {task 1}
+- [ ] {task 2}
+
+## Findings
+{Updated as investigation progresses}
+
+## Surprises / Risks
+{Things that were unexpected or will complicate
+ the implementation}
+
+## Design Decisions (Human-Approved)
+{Filled in after Gate 1 &mdash; documents the user's answers
+ to design-direction questions}
+
+## Previous Experiment Learnings
+{Entries from scratch/registry/ that matched this
+ investigation's keywords, if any}</code></pre>
+
+    <!-- ── Investigation Patterns ── -->
+    <h2 id="patterns">Investigation Patterns</h2>
+    <p>These are common patterns, not rigid categories. Most investigations blend multiple patterns.</p>
+
+    <h3 id="pattern-tracing">Tracing</h3>
+    <p><strong>Triggers:</strong> "trace from X to Y", "what touches X", "follow the wiring"</p>
+    <ul>
+      <li>Follow call stack or data flow from a focal component to its connections</li>
+      <li>Can trace forward (X &rarr; where does it go?) or backward (what leads to X?)</li>
+      <li>Useful for: assessing impact of changes, understanding coupling</li>
+    </ul>
+
+    <h3 id="pattern-archeology">System Architecture Archeology</h3>
+    <p><strong>Triggers:</strong> "document how the system works", "archeology"</p>
+    <ul>
+      <li>Comprehensive documentation of an entire system or flow for reusable reference</li>
+      <li>Start from entry points, trace through all layers, document relationships exhaustively</li>
+      <li>For complex systems, consider numbered sub-documents (<code>01-cli.md</code>, <code>02-data.md</code>, etc.)</li>
+    </ul>
+
+    <h3 id="pattern-bug">Bug Investigation</h3>
+    <p><strong>Triggers:</strong> "figure out why X happens", "this is broken"</p>
+    <ul>
+      <li>Reproduce &rarr; trace root cause &rarr; propose fix</li>
+      <li>For cross-repo bugs, consider per-repo task breakdowns</li>
+    </ul>
+
+    <h3 id="pattern-exploration">Technical Exploration</h3>
+    <p><strong>Triggers:</strong> "can we do X?", "is this possible?", "figure out how to"</p>
+    <ul>
+      <li>Feasibility testing with proof-of-concept scripts</li>
+      <li>Document what works AND what doesn't</li>
+    </ul>
+
+    <h3 id="pattern-design">Design Research</h3>
+    <p><strong>Triggers:</strong> "explore the API", "gather context", "design alternatives"</p>
+    <ul>
+      <li>Understand systems and constraints before building</li>
+      <li>Compare alternatives, document trade-offs</li>
+      <li>Include visual artifacts (mockups, screenshots) when relevant</li>
+      <li>For iterative decisions, use numbered "Design Questions" (DQ1, DQ2...) to structure review</li>
+    </ul>
+
+    <!-- ── Gate 1 ── -->
+    <h2 id="gate-1">Gate 1: Post-Investigation Checkpoint</h2>
+    <p>After the investigation is complete, findings <strong>must</strong> be presented to the user before any design work begins. This is Gate 1.</p>
+
+    <pre><code>## Investigation Summary
+
+### What I Found
+- [3-5 bullet summary of key findings:
+  architecture, code paths, dependencies]
+
+### Surprises / Risks
+- [Things that were unexpected or will
+  complicate the implementation]
+- [Existing behavior that might conflict
+  with the proposed change]
+
+### Open Questions &mdash; I Need Your Input
+1. [Trade-off question surfaced by investigation]
+2. [Architecture choice that requires human judgment]
+3. [Priority question about which findings to act on]</code></pre>
+
+    <h3 id="gate-1-rules">Gate 1 Rules</h3>
+    <ul>
+      <li>Present the investigation README to the user. They <strong>must</strong> read it.</li>
+      <li>If the investigation revealed a fundamental problem with the user's idea, say so directly (the think-deeply skill activates here).</li>
+      <li>Ask at most 3 questions. More than that means the investigation wasn't thorough enough.</li>
+      <li>Document the user's answers in the README under "Design Decisions (Human-Approved)".</li>
+      <li>User confirms design direction &rarr; proceed to design phase.</li>
+    </ul>
+
+    <!-- ── Task Checklists ── -->
+    <h2 id="checklists">Task Checklists</h2>
+    <p>
+      The Task Checklist section in the README is updated as the investigation progresses. Each item should be specific and verifiable. Check items off as they are completed. For complex investigations, split tasks by pattern:
+    </p>
+    <ul>
+      <li><strong>Tracing tasks:</strong> "Trace data flow from encoder output to loss computation"</li>
+      <li><strong>Archeology tasks:</strong> "Document all entry points in the CLI module"</li>
+      <li><strong>Bug tasks:</strong> "Reproduce NaN in commitment loss with RVQ config"</li>
+      <li><strong>Exploration tasks:</strong> "Test whether JAX vmap supports dynamic batch sizes"</li>
+    </ul>
+
+    <!-- ── Living Documentation ── -->
+    <h2 id="living-docs">Living Documentation Across /clear</h2>
+    <p>
+      The investigation README is a <strong>living document</strong> &mdash; it persists across <code>/clear</code> boundaries. This is critical because research sessions often span multiple context windows. The README serves as the bridge between sessions:
+    </p>
+    <ul>
+      <li>Before <code>/clear</code>: update the README with all current findings, mark completed tasks, note where you stopped</li>
+      <li>After <code>/clear</code>: read the README to reconstruct context and resume where you left off</li>
+      <li>The Findings section accumulates across sessions &mdash; never overwrite, only append</li>
+      <li>The Surprises / Risks section captures unexpected discoveries that might be lost after clearing context</li>
+    </ul>
+
+    <!-- ── Best Practices ── -->
+    <h2 id="best-practices">Best Practices</h2>
+    <ul>
+      <li>Use <code>uv</code> with inline dependencies for standalone scripts; for scripts importing local project code, use <code>python</code> directly</li>
+      <li>Use subagents for parallel exploration to save context</li>
+      <li>Write small scripts to explore APIs interactively</li>
+      <li>Generate figures/diagrams and reference inline in markdown</li>
+      <li>For external package API review: clone to <code>scratch/repos/</code> for direct source access</li>
+    </ul>
+
+    <!-- ── Prev/Next ── -->
+    <nav class="docs-pager">
+      <a href="index.html">
+        <span class="pager-label">&larr; Previous</span>
+        <span class="pager-title">Skills Overview</span>
+      </a>
+      <a href="research-design.html" class="next">
+        <span class="pager-label">Next &rarr;</span>
+        <span class="pager-title">Research Design</span>
+      </a>
+    </nav>
+
+    <footer class="docs-footer">
+      <p>
+        <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">Propel</a> is open source under the MIT License.
+        Built by <a href="https://kbian.org" target="_blank" rel="noopener">Kaiwen Bian</a> &amp; <a href="https://yuertang.dev/" target="_blank" rel="noopener">Yuer Tang</a>.
+      </p>
+    </footer>
+
+  </article>
+
+  <!-- ── Right ToC ── -->
+  <aside class="docs-toc">
+    <div class="docs-toc-title">On This Page</div>
+    <a href="#overview">Overview</a>
+    <a href="#scaffolding">Scratch Scaffolding</a>
+    <a href="#readme-template">README Template</a>
+    <a href="#patterns">Investigation Patterns</a>
+    <a href="#pattern-tracing" class="toc-h3">Tracing</a>
+    <a href="#pattern-archeology" class="toc-h3">System Archeology</a>
+    <a href="#pattern-bug" class="toc-h3">Bug Investigation</a>
+    <a href="#pattern-exploration" class="toc-h3">Technical Exploration</a>
+    <a href="#pattern-design" class="toc-h3">Design Research</a>
+    <a href="#gate-1">Gate 1: Post-Investigation</a>
+    <a href="#gate-1-rules" class="toc-h3">Gate 1 Rules</a>
+    <a href="#checklists">Task Checklists</a>
+    <a href="#living-docs">Living Documentation</a>
+    <a href="#best-practices">Best Practices</a>
+  </aside>
+
+</div>
+
+<script src="../docs.js"></script>
+</body>
+</html>

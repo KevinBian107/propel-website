@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trainer Mode Skill &mdash; Propel Documentation</title>
+  <meta name="description" content="Trainer Mode skill: training execution phases, screen session management, runtime bug fixing, and strict scope boundaries." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&family=Noto+Sans+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="../../assets/logo-c.svg" />
+  <link rel="stylesheet" href="../docs.css" />
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header class="docs-header">
+  <button class="sidebar-toggle" aria-label="Toggle navigation">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+  </button>
+  <a href="../../index.html" class="docs-header-logo">
+    <img src="../../assets/logo-c.svg" alt="Propel" />
+    Propel
+    <span class="logo-tag">docs</span>
+  </a>
+  <nav class="docs-header-nav">
+    <a href="../../index.html">Home</a>
+    <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">GitHub</a>
+  </nav>
+  <div class="docs-header-search">
+    <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"/></svg>
+    Search
+    <kbd>/</kbd>
+  </div>
+</header>
+
+<!-- ── Layout ── -->
+<div class="docs-layout">
+
+  <!-- ── Left Sidebar ── -->
+  <nav class="docs-sidebar" aria-label="Documentation navigation">
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Getting Started</div>
+      <a href="../index.html" class="sidebar-link">Overview</a>
+      <a href="../getting-started.html" class="sidebar-link">Installation &amp; Setup</a>
+      <a href="../core-principles.html" class="sidebar-link">Core Principles</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Pipeline</div>
+      <a href="../pipeline/index.html" class="sidebar-link">Pipeline Overview</a>
+      <a href="../pipeline/gates.html" class="sidebar-link">Gates &amp; Questioners</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Modes</div>
+      <a href="../modes/index.html" class="sidebar-link">Mode System</a>
+      <a href="../modes/researcher.html" class="sidebar-link sub">Researcher</a>
+      <a href="../modes/engineer.html" class="sidebar-link sub">Engineer</a>
+      <a href="../modes/debugger.html" class="sidebar-link sub">Debugger</a>
+      <a href="../modes/trainer.html" class="sidebar-link sub">Trainer</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Skills</div>
+      <a href="index.html" class="sidebar-link">Skills Overview</a>
+      <a href="investigation.html" class="sidebar-link sub">Investigation</a>
+      <a href="research-design.html" class="sidebar-link sub">Research Design</a>
+      <a href="subagent-driven-research.html" class="sidebar-link sub">Implementation</a>
+      <a href="systematic-debugging.html" class="sidebar-link sub">Systematic Debugging</a>
+      <a href="research-validation.html" class="sidebar-link sub">Validation</a>
+      <a href="deep-research.html" class="sidebar-link sub">Deep Research</a>
+      <a href="think-deeply.html" class="sidebar-link sub">Think Deeply</a>
+      <a href="context-hygiene.html" class="sidebar-link sub">Context Hygiene</a>
+      <a href="trainer-mode.html" class="sidebar-link sub active">Trainer Mode</a>
+      <a href="retrospective.html" class="sidebar-link sub">Retrospective</a>
+      <a href="other.html" class="sidebar-link sub">Other Skills</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Agents</div>
+      <a href="../agents/index.html" class="sidebar-link">Agents Overview</a>
+      <a href="../agents/paper-alignment-auditor.html" class="sidebar-link sub">Paper Alignment</a>
+      <a href="../agents/silent-bug-detector.html" class="sidebar-link sub">Silent Bug Detector</a>
+      <a href="../agents/jax-logic-auditor.html" class="sidebar-link sub">JAX Logic Auditor</a>
+      <a href="../agents/regression-guard.html" class="sidebar-link sub">Regression Guard</a>
+      <a href="../agents/data-flow-tracer.html" class="sidebar-link sub">Data Flow Tracer</a>
+      <a href="../agents/failure-mode-researcher.html" class="sidebar-link sub">Failure Mode Researcher</a>
+      <a href="../agents/env-researcher.html" class="sidebar-link sub">Env Researcher</a>
+      <a href="../agents/code-reviewer.html" class="sidebar-link sub">Code Reviewer</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Reference</div>
+      <a href="../customization.html" class="sidebar-link">Customization</a>
+      <a href="../pitfalls.html" class="sidebar-link">Common Pitfalls</a>
+    </div>
+
+  </nav>
+
+  <!-- ── Main Content ── -->
+  <article class="docs-content">
+
+    <div class="breadcrumbs">
+      <a href="../index.html">Docs</a>
+      <span class="sep">&#8250;</span>
+      <a href="index.html">Skills</a>
+      <span class="sep">&#8250;</span>
+      Trainer Mode
+    </div>
+
+    <h1 class="page-title">Trainer Mode Skill</h1>
+    <p class="page-subtitle">
+      Training execution and runtime debugging. Find training commands, launch them in persistent sessions, and fix runtime errors &mdash; without touching training logic.
+    </p>
+
+    <!-- ── Overview ── -->
+    <h2 id="overview">Overview</h2>
+    <p>
+      The Trainer Mode skill handles the full training lifecycle: finding training commands, launching them in persistent screen sessions, and fixing runtime errors that prevent training from running. It does <strong>NOT</strong> modify training logic &mdash; that requires switching to Engineer Mode.
+    </p>
+
+    <!-- ── Phase 1 ── -->
+    <h2 id="phase-1">Phase 1: Training Command Detection</h2>
+    <p>When Trainer Mode activates, it immediately scans the project for training entry points:</p>
+
+    <table>
+      <thead>
+        <tr><th>Scan Target</th><th>What It Looks For</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Training scripts</strong></td><td><code>train*.py</code>, <code>run*.py</code>, <code>main*.py</code> in root and subdirectories</td></tr>
+        <tr><td><strong>Shell scripts</strong></td><td><code>*.sh</code> in project root, <code>scripts/</code>, <code>bin/</code></td></tr>
+        <tr><td><strong>Package entry points</strong></td><td><code>pyproject.toml</code> scripts, <code>setup.py</code> console_scripts, Makefile targets</td></tr>
+        <tr><td><strong>Config files</strong></td><td>YAML/JSON/TOML in <code>configs/</code>, <code>conf/</code>, <code>config/</code> directories</td></tr>
+        <tr><td><strong>README instructions</strong></td><td>Grep for "train", "run", "usage" in README.md</td></tr>
+      </tbody>
+    </table>
+
+    <p>Results are presented as a structured table with detected commands, configs, and environment details (Python version, framework, CUDA, GPUs, wandb status). The user must confirm a specific command before proceeding.</p>
+
+    <!-- ── Phase 2 ── -->
+    <h2 id="phase-2">Phase 2: Screen Session Management</h2>
+    <p>Training runs in a named, persistent screen session:</p>
+
+    <pre><code>screen -dmS propel-train-{timestamp} bash -c '{COMMAND}; exec bash'</code></pre>
+
+    <div class="admonition warning">
+      <div class="admonition-title">Critical Rules</div>
+      <p style="margin-bottom: 0">Execute the EXACT command the user confirmed &mdash; no modifications. Do NOT create temporary folders, disable wandb, add wrapper scripts, or modify environment variables unless the user explicitly requests it.</p>
+    </div>
+
+    <p>After launching, the user receives session management commands:</p>
+    <pre><code>Training launched in screen session: propel-train-{timestamp}
+
+Attach:  screen -r propel-train-{timestamp}
+Detach:  Ctrl+A, then D
+List:    screen -ls
+Kill:    screen -X -S propel-train-{timestamp} quit</code></pre>
+
+    <p>If <code>screen</code> is not available, the skill falls back to <code>tmux</code> with equivalent commands.</p>
+
+    <!-- ── Phase 3 ── -->
+    <h2 id="phase-3">Phase 3: Runtime Bug Fixing</h2>
+
+    <h3 id="scope-boundary">Scope Boundary</h3>
+    <p>This is the most critical distinction in Trainer Mode. The skill has a strict scope boundary between runtime bugs and logic changes:</p>
+
+    <h4>CAN Fix (Runtime Bugs)</h4>
+    <ul>
+      <li>GPU/CUDA errors (<code>RuntimeError: CUDA error</code>, device mismatch)</li>
+      <li>OOM errors (<code>CUDA out of memory</code>)</li>
+      <li>Path errors (<code>FileNotFoundError</code>, missing checkpoint paths)</li>
+      <li>Dependency issues (<code>ImportError</code>, <code>ModuleNotFoundError</code>, version conflicts)</li>
+      <li>Config typos (misspelled keys, wrong types, missing required fields)</li>
+      <li>Environment issues (wrong Python version, missing env vars)</li>
+      <li>Multi-GPU/DDP setup (NCCL timeouts, rank errors, <code>torch.distributed</code> failures)</li>
+      <li>Permission errors on log and checkpoint directories</li>
+    </ul>
+
+    <h4>CANNOT Fix (Logic Changes)</h4>
+    <ul>
+      <li>Model architecture changes ("add a layer", "change the backbone")</li>
+      <li>Loss function modifications</li>
+      <li>Feature additions (gradient clipping, LR scheduling)</li>
+      <li>Algorithm changes (switching optimizers)</li>
+      <li>Data pipeline changes</li>
+      <li>Hyperparameter tuning (suggesting values is okay, changing code is not)</li>
+    </ul>
+
+    <div class="admonition note">
+      <div class="admonition-title">Redirect Message</div>
+      <p style="margin-bottom: 0">"That's a logic change, not a runtime bug. Switch to Engineer Mode with <code>/switch engineer</code> to get the full investigation-design-implement workflow for that change."</p>
+    </div>
+
+    <h3 id="fixing-process">Fixing Process</h3>
+    <ol>
+      <li><strong>Read the traceback</strong> &mdash; get the full error output from the screen session</li>
+      <li><strong>Classify</strong>: runtime bug or logic change?</li>
+      <li><strong>If runtime bug</strong>: Present a "Gate 4 lite" diagnosis ("The error is [X] because [Y]. I'll fix it by [Z]. This changes [file:line]. Okay?"), wait for confirmation, apply minimal fix, restart training</li>
+      <li><strong>If same error recurs after 2 fixes</strong>: Stop and reassess before trying again</li>
+    </ol>
+
+    <!-- ── Phase 4 ── -->
+    <h2 id="phase-4">Phase 4: Monitoring Patterns</h2>
+    <p>Trainer Mode doesn't just wait for errors &mdash; it proactively prompts useful thinking about the training run.</p>
+
+    <h3 id="before-training">Before Training</h3>
+    <ul>
+      <li>"What's your target metric for this run?"</li>
+      <li>"Have you run a smoke test (a few steps on a small batch)?"</li>
+      <li>"Is wandb/tensorboard configured?"</li>
+      <li>"Is this resuming from a checkpoint? If so, which one?"</li>
+    </ul>
+
+    <h3 id="during-training">During Training</h3>
+    <ul>
+      <li>Loss plateau detection: "Loss hasn't moved in [N] steps. Common causes: learning rate too low, data not shuffled, or a loss computation bug."</li>
+      <li>Throughput monitoring: "What's your steps/second? Check DataLoader num_workers and pin_memory if lower than expected."</li>
+      <li>Checkpoint verification: "Are checkpoints being saved? A crash at hour 8 without a checkpoint loses everything."</li>
+    </ul>
+
+    <h3 id="common-pitfalls">Common Pitfalls to Flag</h3>
+    <table>
+      <thead>
+        <tr><th>Pitfall</th><th>What to Watch For</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>fp16/bf16 instability</strong></td><td>Watch for NaN in the first 100 steps. bf16 is more stable than fp16 for most training.</td></tr>
+        <tr><td><strong>Multi-GPU scaling</strong></td><td>With N GPUs, effective batch size is Nx. Learning rate may need scaling by sqrt(N) or linearly.</td></tr>
+        <tr><td><strong>Missing warmup</strong></td><td>If loss spikes at the start and never recovers, try LR warmup (100-1000 steps).</td></tr>
+        <tr><td><strong>Gradient accumulation math</strong></td><td>Effective batch = batch_size x accumulation_steps x num_gpus. Ensure LR accounts for this.</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ── Prev/Next ── -->
+    <nav class="docs-pager">
+      <a href="context-hygiene.html">
+        <span class="pager-label">&larr; Previous</span>
+        <span class="pager-title">Context Hygiene</span>
+      </a>
+      <a href="retrospective.html" class="next">
+        <span class="pager-label">Next &rarr;</span>
+        <span class="pager-title">Retrospective</span>
+      </a>
+    </nav>
+
+    <footer class="docs-footer">
+      <p>
+        <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">Propel</a> is open source under the MIT License.
+        Built by <a href="https://kbian.org" target="_blank" rel="noopener">Kaiwen Bian</a> &amp; <a href="https://yuertang.dev/" target="_blank" rel="noopener">Yuer Tang</a>.
+      </p>
+    </footer>
+
+  </article>
+
+  <!-- ── Right ToC ── -->
+  <aside class="docs-toc">
+    <div class="docs-toc-title">On This Page</div>
+    <a href="#overview">Overview</a>
+    <a href="#phase-1">Phase 1: Command Detection</a>
+    <a href="#phase-2">Phase 2: Screen Sessions</a>
+    <a href="#phase-3">Phase 3: Runtime Bug Fixing</a>
+    <a href="#scope-boundary" class="toc-h3">Scope Boundary</a>
+    <a href="#fixing-process" class="toc-h3">Fixing Process</a>
+    <a href="#phase-4">Phase 4: Monitoring Patterns</a>
+    <a href="#before-training" class="toc-h3">Before Training</a>
+    <a href="#during-training" class="toc-h3">During Training</a>
+    <a href="#common-pitfalls" class="toc-h3">Common Pitfalls</a>
+  </aside>
+
+</div>
+
+<script src="../docs.js"></script>
+</body>
+</html>
