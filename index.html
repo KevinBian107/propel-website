@@ -23,6 +23,7 @@
     <a href="#pipeline" data-toc-link>Pipeline</a>
     <a href="#modes" data-toc-link>Four Modes</a>
     <a href="#demos" data-toc-link>Demos</a>
+    <a href="#scenarios" data-toc-link>Live Scenarios</a>
     <a href="#features" data-toc-link>Key Features</a>
     <a href="#skills" data-toc-link>Skills</a>
     <a href="#agents" data-toc-link>Agents</a>
@@ -230,6 +231,135 @@
           <button class="demo-replay">replay</button>
         </div>
         <div class="term-body"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Live Scenarios ── -->
+  <section id="scenarios" class="fade-in">
+    <h2>When Would I Use This?</h2>
+    <p>Three real-world starting points and how Propel guides you through each one.</p>
+
+    <!-- Scenario 1: Build from idea + reference -->
+    <div class="scenario-card">
+      <div class="scenario-header scenario-engineer">
+        <div class="scenario-number">1</div>
+        <div>
+          <h3>&ldquo;I have an idea and a reference codebase&rdquo;</h3>
+          <p class="scenario-desc">You know what you want to build. You have a reference implementation or paper to follow. You need to adapt it to your architecture and constraints.</p>
+        </div>
+      </div>
+      <div class="scenario-body">
+        <div class="scenario-mode">
+          <span class="mode-badge engineer">Engineer Mode</span>
+          <span class="scenario-gates">Gate 0 &rarr; Q0 &rarr; G1 &rarr; Q1 &rarr; G2 &rarr; G3 &rarr; G4</span>
+        </div>
+        <div class="scenario-flow">
+          <div class="scenario-step">
+            <div class="scenario-step-label">Gate 0</div>
+            <div class="scenario-step-text"><strong>Scope it.</strong> Claude asks what exactly you're building, which parts of the reference to follow, and what to change. You provide the reference repo/paper.</div>
+          </div>
+          <div class="scenario-step">
+            <div class="scenario-step-label">Q0</div>
+            <div class="scenario-step-text"><strong>Ground it.</strong> &ldquo;Which file in the reference should I use as the starting point? What architecture pattern should I follow? What should I verify against?&rdquo; &mdash; Claude asks for concrete anchors instead of guessing.</div>
+          </div>
+          <div class="scenario-step">
+            <div class="scenario-step-label">Investigation</div>
+            <div class="scenario-step-text"><strong>Trace the reference.</strong> Claude reads the reference codebase, documents how it works in a <code>scratch/</code> README, identifies what needs adapting vs. what can be reused directly.</div>
+          </div>
+          <div class="scenario-step">
+            <div class="scenario-step-label">Q1 &rarr; Design</div>
+            <div class="scenario-step-text"><strong>Nail down details.</strong> Interface contracts, data formats, edge cases, config approach. Then a paper-to-code mapping with explicit component ordering and regression risk assessment.</div>
+          </div>
+          <div class="scenario-step">
+            <div class="scenario-step-label">Build &rarr; Audit</div>
+            <div class="scenario-step-text"><strong>Implement with review.</strong> Each component gets a 3-stage review: implement &rarr; spec compliance &rarr; domain auditors (paper-alignment, silent-bug-detector, regression-guard). You approve at Gate 3 after each component.</div>
+          </div>
+        </div>
+        <div class="scenario-outcome">
+          <strong>What you get:</strong> Code that precisely matches your reference &mdash; not a plausible average. Every deviation is documented and human-approved.
+        </div>
+      </div>
+    </div>
+
+    <!-- Scenario 2: Existing codebase, understand + extend -->
+    <div class="scenario-card">
+      <div class="scenario-header scenario-researcher">
+        <div class="scenario-number">2</div>
+        <div>
+          <h3>&ldquo;I inherited a codebase and need to understand it, then extend it&rdquo;</h3>
+          <p class="scenario-desc">Your teammate's project, a previous experiment, or an open-source repo. It generally works but you need to understand how before adding your features.</p>
+        </div>
+      </div>
+      <div class="scenario-body">
+        <div class="scenario-mode">
+          <span class="mode-badge researcher">Researcher</span> then
+          <span class="mode-badge engineer">Engineer</span>
+          <span class="scenario-gates">G0 &rarr; G1 &rarr; <em>/switch</em> &rarr; G0 &rarr; Q0 &rarr; G1 &rarr; Q1 &rarr; G2 &rarr; G3</span>
+        </div>
+        <div class="scenario-flow">
+          <div class="scenario-step">
+            <div class="scenario-step-label">Researcher</div>
+            <div class="scenario-step-text"><strong>Map the territory.</strong> Start in Researcher Mode. Claude traces the codebase end-to-end: entry points, data flow, key abstractions, configuration, and conventions. Everything goes into a <code>scratch/</code> investigation README that persists across sessions.</div>
+          </div>
+          <div class="scenario-step">
+            <div class="scenario-step-label">Gate 1</div>
+            <div class="scenario-step-text"><strong>Confirm understanding.</strong> Claude presents its findings: &ldquo;Here's how the reward pipeline works, here are the 3 config files that control it, here's what surprised me.&rdquo; You correct misunderstandings before anything gets built.</div>
+          </div>
+          <div class="scenario-step">
+            <div class="scenario-step-label">/switch engineer</div>
+            <div class="scenario-step-text"><strong>Now build.</strong> Switch to Engineer Mode. The investigation README becomes the foundation. Q0 asks which existing patterns to follow. Q1 nails down how your new feature integrates with what's already there.</div>
+          </div>
+          <div class="scenario-step">
+            <div class="scenario-step-label">Design &rarr; Build</div>
+            <div class="scenario-step-text"><strong>Extend with guardrails.</strong> Design respects existing conventions (from investigation). The regression-guard auditor verifies nothing breaks. Each new component is audited against the existing codebase, not just in isolation.</div>
+          </div>
+        </div>
+        <div class="scenario-outcome">
+          <strong>What you get:</strong> A documented understanding of the codebase that survives across sessions, plus new features that integrate cleanly without breaking existing functionality.
+        </div>
+      </div>
+    </div>
+
+    <!-- Scenario 3: Something is wrong -->
+    <div class="scenario-card">
+      <div class="scenario-header scenario-debugger">
+        <div class="scenario-number">3</div>
+        <div>
+          <h3>&ldquo;Something is wrong and I need to find the real cause&rdquo;</h3>
+          <p class="scenario-desc">Training diverges, outputs look wrong, or a refactor broke something. You need to find the root cause &mdash; not just patch symptoms. Could be a code bug, a design flaw, or a config issue.</p>
+        </div>
+      </div>
+      <div class="scenario-body">
+        <div class="scenario-mode">
+          <span class="mode-badge debugger">Debugger Mode</span>
+          <span class="scenario-gates">Gate 0 &rarr; G1 &rarr; Classify &rarr; G4 &rarr; Fix</span>
+        </div>
+        <div class="scenario-flow">
+          <div class="scenario-step">
+            <div class="scenario-step-label">Gate 0</div>
+            <div class="scenario-step-text"><strong>Characterize the symptom.</strong> Claude asks precise, disjunctive questions: &ldquo;Is the loss exploding or collapsing? All configs or just one? After a specific commit or always?&rdquo;</div>
+          </div>
+          <div class="scenario-step">
+            <div class="scenario-step-label">Investigation</div>
+            <div class="scenario-step-text"><strong>Dispatch auditors.</strong> Based on the symptom, Claude dispatches relevant auditors &mdash; silent-bug-detector for numerical issues, paper-alignment-auditor for correctness, jax-logic-auditor for shape problems. Evidence is gathered, not guessed at.</div>
+          </div>
+          <div class="scenario-step">
+            <div class="scenario-step-label">Classify</div>
+            <div class="scenario-step-text"><strong>Name the category.</strong> Every issue is classified as a <em>code bug</em> (concrete evidence: line numbers, values), <em>design issue</em> (requires literature backing), or <em>config/environment problem</em> (specific settings, version mismatches). The fix depends on the category.</div>
+          </div>
+          <div class="scenario-step">
+            <div class="scenario-step-label">Gate 4</div>
+            <div class="scenario-step-text"><strong>Diagnose before fixing.</strong> Claude presents: Symptom &rarr; Root Cause &rarr; Why This Happens &rarr; Proposed Fix &rarr; Side Effects &rarr; What Won't Fix. You approve before any code changes. If it's a design issue, Claude searches the literature for validated alternatives and redirects to Engineer Mode for the redesign.</div>
+          </div>
+          <div class="scenario-step">
+            <div class="scenario-step-label">3-Strike</div>
+            <div class="scenario-step-text"><strong>No infinite loops.</strong> If the same approach fails 3 times, Claude stops, re-examines assumptions, and asks whether the root cause hypothesis is wrong &mdash; instead of trying one more variation.</div>
+          </div>
+        </div>
+        <div class="scenario-outcome">
+          <strong>What you get:</strong> A proven root cause with evidence, not a symptom patch. Design issues get literature backing. Failed debugging approaches are documented so you don't repeat them.
+        </div>
       </div>
     </div>
   </section>
