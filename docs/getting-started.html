@@ -137,7 +137,7 @@ propel init</code></pre>
     <p>This does several things automatically:</p>
     <ul>
       <li>Copies all skills, agents, commands, and hooks into <code>.claude/</code></li>
-      <li>Configures the session-start hook in <code>settings.local.json</code></li>
+      <li>Configures the session-start and working-memory hooks in <code>settings.local.json</code> (working-memory injects prior experiments and architecture designs so new proposals don't duplicate past work)</li>
       <li>Adds <code>scratch/</code>, <code>sessions/</code>, <code>.propel/</code>, <code>.claude/</code>, and <code>propel/</code> to <code>.gitignore</code></li>
     </ul>
 

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Monitor &mdash; Propel Documentation</title>
+  <meta name="description" content="Monitor skill: supervised self-monitoring loop for training runs and multi-step command chains, with explicit success criteria and a token-cost guard." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&family=Noto+Sans+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="../../assets/logo-c.svg" />
+  <link rel="stylesheet" href="../docs.css" />
+</head>
+<body>
+
+<header class="docs-header">
+  <button class="sidebar-toggle" aria-label="Toggle navigation">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+  </button>
+  <a href="../../index.html" class="docs-header-logo">
+    <img src="../../assets/logo-c.svg" alt="Propel" />
+    Propel
+    <span class="logo-tag">docs</span>
+  </a>
+  <nav class="docs-header-nav">
+    <a href="../../index.html">Home</a>
+    <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">GitHub</a>
+  </nav>
+  <div class="docs-header-search">
+    <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"/></svg>
+    Search
+    <kbd>/</kbd>
+  </div>
+</header>
+
+<div class="docs-layout">
+
+  <nav class="docs-sidebar" aria-label="Documentation navigation">
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Getting Started</div>
+      <a href="../index.html" class="sidebar-link">Overview</a>
+      <a href="../getting-started.html" class="sidebar-link">Installation &amp; Setup</a>
+      <a href="../core-principles.html" class="sidebar-link">Core Principles</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Skills</div>
+      <a href="index.html" class="sidebar-link">Skills Overview</a>
+      <a href="investigation.html" class="sidebar-link sub">Investigation</a>
+      <a href="research-design.html" class="sidebar-link sub">Research Design</a>
+      <a href="subagent-driven-research.html" class="sidebar-link sub">Implementation</a>
+      <a href="systematic-debugging.html" class="sidebar-link sub">Systematic Debugging</a>
+      <a href="research-validation.html" class="sidebar-link sub">Validation</a>
+      <a href="deep-research.html" class="sidebar-link sub">Deep Research</a>
+      <a href="think-deeply.html" class="sidebar-link sub">Think Deeply</a>
+      <a href="context-hygiene.html" class="sidebar-link sub">Context Hygiene</a>
+      <a href="trainer-mode.html" class="sidebar-link sub">Trainer Mode</a>
+      <a href="retrospective.html" class="sidebar-link sub">Retrospective</a>
+      <a href="monitor.html" class="sidebar-link sub active">Monitor</a>
+      <a href="c-codex.html" class="sidebar-link sub">C-Codex</a>
+      <a href="other.html" class="sidebar-link sub">Other Skills</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Reference</div>
+      <a href="../customization.html" class="sidebar-link">Customization</a>
+      <a href="../pitfalls.html" class="sidebar-link">Common Pitfalls</a>
+    </div>
+
+  </nav>
+
+  <article class="docs-content">
+
+    <div class="breadcrumbs">
+      <a href="../index.html">Docs</a>
+      <span class="sep">&#8250;</span>
+      <a href="index.html">Skills</a>
+      <span class="sep">&#8250;</span>
+      Monitor
+    </div>
+
+    <h1 class="page-title">Monitor</h1>
+    <p class="page-subtitle">
+      A supervised self-monitoring loop for long-running training runs and multi-step command chains. Clarifies the success criteria first, prints them for the user, then iterates check &rarr; debug &rarr; verify until done.
+    </p>
+
+    <div class="admonition warning">
+      <div class="admonition-title">Token-Costy by Design</div>
+      <p style="margin-bottom: 0"><code>/monitor</code> runs an iterative loop that reads progress, evaluates against a checklist, and can dispatch debuggers each iteration. The skill <strong>requires explicit user confirmation</strong> before entering the loop. If you just need a single check, use a one-shot inspection instead.</p>
+    </div>
+
+    <h2 id="overview">Overview</h2>
+    <p>
+      Monitor turns Claude into a patient supervisor for work that takes time: training runs, hyperparameter sweeps, deploy pipelines, long command chains. It is deliberately <em>not</em> a dumb polling loop. Every run has three phases: clarify, loop, exit.
+    </p>
+
+    <h2 id="triggers">When It Triggers</h2>
+    <table>
+      <thead>
+        <tr><th>Trigger</th><th>Details</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Manual</strong></td><td>"/monitor", "watch this run", "keep an eye on", "monitor training", "run this and make sure it finishes"</td></tr>
+        <tr><td><strong>Contextual</strong></td><td>User hands off a multi-step chain and wants Claude to supervise through completion</td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="phase-1">Phase 1 &mdash; Clarify Requirements</h2>
+    <p>Before any loop runs, the skill extracts a concrete success checklist, hard blockers (terminate), and debuggable soft failures (try to fix). It prints a reference card for the user:</p>
+    <pre><code>&#9484;&#9472; /monitor plan &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;
+&#9474; Goal:        &lt;one line&gt;                                 &#9474;
+&#9474; Success criteria:                                       &#9474;
+&#9474;   [ ] &lt;item 1&gt;                                          &#9474;
+&#9474;   [ ] &lt;item 2&gt;                                          &#9474;
+&#9474; Hard blockers (terminate loop):                         &#9474;
+&#9474;   &bull; &lt;item&gt;                                              &#9474;
+&#9474; Debuggable failures (try to fix):                       &#9474;
+&#9474;   &bull; &lt;item&gt;                                              &#9474;
+&#9474; Budget: up to N iterations, ~M min between checks       &#9474;
+&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</code></pre>
+    <p>The user confirms or edits the plan before the loop starts.</p>
+
+    <h2 id="phase-2">Phase 2 &mdash; The Loop</h2>
+    <p>Each iteration runs the same four steps, logged to <code>scratch/monitor/{YYYY-MM-DD}-{short-name}/log.md</code>:</p>
+    <ol>
+      <li><strong>Inspect</strong>: cheap reads of the authoritative progress source (tail logs, <code>nvidia-smi</code>, <code>squeue</code>, metric endpoint).</li>
+      <li><strong>Evaluate</strong>: mark each checklist item as met / not-yet / regressed.</li>
+      <li><strong>Decide</strong>: exit on success or hard blocker, dispatch a debugger on soft failure, otherwise schedule the next check via <code>ScheduleWakeup</code>.</li>
+      <li><strong>Check budget</strong>: if iterations &ge; max, stop and report status &mdash; never silently keep going.</li>
+    </ol>
+
+    <h2 id="phase-3">Phase 3 &mdash; Exit Protocol</h2>
+    <p>On exit (success, failure, or budget exhaustion), the skill always produces: outcome, final checklist marks, what was done, what's left, and suggested next step. If the run produced learnings, it recommends <code>/retrospective</code>.</p>
+
+    <h2 id="guardrails">Guardrails</h2>
+    <table>
+      <thead>
+        <tr><th>Guardrail</th><th>Why</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>No destructive writes inside the loop without per-action approval</td><td>The loop has authority to read and diagnose, not to rewrite live infra.</td></tr>
+        <tr><td>Never claim success just because nothing crashed</td><td>Evaluate against the confirmed checklist &mdash; silence is not victory.</td></tr>
+        <tr><td>Renegotiate if criteria turn out to be ill-formed</td><td>Don't march toward the wrong goal just because the user wrote it down once.</td></tr>
+        <tr><td>Keep per-iteration logs to 2&ndash;5 lines</td><td>The log is for audit, not narrative.</td></tr>
+      </tbody>
+    </table>
+
+    <nav class="docs-pager">
+      <a href="retrospective.html">
+        <span class="pager-label">&larr; Previous</span>
+        <span class="pager-title">Retrospective</span>
+      </a>
+      <a href="c-codex.html" class="next">
+        <span class="pager-label">Next &rarr;</span>
+        <span class="pager-title">C-Codex</span>
+      </a>
+    </nav>
+
+    <footer class="docs-footer">
+      <p>
+        <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">Propel</a> is open source under the MIT License.
+        Built by <a href="https://kbian.org" target="_blank" rel="noopener">Kaiwen Bian</a> &amp; <a href="https://yuertang.dev/" target="_blank" rel="noopener">Yuer Tang</a>.
+      </p>
+    </footer>
+
+  </article>
+
+  <aside class="docs-toc">
+    <div class="docs-toc-title">On This Page</div>
+    <a href="#overview">Overview</a>
+    <a href="#triggers">When It Triggers</a>
+    <a href="#phase-1">Phase 1 &mdash; Clarify</a>
+    <a href="#phase-2">Phase 2 &mdash; The Loop</a>
+    <a href="#phase-3">Phase 3 &mdash; Exit</a>
+    <a href="#guardrails">Guardrails</a>
+  </aside>
+
+</div>
+
+<script src="../docs.js"></script>
+</body>
+</html>
