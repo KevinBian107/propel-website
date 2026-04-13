@@ -61,6 +61,7 @@
       <a href="retrospective.html" class="sidebar-link sub">Retrospective</a>
       <a href="monitor.html" class="sidebar-link sub">Monitor</a>
       <a href="c-codex.html" class="sidebar-link sub active">C-Codex</a>
+      <a href="codex-lead.html" class="sidebar-link sub">Codex-Lead</a>
       <a href="other.html" class="sidebar-link sub">Other Skills</a>
     </div>
 
@@ -162,6 +163,11 @@
 &#9474;   &lt;1&ndash;2 lines&gt;                                             &#9474;
 &#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</code></pre>
 
+    <h2 id="codex-lead">Optional Flag: Codex-Lead</h2>
+    <p>
+      By default Claude owns synthesis. If the user arms the <a href="codex-lead.html"><code>codex-lead</code></a> flag for this exchange, the contract flips: Codex produces the primary output and Claude becomes the adversarial checker, verifying every file:line claim against the actual repo. The flag is ephemeral &mdash; single-use per invocation &mdash; so it must be re-armed each time. See the <a href="codex-lead.html">Codex-Lead page</a> for the full flipped contract and when it's appropriate.
+    </p>
+
     <h2 id="guardrails">Guardrails</h2>
     <table>
       <thead>
@@ -181,9 +187,9 @@
         <span class="pager-label">&larr; Previous</span>
         <span class="pager-title">Monitor</span>
       </a>
-      <a href="other.html" class="next">
+      <a href="codex-lead.html" class="next">
         <span class="pager-label">Next &rarr;</span>
-        <span class="pager-title">Other Skills</span>
+        <span class="pager-title">Codex-Lead</span>
       </a>
     </nav>
 
@@ -204,6 +210,7 @@
     <a href="#setup">First-Run Setup</a>
     <a href="#contract">Interaction Contract</a>
     <a href="#output">Output Format</a>
+    <a href="#codex-lead">Codex-Lead Flag</a>
     <a href="#guardrails">Guardrails</a>
   </aside>
 

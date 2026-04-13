@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Codex-Lead &mdash; Propel Documentation</title>
+  <meta name="description" content="Codex-Lead skill: complementary ephemeral flag for /c-codex that switches the next exchange from Claude-synthesizes to Codex-primary with Claude as adversarial checker." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&family=Noto+Sans+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="../../assets/logo-c.svg" />
+  <link rel="stylesheet" href="../docs.css" />
+</head>
+<body>
+
+<header class="docs-header">
+  <button class="sidebar-toggle" aria-label="Toggle navigation">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+  </button>
+  <a href="../../index.html" class="docs-header-logo">
+    <img src="../../assets/logo-c.svg" alt="Propel" />
+    Propel
+    <span class="logo-tag">docs</span>
+  </a>
+  <nav class="docs-header-nav">
+    <a href="../../index.html">Home</a>
+    <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">GitHub</a>
+  </nav>
+  <div class="docs-header-search">
+    <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"/></svg>
+    Search
+    <kbd>/</kbd>
+  </div>
+</header>
+
+<div class="docs-layout">
+
+  <nav class="docs-sidebar" aria-label="Documentation navigation">
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Getting Started</div>
+      <a href="../index.html" class="sidebar-link">Overview</a>
+      <a href="../getting-started.html" class="sidebar-link">Installation &amp; Setup</a>
+      <a href="../core-principles.html" class="sidebar-link">Core Principles</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Skills</div>
+      <a href="index.html" class="sidebar-link">Skills Overview</a>
+      <a href="investigation.html" class="sidebar-link sub">Investigation</a>
+      <a href="research-design.html" class="sidebar-link sub">Research Design</a>
+      <a href="subagent-driven-research.html" class="sidebar-link sub">Implementation</a>
+      <a href="systematic-debugging.html" class="sidebar-link sub">Systematic Debugging</a>
+      <a href="research-validation.html" class="sidebar-link sub">Validation</a>
+      <a href="deep-research.html" class="sidebar-link sub">Deep Research</a>
+      <a href="think-deeply.html" class="sidebar-link sub">Think Deeply</a>
+      <a href="context-hygiene.html" class="sidebar-link sub">Context Hygiene</a>
+      <a href="trainer-mode.html" class="sidebar-link sub">Trainer Mode</a>
+      <a href="retrospective.html" class="sidebar-link sub">Retrospective</a>
+      <a href="monitor.html" class="sidebar-link sub">Monitor</a>
+      <a href="c-codex.html" class="sidebar-link sub">C-Codex</a>
+      <a href="codex-lead.html" class="sidebar-link sub active">Codex-Lead</a>
+      <a href="other.html" class="sidebar-link sub">Other Skills</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Reference</div>
+      <a href="../customization.html" class="sidebar-link">Customization</a>
+      <a href="../pitfalls.html" class="sidebar-link">Common Pitfalls</a>
+    </div>
+
+  </nav>
+
+  <article class="docs-content">
+
+    <div class="breadcrumbs">
+      <a href="../index.html">Docs</a>
+      <span class="sep">&#8250;</span>
+      <a href="index.html">Skills</a>
+      <span class="sep">&#8250;</span>
+      Codex-Lead
+    </div>
+
+    <h1 class="page-title">Codex-Lead</h1>
+    <p class="page-subtitle">
+      Complementary ephemeral flag for <a href="c-codex.html"><code>/c-codex</code></a>. Flips the next exchange from <em>Claude-synthesizes</em> (default) to <em>Codex-primary, Claude-as-adversarial-checker</em>. Single-use per invocation &mdash; must be re-armed each time.
+    </p>
+
+    <div class="admonition warning">
+      <div class="admonition-title">Flag, Not a Mode</div>
+      <p style="margin-bottom: 0">Codex-Lead is <strong>ephemeral</strong> by design. It arms exactly one <code>/c-codex</code> exchange and then reverts. A persistent mode would let you forget you were in lead mode and trust unverified Codex output. Re-arming each time keeps the default honest.</p>
+    </div>
+
+    <h2 id="why">Why This Exists</h2>
+    <p>
+      The default <code>/c-codex</code> contract keeps Claude in charge of synthesis: Claude frames the question, Codex critiques, Claude produces the comparison card. That is correct when Claude has strong repo context and Codex is being brought in for a divergent perspective.
+    </p>
+    <p>
+      But Codex is genuinely stronger on some tasks &mdash; particularly code review in languages or patterns where its training dominates. In those cases, the synthesis step can dilute Codex's findings. Codex-Lead flips the contract for one exchange so Codex drives the substance.
+    </p>
+
+    <h2 id="scope">Scope</h2>
+    <p>
+      Codex-Lead only makes sense inside a <code>/c-codex</code> exchange. If the user invokes it without an active or pending <code>/c-codex</code> call, the skill refuses and redirects:
+    </p>
+    <pre><code>/codex-lead is a flag for /c-codex. It has no effect on its own.
+Either invoke /c-codex with the codex-lead flag set, or drop the flag.</code></pre>
+    <p>The skill cannot be used to hand control to Codex on any workflow that is not routed through <code>/c-codex</code>.</p>
+
+    <h2 id="triggers">When It Triggers</h2>
+    <table>
+      <thead>
+        <tr><th>Trigger</th><th>Details</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Manual</strong></td><td>"/codex-lead", "let codex drive", "codex-primary", "codex leads this review"</td></tr>
+        <tr><td><strong>Combined</strong></td><td>"/codex-lead /c-codex review this diff", "let codex lead, then /c-codex"</td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="contract">The Flipped Contract</h2>
+    <ol>
+      <li><strong>Claude provides a minimal brief</strong> &mdash; diff, plan, files in scope. Facts only, no opinions, so Codex isn't anchored by Claude's reading.</li>
+      <li><strong>Codex produces the primary output.</strong> Full review or plan critique; Codex drives the substance.</li>
+      <li><strong>Claude verifies every concrete claim against the repo.</strong> This is the load-bearing step. Codex can hallucinate file paths, line numbers, and function names &mdash; Claude is the ground-truth filter.</li>
+      <li><strong>Claude adds adversarial findings.</strong> Things Codex missed, false positives Codex raised, anywhere Codex's claim contradicts the actual code.</li>
+      <li><strong>Claude presents the merged output</strong> with clear attribution &mdash; the user must always see who said what.</li>
+    </ol>
+
+    <h3 id="output">Output Format</h3>
+    <pre><code>&#9484;&#9472; /c-codex (codex-lead) &mdash; &lt;planning | code-review&gt; &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;
+&#9474; Codex's primary findings (verified):                      &#9474;
+&#9474;   &#10003; &lt;point&gt;  [verified against file:line]                 &#9474;
+&#9474;   &#10003; &lt;point&gt;  [verified against file:line]                 &#9474;
+&#9474;                                                           &#9474;
+&#9474; Codex raised, Claude could not verify / disputes:         &#9474;
+&#9474;   &#10007; &lt;point&gt; &mdash; Codex cited &lt;X&gt;. Actual: &lt;Y&gt;.               &#9474;
+&#9474;                                                           &#9474;
+&#9474; Claude adds (missed by Codex):                            &#9474;
+&#9474;   + &lt;point&gt; at file:line                                   &#9474;
+&#9474;                                                           &#9474;
+&#9474; Recommended action:                                       &#9474;
+&#9474;   &lt;1&ndash;2 lines&gt;                                             &#9474;
+&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</code></pre>
+
+    <h2 id="when-appropriate">When It's Appropriate &mdash; and When It Isn't</h2>
+    <table>
+      <thead>
+        <tr><th>Good Fit</th><th>Poor Fit</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Code review on a self-contained diff</td>
+          <td>Planning that depends on repo history, team conventions, or prior decisions</td>
+        </tr>
+        <tr>
+          <td>Style / idiom review in a language Codex is strong in</td>
+          <td>Reviews where diffs reference symbols defined far from the changed lines</td>
+        </tr>
+        <tr>
+          <td>When Claude notices itself anchoring (e.g., it authored the change)</td>
+          <td>Anything touching production infra or irreversible state</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2 id="guardrails">Guardrails</h2>
+    <table>
+      <thead>
+        <tr><th>Guardrail</th><th>Why</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Verification is not optional</td><td>Every Codex file:line claim is checked against the actual file. Unverifiable claims go in the "could not verify" section, not the "verified" section.</td></tr>
+        <tr><td>Attribution is not optional</td><td>The output must separate Codex's findings from Claude's additions &mdash; no blended voice.</td></tr>
+        <tr><td>One exchange only</td><td>The flag does not persist across <code>/clear</code>, across sessions, or across multiple <code>/c-codex</code> calls.</td></tr>
+        <tr><td>Claude still owns safety</td><td>Codex leads the substance; Claude still owns destructive-write approval, secret redaction, and the refusal to silently rewrite code.</td></tr>
+      </tbody>
+    </table>
+
+    <nav class="docs-pager">
+      <a href="c-codex.html">
+        <span class="pager-label">&larr; Previous</span>
+        <span class="pager-title">C-Codex</span>
+      </a>
+      <a href="other.html" class="next">
+        <span class="pager-label">Next &rarr;</span>
+        <span class="pager-title">Other Skills</span>
+      </a>
+    </nav>
+
+    <footer class="docs-footer">
+      <p>
+        <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">Propel</a> is open source under the MIT License.
+        Built by <a href="https://kbian.org" target="_blank" rel="noopener">Kaiwen Bian</a> &amp; <a href="https://yuertang.dev/" target="_blank" rel="noopener">Yuer Tang</a>.
+      </p>
+    </footer>
+
+  </article>
+
+  <aside class="docs-toc">
+    <div class="docs-toc-title">On This Page</div>
+    <a href="#why">Why This Exists</a>
+    <a href="#scope">Scope</a>
+    <a href="#triggers">When It Triggers</a>
+    <a href="#contract">Flipped Contract</a>
+    <a href="#output">Output Format</a>
+    <a href="#when-appropriate">When It's Appropriate</a>
+    <a href="#guardrails">Guardrails</a>
+  </aside>
+
+</div>
+
+<script src="../docs.js"></script>
+</body>
+</html>
