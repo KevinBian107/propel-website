@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>C-Review &mdash; Propel Documentation</title>
+  <meta name="description" content="C-Review skill: bridge to the Anthropic code-review plugin. Runs the plugin's rubric alongside Propel's own domain auditors and merges both into one Gate 3 card." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&family=Noto+Sans+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="../../assets/logo-c.svg" />
+  <link rel="stylesheet" href="../docs.css" />
+</head>
+<body>
+
+<header class="docs-header">
+  <button class="sidebar-toggle" aria-label="Toggle navigation">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+  </button>
+  <a href="../../index.html" class="docs-header-logo">
+    <img src="../../assets/logo-c.svg" alt="Propel" />
+    Propel
+    <span class="logo-tag">docs</span>
+  </a>
+  <nav class="docs-header-nav">
+    <a href="../../index.html">Home</a>
+    <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">GitHub</a>
+  </nav>
+  <div class="docs-header-search">
+    <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"/></svg>
+    Search
+    <kbd>/</kbd>
+  </div>
+</header>
+
+<div class="docs-layout">
+
+  <nav class="docs-sidebar" aria-label="Documentation navigation">
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Getting Started</div>
+      <a href="../index.html" class="sidebar-link">Overview</a>
+      <a href="../getting-started.html" class="sidebar-link">Installation &amp; Setup</a>
+      <a href="../core-principles.html" class="sidebar-link">Core Principles</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Skills</div>
+      <a href="index.html" class="sidebar-link">Skills Overview</a>
+      <a href="investigation.html" class="sidebar-link sub">Investigation</a>
+      <a href="research-design.html" class="sidebar-link sub">Research Design</a>
+      <a href="subagent-driven-research.html" class="sidebar-link sub">Implementation</a>
+      <a href="systematic-debugging.html" class="sidebar-link sub">Systematic Debugging</a>
+      <a href="research-validation.html" class="sidebar-link sub">Validation</a>
+      <a href="deep-research.html" class="sidebar-link sub">Deep Research</a>
+      <a href="think-deeply.html" class="sidebar-link sub">Think Deeply</a>
+      <a href="context-hygiene.html" class="sidebar-link sub">Context Hygiene</a>
+      <a href="trainer-mode.html" class="sidebar-link sub">Trainer Mode</a>
+      <a href="retrospective.html" class="sidebar-link sub">Retrospective</a>
+      <a href="monitor.html" class="sidebar-link sub">Monitor</a>
+      <a href="frontend-design.html" class="sidebar-link sub">Frontend Design</a>
+      <a href="other.html" class="sidebar-link sub">Other Skills</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Plugin Skills</div>
+      <a href="c-codex.html" class="sidebar-link sub">C-Codex</a>
+      <a href="codex-lead.html" class="sidebar-link sub">Codex-Lead</a>
+      <a href="c-review.html" class="sidebar-link sub active">C-Review</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Reference</div>
+      <a href="../customization.html" class="sidebar-link">Customization</a>
+      <a href="../pitfalls.html" class="sidebar-link">Common Pitfalls</a>
+    </div>
+
+  </nav>
+
+  <article class="docs-content">
+
+    <div class="breadcrumbs">
+      <a href="../index.html">Docs</a>
+      <span class="sep">&#8250;</span>
+      <a href="index.html">Skills</a>
+      <span class="sep">&#8250;</span>
+      C-Review
+    </div>
+
+    <h1 class="page-title">C-Review</h1>
+    <p class="page-subtitle">
+      Connect-to-Review. Bridge skill that wraps the official <a href="https://github.com/anthropics/claude-code/tree/main/plugins/code-review" target="_blank" rel="noopener">Anthropic code-review plugin</a> and runs it alongside Propel's own domain auditors, merging both into a single Gate 3 card.
+    </p>
+
+    <h2 id="why">Why a Bridge, Not a Copy?</h2>
+    <p>
+      The Anthropic <code>code-review</code> plugin ships a mature, general-purpose review rubric maintained by the Claude Code team. Propel's <a href="../agents/code-reviewer.html"><code>code-reviewer</code></a> agent and domain auditors (<a href="../agents/silent-bug-detector.html">silent-bug-detector</a>, <a href="../agents/paper-alignment-auditor.html">paper-alignment-auditor</a>, <a href="../agents/jax-logic-auditor.html">jax-logic-auditor</a>, <a href="../agents/regression-guard.html">regression-guard</a>) go deeper on research-specific concerns but cover less general ground.
+    </p>
+    <p>
+      Running both gives the widest coverage. <code>c-review</code> is the contract that keeps them from stepping on each other &mdash; de-duplicating findings, tagging sources, and producing one merged card.
+    </p>
+
+    <div class="admonition note">
+      <div class="admonition-title">Plugin Skill Pattern</div>
+      <p style="margin-bottom: 0">Like <a href="c-codex.html"><code>c-codex</code></a>, <code>c-review</code> does not implement the review itself &mdash; it wraps a plugin the user installs separately. The skill owns the interaction contract; the plugin provides the tool.</p>
+    </div>
+
+    <h2 id="triggers">When It Triggers</h2>
+    <table>
+      <thead>
+        <tr><th>Trigger</th><th>Details</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Manual</strong></td><td>"/c-review", "run the code-review plugin", "anthropic review"</td></tr>
+        <tr><td><strong>Gate 3</strong></td><td>Substantive diffs (&gt;30 lines, or any diff touching model / loss / data / training-loop code)</td></tr>
+        <tr><td><strong>Pre-PR</strong></td><td>Before <code>gh pr create</code>, when the user wants an external-rubric pass</td></tr>
+      </tbody>
+    </table>
+    <p>
+      <code>c-review</code> is explicit-invocation or Gate 3 only. It does NOT auto-fire on every edit &mdash; Propel's native <a href="../agents/code-reviewer.html"><code>code-reviewer</code></a> agent remains the always-on default for routine reviews.
+    </p>
+
+    <h2 id="setup">First-Run Setup</h2>
+    <p>
+      On first invocation in a repo, Claude checks whether the <a href="https://github.com/anthropics/claude-code/tree/main/plugins/code-review" target="_blank" rel="noopener">code-review plugin</a> is installed. If not, it points the user to the plugin's README for install instructions and pauses until setup is confirmed. If the plugin's slash command name differs from the default, Claude asks the user to confirm the exact invocation &mdash; it never fabricates plugin syntax.
+    </p>
+
+    <h2 id="contract">The Interaction Contract</h2>
+    <p>The plugin is a tool, not a voice to the user. Every exchange follows this shape:</p>
+    <ol>
+      <li><strong>Claude assembles the review target.</strong> Identify the diff in scope (uncommitted, staged, commit range, or PR). List the files. State one line of context on what the diff implements.</li>
+      <li><strong>Claude runs the plugin</strong> against that target using its documented invocation. Capture the raw output.</li>
+      <li><strong>Claude runs Propel's domain auditors in parallel</strong> &mdash; pick the relevant ones from the auto-dispatch table (silent-bug-detector always; plus paper-alignment-auditor / jax-logic-auditor / regression-guard as the diff requires).</li>
+      <li><strong>Claude merges and de-duplicates findings.</strong> Plugin + auditor findings often overlap. One finding, one line. Tag each with its source.</li>
+      <li><strong>Claude presents a unified Gate 3 card.</strong> User decides what to act on.</li>
+    </ol>
+
+    <div class="admonition warning">
+      <div class="admonition-title">No Unfiltered Pass-Through</div>
+      <p style="margin-bottom: 0">The plugin's raw output is never passed through to the user, nor used to silently rewrite code. Findings always go through the merge + attribution step.</p>
+    </div>
+
+    <h2 id="output">Output Format</h2>
+    <pre><code>&#9484;&#9472; /c-review &mdash; Gate 3 &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;
+&#9474; Diff in scope:                                            &#9474;
+&#9474;   &lt;files, line counts&gt;                                    &#9474;
+&#9474;                                                           &#9474;
+&#9474; Findings (merged, de-duplicated):                         &#9474;
+&#9474;   &bull; [plugin]    &lt;finding&gt; &mdash; file:line (severity)          &#9474;
+&#9474;   &bull; [silent-bug] &lt;finding&gt; &mdash; file:line (severity)         &#9474;
+&#9474;   &bull; [both]      &lt;finding&gt; &mdash; file:line (severity)          &#9474;
+&#9474;                                                           &#9474;
+&#9474; Disagreements:                                            &#9474;
+&#9474;   &bull; &lt;plugin says X, auditor says Y &mdash; Claude's read&gt;       &#9474;
+&#9474;                                                           &#9474;
+&#9474; Not worth acting on (noted, filtered):                    &#9474;
+&#9474;   &bull; &lt;finding&gt; &mdash; reason                                  &#9474;
+&#9474;                                                           &#9474;
+&#9474; Recommended action:                                       &#9474;
+&#9474;   &lt;1&ndash;2 lines, ordered by severity&gt;                        &#9474;
+&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</code></pre>
+    <p>Attribution matters. The user must see which signal came from which source so they can calibrate trust.</p>
+
+    <h2 id="vs-native">Relationship to Propel's Own <code>code-reviewer</code></h2>
+    <table>
+      <thead>
+        <tr><th>Situation</th><th>Use</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Every code change (auto)</td><td>Propel <a href="../agents/code-reviewer.html"><code>code-reviewer</code></a> agent</td></tr>
+        <tr><td>Gate 3 on a substantive diff</td><td><code>/c-review</code> (both, merged)</td></tr>
+        <tr><td>Pre-PR pass</td><td><code>/c-review</code></td></tr>
+        <tr><td>Trivial one-line edit</td><td>Neither &mdash; skip</td></tr>
+      </tbody>
+    </table>
+    <p>If the plugin and Propel's agent contradict each other, the disagreement is surfaced explicitly in the output card. Claude does not silently pick one.</p>
+
+    <h2 id="guardrails">Guardrails</h2>
+    <table>
+      <thead>
+        <tr><th>Guardrail</th><th>Why</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Don't auto-fire</td><td>Routine edits use Propel's own auditors. <code>/c-review</code> is explicit or Gate 3 only.</td></tr>
+        <tr><td>Plugin proposes, Claude implements</td><td>Plugin never writes to the repo directly.</td></tr>
+        <tr><td>De-duplicate aggressively</td><td>Same issue from plugin + auditor is one finding tagged <code>[both]</code>, not two.</td></tr>
+        <tr><td>Filter noise</td><td>Style nits that conflict with project conventions go in "Not worth acting on" with a reason, not into the findings list.</td></tr>
+        <tr><td>Respect the gate</td><td><code>/c-review</code> produces a Gate 3 card; it does not auto-approve the transition.</td></tr>
+      </tbody>
+    </table>
+
+    <nav class="docs-pager">
+      <a href="codex-lead.html">
+        <span class="pager-label">&larr; Previous</span>
+        <span class="pager-title">Codex-Lead</span>
+      </a>
+      <a href="frontend-design.html" class="next">
+        <span class="pager-label">Next &rarr;</span>
+        <span class="pager-title">Frontend Design</span>
+      </a>
+    </nav>
+
+    <footer class="docs-footer">
+      <p>
+        <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">Propel</a> is open source under the MIT License.
+        Built by <a href="https://kbian.org" target="_blank" rel="noopener">Kaiwen Bian</a> &amp; <a href="https://yuertang.dev/" target="_blank" rel="noopener">Yuer Tang</a>.
+      </p>
+    </footer>
+
+  </article>
+
+  <aside class="docs-toc">
+    <div class="docs-toc-title">On This Page</div>
+    <a href="#why">Why a Bridge?</a>
+    <a href="#triggers">When It Triggers</a>
+    <a href="#setup">First-Run Setup</a>
+    <a href="#contract">Interaction Contract</a>
+    <a href="#output">Output Format</a>
+    <a href="#vs-native">vs. Native code-reviewer</a>
+    <a href="#guardrails">Guardrails</a>
+  </aside>
+
+</div>
+
+<script src="../docs.js"></script>
+</body>
+</html>

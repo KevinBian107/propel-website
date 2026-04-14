@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Frontend Design &mdash; Propel Documentation</title>
+  <meta name="description" content="Frontend Design skill: create distinctive, production-grade frontend interfaces with high design quality. Vendored from anthropics/skills." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&family=Noto+Sans+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="../../assets/logo-c.svg" />
+  <link rel="stylesheet" href="../docs.css" />
+</head>
+<body>
+
+<header class="docs-header">
+  <button class="sidebar-toggle" aria-label="Toggle navigation">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+  </button>
+  <a href="../../index.html" class="docs-header-logo">
+    <img src="../../assets/logo-c.svg" alt="Propel" />
+    Propel
+    <span class="logo-tag">docs</span>
+  </a>
+  <nav class="docs-header-nav">
+    <a href="../../index.html">Home</a>
+    <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">GitHub</a>
+  </nav>
+  <div class="docs-header-search">
+    <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"/></svg>
+    Search
+    <kbd>/</kbd>
+  </div>
+</header>
+
+<div class="docs-layout">
+
+  <nav class="docs-sidebar" aria-label="Documentation navigation">
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Getting Started</div>
+      <a href="../index.html" class="sidebar-link">Overview</a>
+      <a href="../getting-started.html" class="sidebar-link">Installation &amp; Setup</a>
+      <a href="../core-principles.html" class="sidebar-link">Core Principles</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Skills</div>
+      <a href="index.html" class="sidebar-link">Skills Overview</a>
+      <a href="investigation.html" class="sidebar-link sub">Investigation</a>
+      <a href="research-design.html" class="sidebar-link sub">Research Design</a>
+      <a href="subagent-driven-research.html" class="sidebar-link sub">Implementation</a>
+      <a href="systematic-debugging.html" class="sidebar-link sub">Systematic Debugging</a>
+      <a href="research-validation.html" class="sidebar-link sub">Validation</a>
+      <a href="deep-research.html" class="sidebar-link sub">Deep Research</a>
+      <a href="think-deeply.html" class="sidebar-link sub">Think Deeply</a>
+      <a href="context-hygiene.html" class="sidebar-link sub">Context Hygiene</a>
+      <a href="trainer-mode.html" class="sidebar-link sub">Trainer Mode</a>
+      <a href="retrospective.html" class="sidebar-link sub">Retrospective</a>
+      <a href="monitor.html" class="sidebar-link sub">Monitor</a>
+      <a href="frontend-design.html" class="sidebar-link sub active">Frontend Design</a>
+      <a href="other.html" class="sidebar-link sub">Other Skills</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Plugin Skills</div>
+      <a href="c-codex.html" class="sidebar-link sub">C-Codex</a>
+      <a href="codex-lead.html" class="sidebar-link sub">Codex-Lead</a>
+      <a href="c-review.html" class="sidebar-link sub">C-Review</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Reference</div>
+      <a href="../customization.html" class="sidebar-link">Customization</a>
+      <a href="../pitfalls.html" class="sidebar-link">Common Pitfalls</a>
+    </div>
+
+  </nav>
+
+  <article class="docs-content">
+
+    <div class="breadcrumbs">
+      <a href="../index.html">Docs</a>
+      <span class="sep">&#8250;</span>
+      <a href="index.html">Skills</a>
+      <span class="sep">&#8250;</span>
+      Frontend Design
+    </div>
+
+    <h1 class="page-title">Frontend Design</h1>
+    <p class="page-subtitle">
+      Create distinctive, production-grade frontend interfaces with high design quality &mdash; avoiding generic AI aesthetics through intentional, opinionated design choices.
+    </p>
+
+    <div class="admonition note">
+      <div class="admonition-title">Vendored Skill</div>
+      <p style="margin-bottom: 0">This skill is vendored verbatim from <a href="https://github.com/anthropics/skills/blob/main/skills/frontend-design/SKILL.md" target="_blank" rel="noopener">anthropics/skills</a>. Propel adds the <code>[Propel]</code> frontmatter prefix and routes it through the mode system; the instruction body is unchanged. See the source repo for LICENSE.</p>
+    </div>
+
+    <h2 id="why">Why This Skill Exists</h2>
+    <p>
+      Without structure, a default LLM frontend is recognizable at a glance: Inter or Arial body font, centered hero section, gradient button, three-column card grid, generic spacing. The "mean of the training data" shows up most visibly in UI work. The <code>frontend-design</code> skill forces an intentional aesthetic commitment before any code is written &mdash; brutally minimal, maximalist, retro-futuristic, editorial, brutalist, industrial, and so on &mdash; and executes that commitment with precision.
+    </p>
+
+    <h2 id="triggers">When It Triggers</h2>
+    <table>
+      <thead>
+        <tr><th>Trigger</th><th>Details</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Build requests</strong></td><td>"build a landing page", "build a dashboard", "make a React component", "create an HTML/CSS layout"</td></tr>
+        <tr><td><strong>Styling requests</strong></td><td>"style this", "beautify the UI", "make this look good", "design the frontend"</td></tr>
+        <tr><td><strong>Artifacts</strong></td><td>Posters, standalone web artifacts, one-off interfaces</td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="process">The Design Process</h2>
+    <ol>
+      <li><strong>Understand purpose.</strong> What problem does this interface solve? Who uses it?</li>
+      <li><strong>Commit to a bold aesthetic direction.</strong> Pick an extreme &mdash; brutally minimal, maximalist chaos, retro-futuristic, organic/natural, luxury/refined, playful/toy-like, editorial/magazine, brutalist/raw, art deco/geometric, soft/pastel, industrial/utilitarian. Intentionality over intensity.</li>
+      <li><strong>Identify constraints.</strong> Framework, performance, accessibility requirements.</li>
+      <li><strong>Define the unforgettable.</strong> What is the one thing someone will remember about this interface?</li>
+      <li><strong>Implement working code.</strong> Production-grade, functional, visually striking, cohesive, meticulously refined.</li>
+    </ol>
+
+    <h2 id="aesthetics">Aesthetics Guidelines</h2>
+    <p>The full skill body covers detailed guidelines on typography, color, layout, motion, and craft. Key principles:</p>
+    <ul>
+      <li><strong>Typography</strong> &mdash; beautiful, unique, distinctive fonts; avoid generic choices like Arial and Inter; pair a distinctive display font with a refined body font.</li>
+      <li><strong>Intentionality</strong> &mdash; every design decision should have a reason traceable to the chosen aesthetic direction.</li>
+      <li><strong>Cohesion</strong> &mdash; one clear point-of-view carried through every element, not a patchwork of trends.</li>
+      <li><strong>Refinement</strong> &mdash; meticulous attention to details: spacing, hierarchy, weight, rhythm.</li>
+    </ul>
+    <p>
+      For the full instruction body, read <a href="https://github.com/KevinBian107/propel/blob/master/skills/frontend-design/SKILL.md" target="_blank" rel="noopener">skills/frontend-design/SKILL.md</a> in the repo, or the <a href="https://github.com/anthropics/skills/blob/main/skills/frontend-design/SKILL.md" target="_blank" rel="noopener">upstream source</a>.
+    </p>
+
+    <h2 id="modes">Mode Availability</h2>
+    <p>
+      <code>frontend-design</code> is active in <span class="mode-badge engineer">Engineer</span> mode only. UI work is implementation, and Propel gates implementation behind investigation + design phases. If the project is a frontend app, the skill activates naturally during the implementation phase; if the request comes in Researcher, Debugger, or Trainer mode, <code>using-propel</code> will suggest <code>/switch engineer</code>.
+    </p>
+
+    <h2 id="interop">Interoperating With Propel</h2>
+    <table>
+      <thead>
+        <tr><th>Phase</th><th>What Happens</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Gate 0 (Intake)</td><td>Scope the interface: purpose, audience, constraints, the "unforgettable" factor.</td></tr>
+        <tr><td>Investigation</td><td>If the project has existing design language, investigate it first &mdash; the skill should respect the established aesthetic, not override it.</td></tr>
+        <tr><td>Gate 2 (Post-Design)</td><td>Commit to the aesthetic direction before writing code. Present it for approval.</td></tr>
+        <tr><td>Implementation</td><td>Skill body drives the code-writing: typography, layout, color, motion choices.</td></tr>
+        <tr><td>Gate 3 (Audits)</td><td>Standard Propel auditors run over the code. <code>/c-review</code> optional for broad rubric coverage.</td></tr>
+      </tbody>
+    </table>
+
+    <nav class="docs-pager">
+      <a href="c-review.html">
+        <span class="pager-label">&larr; Previous</span>
+        <span class="pager-title">C-Review</span>
+      </a>
+      <a href="other.html" class="next">
+        <span class="pager-label">Next &rarr;</span>
+        <span class="pager-title">Other Skills</span>
+      </a>
+    </nav>
+
+    <footer class="docs-footer">
+      <p>
+        <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">Propel</a> is open source under the MIT License.
+        Built by <a href="https://kbian.org" target="_blank" rel="noopener">Kaiwen Bian</a> &amp; <a href="https://yuertang.dev/" target="_blank" rel="noopener">Yuer Tang</a>.
+      </p>
+    </footer>
+
+  </article>
+
+  <aside class="docs-toc">
+    <div class="docs-toc-title">On This Page</div>
+    <a href="#why">Why This Skill Exists</a>
+    <a href="#triggers">When It Triggers</a>
+    <a href="#process">The Design Process</a>
+    <a href="#aesthetics">Aesthetics Guidelines</a>
+    <a href="#modes">Mode Availability</a>
+    <a href="#interop">Interoperating With Propel</a>
+  </aside>
+
+</div>
+
+<script src="../docs.js"></script>
+</body>
+</html>

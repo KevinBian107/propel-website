@@ -82,9 +82,17 @@
       <a href="trainer-mode.html" class="sidebar-link sub">Trainer Mode</a>
       <a href="retrospective.html" class="sidebar-link sub">Retrospective</a>
       <a href="monitor.html" class="sidebar-link sub">Monitor</a>
+      <a href="frontend-design.html" class="sidebar-link sub">Frontend Design</a>
+      <a href="other.html" class="sidebar-link sub">Other Skills</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Plugin Skills</div>
       <a href="c-codex.html" class="sidebar-link sub">C-Codex</a>
       <a href="codex-lead.html" class="sidebar-link sub">Codex-Lead</a>
-      <a href="other.html" class="sidebar-link sub">Other Skills</a>
+      <a href="c-review.html" class="sidebar-link sub">C-Review</a>
     </div>
 
     <div class="sidebar-divider"></div>
@@ -310,15 +318,19 @@
           <td>"/monitor", "watch this run", "keep an eye on", multi-step command chains</td>
           <td><span class="mode-badge engineer">Engineer</span> <span class="mode-badge debugger">Debugger</span> <span class="mode-badge trainer">Trainer</span></td>
         </tr>
+      </tbody>
+    </table>
+
+    <h3 id="cat-frontend">Frontend</h3>
+    <table>
+      <thead>
+        <tr><th>Skill</th><th>Trigger</th><th>Active Modes</th></tr>
+      </thead>
+      <tbody>
         <tr>
-          <td><a href="c-codex.html"><strong>c-codex</strong></a></td>
-          <td>"/c-codex", "ask codex", "second opinion from codex" (planning or code review)</td>
-          <td><span class="mode-badge researcher">Researcher</span> <span class="mode-badge engineer">Engineer</span> <span class="mode-badge debugger">Debugger</span></td>
-        </tr>
-        <tr>
-          <td><a href="codex-lead.html"><strong>codex-lead</strong></a></td>
-          <td>"/codex-lead", "let codex drive" (complementary flag for /c-codex — ephemeral, single-use)</td>
-          <td><span class="mode-badge researcher">Researcher</span> <span class="mode-badge engineer">Engineer</span> <span class="mode-badge debugger">Debugger</span></td>
+          <td><a href="frontend-design.html"><strong>frontend-design</strong></a></td>
+          <td>Build web components, pages, landing pages, dashboards, React/HTML/CSS layouts, or style/beautify any web UI</td>
+          <td><span class="mode-badge engineer">Engineer</span></td>
         </tr>
       </tbody>
     </table>
@@ -351,6 +363,40 @@
       </tbody>
     </table>
 
+    <!-- ── Plugin Skills (bridges to external plugins) ── -->
+    <h2 id="plugin-skills">Plugin Skills</h2>
+    <p>
+      Plugin skills are a distinct class: they do not implement capability themselves, they wrap external plugins the user installs separately. The skill owns the <strong>interaction contract</strong> (when to invoke, how to frame the request, how to synthesize the reply) while the installed plugin provides the underlying tool. Claude always owns the synthesis step &mdash; plugin output never reaches the user unfiltered.
+    </p>
+    <p>
+      Each plugin skill performs a first-run install check. If the backing plugin is missing, the skill pauses and points the user to the plugin's repo rather than fabricating invocation syntax.
+    </p>
+    <table>
+      <thead>
+        <tr><th>Skill</th><th>Wraps</th><th>Purpose</th><th>Active Modes</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><a href="c-codex.html"><strong>c-codex</strong></a></td>
+          <td><a href="https://github.com/openai/codex-plugin-cc" target="_blank" rel="noopener">openai/codex-plugin-cc</a></td>
+          <td>Divergent-model peer review during planning or code review &mdash; Codex as critic, Claude synthesizes.</td>
+          <td><span class="mode-badge researcher">Researcher</span> <span class="mode-badge engineer">Engineer</span> <span class="mode-badge debugger">Debugger</span></td>
+        </tr>
+        <tr>
+          <td><a href="codex-lead.html"><strong>codex-lead</strong></a></td>
+          <td>(flag for <code>/c-codex</code>)</td>
+          <td>Ephemeral, single-use flag that flips <code>/c-codex</code> to Codex-primary mode with Claude as adversarial checker.</td>
+          <td><span class="mode-badge researcher">Researcher</span> <span class="mode-badge engineer">Engineer</span> <span class="mode-badge debugger">Debugger</span></td>
+        </tr>
+        <tr>
+          <td><a href="c-review.html"><strong>c-review</strong></a></td>
+          <td><a href="https://github.com/anthropics/claude-code/tree/main/plugins/code-review" target="_blank" rel="noopener">anthropics/claude-code code-review</a></td>
+          <td>Runs the official Anthropic code-review rubric alongside Propel's own auditors, merged into one Gate 3 card.</td>
+          <td><span class="mode-badge engineer">Engineer</span> <span class="mode-badge debugger">Debugger</span></td>
+        </tr>
+      </tbody>
+    </table>
+
     <!-- ── How Skills Are Injected ── -->
     <h2 id="injection">How Skills Are Injected</h2>
     <p>
@@ -376,8 +422,10 @@
         <tr><td><strong>Debugging</strong></td><td>Root-cause analysis with evidence standards and 3-strike limit</td><td>Engineer, Debugger</td></tr>
         <tr><td><strong>Learning</strong></td><td>Anti-sycophancy guards and experiment retrospectives</td><td>All modes</td></tr>
         <tr><td><strong>Cross-Cutting</strong></td><td>Context management, git worktrees, session hygiene</td><td>Varies by skill</td></tr>
+        <tr><td><strong>Frontend</strong></td><td>Production-grade UI with distinctive design choices (vendored from anthropics/skills)</td><td>Engineer only</td></tr>
         <tr><td><strong>Training</strong></td><td>Training execution, runtime bug fixing, monitoring</td><td>Trainer only</td></tr>
         <tr><td><strong>Customization</strong></td><td>Project profiling and persistent convention detection</td><td>All modes</td></tr>
+        <tr><td><strong>Plugin Skills</strong></td><td>Bridges to external plugins (c-codex, c-review); Claude owns the interaction contract, plugin provides the tool</td><td>Varies by skill</td></tr>
       </tbody>
     </table>
 
@@ -416,8 +464,10 @@
     <a href="#cat-debugging" class="toc-h3">Debugging</a>
     <a href="#cat-learning" class="toc-h3">Learning &amp; Reflection</a>
     <a href="#cat-cross-cutting" class="toc-h3">Cross-Cutting</a>
+    <a href="#cat-frontend" class="toc-h3">Frontend</a>
     <a href="#cat-training" class="toc-h3">Training</a>
     <a href="#cat-customization" class="toc-h3">Customization</a>
+    <a href="#plugin-skills">Plugin Skills</a>
     <a href="#injection">How Skills Are Injected</a>
     <a href="#categories">Skill Categories Explained</a>
   </aside>
