@@ -28,6 +28,7 @@
     <a href="#skills" data-toc-link>Skills</a>
     <a href="#agents" data-toc-link>Agents</a>
     <a href="#installation" data-toc-link>Get Started</a>
+    <a href="#plugins" data-toc-link>Recommended Plugins</a>
     <a href="#acknowledgments" data-toc-link>Acknowledgments</a>
   </div>
 </nav>
@@ -480,6 +481,39 @@ propel init</code></pre>
         <tr><td><strong>Domain knowledge</strong></td><td>Pitfalls not in any paper, configs that silently fail, things that only work in your setup.</td></tr>
       </tbody>
     </table>
+  </section>
+
+  <!-- ── Recommended Plugins ── -->
+  <section id="plugins" class="fade-in">
+    <h2>Recommended Plugins</h2>
+    <p>
+      Third-party Claude Code plugins that pair well with Propel. The first two power Propel's bridge skills (<code>/c-codex</code>, <code>/codex-lead</code>, <code>/c-review</code>) &mdash; without them, those skills refuse to run. The third is complementary: it doesn't change Propel's pipeline, it just makes long sessions easier to manage.
+    </p>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <h3><a href="https://github.com/openai/codex-plugin-cc" target="_blank" rel="noopener">codex-plugin-cc</a></h3>
+        <p>
+          Brings OpenAI Codex into Claude Code as a callable second model. Powers <a href="docs/skills/c-codex.html"><code>/c-codex</code></a> (peer-review critique during planning or code review) and <a href="docs/skills/codex-lead.html"><code>/codex-lead</code></a> (flip the contract for one exchange). Cross-model critique catches blind spots a single model would miss.
+        </p>
+      </div>
+      <div class="feature-card">
+        <h3><a href="https://github.com/anthropics/claude-code/tree/main/plugins/code-review" target="_blank" rel="noopener">Anthropic <code>code-review</code> plugin</a></h3>
+        <p>
+          The official Claude Code team's general-purpose review rubric. Powers <a href="docs/skills/c-review.html"><code>/c-review</code></a>, which runs the plugin alongside Propel's domain auditors (silent-bug-detector, paper-alignment-auditor, jax-logic-auditor, regression-guard) and merges everything into one Gate 3 card with source attribution.
+        </p>
+      </div>
+      <div class="feature-card">
+        <h3><a href="https://github.com/jarrodwatts/claude-hud" target="_blank" rel="noopener">claude-hud</a></h3>
+        <p>
+          A heads-up display for Claude Code that surfaces session state &mdash; model, token usage, context budget &mdash; in the status line. Pairs especially well with Propel because long investigation &rarr; design &rarr; implementation sessions are exactly where context health matters most, and where <a href="docs/skills/context-hygiene.html"><code>context-hygiene</code></a> decisions get made.
+        </p>
+      </div>
+    </div>
+
+    <p style="font-size: 0.9rem; color: var(--color-muted); margin-top: 1rem;">
+      See the <a href="docs/recommended-plugins.html">full Recommended Plugins page</a> for setup notes, compatibility caveats, and the bridge-skill interaction contract.
+    </p>
   </section>
 
   <!-- ── Acknowledgments ── -->
