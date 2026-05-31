@@ -218,6 +218,30 @@
       <strong>Install:</strong> follow the instructions in the <a href="https://github.com/jarrodwatts/claude-hud" target="_blank" rel="noopener">claude-hud repo</a>. There is no Propel-side configuration &mdash; once installed, the HUD just shows up.
     </p>
 
+    <!-- pixel-agents -->
+    <h3 id="pixel-agents">pixel-agents <span style="font-weight: 400; color: var(--color-muted);">&mdash; your agents as a pixel-art office (just for fun)</span></h3>
+    <p>
+      <strong>Repo:</strong> <a href="https://github.com/pixel-agents-hq/pixel-agents" target="_blank" rel="noopener">github.com/pixel-agents-hq/pixel-agents</a>
+    </p>
+    <p>
+      A VS Code companion extension that turns your Claude Code sessions into a tiny animated pixel-art office. Each agent becomes a character that walks around, sits at a desk, and animates to match what it's actually doing &mdash; typing while writing code, reading while searching files, waiting when it needs your input. It's the one purely-for-fun pick on this page: it adds nothing to the pipeline, it just makes a long Propel session a little more delightful to watch.
+    </p>
+    <p><strong>Why it's a fun fit for Propel:</strong></p>
+    <ul>
+      <li>
+        <strong>It watches every session, across every project.</strong> pixel-agents monitors Claude Code transcripts directly, so it isn't tied to a single repo &mdash; multiple Claude Code sessions running in different projects all show up at once as their own characters in the same office. If you've got a researcher session in one repo and a debugger session in another, you can watch both go to work side by side.
+      </li>
+      <li>
+        <strong>Sub-agents get their own characters.</strong> Propel leans hard on subagent dispatches (investigation scans, auditors, the agent fleet). With pixel-agents, each <code>Task</code> sub-agent spawns as a linked character, so a fan-out becomes a literal room filling up with workers.
+      </li>
+      <li>
+        <strong>It's observational only.</strong> Like claude-hud, it reads transcript JSONL and never intercepts tool calls or rewrites output. Safe to layer on top of Propel's constraint framework &mdash; it can't break a gate, because it can't touch the session.
+      </li>
+    </ul>
+    <p>
+      <strong>Install:</strong> grab it from the VS Code Marketplace / Open VSX, or clone the <a href="https://github.com/pixel-agents-hq/pixel-agents" target="_blank" rel="noopener">repo</a> and run it from the Extension Development Host. It requires the Claude Code CLI but needs no Propel-side configuration.
+    </p>
+
     <!-- ── Compatibility Notes ── -->
     <h2 id="compatibility">Compatibility Notes</h2>
     <ul>
@@ -268,6 +292,7 @@
     <a href="#code-review-plugin" class="toc-h3">Anthropic code-review</a>
     <a href="#complementary">Complementary Plugins</a>
     <a href="#claude-hud" class="toc-h3">claude-hud</a>
+    <a href="#pixel-agents" class="toc-h3">pixel-agents</a>
     <a href="#compatibility">Compatibility Notes</a>
     <a href="#suggestions">Suggest a Plugin</a>
   </aside>
