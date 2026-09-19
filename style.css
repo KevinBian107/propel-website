@@ -17,8 +17,6 @@
   --color-accent-light: #dbeafe;
   --color-border: #e5e7eb;
   --color-code-bg: #f8f9fa;
-  --color-banner-bg: #fef3c7;
-  --color-banner-border: #f59e0b;
   --max-width: 820px;
   --section-gap: 3.5rem;
 }
@@ -141,6 +139,13 @@ blockquote {
   line-height: 1.6;
 }
 
+.hero .subtitle-detail {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
 .hero .author {
   font-size: 0.95rem;
   color: var(--color-muted);
@@ -183,22 +188,6 @@ blockquote {
 .quick-links a svg {
   width: 16px;
   height: 16px;
-}
-
-/* ── Development Banner ── */
-.dev-banner {
-  background: var(--color-banner-bg);
-  border: 1px solid var(--color-banner-border);
-  border-radius: 8px;
-  padding: 1rem 1.25rem;
-  margin-bottom: 2.5rem;
-  text-align: center;
-  font-size: 0.95rem;
-  line-height: 1.6;
-}
-
-.dev-banner strong {
-  color: #92400e;
 }
 
 /* ── Table of Contents ── */

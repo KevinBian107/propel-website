@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Propel &mdash; Structured Constraint Framework for Research Code Agents</title>
-  <meta name="description" content="Propel is a structured constraint framework that turns unconstrained LLM output into precise, paper-aligned research code through human-in-the-loop gates, domain-specific auditors, and investigation-first methodology." />
+  <title>Propel &mdash; A Research Coding Assistant for Claude Code</title>
+  <meta name="description" content="Propel is a research coding assistant for Claude Code, not an autonomous scientist. Human-in-the-loop gates, domain-specific auditors, and investigation-first methodology turn unconstrained LLM output into precise, paper-aligned research code while every research decision stays with you." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&family=Noto+Sans+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -40,8 +40,11 @@
     <img src="assets/logo-c.svg" alt="Propel Logo" class="hero-logo" />
     <h1>Propel</h1>
     <p class="subtitle">
-      A structured constraint framework for Claude Code in research workflows &mdash;
-      turning unconstrained LLM output into precise, paper-aligned research code.
+      A research coding assistant for Claude Code
+      <span class="subtitle-detail">
+        Not an autonomous scientist. Structured constraints turn unconstrained LLM output into precise, paper-aligned research code,
+        while every research decision stays with you.
+      </span>
     </p>
     <p class="author">
       <a href="https://kbian.org" target="_blank" rel="noopener">Kaiwen Bian</a> &middot;
@@ -53,7 +56,7 @@
         <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
         Code
       </a>
-      <a href="https://github.com/KevinBian107/propel#installation" target="_blank" rel="noopener">
+      <a href="docs/getting-started.html">
         <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8.878.392a1.75 1.75 0 00-1.756 0l-5.25 3.045A1.75 1.75 0 001 4.951v6.098c0 .624.332 1.2.872 1.514l5.25 3.045a1.75 1.75 0 001.756 0l5.25-3.045c.54-.313.872-.89.872-1.514V4.951c0-.624-.332-1.2-.872-1.514L8.878.392zM7.875 1.69a.25.25 0 01.25 0l4.63 2.685L8 7.133 3.245 4.375l4.63-2.685zM2.5 5.677l5 2.9v5.765l-4.63-2.685A.25.25 0 012.5 11.4V5.677zm6 8.665V8.577l5-2.9V11.4a.25.25 0 01-.13.216L8.5 14.342z"/></svg>
         Install
       </a>
@@ -67,21 +70,19 @@
       </a>
     </div>
 
-    <!-- Development Banner -->
-    <div class="dev-banner">
-      <strong>Under Active Development.</strong>
-      Propel currently serves as a <strong>Claude Code plugin</strong>, but the pipeline and logic are designed to be <strong>agent-agnostic</strong> &mdash; the structured constraint framework generalizes to any research code agent assistant.
-    </div>
   </header>
 
   <!-- ── Overview ── -->
   <section id="overview" class="fade-in">
     <h2>Overview</h2>
     <p>
-      Claude Code can be a powerful boost to research workflows &mdash; if used correctly and carefully. Without structure, an unconstrained LLM produces the <em>mean of its training data</em>: ask it to "implement RVQ" and you get a plausible-looking average of every RVQ implementation it has seen, not the one that matches your paper, your architecture, your constraints. The output compiles, but it's noisy &mdash; wrong assumptions baked in, silent numerical bugs, design decisions made without asking.
+      Propel is a <strong>research coding assistant</strong>. It is not an autonomous scientist: it does not choose your research question, run experiments unattended, or decide what counts as a result. You bring the question, the paper, and the judgment. Propel makes Claude Code a careful collaborator on the code that tests them.
     </p>
     <p>
-      <strong>The fix isn't better prompts &mdash; it's structured constraints.</strong> When we constrain an LLM with domain-specific rules, verification gates, and forced checkpoints, the output goes from "plausible average" to precisely what we need. Propel applies this to research workflows where the cost of undetected noise is highest &mdash; a silent broadcasting bug in a loss function doesn't crash, it produces subtly wrong training runs that waste compute.
+      That split matters because an unconstrained LLM writes the <em>mean of its training data</em>. Ask it to "add a diffusion policy head" and you get a blend of every diffusion codebase it has seen: a cosine noise schedule from one repo, &epsilon;-prediction from another, an EMA decay from a third. The code runs and may even train, but it is not the variant your paper describes, and the choices that decide whether your experiment means anything were made without asking you.
+    </p>
+    <p>
+      Propel adds structure instead of cleverer prompts. Claude has to investigate before it writes code, stop at five gates to ask you design questions, and send every change past auditors that compare it against the paper and look for silent bugs. You make the calls; Claude does the reading, tracing, and checking that make those calls well-informed. This matters most in research code, where mistakes are quiet: a broadcasting bug in a loss function doesn't crash, it just gives you a training run whose numbers are wrong.
     </p>
   </section>
 
@@ -141,16 +142,17 @@
   <section id="pipeline" class="fade-in">
     <h2>The Pipeline</h2>
     <p>
-      Propel enforces five human-in-the-loop gates, two questioner checkpoints, and automatic auditor dispatch after every code change. The pipeline ensures investigation happens before implementation, design decisions are explicit, and silent bugs are caught before they reach training.
+      Propel enforces five human-in-the-loop gates, two questioner checkpoints, and automatic auditor dispatch after every code change. The pipeline ensures investigation happens before implementation, design decisions are explicit, and silent bugs are caught before they reach training. Each retrospective feeds a working memory of past experiments and designs that is loaded into the next session, so Claude checks what was already tried before proposing it again.
     </p>
 
     <figure class="pipeline-figure">
-      <img src="assets/propel_pipeline.svg" alt="Propel Pipeline: Human-in-the-Loop Research Workflow with Gates, Questioners, and Auditors" />
-      <figcaption>Figure 1. The Propel pipeline &mdash; seven stages, five human-in-the-loop gates, and two questioner checkpoints.</figcaption>
+      <img src="assets/propel_pipeline.svg" alt="Propel pipeline: seven stages from intake to retrospective, with human gates G0 to G4, questioners Q0 and Q1, a per-component review loop, a working-memory loop into the next session, and the stages each mode runs." />
+      <figcaption>Figure 1. The Propel pipeline: seven stages, five human gates, and two questioners. The bars below show which stages each mode runs.</figcaption>
     </figure>
 
-    <div class="pipeline-text">Intake &rarr; Q0 &rarr; Investigation &rarr; Gate 1 &rarr; Q1 &rarr; Design &rarr; Implementation &rarr; Debug &rarr; Training &rarr; Retrospective
- G0    ground      G1        findings  detail   G2          G3          G4      Trainer      All</div>
+    <div class="pipeline-text">Intake &rarr; G0 &rarr; Q0 &rarr; Investigate &rarr; G1 &rarr; Q1 &rarr; Design &amp; plan &rarr; G2
+  &rarr; Implement (G3 after each component) &rarr; Debug &rarr; G4 &rarr; Train
+  &rarr; Retrospective &rarr; working memory for the next session</div>
 
     <p>
       At each gate, the agent stops and asks structured questions that reveal design assumptions &mdash; never "shall I proceed?" but "should we [A] or [B]? A means [trade-off], B means [trade-off]." The questioners (Q0, Q1) ground the work in concrete reference implementations and specific implementation details before the agent acts.
