@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Codex Consult &mdash; Propel Documentation</title>
+  <meta name="description" content="codex-consult is Propel's automatic dual-model layer: it fires at every major decision point with no command, verifies every claim Codex makes, and presents an attributed card." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&family=Noto+Sans+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="../../assets/logo-c.svg" />
+  <link rel="stylesheet" href="../docs.css" />
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header class="docs-header">
+  <button class="sidebar-toggle" aria-label="Toggle navigation">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+  </button>
+  <a href="../../index.html" class="docs-header-logo">
+    <img src="../../assets/logo-c.svg" alt="Propel" />
+    Propel
+    <span class="logo-tag">docs</span>
+  </a>
+  <nav class="docs-header-nav">
+    <a href="../../index.html">Home</a>
+    <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">GitHub</a>
+  </nav>
+  <div class="docs-header-search">
+    <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"/></svg>
+    Search
+    <kbd>/</kbd>
+  </div>
+</header>
+
+<!-- ── Layout ── -->
+<div class="docs-layout">
+
+  <nav class="docs-sidebar" aria-label="Documentation navigation">
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Getting Started</div>
+      <a href="../index.html" class="sidebar-link">Overview</a>
+      <a href="../getting-started.html" class="sidebar-link">Installation &amp; Setup</a>
+      <a href="../core-principles.html" class="sidebar-link">Core Principles</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">How It Works</div>
+      <a href="../automation.html" class="sidebar-link">Automatic Dispatch</a>
+      <a href="../codex.html" class="sidebar-link">Codex &mdash; Two Models</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Pipeline</div>
+      <a href="../pipeline/index.html" class="sidebar-link">Pipeline Overview</a>
+      <a href="../pipeline/gates.html" class="sidebar-link">Gates &amp; Questioners</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Modes</div>
+      <a href="../modes/index.html" class="sidebar-link">Mode System</a>
+      <a href="../modes/researcher.html" class="sidebar-link sub">Researcher</a>
+      <a href="../modes/engineer.html" class="sidebar-link sub">Engineer</a>
+      <a href="../modes/debugger.html" class="sidebar-link sub">Debugger</a>
+      <a href="../modes/trainer.html" class="sidebar-link sub">Trainer</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Skills</div>
+      <a href="../skills/index.html" class="sidebar-link">Skills Overview</a>
+      <a href="../skills/codex-consult.html" class="sidebar-link sub active">Codex Consult</a>
+      <a href="../skills/investigation.html" class="sidebar-link sub">Investigation</a>
+      <a href="../skills/research-design.html" class="sidebar-link sub">Research Design</a>
+      <a href="../skills/subagent-driven-research.html" class="sidebar-link sub">Implementation</a>
+      <a href="../skills/systematic-debugging.html" class="sidebar-link sub">Systematic Debugging</a>
+      <a href="../skills/research-validation.html" class="sidebar-link sub">Validation</a>
+      <a href="../skills/deep-research.html" class="sidebar-link sub">Deep Research</a>
+      <a href="../skills/think-deeply.html" class="sidebar-link sub">Think Deeply</a>
+      <a href="../skills/context-hygiene.html" class="sidebar-link sub">Context Hygiene</a>
+      <a href="../skills/trainer-mode.html" class="sidebar-link sub">Trainer Mode</a>
+      <a href="../skills/retrospective.html" class="sidebar-link sub">Retrospective</a>
+      <a href="../skills/monitor.html" class="sidebar-link sub">Monitor</a>
+      <a href="../skills/c-review.html" class="sidebar-link sub">C-Review</a>
+      <a href="../skills/frontend-design.html" class="sidebar-link sub">Frontend Design</a>
+      <a href="../skills/other.html" class="sidebar-link sub">Other Skills</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Agents &mdash; Auditors</div>
+      <a href="../agents/index.html" class="sidebar-link">Agents Overview</a>
+      <a href="../agents/paper-alignment-auditor.html" class="sidebar-link sub">Paper Alignment</a>
+      <a href="../agents/silent-bug-detector.html" class="sidebar-link sub">Silent Bug Detector</a>
+      <a href="../agents/jax-logic-auditor.html" class="sidebar-link sub">JAX Logic Auditor</a>
+      <a href="../agents/regression-guard.html" class="sidebar-link sub">Regression Guard</a>
+      <a href="../agents/data-flow-tracer.html" class="sidebar-link sub">Data Flow Tracer</a>
+      <a href="../agents/failure-mode-researcher.html" class="sidebar-link sub">Failure Mode Researcher</a>
+      <a href="../agents/env-researcher.html" class="sidebar-link sub">Env Researcher</a>
+      <a href="../agents/code-reviewer.html" class="sidebar-link sub">Code Reviewer</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Agents &mdash; Workers</div>
+      <a href="../agents/codex-bridge.html" class="sidebar-link sub">Codex Bridge</a>
+      <a href="../agents/investigator.html" class="sidebar-link sub">Investigator</a>
+      <a href="../agents/implementer.html" class="sidebar-link sub">Implementer</a>
+      <a href="../agents/spec-reviewer.html" class="sidebar-link sub">Spec Reviewer</a>
+      <a href="../agents/trainer-operator.html" class="sidebar-link sub">Trainer Operator</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Reference</div>
+      <a href="../customization.html" class="sidebar-link">Customization</a>
+      <a href="../recommended-plugins.html" class="sidebar-link">Plugins</a>
+      <a href="../pitfalls.html" class="sidebar-link">Common Pitfalls</a>
+    </div>
+
+  </nav>
+
+  <!-- ── Main Content ── -->
+  <article class="docs-content">
+
+    <div class="breadcrumbs">
+      <a href="../index.html">Docs</a>
+      <span class="sep">&#8250;</span>
+      <a href="index.html">Skills</a>
+      <span class="sep">&#8250;</span>
+      Codex Consult
+    </div>
+
+    <h1 class="page-title">Codex Consult</h1>
+    <p class="page-subtitle">
+      The automatic dual-model layer. Fires on its own at every major decision point &mdash; there is no command to invoke, and no way to forget.
+    </p>
+
+    <h2 id="overview">Overview</h2>
+
+    <p>
+      <a href="../codex.html">The Codex page</a> explains <em>that</em> a second model is consulted at every decision point, and why. This skill is <em>how</em>.
+    </p>
+    <table>
+      <thead><tr><th>Property</th><th>Details</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Trigger</strong></td><td>None. It is scheduled, not requested.</td></tr>
+        <tr><td><strong>Active in</strong></td><td>All four modes</td></tr>
+        <tr><td><strong>Dispatches</strong></td><td><a href="../agents/codex-bridge.html"><code>codex-bridge</code></a></td></tr>
+        <tr><td><strong>Governed by</strong></td><td><code>core/CODEX.md</code> and <code>.propel/codex.json</code></td></tr>
+      </tbody>
+    </table>
+    <p>
+      A command would put the burden on you at exactly the moments you're least able to carry it &mdash; mid-design, mid-diagnosis, head down in the problem. So there is no command.
+    </p>
+
+
+    <h2 id="step0">Step 0 — Should this consult happen?</h2>
+
+    <p>It fires at eight points and nowhere else:</p>
+    <table>
+      <thead><tr><th>Point</th><th>Fires when</th></tr></thead>
+      <tbody>
+        <tr><td>Gate 0</td><td>The scope statement is written, before you see it</td></tr>
+        <tr><td>Gate 1</td><td>Investigation findings are assembled</td></tr>
+        <tr><td>Gate 2</td><td>The design proposal is complete</td></tr>
+        <tr><td>Gate 3</td><td>A component diff is non-trivial (&ge;&nbsp;30 lines, or model / loss / data / training-loop code)</td></tr>
+        <tr><td>Gate 4</td><td>A root cause is identified, before the fix is proposed</td></tr>
+        <tr><td>Classification</td><td>A bug is about to be called code / design / config</td></tr>
+        <tr><td>3-strike</td><td>The third attempt at the same approach has failed</td></tr>
+        <tr><td>Retrospective</td><td>Conclusions are written, before they enter the registry</td></tr>
+      </tbody>
+    </table>
+    <p>
+      <strong>Not</strong> at Q0/Q1 &mdash; those are questions for you, not for a model &mdash; nor on mode selection, reads, renames, formatting, trivial diffs, or anything in <code>scratch/</code>.
+    </p>
+
+
+    <h2 id="step1">Step 1 — Announce, before dispatching</h2>
+
+    <pre><code>&#9670; Consulting Codex &mdash; Gate 2 (design): "Propose the strongest alternative
+  to the two-stage encoder and name the failure mode this design doesn't
+  address."</code></pre>
+    <p>
+      One line: the decision point, and the actual question being sent. You should be able to tell from this line alone whether it was a good question. It is not optional and it is not retroactive &mdash; if you only learn Codex was involved when the findings appear, the announcement has failed.
+    </p>
+
+
+    <h2 id="step2">Step 2 — The brief</h2>
+
+    <p>Five to fifteen lines. Facts first, position second, question last.</p>
+    <pre><code>CONTEXT
+  Project:   &lt;one line&gt;
+  Decision:  &lt;what is being decided right now&gt;
+  Material:  &lt;the design / diff / diagnosis, inlined&gt;
+
+CLAUDE'S POSITION
+  &lt;2-4 lines — omitted when Claude wrote the thing being reviewed&gt;
+
+QUESTION
+  &lt;one sharp, falsifiable question&gt;
+
+CONSTRAINTS
+  Under 400 words. Cite file:line for every code claim. If you have no
+  additional finding, say "no additional findings" rather than restating
+  mine.</code></pre>
+    <h3 id="brief-rules">Brief-writing rules</h3>
+    <ul>
+      <li><strong>Don't bias the question.</strong> "Does this look right?" gets agreement. "Name the strongest counter-approach" gets a second opinion.</li>
+      <li><strong>Omit Claude's position on self-authored material</strong> &mdash; a Gate 3 diff, or a design Claude proposed. Anchoring Codex to the author's reading of their own work throws away most of the value.</li>
+      <li><strong>Inline the material.</strong> Codex doesn't share Claude's context, working memory, registry, or CLAUDE.md. A brief referencing "the design we discussed" produces a hallucinated review of a design Codex has never seen.</li>
+      <li><strong>Redact.</strong> Keys, tokens, unpublished data. If the brief can't be written without a secret, skip the consult and say why.</li>
+    </ul>
+
+
+    <h2 id="step3">Step 3 — Dispatch through codex-bridge</h2>
+
+    <p>
+      Never run the CLI from the main context. The bridge subagent runs it, checks each claim against the repo, throws away the transcript, and returns a <code>VERIFIED</code> / <code>DISPUTED</code> / <code>UNVERIFIED</code> table.
+    </p>
+    <p>
+      The reason is context hygiene, and it's load-bearing: Codex's raw reply is long, confident, and partly wrong. In the main conversation it becomes background the model reasons next to for the rest of the session.
+    </p>
+
+
+    <h2 id="step4">Step 4 — Judgment on top of verification</h2>
+
+    <p>
+      The bridge does the mechanical verification. Claude does the judgment.
+    </p>
+    <p>
+      For every <code>VERIFIED</code> finding: is it <em>real</em>? A confirmed line number is not a confirmed bug &mdash; Codex will correctly quote a line and draw the wrong conclusion from it. For every <code>DISPUTED</code> finding: was Codex wrong, or right about something in the wrong place?
+    </p>
+    <div class="callout callout-warn">
+      <strong>Never promote an <code>UNVERIFIED</code> claim to a finding.</strong> It goes in the card, labelled, or it doesn't appear. Silently dropping it is also wrong &mdash; a claim nobody could check is information about where the repo is hard to reason about.
+    </div>
+
+
+    <h2 id="step5">Step 5 — The card</h2>
+
+    <pre><code>┌─ &#9670; Codex consult — Gate 2 (design) ─────────────────┐
+│ Asked: Propose the strongest alternative and name a failure  │
+│        mode this design doesn't address.                     │
+│                                                              │
+│ Both models agree:                                           │
+│   • [both] The encoder must be frozen before stage 2         │
+│            — weak evidence, two models agreeing is cheap     │
+│                                                              │
+│ They disagree:                                               │
+│   • Codebook init. [claude] k-means per §3.2. [codex]        │
+│     uniform, argues k-means leaks val statistics.            │
+│     Claude's read: codex is right about the leak, wrong      │
+│     that §3.2 requires uniform. This is a real decision.     │
+│                                                              │
+│ New from Codex:                                              │
+│   • [codex] EMA decay applied per-step, paper applies it     │
+│     per-epoch — vq.py:88 (verified)      severity: high      │
+│                                                              │
+│ Codex claimed, Claude could not confirm:                     │
+│   • [codex · unverified] "loss.py:210 detaches the codebook" │
+│     — loss.py has 140 lines; no detach found anywhere.       │
+│                                                              │
+│ Your decision:                                               │
+│   The codebook init question is the one that changes         │
+│   results. Uniform, or k-means on a train-only sample?       │
+└─────────────────────────────────────────────────────┘</code></pre>
+    <p>
+      Then the gate proceeds as normal. <strong>The card is input to the gate, not a replacement for it.</strong> Codex is not a fifth reviewer whose approval advances the pipeline &mdash; you still answer the gate question.
+    </p>
+
+
+    <h2 id="controls">Controls</h2>
+
+    <table>
+      <thead><tr><th>Command</th><th>Effect</th></tr></thead>
+      <tbody>
+        <tr><td><code>/disable-codex</code></td><td>Single-model for this project until re-enabled</td></tr>
+        <tr><td><code>/enable-codex</code></td><td>Turn it back on, and re-check that the CLI is reachable</td></tr>
+      </tbody>
+    </table>
+    <p>
+      If you ask for a second opinion mid-turn &mdash; not at a gate &mdash; Propel just runs the consult. Same procedure; the schedule is a floor, not a ceiling.
+    </p>
+    <p>
+      See also: <a href="../codex.html">Codex &mdash; Two Models</a>, <a href="../agents/codex-bridge.html">codex-bridge</a>, <a href="think-deeply.html">think-deeply</a> (the internal anti-sycophancy pass), and <a href="c-review.html">c-review</a>, which folds this consult into a merged Gate 3 card.
+    </p>
+
+
+
+    <footer class="docs-footer">
+      <p>
+        <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">Propel</a> is open source under the MIT License.
+        Built by <a href="https://kbian.org" target="_blank" rel="noopener">Kaiwen Bian</a> &amp; <a href="https://yuertang.dev/" target="_blank" rel="noopener">Yuer Tang</a>.
+      </p>
+    </footer>
+
+  </article>
+
+  <!-- ── Right ToC ── -->
+  <aside class="docs-toc">
+    <div class="docs-toc-title">On This Page</div>
+    <a href="#overview">Overview</a>
+    <a href="#step0">Step 0 — Should this consult happen?</a>
+    <a href="#step1">Step 1 — Announce, before dispatching</a>
+    <a href="#step2">Step 2 — The brief</a>
+    <a href="#step3">Step 3 — Dispatch through codex-bridge</a>
+    <a href="#step4">Step 4 — Judgment on top of verification</a>
+    <a href="#step5">Step 5 — The card</a>
+    <a href="#controls">Controls</a>
+  </aside>
+
+</div>
+
+<script src="../docs.js"></script>
+</body>
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Implementer &mdash; Propel Documentation</title>
+  <meta name="description" content="Implementer builds exactly one approved plan task in its own context — no design, no scope creep, no self-review." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&family=Noto+Sans+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="../../assets/logo-c.svg" />
+  <link rel="stylesheet" href="../docs.css" />
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header class="docs-header">
+  <button class="sidebar-toggle" aria-label="Toggle navigation">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+  </button>
+  <a href="../../index.html" class="docs-header-logo">
+    <img src="../../assets/logo-c.svg" alt="Propel" />
+    Propel
+    <span class="logo-tag">docs</span>
+  </a>
+  <nav class="docs-header-nav">
+    <a href="../../index.html">Home</a>
+    <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">GitHub</a>
+  </nav>
+  <div class="docs-header-search">
+    <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"/></svg>
+    Search
+    <kbd>/</kbd>
+  </div>
+</header>
+
+<!-- ── Layout ── -->
+<div class="docs-layout">
+
+  <nav class="docs-sidebar" aria-label="Documentation navigation">
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Getting Started</div>
+      <a href="../index.html" class="sidebar-link">Overview</a>
+      <a href="../getting-started.html" class="sidebar-link">Installation &amp; Setup</a>
+      <a href="../core-principles.html" class="sidebar-link">Core Principles</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">How It Works</div>
+      <a href="../automation.html" class="sidebar-link">Automatic Dispatch</a>
+      <a href="../codex.html" class="sidebar-link">Codex &mdash; Two Models</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Pipeline</div>
+      <a href="../pipeline/index.html" class="sidebar-link">Pipeline Overview</a>
+      <a href="../pipeline/gates.html" class="sidebar-link">Gates &amp; Questioners</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Modes</div>
+      <a href="../modes/index.html" class="sidebar-link">Mode System</a>
+      <a href="../modes/researcher.html" class="sidebar-link sub">Researcher</a>
+      <a href="../modes/engineer.html" class="sidebar-link sub">Engineer</a>
+      <a href="../modes/debugger.html" class="sidebar-link sub">Debugger</a>
+      <a href="../modes/trainer.html" class="sidebar-link sub">Trainer</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Skills</div>
+      <a href="../skills/index.html" class="sidebar-link">Skills Overview</a>
+      <a href="../skills/codex-consult.html" class="sidebar-link sub">Codex Consult</a>
+      <a href="../skills/investigation.html" class="sidebar-link sub">Investigation</a>
+      <a href="../skills/research-design.html" class="sidebar-link sub">Research Design</a>
+      <a href="../skills/subagent-driven-research.html" class="sidebar-link sub">Implementation</a>
+      <a href="../skills/systematic-debugging.html" class="sidebar-link sub">Systematic Debugging</a>
+      <a href="../skills/research-validation.html" class="sidebar-link sub">Validation</a>
+      <a href="../skills/deep-research.html" class="sidebar-link sub">Deep Research</a>
+      <a href="../skills/think-deeply.html" class="sidebar-link sub">Think Deeply</a>
+      <a href="../skills/context-hygiene.html" class="sidebar-link sub">Context Hygiene</a>
+      <a href="../skills/trainer-mode.html" class="sidebar-link sub">Trainer Mode</a>
+      <a href="../skills/retrospective.html" class="sidebar-link sub">Retrospective</a>
+      <a href="../skills/monitor.html" class="sidebar-link sub">Monitor</a>
+      <a href="../skills/c-review.html" class="sidebar-link sub">C-Review</a>
+      <a href="../skills/frontend-design.html" class="sidebar-link sub">Frontend Design</a>
+      <a href="../skills/other.html" class="sidebar-link sub">Other Skills</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Agents &mdash; Auditors</div>
+      <a href="../agents/index.html" class="sidebar-link">Agents Overview</a>
+      <a href="../agents/paper-alignment-auditor.html" class="sidebar-link sub">Paper Alignment</a>
+      <a href="../agents/silent-bug-detector.html" class="sidebar-link sub">Silent Bug Detector</a>
+      <a href="../agents/jax-logic-auditor.html" class="sidebar-link sub">JAX Logic Auditor</a>
+      <a href="../agents/regression-guard.html" class="sidebar-link sub">Regression Guard</a>
+      <a href="../agents/data-flow-tracer.html" class="sidebar-link sub">Data Flow Tracer</a>
+      <a href="../agents/failure-mode-researcher.html" class="sidebar-link sub">Failure Mode Researcher</a>
+      <a href="../agents/env-researcher.html" class="sidebar-link sub">Env Researcher</a>
+      <a href="../agents/code-reviewer.html" class="sidebar-link sub">Code Reviewer</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Agents &mdash; Workers</div>
+      <a href="../agents/codex-bridge.html" class="sidebar-link sub">Codex Bridge</a>
+      <a href="../agents/investigator.html" class="sidebar-link sub">Investigator</a>
+      <a href="../agents/implementer.html" class="sidebar-link sub active">Implementer</a>
+      <a href="../agents/spec-reviewer.html" class="sidebar-link sub">Spec Reviewer</a>
+      <a href="../agents/trainer-operator.html" class="sidebar-link sub">Trainer Operator</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Reference</div>
+      <a href="../customization.html" class="sidebar-link">Customization</a>
+      <a href="../recommended-plugins.html" class="sidebar-link">Plugins</a>
+      <a href="../pitfalls.html" class="sidebar-link">Common Pitfalls</a>
+    </div>
+
+  </nav>
+
+  <!-- ── Main Content ── -->
+  <article class="docs-content">
+
+    <div class="breadcrumbs">
+      <a href="../index.html">Docs</a>
+      <span class="sep">&#8250;</span>
+      <a href="index.html">Agents</a>
+      <span class="sep">&#8250;</span>
+      Implementer
+    </div>
+
+    <h1 class="page-title">Implementer</h1>
+    <p class="page-subtitle">
+      Builds exactly one approved task. The design is done and the human approved it; this agent turns one plan entry into working code without re-opening any decision.
+    </p>
+
+    <h2 id="overview">Overview</h2>
+
+    <p>
+      The implementer has no conversation history. Everything it needs is in its prompt. If something essential is missing, it says so and stops &mdash; it does <strong>not</strong> fill the gap with a plausible default.
+    </p>
+    <p>
+      That refusal is the point. A plausible default is exactly the failure mode Propel exists to prevent: it's how research code ends up implementing the average of the literature instead of the paper on your desk.
+    </p>
+    <table>
+      <thead><tr><th>Property</th><th>Details</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Tools</strong></td><td>Read, Write, Edit, Bash, Grep, Glob</td></tr>
+        <tr><td><strong>Auto-Dispatch</strong></td><td>Yes &mdash; one task at a time, after Gate 2, by <a href="../skills/subagent-driven-research.html">subagent-driven-research</a></td></tr>
+        <tr><td><strong>Never parallel</strong></td><td>Auditors run between tasks; two implementers at once makes the regression audit ambiguous</td></tr>
+      </tbody>
+    </table>
+
+
+    <h2 id="does">What It Does</h2>
+
+    <ol>
+      <li><strong>Reads before writing.</strong> Opens every file it will modify plus the files that call into it, and matches existing conventions &mdash; naming, import order, error handling, docstring style. Code that's correct but stylistically foreign is a review burden.</li>
+      <li><strong>Implements exactly the task.</strong> Not the task plus an obvious improvement. The plan's ordering exists because components have dependencies and auditors run between them.</li>
+      <li><strong>Follows the paper literally.</strong> Signs, reduction axes, normalization constants, the exact order of operations. Where the paper is ambiguous, it uses the human-approved design decision; where none exists, it implements the most literal reading and flags it.</li>
+      <li><strong>Verifies what it can</strong> &mdash; runs the plan's verification step and reports the actual output.</li>
+    </ol>
+
+
+    <h2 id="doesnt">What It Does Not Do</h2>
+
+    <ul>
+      <li><strong>Review its own work.</strong> Spec review, paper alignment, and the domain auditors run after it, as separate agents with separate context. Self-review by the author is theatre.</li>
+      <li><strong>Fix unrelated bugs it notices.</strong> Those go in <code>OBSERVED, NOT FIXED</code>. A drive-by fix inside another task's diff makes the regression audit ambiguous.</li>
+      <li><strong>Expand scope.</strong> No extra abstraction layers, no configurability nobody asked for, no "while I was in here".</li>
+      <li><strong>Claim success it didn't observe.</strong> "Should work" is not a result.</li>
+    </ul>
+
+
+    <h2 id="output">Output</h2>
+
+    <pre><code>TASK / MAPS TO        the plan entry and its paper reference
+CHANGED               file:line-range — what changed and why
+IMPLEMENTATION NOTES  choices the plan left open, and how they were resolved
+VERIFICATION RUN      the command, and its actual output
+DEVIATIONS FROM PLAN  every difference, and why
+OBSERVED, NOT FIXED   unrelated problems noticed in passing
+BLOCKED ON            anything missing that forced a guess</code></pre>
+    <div class="callout callout-warn">
+      <strong>Deviations are never hidden.</strong> The <a href="spec-reviewer.html">spec-reviewer</a> will find them, and an unexplained deviation costs more trust than an explained one &mdash; it means the report can't be trusted for the remaining tasks either.
+    </div>
+
+
+
+    <footer class="docs-footer">
+      <p>
+        <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">Propel</a> is open source under the MIT License.
+        Built by <a href="https://kbian.org" target="_blank" rel="noopener">Kaiwen Bian</a> &amp; <a href="https://yuertang.dev/" target="_blank" rel="noopener">Yuer Tang</a>.
+      </p>
+    </footer>
+
+  </article>
+
+  <!-- ── Right ToC ── -->
+  <aside class="docs-toc">
+    <div class="docs-toc-title">On This Page</div>
+    <a href="#overview">Overview</a>
+    <a href="#does">What It Does</a>
+    <a href="#doesnt">What It Does Not Do</a>
+    <a href="#output">Output</a>
+  </aside>
+
+</div>
+
+<script src="../docs.js"></script>
+</body>
+</html>

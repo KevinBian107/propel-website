@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Codex — Two Models at Every Decision &mdash; Propel Documentation</title>
+  <meta name="description" content="Propel consults OpenAI Codex automatically at every major decision point, verifies every claim it makes against your repository, and attributes every finding by model. No command to invoke." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&family=Noto+Sans+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="../assets/logo-c.svg" />
+  <link rel="stylesheet" href="docs.css" />
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header class="docs-header">
+  <button class="sidebar-toggle" aria-label="Toggle navigation">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+  </button>
+  <a href="../index.html" class="docs-header-logo">
+    <img src="../assets/logo-c.svg" alt="Propel" />
+    Propel
+    <span class="logo-tag">docs</span>
+  </a>
+  <nav class="docs-header-nav">
+    <a href="../index.html">Home</a>
+    <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">GitHub</a>
+  </nav>
+  <div class="docs-header-search">
+    <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"/></svg>
+    Search
+    <kbd>/</kbd>
+  </div>
+</header>
+
+<!-- ── Layout ── -->
+<div class="docs-layout">
+
+  <nav class="docs-sidebar" aria-label="Documentation navigation">
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Getting Started</div>
+      <a href="index.html" class="sidebar-link">Overview</a>
+      <a href="getting-started.html" class="sidebar-link">Installation &amp; Setup</a>
+      <a href="core-principles.html" class="sidebar-link">Core Principles</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">How It Works</div>
+      <a href="automation.html" class="sidebar-link">Automatic Dispatch</a>
+      <a href="codex.html" class="sidebar-link active">Codex &mdash; Two Models</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Pipeline</div>
+      <a href="pipeline/index.html" class="sidebar-link">Pipeline Overview</a>
+      <a href="pipeline/gates.html" class="sidebar-link">Gates &amp; Questioners</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Modes</div>
+      <a href="modes/index.html" class="sidebar-link">Mode System</a>
+      <a href="modes/researcher.html" class="sidebar-link sub">Researcher</a>
+      <a href="modes/engineer.html" class="sidebar-link sub">Engineer</a>
+      <a href="modes/debugger.html" class="sidebar-link sub">Debugger</a>
+      <a href="modes/trainer.html" class="sidebar-link sub">Trainer</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Skills</div>
+      <a href="skills/index.html" class="sidebar-link">Skills Overview</a>
+      <a href="skills/codex-consult.html" class="sidebar-link sub">Codex Consult</a>
+      <a href="skills/investigation.html" class="sidebar-link sub">Investigation</a>
+      <a href="skills/research-design.html" class="sidebar-link sub">Research Design</a>
+      <a href="skills/subagent-driven-research.html" class="sidebar-link sub">Implementation</a>
+      <a href="skills/systematic-debugging.html" class="sidebar-link sub">Systematic Debugging</a>
+      <a href="skills/research-validation.html" class="sidebar-link sub">Validation</a>
+      <a href="skills/deep-research.html" class="sidebar-link sub">Deep Research</a>
+      <a href="skills/think-deeply.html" class="sidebar-link sub">Think Deeply</a>
+      <a href="skills/context-hygiene.html" class="sidebar-link sub">Context Hygiene</a>
+      <a href="skills/trainer-mode.html" class="sidebar-link sub">Trainer Mode</a>
+      <a href="skills/retrospective.html" class="sidebar-link sub">Retrospective</a>
+      <a href="skills/monitor.html" class="sidebar-link sub">Monitor</a>
+      <a href="skills/c-review.html" class="sidebar-link sub">C-Review</a>
+      <a href="skills/frontend-design.html" class="sidebar-link sub">Frontend Design</a>
+      <a href="skills/other.html" class="sidebar-link sub">Other Skills</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Agents &mdash; Auditors</div>
+      <a href="agents/index.html" class="sidebar-link">Agents Overview</a>
+      <a href="agents/paper-alignment-auditor.html" class="sidebar-link sub">Paper Alignment</a>
+      <a href="agents/silent-bug-detector.html" class="sidebar-link sub">Silent Bug Detector</a>
+      <a href="agents/jax-logic-auditor.html" class="sidebar-link sub">JAX Logic Auditor</a>
+      <a href="agents/regression-guard.html" class="sidebar-link sub">Regression Guard</a>
+      <a href="agents/data-flow-tracer.html" class="sidebar-link sub">Data Flow Tracer</a>
+      <a href="agents/failure-mode-researcher.html" class="sidebar-link sub">Failure Mode Researcher</a>
+      <a href="agents/env-researcher.html" class="sidebar-link sub">Env Researcher</a>
+      <a href="agents/code-reviewer.html" class="sidebar-link sub">Code Reviewer</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Agents &mdash; Workers</div>
+      <a href="agents/codex-bridge.html" class="sidebar-link sub">Codex Bridge</a>
+      <a href="agents/investigator.html" class="sidebar-link sub">Investigator</a>
+      <a href="agents/implementer.html" class="sidebar-link sub">Implementer</a>
+      <a href="agents/spec-reviewer.html" class="sidebar-link sub">Spec Reviewer</a>
+      <a href="agents/trainer-operator.html" class="sidebar-link sub">Trainer Operator</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Reference</div>
+      <a href="customization.html" class="sidebar-link">Customization</a>
+      <a href="recommended-plugins.html" class="sidebar-link">Plugins</a>
+      <a href="pitfalls.html" class="sidebar-link">Common Pitfalls</a>
+    </div>
+
+  </nav>
+
+  <!-- ── Main Content ── -->
+  <article class="docs-content">
+
+    <div class="breadcrumbs">
+      <a href="index.html">Docs</a>
+      <span class="sep">&#8250;</span>
+      Codex
+    </div>
+
+    <h1 class="page-title">Two Models at Every Decision</h1>
+    <p class="page-subtitle">
+      Propel consults a second model automatically &mdash; at every gate, with no command to invoke and no way to forget. Codex advises. It never decides, and it never writes.
+    </p>
+
+    <h2 id="why">Why a Second Model</h2>
+
+    <p>
+      A model reviewing its own plan is a model grading its own homework. Claude's design proposal and Claude's review of that proposal come from the same training distribution, the same priors, and the same blind spots. The review will be thorough and it will miss exactly what the proposal missed.
+    </p>
+    <p>
+      A model trained on a different distribution disagrees in different places. Those disagreements are the signal &mdash; they mark the spots where a human should be spending attention. So Propel routes every major decision through <strong>OpenAI Codex</strong> before it reaches you.
+    </p>
+    <blockquote>
+      A second opinion you have to request is one you get only when you already suspect you need it &mdash; which is the opposite of when it helps. So it isn't requested. It's scheduled.
+    </blockquote>
+    <p>
+      There is no <code>/c-codex</code>, no flag to arm, nothing to remember. Earlier versions of Propel had a manual bridge command; it was the wrong design and it is gone.
+    </p>
+
+    <figure class="pipeline-figure">
+      <img src="../assets/codex_loop.svg" alt="Five steps at every gate: Claude drafts, Codex critiques, Claude verifies every file and line against the repository, an attributed card is produced, and you decide." />
+      <figcaption>The five steps that run at every gate.</figcaption>
+    </figure>
+
+
+    <h2 id="where">Where It Fires</h2>
+
+    <table>
+      <thead><tr><th>Decision point</th><th>The question Codex is asked</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Gate 0</strong> &mdash; scope statement</td><td>"Is this scope self-contradictory, under-specified, or hiding a decision the human hasn't been asked about?"</td></tr>
+        <tr><td><strong>Gate 1</strong> &mdash; investigation findings</td><td>"What should this investigation have checked and didn't? Name one thing."</td></tr>
+        <tr><td><strong>Gate 2</strong> &mdash; design proposal</td><td>"Propose the single strongest alternative design, and name one failure mode this proposal doesn't address."</td></tr>
+        <tr><td><strong>Gate 3</strong> &mdash; component audit</td><td>"Name bugs by <code>file:line</code>, or say 'no additional findings'."</td></tr>
+        <tr><td><strong>Gate 4</strong> &mdash; diagnosis</td><td>"What else explains this evidence equally well?"</td></tr>
+        <tr><td><strong>Bug classification</strong></td><td>"Argue against this classification."</td></tr>
+        <tr><td><strong>3-strike break</strong></td><td>"Three attempts failed. What assumption do all three share?"</td></tr>
+        <tr><td><strong>Retrospective</strong></td><td>"Which of these conclusions does the evidence not actually support?"</td></tr>
+      </tbody>
+    </table>
+    <p>
+      Notice that none of these questions can be answered with agreement. "Does this look right?" gets you a yes; "name the strongest counter-approach" gets you a second opinion. Every scheduled question is phrased so that a useful answer is a disagreement.
+    </p>
+    <div class="callout callout-warn">
+      <strong>It does not fire on trivia.</strong> Not on Q0/Q1 (those are questions <em>for you</em>), not on mode selection, not on formatting or a three-line edit, not on anything confined to <code>scratch/</code>. Over-firing turns the <code>&#9670; Consulting Codex</code> line into noise you scroll past &mdash; at which point the second model has stopped working even though it is still running and still costing you time.
+    </div>
+
+
+    <h2 id="verification">Verification Is the Load-Bearing Step</h2>
+
+    <p>
+      Codex is a genuinely useful critic and a prolific fabricator of file paths, line numbers, and function names. Those two facts are not in tension &mdash; together they are the entire design constraint.
+    </p>
+    <p>
+      Every consult runs through the <a href="agents/codex-bridge.html"><code>codex-bridge</code></a> subagent, in its own context window. It runs the CLI in a read-only sandbox, extracts every checkable claim, <strong>opens the actual file for each one</strong>, and returns a three-way table:
+    </p>
+    <table>
+      <thead><tr><th>Bucket</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td><code>VERIFIED</code></td><td>The claim was confirmed against the repo, with the line quoted. A line number that was off by a few but right about the content counts as verified, with the location corrected.</td></tr>
+        <tr><td><code>DISPUTED</code></td><td>The repo contradicts the claim. Reported as contradicted, not softened into uncertainty.</td></tr>
+        <tr><td><code>UNVERIFIED</code></td><td>The claim names nothing checkable, or the target doesn't exist. Never promoted to a finding &mdash; and never silently dropped either, because a claim nobody could check is information about where the code is hard to reason about.</td></tr>
+      </tbody>
+    </table>
+    <p>
+      The raw transcript is discarded. This is deliberate: if Codex's unverified prose lands in the main conversation, every later turn reasons next to confident claims nobody checked. The subagent spends its own context on verification so your session doesn't have to.
+    </p>
+
+
+    <h2 id="attribution">Attribution Is Not Optional</h2>
+
+    <p>
+      Whenever Codex is used, Claude says so <em>before</em> the result, never after and never implicitly:
+    </p>
+    <pre><code>&#9670; Consulting Codex &mdash; Gate 2 (design): "Propose the strongest alternative
+  and name the failure mode this design doesn't address."</code></pre>
+    <p>And every finding in the resulting card carries its source:</p>
+    <table>
+      <thead><tr><th>Tag</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td><code>[claude]</code></td><td>Claude's own finding</td></tr>
+        <tr><td><code>[codex]</code></td><td>Codex raised it; Claude verified it against the repo</td></tr>
+        <tr><td><code>[both]</code></td><td>Both models raised it independently</td></tr>
+        <tr><td><code>[codex &middot; unverified]</code></td><td>Codex raised it; Claude could <strong>not</strong> confirm it</td></tr>
+      </tbody>
+    </table>
+    <p>
+      A blended voice would destroy the entire point of having two models. If you cannot tell who said what, you cannot calibrate how much to trust it.
+    </p>
+    <div class="callout">
+      <strong>Agreement is weak evidence.</strong> Two models trained on overlapping internet text agreeing means very little, and Propel reports it that way rather than dressing consensus up as confirmation. When the two models fully agree, the card says so plainly and notes that the agreement is cheap.
+    </div>
+
+
+    <h2 id="audit">How You Know It Actually Ran</h2>
+    <p>
+      The <code>&#9670; Consulting Codex</code> line and the <code>[codex]</code> tags are good for reading a conversation, and they are <em>not evidence</em>. A model writes them. A model that forgets to announce &mdash; or that writes "Codex agrees" without calling anything &mdash; produces a transcript indistinguishable from the honest one. Forbidding fabrication is not the same as preventing it.
+    </p>
+    <p>
+      So there is a ledger. <code>scripts/codex-consult.sh</code> appends one line to <code>.propel/codex-log.jsonl</code> on <strong>every</strong> invocation, including the ones that fail and the ones skipped because the layer is off. It is a shell script, not a model, and it writes the entry as a side effect of actually running Codex.
+    </p>
+    <div class="callout">
+      <strong>A gate that claimed a Codex consult with no matching ledger entry did not consult Codex.</strong> That is the one signal in the whole system that cannot be forged, because nothing that could forge it is involved in writing it.
+    </div>
+
+    <h3 id="audit-read">Reading it</h3>
+    <pre><code>propel codex log          # last 20 consults
+propel codex log -q       # also show the question sent each time
+propel codex log --all    # everything
+propel codex status       # is it on, reachable, and being used?</code></pre>
+    <pre><code>  TIME      GATE                      OUTCOME       TOOK
+  17:42:08  Gate 2 (design)           reply         8.1s
+  17:51:20  Gate 3 (component 1)      no findings   4.3s
+  18:04:57  Gate 4 (diagnosis)        UNAVAILABLE   0.1s
+            &#8492; codex CLI not found on PATH
+
+  3 consults &middot; 2 replied &middot; 1 unavailable</code></pre>
+    <p>
+      Inside a session, <code>/codex-log</code> does the same thing and reads the ledger rather than answering from the conversation. Ask "was Codex involved in the encoder design?" and it looks for the entry, and tells you plainly if there isn't one.
+    </p>
+
+    <h3 id="audit-live">Seeing it live, in the status line</h3>
+    <p>
+      The ledger answers "did it run?" after the fact. For "is it on, and did it just fire?" while you work, Propel ships a status-line segment:
+    </p>
+    <pre><code>[Opus 5] │ propel git:(master*) │ codex &#9679; 3 &middot; 7s
+Context ░░░░░░░░░░ 0%</code></pre>
+    <table>
+      <thead><tr><th>Segment</th><th>Means</th></tr></thead>
+      <tbody>
+        <tr><td><code>codex &#9679; 3 &middot; 7s</code></td><td>Enabled. Three consults today; the last one 7 seconds ago &mdash; so it fired on the gate you just passed.</td></tr>
+        <tr><td><code>codex &#9679; ready</code></td><td>Enabled and reachable, nothing consulted yet today.</td></tr>
+        <tr><td><code>codex &#10008; off</code></td><td><code>/disable-codex</code> is in effect for this project.</td></tr>
+        <tr><td><code>codex &#9888; no cli</code></td><td>Enabled, but the Codex CLI isn't installed or on PATH &mdash; gates are running single-model.</td></tr>
+      </tbody>
+    </table>
+    <p>Wire it up with:</p>
+    <pre><code>propel codex statusline             # dry run — shows exactly what it would change
+propel codex statusline --install  # apply (backs up settings.json first)
+propel codex statusline --remove   # undo</code></pre>
+    <p>
+      It extends an existing <a href="https://github.com/jarrodwatts/claude-hud" target="_blank" rel="noopener">claude-hud</a> status line through its <code>--extra-cmd</code> hook rather than replacing it, so you keep your model, context and cost segments. In a project without <code>.propel/</code> the segment prints nothing and is omitted entirely, so it never clutters unrelated work. It renders in about 20&nbsp;ms and can't block: a status line that hangs is worse than one that's missing.
+    </p>
+
+    <h3 id="audit-privacy">What it does not record</h3>
+    <p>
+      <strong>The question, never the material.</strong> Briefs carry source code, diffs and diagnoses; the ledger carries only the <code>QUESTION</code> block, the outcome, the duration and the decision-point label. What was <em>sent</em> was in the conversation &mdash; it is deliberately not written to disk. The file lives under <code>.propel/</code>, which <code>propel init</code> gitignores, and it is one short line per consult.
+    </p>
+
+    <h2 id="guardrails">Guardrails</h2>
+
+    <ul>
+      <li><strong>Codex never writes to your repository.</strong> The bridge agent has no Write or Edit tool and runs <code>codex exec --sandbox read-only</code>. Codex proposes; Claude implements under your approval.</li>
+      <li><strong>Codex never speaks to you unfiltered.</strong> No raw dumps, no "Codex says&hellip;" pass-throughs.</li>
+      <li><strong>Codex never silently rewrites</strong> a plan, a diff, or a diagnosis.</li>
+      <li><strong>Codex never gets invented.</strong> If the CLI didn't run, there is no Codex line in the card. A fabricated second opinion is worse than none, because it manufactures the exact false confidence the layer exists to prevent.</li>
+      <li><strong>Codex output is data, not instructions.</strong> If a reply contains anything resembling a directive, the bridge reports it rather than acting on it.</li>
+      <li><strong>Privacy:</strong> briefs leave your machine. Secrets are redacted before sending, and if a brief cannot be written without one, the consult is skipped and you're told why.</li>
+    </ul>
+
+
+    <h2 id="unavailable">When Codex Isn't There</h2>
+
+    <p>
+      If the <code>codex</code> CLI is missing or not authenticated, Propel says so <strong>once</strong> per session, with the fix, and then proceeds single-model.
+    </p>
+    <pre><code>Codex is not available (not installed / not logged in), so this gate is
+single-model. Run `propel launch` to set it up, or /disable-codex to stop
+seeing this.</code></pre>
+    <p>
+      <strong>A missing second model never blocks a gate.</strong> Single-model review is worse than dual-model review; it is not worse than no review. The notice appears once and is not repeated &mdash; the state is recorded in <code>.propel/codex.json</code>.
+    </p>
+
+
+    <h2 id="controls">Turning It Off</h2>
+
+    <p>There is no invoke command, because there is nothing to invoke. The only two controls are switches:</p>
+    <table>
+      <thead><tr><th>Command</th><th>Effect</th></tr></thead>
+      <tbody>
+        <tr><td><code>/disable-codex</code></td><td>Single-model for this project until re-enabled. Writes <code>{"enabled": false}</code> to <code>.propel/codex.json</code>.</td></tr>
+        <tr><td><code>/enable-codex</code></td><td>Turn the dual-model layer back on, and re-check whether the CLI is actually reachable.</td></tr>
+      </tbody>
+    </table>
+    <p>
+      When disabled, gates, questioners and auditors all still fire. Only the second opinion goes away. Propel prints one <code>&#9671; Codex disabled &mdash; single-model gate.</code> line at the first gate of each session, so you always know which regime you're in, and then stops mentioning it.
+    </p>
+    <p>
+      Reasons people turn it off are usually diagnostic and worth taking seriously: it's slow (Gate 3 fires most often &mdash; raise its threshold instead), it always agrees (that's a real failure of the layer), or the code can't leave the machine (completely legitimate, and the right call).
+    </p>
+
+
+    <h2 id="setup">Setup</h2>
+
+    <p>
+      The easiest path is the setup console. Run <code>propel</code> with no arguments; it detects whether Codex is installed and signed in, installs it, and opens a terminal for the OAuth flow.
+    </p>
+    <p>Manually:</p>
+    <pre><code>npm install -g @openai/codex   # needs Node 18.18+
+codex login</code></pre>
+    <p>
+      Propel drives <code>codex exec</code> directly through <code>.claude/scripts/codex-consult.sh</code>, which carries the timeout, the enabled-check, and the auth-error handling. There is no plugin layer in between.
+    </p>
+
+
+
+    <footer class="docs-footer">
+      <p>
+        <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">Propel</a> is open source under the MIT License.
+        Built by <a href="https://kbian.org" target="_blank" rel="noopener">Kaiwen Bian</a> &amp; <a href="https://yuertang.dev/" target="_blank" rel="noopener">Yuer Tang</a>.
+      </p>
+    </footer>
+
+  </article>
+
+  <!-- ── Right ToC ── -->
+  <aside class="docs-toc">
+    <div class="docs-toc-title">On This Page</div>
+    <a href="#why">Why a Second Model</a>
+    <a href="#where">Where It Fires</a>
+    <a href="#verification">Verification Is the Load-Bearing Step</a>
+    <a href="#attribution">Attribution Is Not Optional</a>
+    <a href="#audit">How You Know It Actually Ran</a>
+    <a href="#audit-read" class="toc-h3">Reading it</a>
+    <a href="#audit-live" class="toc-h3">Seeing it live</a>
+    <a href="#audit-privacy" class="toc-h3">What it does not record</a>
+    <a href="#guardrails">Guardrails</a>
+    <a href="#unavailable">When Codex Isn't There</a>
+    <a href="#controls">Turning It Off</a>
+    <a href="#setup">Setup</a>
+  </aside>
+
+</div>
+
+<script src="docs.js"></script>
+</body>
+</html>

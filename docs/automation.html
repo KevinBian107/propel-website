@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Automatic Dispatch &mdash; Propel Documentation</title>
+  <meta name="description" content="What Propel does without being asked — mode selection, skill routing, subagent dispatch, auditor dispatch — and the hard line it will not cross." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&family=Noto+Sans+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="../assets/logo-c.svg" />
+  <link rel="stylesheet" href="docs.css" />
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header class="docs-header">
+  <button class="sidebar-toggle" aria-label="Toggle navigation">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+  </button>
+  <a href="../index.html" class="docs-header-logo">
+    <img src="../assets/logo-c.svg" alt="Propel" />
+    Propel
+    <span class="logo-tag">docs</span>
+  </a>
+  <nav class="docs-header-nav">
+    <a href="../index.html">Home</a>
+    <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">GitHub</a>
+  </nav>
+  <div class="docs-header-search">
+    <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"/></svg>
+    Search
+    <kbd>/</kbd>
+  </div>
+</header>
+
+<!-- ── Layout ── -->
+<div class="docs-layout">
+
+  <nav class="docs-sidebar" aria-label="Documentation navigation">
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Getting Started</div>
+      <a href="index.html" class="sidebar-link">Overview</a>
+      <a href="getting-started.html" class="sidebar-link">Installation &amp; Setup</a>
+      <a href="core-principles.html" class="sidebar-link">Core Principles</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">How It Works</div>
+      <a href="automation.html" class="sidebar-link active">Automatic Dispatch</a>
+      <a href="codex.html" class="sidebar-link">Codex &mdash; Two Models</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Pipeline</div>
+      <a href="pipeline/index.html" class="sidebar-link">Pipeline Overview</a>
+      <a href="pipeline/gates.html" class="sidebar-link">Gates &amp; Questioners</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Modes</div>
+      <a href="modes/index.html" class="sidebar-link">Mode System</a>
+      <a href="modes/researcher.html" class="sidebar-link sub">Researcher</a>
+      <a href="modes/engineer.html" class="sidebar-link sub">Engineer</a>
+      <a href="modes/debugger.html" class="sidebar-link sub">Debugger</a>
+      <a href="modes/trainer.html" class="sidebar-link sub">Trainer</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Skills</div>
+      <a href="skills/index.html" class="sidebar-link">Skills Overview</a>
+      <a href="skills/codex-consult.html" class="sidebar-link sub">Codex Consult</a>
+      <a href="skills/investigation.html" class="sidebar-link sub">Investigation</a>
+      <a href="skills/research-design.html" class="sidebar-link sub">Research Design</a>
+      <a href="skills/subagent-driven-research.html" class="sidebar-link sub">Implementation</a>
+      <a href="skills/systematic-debugging.html" class="sidebar-link sub">Systematic Debugging</a>
+      <a href="skills/research-validation.html" class="sidebar-link sub">Validation</a>
+      <a href="skills/deep-research.html" class="sidebar-link sub">Deep Research</a>
+      <a href="skills/think-deeply.html" class="sidebar-link sub">Think Deeply</a>
+      <a href="skills/context-hygiene.html" class="sidebar-link sub">Context Hygiene</a>
+      <a href="skills/trainer-mode.html" class="sidebar-link sub">Trainer Mode</a>
+      <a href="skills/retrospective.html" class="sidebar-link sub">Retrospective</a>
+      <a href="skills/monitor.html" class="sidebar-link sub">Monitor</a>
+      <a href="skills/c-review.html" class="sidebar-link sub">C-Review</a>
+      <a href="skills/frontend-design.html" class="sidebar-link sub">Frontend Design</a>
+      <a href="skills/other.html" class="sidebar-link sub">Other Skills</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Agents &mdash; Auditors</div>
+      <a href="agents/index.html" class="sidebar-link">Agents Overview</a>
+      <a href="agents/paper-alignment-auditor.html" class="sidebar-link sub">Paper Alignment</a>
+      <a href="agents/silent-bug-detector.html" class="sidebar-link sub">Silent Bug Detector</a>
+      <a href="agents/jax-logic-auditor.html" class="sidebar-link sub">JAX Logic Auditor</a>
+      <a href="agents/regression-guard.html" class="sidebar-link sub">Regression Guard</a>
+      <a href="agents/data-flow-tracer.html" class="sidebar-link sub">Data Flow Tracer</a>
+      <a href="agents/failure-mode-researcher.html" class="sidebar-link sub">Failure Mode Researcher</a>
+      <a href="agents/env-researcher.html" class="sidebar-link sub">Env Researcher</a>
+      <a href="agents/code-reviewer.html" class="sidebar-link sub">Code Reviewer</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Agents &mdash; Workers</div>
+      <a href="agents/codex-bridge.html" class="sidebar-link sub">Codex Bridge</a>
+      <a href="agents/investigator.html" class="sidebar-link sub">Investigator</a>
+      <a href="agents/implementer.html" class="sidebar-link sub">Implementer</a>
+      <a href="agents/spec-reviewer.html" class="sidebar-link sub">Spec Reviewer</a>
+      <a href="agents/trainer-operator.html" class="sidebar-link sub">Trainer Operator</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Reference</div>
+      <a href="customization.html" class="sidebar-link">Customization</a>
+      <a href="recommended-plugins.html" class="sidebar-link">Plugins</a>
+      <a href="pitfalls.html" class="sidebar-link">Common Pitfalls</a>
+    </div>
+
+  </nav>
+
+  <!-- ── Main Content ── -->
+  <article class="docs-content">
+
+    <div class="breadcrumbs">
+      <a href="index.html">Docs</a>
+      <span class="sep">&#8250;</span>
+      Automation
+    </div>
+
+    <h1 class="page-title">What Runs Without You Asking</h1>
+    <p class="page-subtitle">
+      You describe the problem. Propel picks the mode, routes the skills, dispatches the subagents, and tells you what it did. The only thing it will not do on your behalf is decide.
+    </p>
+
+    <h2 id="contract">The Automation Contract</h2>
+
+    <p>
+      A framework that requires you to remember <code>/investigation</code> before investigating, or a flag before wanting a second opinion, has moved the cognitive load it was supposed to remove. The trigger tables throughout these docs are instructions to the <em>agent</em>, not a menu for you.
+    </p>
+    <p>Three rules follow from that, and they are the ones that decay first in a long session:</p>
+    <ol>
+      <li><strong>Announce; don't ask permission for process.</strong> "Dispatching three investigators in parallel &mdash; call graph, config wiring, and the reward path." Not "would you like me to investigate?" Process belongs to the agent. <em>Decisions</em> belong to you, and those get a gate.</li>
+      <li><strong>Never wait to be told to dispatch.</strong> If the auto-dispatch table says an auditor applies, it runs. You find out from the narration, not from a permission prompt.</li>
+      <li><strong>If the agent catches itself writing "you can run X if you want"</strong> &mdash; it should stop, and run X.</li>
+    </ol>
+    <blockquote>
+      Everything mechanical is Propel's job. Everything that decides what the experiment <em>means</em> is yours. That line is the product &mdash; see <a href="index.html#start">Who Decides What</a>.
+    </blockquote>
+
+
+    <h2 id="triggers">What Fires, and When</h2>
+
+    <table>
+      <thead><tr><th>Trigger</th><th>What fires automatically</th></tr></thead>
+      <tbody>
+        <tr><td>Your first message</td><td>Mode selection, announced in one line with its reason</td></tr>
+        <tr><td>A new task</td><td>Gate 0 scoping questions, one at a time, then Q0 grounding</td></tr>
+        <tr><td>A question needing several files traced</td><td>Several <a href="agents/investigator.html"><code>investigator</code></a> subagents in parallel, one question each</td></tr>
+        <tr><td>Findings assembled</td><td>Codex consult, then Gate 1</td></tr>
+        <tr><td>Design complete</td><td>Codex consult, then Gate 2</td></tr>
+        <tr><td>An approved plan</td><td><a href="agents/implementer.html"><code>implementer</code></a>, then <a href="agents/spec-reviewer.html"><code>spec-reviewer</code></a>, one component at a time</td></tr>
+        <tr><td>Any source edit</td><td>A <code>PostToolUse</code> hook names the required auditors</td></tr>
+        <tr><td>An approved training command</td><td><a href="agents/trainer-operator.html"><code>trainer-operator</code></a>, in its own context</td></tr>
+        <tr><td>A root cause identified</td><td>Codex consult, then Gate 4</td></tr>
+        <tr><td>Three failed attempts</td><td>The 3-strike break: stop, and ask what assumption all three share</td></tr>
+        <tr><td>~15 substantive turns</td><td><code>context-hygiene</code> &mdash; update the README, suggest <code>/clear</code></td></tr>
+        <tr><td>~20 turns without one</td><td><code>retrospective</code> suggestion</td></tr>
+      </tbody>
+    </table>
+
+
+    <h2 id="hooks">Hooks: Mechanism, Not Memory</h2>
+
+    <p>
+      Propel used to say "auditors are auto-dispatched", which really meant "a skill file reminds the model to remember". Memory is not a mechanism, and it is the first thing to go thirty turns into a session.
+    </p>
+    <p>Four hooks make the important parts deterministic, executed by the harness rather than recalled by a model:</p>
+    <table>
+      <thead><tr><th>Hook</th><th>Event</th><th>What it does</th></tr></thead>
+      <tbody>
+        <tr><td><code>session-start.sh</code></td><td><code>SessionStart</code>, <code>PreCompact</code></td><td>Injects the core principles, the dual-model policy, the active mode, and any open investigations</td></tr>
+        <tr><td><code>working-memory.sh</code></td><td><code>SessionStart</code>, <code>PreCompact</code></td><td>Injects past experiments and architectures so nothing gets re-proposed</td></tr>
+        <tr><td><code>route.sh</code></td><td><code>UserPromptSubmit</code></td><td>Re-states the active mode, the Codex state, and six routing rules &mdash; every turn, so they don't decay as context fills</td></tr>
+        <tr><td><code>auditor-dispatch.sh</code></td><td><code>PostToolUse</code> on <code>Edit|Write|MultiEdit|NotebookEdit</code></td><td>Looks at the file just written and states which auditors are now required</td></tr>
+      </tbody>
+    </table>
+    <p>
+      The dispatch hook inspects the path and the file contents: <code>silent-bug-detector</code> for model / loss / data / training surfaces, <code>jax-logic-auditor</code> when JAX transforms are actually present in the file, <code>env-researcher</code> for environment wrappers, <code>regression-guard</code> for everything. It skips <code>scratch/</code>, <code>.claude/</code>, <code>sessions/</code> and non-source files entirely.
+    </p>
+    <div class="callout">
+      <strong>The hook states the requirement; the model still has to satisfy it.</strong> That's a meaningful improvement over pure memory, not a guarantee &mdash; which is why the auditors' findings appear in the Gate 3 card where you can see whether they actually ran.
+    </div>
+
+
+    <h2 id="subagents">Why Subagents, Not Just More Context</h2>
+
+    <p>
+      Every worker agent exists for the same reason: <strong>context is the scarce resource</strong>, and the work that consumes the most of it produces the least of the reasoning you actually need.
+    </p>
+    <ul>
+      <li>An <a href="agents/investigator.html">investigator</a> reads forty files and returns eight lines with <code>file:line</code> evidence. The session gets the eight lines.</li>
+      <li>A <a href="agents/trainer-operator.html">trainer-operator</a> absorbs thousands of near-identical log lines and returns a status card.</li>
+      <li>A <a href="agents/codex-bridge.html">codex-bridge</a> reads a long, confident, partly-wrong Codex reply, checks it against the repo, and returns only what survived.</li>
+    </ul>
+    <p>
+      The alternative &mdash; doing all of that in the main conversation &mdash; means that by the time you reach the design decision, the context is full of log tails and unverified claims, and the model is reasoning next to them. Hallucination risk grows with context. Spending someone else's context is the cheapest fix available.
+    </p>
+    <div class="callout callout-warn">
+      <strong>One question per investigator.</strong> A single agent with a broad brief ("understand the codebase") returns a shallow summary of everything and an answer to nothing &mdash; and burns the context the specific questions needed. Four narrow agents return four answers with evidence.
+    </div>
+
+
+    <h2 id="limits">What Never Automates</h2>
+
+    <p>
+      The list is short and it does not grow:
+    </p>
+    <ul>
+      <li><strong>Gate answers.</strong> Every gate question is disjunctive &mdash; "A or B, and here's what each costs" &mdash; and the pipeline does not advance until you answer. Never "shall I proceed?", which invites rubber-stamping.</li>
+      <li><strong>Q0 and Q1.</strong> These ask for reference implementations and binding implementation details. They are questions <em>for you</em>; a model answering them defeats their purpose. Codex is not consulted at either.</li>
+      <li><strong>Destructive or irreversible actions.</strong> Always explicit approval, in every mode.</li>
+      <li><strong>Anything that changes what an experiment measures.</strong> The <code>trainer-operator</code> boundary is the clearest case: it may fix a path or lower a batch size inside a range you approved; it may not touch the loss, the architecture, or the data pipeline. A run that dies in 30 seconds costs a restart. A run that trains for 18 hours on silently altered semantics costs the experiment &mdash; and produces a number someone might believe.</li>
+    </ul>
+
+
+    <h2 id="override">Overriding It</h2>
+
+    <table>
+      <thead><tr><th>Command</th><th>Effect</th></tr></thead>
+      <tbody>
+        <tr><td><code>/switch &lt;mode&gt;</code></td><td>Override the automatically selected mode. Marks it <code>selected_by: user</code>, which makes Propel ask before auto-switching away from it.</td></tr>
+        <tr><td><code>/disable-codex</code></td><td>Single-model gates for this project.</td></tr>
+        <tr><td><code>/intro</code></td><td>The full tour, including the four-mode menu, if you'd rather choose explicitly.</td></tr>
+        <tr><td><code>/primer</code></td><td>Reload project context after a <code>/clear</code>.</td></tr>
+      </tbody>
+    </table>
+    <p>
+      If you correct an auto-selected mode, Propel says so in one line &mdash; that's signal about where the inference went wrong, and it's worth seeing.
+    </p>
+
+
+
+    <footer class="docs-footer">
+      <p>
+        <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">Propel</a> is open source under the MIT License.
+        Built by <a href="https://kbian.org" target="_blank" rel="noopener">Kaiwen Bian</a> &amp; <a href="https://yuertang.dev/" target="_blank" rel="noopener">Yuer Tang</a>.
+      </p>
+    </footer>
+
+  </article>
+
+  <!-- ── Right ToC ── -->
+  <aside class="docs-toc">
+    <div class="docs-toc-title">On This Page</div>
+    <a href="#contract">The Automation Contract</a>
+    <a href="#triggers">What Fires, and When</a>
+    <a href="#hooks">Hooks: Mechanism, Not Memory</a>
+    <a href="#subagents">Why Subagents, Not Just More Context</a>
+    <a href="#limits">What Never Automates</a>
+    <a href="#override">Overriding It</a>
+  </aside>
+
+</div>
+
+<script src="docs.js"></script>
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trainer Operator &mdash; Propel Documentation</title>
+  <meta name="description" content="Trainer Operator launches and babysits a training run in its own context, fixing runtime problems within an approved range and escalating anything that changes what the run measures." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&family=Noto+Sans+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="../../assets/logo-c.svg" />
+  <link rel="stylesheet" href="../docs.css" />
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header class="docs-header">
+  <button class="sidebar-toggle" aria-label="Toggle navigation">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+  </button>
+  <a href="../../index.html" class="docs-header-logo">
+    <img src="../../assets/logo-c.svg" alt="Propel" />
+    Propel
+    <span class="logo-tag">docs</span>
+  </a>
+  <nav class="docs-header-nav">
+    <a href="../../index.html">Home</a>
+    <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">GitHub</a>
+  </nav>
+  <div class="docs-header-search">
+    <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"/></svg>
+    Search
+    <kbd>/</kbd>
+  </div>
+</header>
+
+<!-- ── Layout ── -->
+<div class="docs-layout">
+
+  <nav class="docs-sidebar" aria-label="Documentation navigation">
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Getting Started</div>
+      <a href="../index.html" class="sidebar-link">Overview</a>
+      <a href="../getting-started.html" class="sidebar-link">Installation &amp; Setup</a>
+      <a href="../core-principles.html" class="sidebar-link">Core Principles</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">How It Works</div>
+      <a href="../automation.html" class="sidebar-link">Automatic Dispatch</a>
+      <a href="../codex.html" class="sidebar-link">Codex &mdash; Two Models</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Pipeline</div>
+      <a href="../pipeline/index.html" class="sidebar-link">Pipeline Overview</a>
+      <a href="../pipeline/gates.html" class="sidebar-link">Gates &amp; Questioners</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Modes</div>
+      <a href="../modes/index.html" class="sidebar-link">Mode System</a>
+      <a href="../modes/researcher.html" class="sidebar-link sub">Researcher</a>
+      <a href="../modes/engineer.html" class="sidebar-link sub">Engineer</a>
+      <a href="../modes/debugger.html" class="sidebar-link sub">Debugger</a>
+      <a href="../modes/trainer.html" class="sidebar-link sub">Trainer</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Skills</div>
+      <a href="../skills/index.html" class="sidebar-link">Skills Overview</a>
+      <a href="../skills/codex-consult.html" class="sidebar-link sub">Codex Consult</a>
+      <a href="../skills/investigation.html" class="sidebar-link sub">Investigation</a>
+      <a href="../skills/research-design.html" class="sidebar-link sub">Research Design</a>
+      <a href="../skills/subagent-driven-research.html" class="sidebar-link sub">Implementation</a>
+      <a href="../skills/systematic-debugging.html" class="sidebar-link sub">Systematic Debugging</a>
+      <a href="../skills/research-validation.html" class="sidebar-link sub">Validation</a>
+      <a href="../skills/deep-research.html" class="sidebar-link sub">Deep Research</a>
+      <a href="../skills/think-deeply.html" class="sidebar-link sub">Think Deeply</a>
+      <a href="../skills/context-hygiene.html" class="sidebar-link sub">Context Hygiene</a>
+      <a href="../skills/trainer-mode.html" class="sidebar-link sub">Trainer Mode</a>
+      <a href="../skills/retrospective.html" class="sidebar-link sub">Retrospective</a>
+      <a href="../skills/monitor.html" class="sidebar-link sub">Monitor</a>
+      <a href="../skills/c-review.html" class="sidebar-link sub">C-Review</a>
+      <a href="../skills/frontend-design.html" class="sidebar-link sub">Frontend Design</a>
+      <a href="../skills/other.html" class="sidebar-link sub">Other Skills</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Agents &mdash; Auditors</div>
+      <a href="../agents/index.html" class="sidebar-link">Agents Overview</a>
+      <a href="../agents/paper-alignment-auditor.html" class="sidebar-link sub">Paper Alignment</a>
+      <a href="../agents/silent-bug-detector.html" class="sidebar-link sub">Silent Bug Detector</a>
+      <a href="../agents/jax-logic-auditor.html" class="sidebar-link sub">JAX Logic Auditor</a>
+      <a href="../agents/regression-guard.html" class="sidebar-link sub">Regression Guard</a>
+      <a href="../agents/data-flow-tracer.html" class="sidebar-link sub">Data Flow Tracer</a>
+      <a href="../agents/failure-mode-researcher.html" class="sidebar-link sub">Failure Mode Researcher</a>
+      <a href="../agents/env-researcher.html" class="sidebar-link sub">Env Researcher</a>
+      <a href="../agents/code-reviewer.html" class="sidebar-link sub">Code Reviewer</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Agents &mdash; Workers</div>
+      <a href="../agents/codex-bridge.html" class="sidebar-link sub">Codex Bridge</a>
+      <a href="../agents/investigator.html" class="sidebar-link sub">Investigator</a>
+      <a href="../agents/implementer.html" class="sidebar-link sub">Implementer</a>
+      <a href="../agents/spec-reviewer.html" class="sidebar-link sub">Spec Reviewer</a>
+      <a href="../agents/trainer-operator.html" class="sidebar-link sub active">Trainer Operator</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Reference</div>
+      <a href="../customization.html" class="sidebar-link">Customization</a>
+      <a href="../recommended-plugins.html" class="sidebar-link">Plugins</a>
+      <a href="../pitfalls.html" class="sidebar-link">Common Pitfalls</a>
+    </div>
+
+  </nav>
+
+  <!-- ── Main Content ── -->
+  <article class="docs-content">
+
+    <div class="breadcrumbs">
+      <a href="../index.html">Docs</a>
+      <span class="sep">&#8250;</span>
+      <a href="index.html">Agents</a>
+      <span class="sep">&#8250;</span>
+      Trainer Operator
+    </div>
+
+    <h1 class="page-title">Trainer Operator</h1>
+    <p class="page-subtitle">
+      Launches an approved training run, keeps it alive, and keeps thousands of log lines out of your session. It may fix runtime problems. It may not fix logic problems.
+    </p>
+
+    <h2 id="overview">Overview</h2>
+
+    <p>
+      Monitoring is context-toxic. Tailing a training log into the main conversation fills it with thousands of near-identical lines and pushes out the design decisions that actually matter. This agent absorbs that; your session gets a status card.
+    </p>
+    <table>
+      <thead><tr><th>Property</th><th>Details</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Tools</strong></td><td>Read, Edit, Bash, Grep, Glob</td></tr>
+        <tr><td><strong>Auto-Dispatch</strong></td><td>Yes &mdash; <strong>after</strong> a human approves the exact command, by <a href="../skills/trainer-mode.html">trainer-mode</a></td></tr>
+        <tr><td><strong>Decides what to train</strong></td><td>Never</td></tr>
+      </tbody>
+    </table>
+
+
+    <h2 id="boundary">The Scope Boundary</h2>
+
+    <p>
+      It may fix <strong>runtime</strong> problems. It may not fix <strong>logic</strong> problems. The line isn't about difficulty &mdash; it's about who owns the decision.
+    </p>
+    <table>
+      <thead><tr><th>It may fix</th><th>It must escalate</th></tr></thead>
+      <tbody>
+        <tr><td>OOM &rarr; lower batch size, <em>only within a pre-approved range</em></td><td>Model architecture, layer sizes, capacity</td></tr>
+        <tr><td>Missing directory, wrong path, bad checkpoint dir</td><td>Loss terms, weights, schedules</td></tr>
+        <tr><td><code>ImportError</code>, missing dependency, version pin</td><td>Data pipeline semantics, augmentation, normalization</td></tr>
+        <tr><td>Config typo &mdash; a key that doesn't exist, a string where an int belongs</td><td>Hyperparameters that change what the experiment measures</td></tr>
+        <tr><td>Device placement, visible-device masking, workers</td><td>Anything derived from the paper</td></tr>
+      </tbody>
+    </table>
+    <div class="callout callout-warn">
+      <strong>The test:</strong> would this change alter what the experiment measures? If yes &mdash; or if it can't tell &mdash; it stops and escalates. A run that dies in 30 seconds costs a restart. A run that trains for 18 hours on silently altered semantics costs the experiment, and worse, produces a number someone might believe.
+    </div>
+    <p>
+      Escalation always names the boundary explicitly: <em>"This is a logic change, not a runtime error. It needs <code>/switch engineer</code>. Here is the error and what I believe it points at."</em>
+    </p>
+
+
+    <h2 id="procedure">Procedure</h2>
+
+    <ol>
+      <li><strong>Confirm the command</strong> &mdash; the exact approved string. Any permitted adjustment range is its entire discretion; it does not widen it.</li>
+      <li><strong>Pre-flight.</strong> Output dir writable? Disk space? GPUs visible and free? Config parses? Entry point imports? Thirty seconds here beats a failure at minute forty.</li>
+      <li><strong>Launch detached</strong> in <code>screen</code> (or <code>tmux</code>), recording the session name and log path.</li>
+      <li><strong>Watch</strong> at widening intervals &mdash; first loss magnitude, NaN/Inf, the failure signatures above, throughput collapse, and silence. A process that stopped writing is as informative as one that crashed.</li>
+      <li><strong>Fix or escalate</strong>, per the boundary. Every adjustment is reported with whether it was inside the approved discretion.</li>
+      <li><strong>Three strikes.</strong> Same failure three times &rarr; stop fixing, report a hard blocker with everything tried. Three failures of one approach means the hypothesis about the cause is wrong, and the fourth variation won't find it.</li>
+    </ol>
+
+
+    <h2 id="output">Output</h2>
+
+    <pre><code>TRAINING STATUS — &lt;run name&gt;
+
+COMMAND / SESSION / LOG / STATE
+PRE-FLIGHT           each check with its actual value
+PROGRESS             step, loss, throughput — and whether the
+                     first loss is plausible for this setup
+RUNTIME FIXES        what, why, and whether within discretion
+ESCALATED            error → what it points at → why it's logic
+WATCH NEXT           the specific metric and value that means trouble</code></pre>
+    <p>
+      It never reports a metric it didn't read from the log. No estimates, no extrapolations, no "should be around".
+    </p>
+
+
+
+    <footer class="docs-footer">
+      <p>
+        <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">Propel</a> is open source under the MIT License.
+        Built by <a href="https://kbian.org" target="_blank" rel="noopener">Kaiwen Bian</a> &amp; <a href="https://yuertang.dev/" target="_blank" rel="noopener">Yuer Tang</a>.
+      </p>
+    </footer>
+
+  </article>
+
+  <!-- ── Right ToC ── -->
+  <aside class="docs-toc">
+    <div class="docs-toc-title">On This Page</div>
+    <a href="#overview">Overview</a>
+    <a href="#boundary">The Scope Boundary</a>
+    <a href="#procedure">Procedure</a>
+    <a href="#output">Output</a>
+  </aside>
+
+</div>
+
+<script src="../docs.js"></script>
+</body>
+</html>
