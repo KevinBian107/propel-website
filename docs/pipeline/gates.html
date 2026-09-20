@@ -39,7 +39,6 @@
 
   <!-- ── Left Sidebar ── -->
   <nav class="docs-sidebar" aria-label="Documentation navigation">
-
     <div class="sidebar-section">
       <div class="sidebar-heading">Getting Started</div>
       <a href="../index.html" class="sidebar-link">Overview</a>
@@ -50,9 +49,17 @@
     <div class="sidebar-divider"></div>
 
     <div class="sidebar-section">
+      <div class="sidebar-heading">How It Works</div>
+      <a href="../automation.html" class="sidebar-link">Automatic Dispatch</a>
+      <a href="../codex.html" class="sidebar-link">Codex &mdash; Two Models</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
       <div class="sidebar-heading">Pipeline</div>
-      <a href="index.html" class="sidebar-link">Pipeline Overview</a>
-      <a href="gates.html" class="sidebar-link active">Gates &amp; Questioners</a>
+      <a href="../pipeline/index.html" class="sidebar-link">Pipeline Overview</a>
+      <a href="../pipeline/gates.html" class="sidebar-link active">Gates &amp; Questioners</a>
     </div>
 
     <div class="sidebar-divider"></div>
@@ -71,6 +78,7 @@
     <div class="sidebar-section">
       <div class="sidebar-heading">Skills</div>
       <a href="../skills/index.html" class="sidebar-link">Skills Overview</a>
+      <a href="../skills/codex-consult.html" class="sidebar-link sub">Codex Consult</a>
       <a href="../skills/investigation.html" class="sidebar-link sub">Investigation</a>
       <a href="../skills/research-design.html" class="sidebar-link sub">Research Design</a>
       <a href="../skills/subagent-driven-research.html" class="sidebar-link sub">Implementation</a>
@@ -82,6 +90,7 @@
       <a href="../skills/trainer-mode.html" class="sidebar-link sub">Trainer Mode</a>
       <a href="../skills/retrospective.html" class="sidebar-link sub">Retrospective</a>
       <a href="../skills/monitor.html" class="sidebar-link sub">Monitor</a>
+      <a href="../skills/c-review.html" class="sidebar-link sub">C-Review</a>
       <a href="../skills/frontend-design.html" class="sidebar-link sub">Frontend Design</a>
       <a href="../skills/other.html" class="sidebar-link sub">Other Skills</a>
     </div>
@@ -89,16 +98,7 @@
     <div class="sidebar-divider"></div>
 
     <div class="sidebar-section">
-      <div class="sidebar-heading">Plugin Skills</div>
-      <a href="../skills/c-codex.html" class="sidebar-link sub">C-Codex</a>
-      <a href="../skills/codex-lead.html" class="sidebar-link sub">Codex-Lead</a>
-      <a href="../skills/c-review.html" class="sidebar-link sub">C-Review</a>
-    </div>
-
-    <div class="sidebar-divider"></div>
-
-    <div class="sidebar-section">
-      <div class="sidebar-heading">Agents</div>
+      <div class="sidebar-heading">Agents &mdash; Auditors</div>
       <a href="../agents/index.html" class="sidebar-link">Agents Overview</a>
       <a href="../agents/paper-alignment-auditor.html" class="sidebar-link sub">Paper Alignment</a>
       <a href="../agents/silent-bug-detector.html" class="sidebar-link sub">Silent Bug Detector</a>
@@ -113,9 +113,20 @@
     <div class="sidebar-divider"></div>
 
     <div class="sidebar-section">
+      <div class="sidebar-heading">Agents &mdash; Workers</div>
+      <a href="../agents/codex-bridge.html" class="sidebar-link sub">Codex Bridge</a>
+      <a href="../agents/investigator.html" class="sidebar-link sub">Investigator</a>
+      <a href="../agents/implementer.html" class="sidebar-link sub">Implementer</a>
+      <a href="../agents/spec-reviewer.html" class="sidebar-link sub">Spec Reviewer</a>
+      <a href="../agents/trainer-operator.html" class="sidebar-link sub">Trainer Operator</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
       <div class="sidebar-heading">Reference</div>
       <a href="../customization.html" class="sidebar-link">Customization</a>
-      <a href="../recommended-plugins.html" class="sidebar-link">Recommended Plugins</a>
+      <a href="../recommended-plugins.html" class="sidebar-link">Plugins</a>
       <a href="../pitfalls.html" class="sidebar-link">Common Pitfalls</a>
     </div>
 
@@ -167,6 +178,22 @@
     </div>
 
     <!-- ── Gate 0 ── -->
+    <h2 id="codex-at-gates">Every Gate Runs Two Models</h2>
+    <p>
+      Before any gate below is presented, the <a href="../skills/codex-consult.html"><code>codex-consult</code></a> skill fires automatically: Claude writes a short brief, dispatches the <a href="../agents/codex-bridge.html"><code>codex-bridge</code></a> subagent, verifies every <code>file:line</code> Codex cites against the actual repository, and folds the result into the gate card with <code>[claude]</code> / <code>[codex]</code> / <code>[both]</code> / <code>[codex &middot; unverified]</code> attribution.
+    </p>
+    <pre><code>&#9670; Consulting Codex &mdash; Gate 2 (design): "Propose the strongest
+  alternative and name the failure mode this design doesn't address."</code></pre>
+    <p>
+      You never ask for this and you cannot forget it. Notice that the questions sent at each gate are chosen so a <em>useful</em> answer is a disagreement &mdash; "name the strongest counter-approach", not "does this look right?".
+    </p>
+    <div class="callout">
+      <strong>Codex does not get a vote.</strong> The card is input to the gate, not a replacement for it. Codex agreeing with Claude is not approval &mdash; and because two models trained on overlapping data agreeing is weak evidence, Propel reports consensus as weak rather than dressing it up as confirmation. You still answer the gate question. See <a href="../codex.html">Codex &mdash; Two Models</a>.
+    </div>
+    <p>
+      <strong>Q0 and Q1 are the exception.</strong> No Codex consult fires at either, because those are questions <em>for you</em> &mdash; reference implementations and binding implementation details. A model answering them defeats their entire purpose.
+    </p>
+
     <h2 id="gate-0">Gate 0: Intake</h2>
     <p>
       <strong>When:</strong> The user describes what they want to build or fix.<br />
@@ -636,6 +663,7 @@ combined approach an intentional simplification?</code></pre>
   <aside class="docs-toc">
     <div class="docs-toc-title">On This Page</div>
     <a href="#overview">Overview</a>
+    <a href="#codex-at-gates">Every Gate Runs Two Models</a>
     <a href="#gate-0">Gate 0: Intake</a>
     <a href="#gate-0-format" class="toc-h3">Format</a>
     <a href="#gate-0-question-types" class="toc-h3">Question Types</a>

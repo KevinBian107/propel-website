@@ -39,12 +39,19 @@
 
   <!-- ── Left Sidebar ── -->
   <nav class="docs-sidebar" aria-label="Documentation navigation">
-
     <div class="sidebar-section">
       <div class="sidebar-heading">Getting Started</div>
       <a href="index.html" class="sidebar-link active">Overview</a>
       <a href="getting-started.html" class="sidebar-link">Installation &amp; Setup</a>
       <a href="core-principles.html" class="sidebar-link">Core Principles</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">How It Works</div>
+      <a href="automation.html" class="sidebar-link">Automatic Dispatch</a>
+      <a href="codex.html" class="sidebar-link">Codex &mdash; Two Models</a>
     </div>
 
     <div class="sidebar-divider"></div>
@@ -71,6 +78,7 @@
     <div class="sidebar-section">
       <div class="sidebar-heading">Skills</div>
       <a href="skills/index.html" class="sidebar-link">Skills Overview</a>
+      <a href="skills/codex-consult.html" class="sidebar-link sub">Codex Consult</a>
       <a href="skills/investigation.html" class="sidebar-link sub">Investigation</a>
       <a href="skills/research-design.html" class="sidebar-link sub">Research Design</a>
       <a href="skills/subagent-driven-research.html" class="sidebar-link sub">Implementation</a>
@@ -82,6 +90,7 @@
       <a href="skills/trainer-mode.html" class="sidebar-link sub">Trainer Mode</a>
       <a href="skills/retrospective.html" class="sidebar-link sub">Retrospective</a>
       <a href="skills/monitor.html" class="sidebar-link sub">Monitor</a>
+      <a href="skills/c-review.html" class="sidebar-link sub">C-Review</a>
       <a href="skills/frontend-design.html" class="sidebar-link sub">Frontend Design</a>
       <a href="skills/other.html" class="sidebar-link sub">Other Skills</a>
     </div>
@@ -89,16 +98,7 @@
     <div class="sidebar-divider"></div>
 
     <div class="sidebar-section">
-      <div class="sidebar-heading">Plugin Skills</div>
-      <a href="skills/c-codex.html" class="sidebar-link sub">C-Codex</a>
-      <a href="skills/codex-lead.html" class="sidebar-link sub">Codex-Lead</a>
-      <a href="skills/c-review.html" class="sidebar-link sub">C-Review</a>
-    </div>
-
-    <div class="sidebar-divider"></div>
-
-    <div class="sidebar-section">
-      <div class="sidebar-heading">Agents</div>
+      <div class="sidebar-heading">Agents &mdash; Auditors</div>
       <a href="agents/index.html" class="sidebar-link">Agents Overview</a>
       <a href="agents/paper-alignment-auditor.html" class="sidebar-link sub">Paper Alignment</a>
       <a href="agents/silent-bug-detector.html" class="sidebar-link sub">Silent Bug Detector</a>
@@ -113,9 +113,20 @@
     <div class="sidebar-divider"></div>
 
     <div class="sidebar-section">
+      <div class="sidebar-heading">Agents &mdash; Workers</div>
+      <a href="agents/codex-bridge.html" class="sidebar-link sub">Codex Bridge</a>
+      <a href="agents/investigator.html" class="sidebar-link sub">Investigator</a>
+      <a href="agents/implementer.html" class="sidebar-link sub">Implementer</a>
+      <a href="agents/spec-reviewer.html" class="sidebar-link sub">Spec Reviewer</a>
+      <a href="agents/trainer-operator.html" class="sidebar-link sub">Trainer Operator</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
       <div class="sidebar-heading">Reference</div>
       <a href="customization.html" class="sidebar-link">Customization</a>
-      <a href="recommended-plugins.html" class="sidebar-link">Recommended Plugins</a>
+      <a href="recommended-plugins.html" class="sidebar-link">Plugins</a>
       <a href="pitfalls.html" class="sidebar-link">Common Pitfalls</a>
     </div>
 
@@ -128,7 +139,7 @@
     <div class="landing-hero">
       <img src="../assets/logo-c.svg" alt="Propel" class="logo-large" />
       <h1>Propel Documentation</h1>
-      <p>A research coding assistant for Claude Code, not an autonomous scientist. Structured constraints turn unconstrained LLM output into precise, paper-aligned research code.</p>
+      <p><strong>Not an autonomous agent.</strong> Propel automates the tedious half of research engineering and stops at every decision that is yours. You decide; the machines execute.</p>
     </div>
 
     <!-- Getting Started -->
@@ -143,6 +154,21 @@
       <a href="core-principles.html" class="doc-card">
         <h3>Core Principles</h3>
         <p>The five non-negotiable principles injected into every session &mdash; the mindset beneath all mechanisms.</p>
+      </a>
+    </div>
+
+    <!-- How It Works -->
+    <h2 id="how">How It Works</h2>
+    <p class="section-intro">The two things that changed most recently: almost everything now dispatches itself, and every decision gets a second model before it reaches you.</p>
+
+    <div class="cards-grid">
+      <a href="automation.html" class="doc-card">
+        <h3>Automatic Dispatch</h3>
+        <p>Mode selection, skill routing, subagent and auditor dispatch &mdash; what fires without you asking, and the line it will not cross.</p>
+      </a>
+      <a href="codex.html" class="doc-card">
+        <h3>Codex &mdash; Two Models</h3>
+        <p>A second model critiques every design, diff and diagnosis. Every claim is verified against your repo. No command to invoke.</p>
       </a>
     </div>
 
@@ -186,7 +212,7 @@
 
     <!-- Skills -->
     <h2 id="skills">Skills</h2>
-    <p class="section-intro">17 specialized skills organized by workflow phase. Each activates on specific triggers and guides the agent through structured processes.</p>
+    <p class="section-intro">20 specialized skills organized by workflow phase. They activate on intent, not on magic phrases &mdash; describe the problem and the right one runs.</p>
 
     <div class="cards-grid">
       <a href="skills/investigation.html" class="doc-card">
@@ -201,15 +227,19 @@
         <h3>Systematic Debugging</h3>
         <p>Diagnosis-first methodology with 3-strike limit. Never apply a fix without presenting the root cause.</p>
       </a>
+      <a href="skills/codex-consult.html" class="doc-card">
+        <h3>Codex Consult</h3>
+        <p>The automatic dual-model layer: how the brief is written, how claims are verified, and what the attributed card looks like.</p>
+      </a>
       <a href="skills/index.html" class="doc-card">
         <h3>All Skills &rarr;</h3>
-        <p>Complete reference of all 17 skills: triggers, active modes, and detailed workflow descriptions.</p>
+        <p>Complete reference of all 20 skills: triggers, active modes, and detailed workflow descriptions.</p>
       </a>
     </div>
 
     <!-- Agents -->
-    <h2 id="agents">Agents (Auditors)</h2>
-    <p class="section-intro">Domain-specific auditors that auto-dispatch after code changes. They run as subagents with separate context windows and read-only access.</p>
+    <h2 id="agents">Agents</h2>
+    <p class="section-intro">Thirteen subagents, dispatched for you. Eight read-only auditors that check the work, and five workers that do it &mdash; each in its own context window, so the session keeps the conclusions rather than the file dumps.</p>
 
     <div class="cards-grid">
       <a href="agents/silent-bug-detector.html" class="doc-card">
@@ -224,9 +254,13 @@
         <h3>JAX Logic Auditor</h3>
         <p>Traces tensor shapes through JAX transforms (vmap, jit, scan) to catch shape mismatches.</p>
       </a>
+      <a href="agents/codex-bridge.html" class="doc-card">
+        <h3>Codex Bridge</h3>
+        <p>Runs the Codex consult in an isolated context and returns only what survived verification against your actual code.</p>
+      </a>
       <a href="agents/index.html" class="doc-card">
         <h3>All Agents &rarr;</h3>
-        <p>Complete reference of all 8 auditors: dispatch rules, auto-trigger conditions, and output formats.</p>
+        <p>Complete reference of all 13 agents: dispatch rules, auto-trigger conditions, and output formats.</p>
       </a>
     </div>
 
@@ -239,8 +273,8 @@
         <p>Add project-specific agents, skills, and commands. Generate a project profile for convention detection.</p>
       </a>
       <a href="recommended-plugins.html" class="doc-card">
-        <h3>Recommended Plugins</h3>
-        <p>Third-party plugins Propel pairs with &mdash; codex-plugin-cc, the Anthropic code-review plugin, and claude-hud.</p>
+        <h3>Plugins</h3>
+        <p>What Propel uses when present &mdash; the Codex CLI, claude-hud, and Anthropic's code-review. Offered by the setup console; never installed behind your back.</p>
       </a>
       <a href="pitfalls.html" class="doc-card">
         <h3>Common Pitfalls</h3>
