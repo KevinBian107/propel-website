@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Propel &mdash; A Research Coding Assistant for Claude Code</title>
-  <meta name="description" content="Propel is a research coding assistant for Claude Code, not an autonomous scientist. Human-in-the-loop gates, domain-specific auditors, and investigation-first methodology turn unconstrained LLM output into precise, paper-aligned research code while every research decision stays with you." />
+  <meta name="description" content="Propel is not an autonomous agent. It automates the tedious half of research engineering — tracing code, checking implementations against the paper, hunting silent bugs — and stops at every decision that is yours. Two models argue; you decide." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&family=Noto+Sans+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -18,17 +18,14 @@
   <div class="toc">
     <h4>Contents</h4>
     <a href="#overview" data-toc-link>Overview</a>
-    <a href="#core" data-toc-link>Core Principles</a>
-    <a href="#vision" data-toc-link>Vision</a>
+    <a href="#decisions" data-toc-link>Who Decides What</a>
     <a href="#pipeline" data-toc-link>Pipeline</a>
+    <a href="#codex" data-toc-link>Two Models</a>
     <a href="#modes" data-toc-link>Four Modes</a>
+    <a href="#automation" data-toc-link>Automation</a>
     <a href="#demos" data-toc-link>Demos</a>
     <a href="#scenarios" data-toc-link>Live Scenarios</a>
-    <a href="#features" data-toc-link>Key Features</a>
-    <a href="#skills" data-toc-link>Skills</a>
-    <a href="#agents" data-toc-link>Agents</a>
     <a href="#installation" data-toc-link>Get Started</a>
-    <a href="#plugins" data-toc-link>Recommended Plugins</a>
     <a href="#acknowledgments" data-toc-link>Acknowledgments</a>
   </div>
 </nav>
@@ -40,10 +37,11 @@
     <img src="assets/logo-c.svg" alt="Propel Logo" class="hero-logo" />
     <h1>Propel</h1>
     <p class="subtitle">
-      A research coding assistant for Claude Code
+      Not an autonomous agent. A research coding assistant.
       <span class="subtitle-detail">
-        Not an autonomous scientist. Structured constraints turn unconstrained LLM output into precise, paper-aligned research code,
-        while every research decision stays with you.
+        Propel automates the tedious half of research engineering &mdash; tracing code, checking implementations against the paper,
+        hunting silent bugs, remembering what already failed. It stops at every decision that is actually yours.
+        <strong>You decide; the machines execute.</strong>
       </span>
     </p>
     <p class="author">
@@ -76,65 +74,34 @@
   <section id="overview" class="fade-in">
     <h2>Overview</h2>
     <p>
-      Propel is a <strong>research coding assistant</strong>. It is not an autonomous scientist: it does not choose your research question, run experiments unattended, or decide what counts as a result. You bring the question, the paper, and the judgment. Propel makes Claude Code a careful collaborator on the code that tests them.
+      <strong>Propel is not an autonomous agent, and it is not trying to become one.</strong> It does not choose your research question, run experiments unattended, or decide what counts as a result. It automates the dirty work &mdash; reading the codebase, tracing data flow, checking every equation against the paper, hunting the bugs that don't crash, remembering what failed last month &mdash; and then it stops and asks you the questions only you can answer.
     </p>
     <p>
-      That split matters because an unconstrained LLM writes the <em>mean of its training data</em>. Ask it to "add a diffusion policy head" and you get a blend of every diffusion codebase it has seen: a cosine noise schedule from one repo, &epsilon;-prediction from another, an EMA decay from a third. The code runs and may even train, but it is not the variant your paper describes, and the choices that decide whether your experiment means anything were made without asking you.
+      That split is deliberate, because it tracks what the technology is actually good at. Machines are excellent at the mechanical, repetitive, easily-botched work that researchers do badly precisely because it is boring. They are bad at judgment: what question is worth asking, which variant of the method matters, what threshold makes a result mean something, whether to believe a number. Automation that crosses that line doesn't save you work &mdash; it makes decisions you never saw, in code you will publish.
     </p>
     <p>
-      Propel adds structure instead of cleverer prompts. Claude has to investigate before it writes code, stop at five gates to ask you design questions, and send every change past auditors that compare it against the paper and look for silent bugs. You make the calls; Claude does the reading, tracing, and checking that make those calls well-informed. This matters most in research code, where mistakes are quiet: a broadcasting bug in a loss function doesn't crash, it just gives you a training run whose numbers are wrong.
+      The reason structure is needed at all is that an unconstrained LLM writes the <em>mean of its training data</em>. Ask it to "add a diffusion policy head" and you get a blend of every diffusion codebase it has seen: a cosine noise schedule from one repo, &epsilon;-prediction from another, an EMA decay from a third. The code runs and may even train, but it is not the variant your paper describes. This matters most in research code, where mistakes are quiet: a broadcasting bug in a loss function doesn't crash, it just gives you a training run whose numbers are wrong &mdash; and a plot you believe.
     </p>
   </section>
 
-  <!-- ── Core Principles ── -->
-  <section id="core" class="fade-in">
-    <h2>Core Principles</h2>
+  <!-- ── Who Decides What ── -->
+  <section id="decisions" class="fade-in">
+    <h2>Who Decides What</h2>
     <p>
-      Before the skills, gates, and agents &mdash; Propel is built on five non-negotiable principles that are injected into every session. These define the <strong>mindset</strong>, not the process.
+      Every capability Propel adds falls on one side of a line. On the left, work that a machine does identically every time and a tired researcher does not. On the right, decisions that determine whether the experiment means anything.
     </p>
 
-    <div class="core-grid">
-      <div class="core-card">
-        <h3>Assistant, Not Agent</h3>
-        <p>Claude gathers information, analyzes code, does deep research, and makes logical arguments based on evidence. It presents assessments for the user to decide on &mdash; it does not guess when it can investigate, or assume when it can ask.</p>
-        <ul class="core-details">
-          <li><strong>Evidence standard:</strong> Every claim traceable to a line of code, a paper, or a concrete observation</li>
-          <li><strong>Context discipline:</strong> Hallucination risk increases as context grows &mdash; proactively suggest clearing before reasoning degrades, preserving state in living READMEs first</li>
-          <li><strong>Break logic loops:</strong> When stuck in circular reasoning, name it, reframe the question, or bring new data instead of pushing through</li>
-        </ul>
-      </div>
-      <div class="core-card">
-        <h3>Critical Self-Reflection</h3>
-        <p>Claude questions its own reasoning as critically as the user's. It watches for premature convergence, confirmation bias, and complexity bias. When it catches itself in a reasoning error, it says so out loud.</p>
-        <ul class="core-details">
-          <li><strong>Retrospection:</strong> "What evidence would change my mind? Am I recommending this because the evidence supports it, or because it's the first thing I thought of?"</li>
-          <li><strong>Honesty rule:</strong> If unsure about something said earlier, re-verify against written artifacts rather than trusting "memory"</li>
-          <li><strong>3-strike limit:</strong> If the same approach fails 3 times, stop, re-examine assumptions, and change direction</li>
-        </ul>
-      </div>
-      <div class="core-card">
-        <h3>Anti-Sycophancy</h3>
-        <p>Claude does not try to please the user. It resists leading questions, confirmation-seeking, and emotional framing. When it notices itself about to agree because agreement is expected, it stops and steel-mans the counterargument first.</p>
-        <ul class="core-details">
-          <li><strong>Resist anchoring:</strong> When the user steers toward a predetermined conclusion, check the evidence independently before responding</li>
-          <li><strong>Challenge false transfer:</strong> Success in one context does not guarantee success in another &mdash; verify that assumptions actually hold in the current setting</li>
-          <li><strong>Ignore sunk cost:</strong> Time already invested is not evidence that an approach will work &mdash; present the data honestly regardless of prior effort</li>
-        </ul>
-      </div>
-    </div>
-  </section>
+    <figure class="pipeline-figure">
+      <img src="assets/decision_split.svg" alt="Two columns. Machine executes: reading the codebase, checking code against the paper, hunting silent bugs, guarding against regressions, remembering across sessions, arguing with itself. You decide: what question is worth asking, which paper and which variant, what counts as a result, which trade-off to accept, when the evidence is enough, whether to believe the number." />
+      <figcaption>Figure 1. Propel automates the left column aggressively and refuses to touch the right one.</figcaption>
+    </figure>
 
-  <!-- ── Vision ── -->
-  <section id="vision" class="fade-in">
-    <h2>Vision: Beyond Claude Code</h2>
-    <p>
-      While Propel is currently implemented as a Claude Code plugin, its core design &mdash; structured gates, investigation-first methodology, domain-specific auditors, and living documentation &mdash; is not tied to any particular agent platform. The pipeline encodes <strong>how researchers should interact with code-generating agents</strong>, regardless of the underlying model or tool.
-    </p>
     <blockquote>
-      The same constraint framework that prevents Claude Code from producing noisy averages can prevent <em>any</em> research code agent from doing the same. Propel's gates, questioners, and auditors represent a general protocol for human-AI collaboration in research engineering.
+      The line between the columns is the product. An agent that crosses it is not more helpful &mdash; it is less auditable.
     </blockquote>
+
     <p>
-      The goal is a portable specification: structured intake, grounding questioners, investigation scaffolds, paper-alignment auditing, and experiment registries that work across agent systems &mdash; Claude Code, Cursor, Copilot Workspace, Devin, or whatever comes next.
+      This is why Propel's gates are not a speed bump on the way to autonomy. They are the point. The framework is built so that the mechanical work happens without you having to ask for it, and the judgment calls cannot happen without you.
     </p>
   </section>
 
@@ -142,12 +109,12 @@
   <section id="pipeline" class="fade-in">
     <h2>The Pipeline</h2>
     <p>
-      Propel enforces five human-in-the-loop gates, two questioner checkpoints, and automatic auditor dispatch after every code change. The pipeline ensures investigation happens before implementation, design decisions are explicit, and silent bugs are caught before they reach training. Each retrospective feeds a working memory of past experiments and designs that is loaded into the next session, so Claude checks what was already tried before proposing it again.
+      Propel enforces five human-in-the-loop gates, two questioner checkpoints, automatic auditor dispatch after every code change, and an automatic second-model consult at every gate. Investigation happens before implementation, design decisions are explicit, and silent bugs are caught before they reach training. Each retrospective feeds a working memory of past experiments and designs that is loaded into the next session, so the agent checks what was already tried before proposing it again.
     </p>
 
     <figure class="pipeline-figure">
-      <img src="assets/propel_pipeline.svg" alt="Propel pipeline: seven stages from intake to retrospective, with human gates G0 to G4, questioners Q0 and Q1, a per-component review loop, a working-memory loop into the next session, and the stages each mode runs." />
-      <figcaption>Figure 1. The Propel pipeline: seven stages, five human gates, and two questioners. The bars below show which stages each mode runs.</figcaption>
+      <img src="assets/propel_pipeline.svg" alt="Propel pipeline: seven stages from intake to retrospective, with human gates G0 to G4, questioners Q0 and Q1, an automatic Codex consult at each gate, a per-component review loop, a working-memory loop into the next session, and the stages each mode runs." />
+      <figcaption>Figure 2. The Propel pipeline: seven stages, five human gates, two questioners, and a Codex consult at each gate. The bars below show which stages each mode runs.</figcaption>
     </figure>
 
     <div class="pipeline-text">Intake &rarr; G0 &rarr; Q0 &rarr; Investigate &rarr; G1 &rarr; Q1 &rarr; Design &amp; plan &rarr; G2
@@ -159,35 +126,117 @@
     </p>
   </section>
 
+  <!-- ── Two Models ── -->
+  <section id="codex" class="fade-in">
+    <h2>Two Models at Every Decision</h2>
+    <p>
+      A model reviewing its own plan is a model grading its own homework. Propel consults a second model &mdash; <strong>OpenAI Codex</strong> &mdash; automatically, at every major decision point. There is no command to invoke and nothing to remember. A second opinion you have to request is one you get only when you already suspect you need it, which is the opposite of when it helps.
+    </p>
+
+    <figure class="pipeline-figure">
+      <img src="assets/codex_loop.svg" alt="Five steps at every gate: Claude drafts, Codex critiques, Claude verifies every file and line against the repository, an attributed card is produced, and you decide. Below: what Codex never does — write to your repository, speak to you unfiltered, decide anything, or get invented." />
+      <figcaption>Figure 3. Every gate runs the same five steps. Exactly one of the participants is a human, and that one decides.</figcaption>
+    </figure>
+
+    <p>
+      Claude writes a short brief, a <code>codex-bridge</code> subagent runs the consult in an isolated context, and <strong>every <code>file:line</code> Codex cites is checked against your actual repository</strong> before you see it. Codex hallucinates paths and line numbers; that verification step is what makes its genuinely-good findings usable. Anything that cannot be confirmed is labelled <code>[codex &middot; unverified]</code> &mdash; never promoted to a finding, never silently dropped.
+    </p>
+    <p>
+      Claude says so every time, with a <code>&#9670; Consulting Codex</code> line naming the question being sent, and every finding in the resulting card is tagged <code>[claude]</code>, <code>[codex]</code>, <code>[both]</code> or <code>[codex &middot; unverified]</code>. You can always tell which model said what &mdash; a blended voice would destroy the entire point of having two.
+    </p>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <h3>Where it fires</h3>
+        <p>Gate 0 scope, Gate 1 findings, Gate 2 design, Gate 3 audit, Gate 4 diagnosis, bug classification, 3-strike breaks, and retrospective conclusions. Not on trivia &mdash; over-firing turns the announcement into noise, which is worse than not firing at all.</p>
+      </div>
+      <div class="feature-card">
+        <h3>What it never does</h3>
+        <p>Write to your repository. Speak to you unfiltered. Decide anything. Get invented &mdash; if the CLI did not run, there is no Codex line in the card, and Propel says it ran single-model.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Agreement is weak evidence</h3>
+        <p>Two models trained on overlapping internet text agreeing means little, and Propel reports it that way rather than dressing consensus up as confirmation. The <em>disagreements</em> are what deserve your attention.</p>
+      </div>
+    </div>
+
+    <p>
+      Don't want it? <code>/disable-codex</code> turns the layer off for the project. Gates, questioners and auditors all still fire &mdash; only the second opinion goes away. A missing or unauthenticated Codex never blocks a gate: Propel says so once and continues single-model.
+    </p>
+  </section>
+
   <!-- ── Four Modes ── -->
   <section id="modes" class="fade-in">
-    <h2>Four Modes</h2>
+    <h2>Four Modes &mdash; selected automatically</h2>
     <p>
-      Not every session needs the full pipeline. Choose a mode at the start of each session to filter which skills and gates are active. Each mode is a standalone tool &mdash; use Researcher just for literature, Debugger just for diagnosis, or Trainer just for launching runs.
+      Not every session needs the full pipeline, so Propel filters which skills and gates are active. <strong>You do not choose the mode.</strong> The agent reads your first message, picks one, and says which and why in a single line &mdash; then switches again on its own when the work crosses a boundary. Asking someone to classify their own problem before they have started working on it is exactly the kind of friction Propel exists to remove.
     </p>
+
+    <figure class="pipeline-figure">
+      <img src="assets/mode_selection.svg" alt="Four example first messages, each mapped to the mode Propel infers from it and the gates that then fire: a question about how code works selects Researcher; a request to port a paper section selects Engineer; a NaN loss with a traceback selects Debugger; launching a cluster sweep selects Trainer." />
+      <figcaption>Figure 4. First message to inferred mode to active gates. <code>/switch</code> overrides it whenever you disagree.</figcaption>
+    </figure>
 
     <div class="modes-grid">
       <div class="mode-card mode-researcher">
         <h3>Researcher</h3>
         <div class="mode-scope">Gates 0 &amp; 1</div>
-        <p>Literature, investigation, deep research. Understanding the problem space before building anything.</p>
+        <p>Literature, investigation, deep research. Picked when the question is about the problem space rather than the code.</p>
       </div>
       <div class="mode-card mode-engineer">
         <h3>Engineer</h3>
         <div class="mode-scope">All Gates (0&ndash;4)</div>
-        <p>Full pipeline. Investigation through implementation with all auditors. The default mode.</p>
+        <p>Full pipeline with every auditor. Picked when there is something to build &mdash; and when the request is ambiguous, since it filters nothing out by mistake.</p>
       </div>
       <div class="mode-card mode-debugger">
         <h3>Debugger</h3>
         <div class="mode-scope">Gates 0, 1 &amp; 4</div>
-        <p>Deep root-cause analysis. Classifies code bugs vs. design issues with evidence. Literature-backed diagnosis.</p>
+        <p>Root-cause analysis with evidence-backed classification. Picked when there is a specific wrong behavior to explain.</p>
       </div>
       <div class="mode-card mode-trainer">
         <h3>Trainer</h3>
         <div class="mode-scope">Gate 4 (runtime)</div>
-        <p>Code is ready. Launch training runs, monitor, fix CUDA/OOM/path errors.</p>
+        <p>Launch, monitor, and fix CUDA/OOM/path errors. Picked when the code is settled and the problem is execution.</p>
       </div>
     </div>
+
+    <p>
+      Crossing a boundary switches the mode rather than refusing the request. Ask a Trainer-mode session to change a loss function and it moves to Engineer &mdash; and tells you why: that change alters what the run measures, so it needs the design and audit path, not a runtime patch. <strong>The mode boundary exists to make sure the right gates fire, not to withhold capability.</strong> A narrower mode runs fewer gates; it never lowers the bar at the ones it runs.
+    </p>
+  </section>
+
+  <!-- ── Automation ── -->
+  <section id="automation" class="fade-in">
+    <h2>What Runs Without You Asking</h2>
+    <p>
+      A framework that requires you to remember a command before investigating, or a flag before wanting a second opinion, has moved the cognitive load it was supposed to remove. In Propel, you describe the problem. Everything mechanical dispatches itself &mdash; and narrates what it did, so nothing happens invisibly.
+    </p>
+
+    <table>
+      <thead>
+        <tr><th>Trigger</th><th>What fires, automatically</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Your first message</td><td>Mode selection, announced in one line with its reason</td></tr>
+        <tr><td>A new task</td><td>Gate 0 scoping questions, one at a time, then Q0 grounding</td></tr>
+        <tr><td>A question needing several files traced</td><td>Several <code>investigator</code> subagents in parallel, one question each</td></tr>
+        <tr><td>Any gate about to be presented</td><td>A Codex consult via <code>codex-bridge</code>, verified against the repo</td></tr>
+        <tr><td>An approved plan</td><td><code>implementer</code> then <code>spec-reviewer</code>, one component at a time</td></tr>
+        <tr><td>Any source edit</td><td>A hook names the required auditors &mdash; the dispatch is deterministic, not remembered</td></tr>
+        <tr><td>An approved training command</td><td><code>trainer-operator</code>, which keeps thousands of log lines out of your session</td></tr>
+        <tr><td>Three failed attempts</td><td>The 3-strike break: stop, and ask what assumption all three share</td></tr>
+      </tbody>
+    </table>
+
+    <blockquote>
+      Process is the agent's to decide. Research is yours. If the agent catches itself writing "you can run X if you want", it should just run X.
+    </blockquote>
+
+    <p>
+      Twenty skills and thirteen subagents sit behind that table. You never name one &mdash; but if you want to see exactly what exists and what triggers it, the full references are in the documentation:
+      <a href="docs/skills/index.html">all skills</a>, by category, with triggers and the modes each is active in &middot;
+      <a href="docs/agents/index.html">all agents</a>, split into read-only auditors and the workers that do the building.
+    </p>
   </section>
 
   <!-- ── Demos ── -->
@@ -367,110 +416,36 @@
     </div>
   </section>
 
-  <!-- ── Key Features ── -->
-  <section id="features" class="fade-in">
-    <h2>Key Features</h2>
-
-    <div class="features-grid">
-      <div class="feature-card">
-        <h3>Human-in-the-Loop Gates</h3>
-        <p>Five mandatory checkpoints that extract your specific insight before the agent acts. No rubber-stamping &mdash; every question is disjunctive and assumption-exposing.</p>
-      </div>
-      <div class="feature-card">
-        <h3>Investigation-First</h3>
-        <p>No implementation without a documented investigation in <code>scratch/</code>. Living READMEs preserve knowledge across sessions and <code>/clear</code> boundaries.</p>
-      </div>
-      <div class="feature-card">
-        <h3>Paper-Alignment Auditing</h3>
-        <p>Every paper-derived component is automatically cross-referenced against source equations. Catches mismatches between what the paper says and what the code does.</p>
-      </div>
-      <div class="feature-card">
-        <h3>Silent Bug Detection</h3>
-        <p>Active scanning for 11 categories of silent failures after every code change &mdash; broadcasting bugs, wrong reductions, detached gradients, and more.</p>
-      </div>
-      <div class="feature-card">
-        <h3>Questioner Checkpoints</h3>
-        <p>Q0 grounds work in concrete references before investigation. Q1 nails down implementation details before design. Prevents the agent from filling gaps with training-data averages.</p>
-      </div>
-      <div class="feature-card">
-        <h3>Experiment Registry</h3>
-        <p>Retrospectives capture what worked, what failed, and why. The failed attempts table is more valuable than the working solution &mdash; prevents repeating mistakes.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── Skills ── -->
-  <section id="skills" class="fade-in">
-    <h2>Skills</h2>
-    <p>Propel includes 15+ skills organized by workflow phase. Each skill activates on specific triggers and guides the agent through a structured process.</p>
-
-    <table>
-      <thead>
-        <tr><th>Category</th><th>Skill</th><th>Trigger</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Meta</td><td><strong>using-propel</strong></td><td>Always active &mdash; routes to correct skill</td></tr>
-        <tr><td rowspan="2">Literature</td><td><strong>deep-research</strong></td><td>"survey", "literature review", "compare methods"</td></tr>
-        <tr><td><strong>paper-extraction</strong></td><td>"process these papers", "build paper database"</td></tr>
-        <tr><td>Investigation</td><td><strong>investigation</strong></td><td>"start investigation", "trace X", "what touches X"</td></tr>
-        <tr><td rowspan="2">Design</td><td><strong>research-design</strong></td><td>"propose how to", "design the implementation"</td></tr>
-        <tr><td><strong>writing-plans</strong></td><td>"write the plan", "break into tasks"</td></tr>
-        <tr><td>Implementation</td><td><strong>subagent-driven-research</strong></td><td>User says "go" after plan approval</td></tr>
-        <tr><td rowspan="2">Validation</td><td><strong>research-validation</strong></td><td>"validate this", "test the implementation"</td></tr>
-        <tr><td><strong>verification-before-completion</strong></td><td>Before claiming "done"</td></tr>
-        <tr><td>Debugging</td><td><strong>systematic-debugging</strong></td><td>Bug reports, training failures</td></tr>
-        <tr><td>Learning</td><td><strong>retrospective</strong></td><td>"retrospective", auto-suggests at ~20 turns</td></tr>
-        <tr><td rowspan="2">Cross-cutting</td><td><strong>think-deeply</strong></td><td>Confirmation-seeking statements</td></tr>
-        <tr><td><strong>context-hygiene</strong></td><td>&gt;15 turns, "getting long"</td></tr>
-        <tr><td>Training</td><td><strong>trainer-mode</strong></td><td>"train", "launch training" (Trainer Mode)</td></tr>
-        <tr><td>Customization</td><td><strong>project-customization</strong></td><td>"customize Propel", "detect conventions"</td></tr>
-      </tbody>
-    </table>
-  </section>
-
-  <!-- ── Agents ── -->
-  <section id="agents" class="fade-in">
-    <h2>Agents (Auditors)</h2>
-    <p>Domain-specific auditors auto-dispatch after code changes. They run as subagents with separate context windows and read-only access.</p>
-
-    <table>
-      <thead>
-        <tr><th>Agent</th><th>Purpose</th><th>Auto?</th></tr>
-      </thead>
-      <tbody>
-        <tr><td><strong>paper-alignment-auditor</strong></td><td>Cross-reference code against paper equations</td><td>Yes</td></tr>
-        <tr><td><strong>jax-logic-auditor</strong></td><td>Trace shapes through JAX transforms</td><td>Yes</td></tr>
-        <tr><td><strong>silent-bug-detector</strong></td><td>Scan for 11 silent failure categories</td><td>Yes</td></tr>
-        <tr><td><strong>data-flow-tracer</strong></td><td>End-to-end tensor annotation</td><td>No</td></tr>
-        <tr><td><strong>regression-guard</strong></td><td>Verify existing configs unchanged</td><td>Yes</td></tr>
-        <tr><td><strong>env-researcher</strong></td><td>Deep-dive simulation env docs</td><td>Yes</td></tr>
-        <tr><td><strong>failure-mode-researcher</strong></td><td>Internet search for training failures</td><td>No</td></tr>
-        <tr><td><strong>code-reviewer</strong></td><td>General code quality with research awareness</td><td>No</td></tr>
-      </tbody>
-    </table>
-  </section>
-
   <!-- ── Installation ── -->
   <section id="installation" class="fade-in">
     <h2>Get Started</h2>
 
     <pre><code>git clone https://github.com/KevinBian107/propel.git
-cd propel && pip install -e .
+cd propel
 
-cd /path/to/your/project
-propel init</code></pre>
+pipx install -e .     # or: uv tool install -e .
+propel                # opens the setup console</code></pre>
 
     <p>
-      Then start Claude and run <code>/intro</code> to select a mode and set up your project.
-      See the <a href="docs/getting-started.html">full Getting Started guide</a> for a complete walkthrough.
+      <code>pipx</code> (or <code>uv tool</code>) is the reliable route &mdash; it puts <code>propel</code> on your PATH in its own environment, and the editable install means repo edits take effect immediately. Plain <code>pip install -e .</code> works inside an activated virtualenv or conda env, but against a Homebrew or system Python it fails with <code>externally-managed-environment</code> and leaves you without the command.
+    </p>
+
+    <p>
+      Running <code>propel</code> with no arguments opens a local setup page in your browser. It detects Claude Code, Codex, Node and git, installs whatever is missing with one click, opens a real terminal for the two logins that genuinely need one, and installs Propel into your project. It runs entirely on <code>127.0.0.1</code> behind a per-process token, and it can only run a fixed list of setup commands &mdash; nothing leaves your machine except the installers you click.
+    </p>
+
+    <p>Prefer the command line? <code>cd</code> into your project and run <code>propel init</code>.</p>
+
+    <p>
+      Then start <code>claude</code> and <strong>just describe what you're working on</strong>. Propel picks a mode, fires Gate 0, and tells you what it's doing. You never have to name a skill, an agent, or a model. Run <code>/intro</code> if you'd rather see the full tour first, and see the <a href="docs/getting-started.html">Getting Started guide</a> for a complete walkthrough.
     </p>
   </section>
 
   <!-- ── What Only You Can Provide ── -->
   <section id="human-input" class="fade-in">
-    <h2>What Only You Can Provide</h2>
+    <h2>What You Bring to the Gates</h2>
     <p>
-      Propel's constraints are necessary but not sufficient. The framework forces the agent to stop and ask structured questions at every phase transition, but <strong>the quality of the output depends entirely on what you bring to those checkpoints</strong>:
+      Propel's constraints are necessary but not sufficient. Automating the mechanical half only pays off if the judgment half actually happens &mdash; and that half is yours. The framework guarantees the agent will stop and ask; <strong>the quality of the output depends entirely on what you bring when it does</strong>:
     </p>
     <table>
       <thead>
@@ -485,39 +460,6 @@ propel init</code></pre>
     </table>
   </section>
 
-  <!-- ── Recommended Plugins ── -->
-  <section id="plugins" class="fade-in">
-    <h2>Recommended Plugins</h2>
-    <p>
-      Third-party Claude Code plugins that pair well with Propel. The first two power Propel's bridge skills (<code>/c-codex</code>, <code>/codex-lead</code>, <code>/c-review</code>) &mdash; without them, those skills refuse to run. The third is complementary: it doesn't change Propel's pipeline, it just makes long sessions easier to manage.
-    </p>
-
-    <div class="features-grid">
-      <div class="feature-card">
-        <h3><a href="https://github.com/openai/codex-plugin-cc" target="_blank" rel="noopener">codex-plugin-cc</a></h3>
-        <p>
-          Brings OpenAI Codex into Claude Code as a callable second model. Powers <a href="docs/skills/c-codex.html"><code>/c-codex</code></a> (peer-review critique during planning or code review) and <a href="docs/skills/codex-lead.html"><code>/codex-lead</code></a> (flip the contract for one exchange). Cross-model critique catches blind spots a single model would miss.
-        </p>
-      </div>
-      <div class="feature-card">
-        <h3><a href="https://github.com/anthropics/claude-code/tree/main/plugins/code-review" target="_blank" rel="noopener">Anthropic <code>code-review</code> plugin</a></h3>
-        <p>
-          The official Claude Code team's general-purpose review rubric. Powers <a href="docs/skills/c-review.html"><code>/c-review</code></a>, which runs the plugin alongside Propel's domain auditors (silent-bug-detector, paper-alignment-auditor, jax-logic-auditor, regression-guard) and merges everything into one Gate 3 card with source attribution.
-        </p>
-      </div>
-      <div class="feature-card">
-        <h3><a href="https://github.com/jarrodwatts/claude-hud" target="_blank" rel="noopener">claude-hud</a></h3>
-        <p>
-          A heads-up display for Claude Code that surfaces session state &mdash; model, token usage, context budget &mdash; in the status line. Pairs especially well with Propel because long investigation &rarr; design &rarr; implementation sessions are exactly where context health matters most, and where <a href="docs/skills/context-hygiene.html"><code>context-hygiene</code></a> decisions get made.
-        </p>
-      </div>
-    </div>
-
-    <p style="font-size: 0.9rem; color: var(--color-muted); margin-top: 1rem;">
-      See the <a href="docs/recommended-plugins.html">full Recommended Plugins page</a> for setup notes, compatibility caveats, and the bridge-skill interaction contract.
-    </p>
-  </section>
-
   <!-- ── Acknowledgments ── -->
   <section id="acknowledgments" class="fade-in">
     <h2>Acknowledgments</h2>
@@ -530,6 +472,7 @@ propel init</code></pre>
       <li><a href="https://github.com/brunoasm/my_claude_skills" target="_blank" rel="noopener"><strong>brunoasm's claude skills</strong></a> &mdash; Think-deeply anti-sycophancy skill and PDF extraction.</li>
       <li><a href="https://github.com/Weizhena/Deep-Research-skills" target="_blank" rel="noopener"><strong>Weizhena's Deep-Research</strong></a> &mdash; Structured literature review with human-in-the-loop checkpoints.</li>
       <li><a href="https://github.com/coleam00/context-engineering-intro" target="_blank" rel="noopener"><strong>Context Engineering Template</strong></a> &mdash; Basic Claude Code usage patterns and context engineering principles.</li>
+      <li><a href="https://github.com/ChenLiu-1996/figures4papers" target="_blank" rel="noopener"><strong>ChenLiu-1996/figures4papers</strong></a> &mdash; Figure repository structure and publication-style conventions. Every figure on this site is generated by a script in <code>figures/</code>, one folder per figure, regenerated with <code>python figures/make_all.py</code>.</li>
     </ul>
   </section>
 
