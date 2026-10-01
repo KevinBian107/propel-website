@@ -423,18 +423,18 @@
     <pre><code>git clone https://github.com/KevinBian107/propel.git
 cd propel
 
-pipx install -e .     # or: uv tool install -e .
-propel                # opens the setup console</code></pre>
+uv tool install -e .  # or, inside an activated conda env / virtualenv: pip install -e .
+propel                # setup: browser page locally, terminal prompts on a cluster</code></pre>
 
     <p>
-      <code>pipx</code> (or <code>uv tool</code>) is the reliable route &mdash; it puts <code>propel</code> on your PATH in its own environment, and the editable install means repo edits take effect immediately. Plain <code>pip install -e .</code> works inside an activated virtualenv or conda env, but against a Homebrew or system Python it fails with <code>externally-managed-environment</code> and leaves you without the command.
+      Both are editable installs, so edits to the repo take effect immediately. <code>uv tool install -e .</code> puts <code>propel</code> on your PATH in its own environment. If you don't have uv, <code>curl -LsSf https://astral.sh/uv/install.sh | sh</code> installs it with no sudo. Plain <code>pip install -e .</code> works inside an activated conda env or virtualenv, but against a Homebrew or system Python it fails with <code>externally-managed-environment</code> and leaves you without the command.
     </p>
 
     <p>
-      Running <code>propel</code> with no arguments opens a local setup page in your browser. It detects Claude Code, Codex, Node and git, installs whatever is missing with one click, opens a real terminal for the two logins that genuinely need one, and installs Propel into your project. It runs entirely on <code>127.0.0.1</code> behind a per-process token, and it can only run a fixed list of setup commands &mdash; nothing leaves your machine except the installers you click.
+      Running <code>propel</code> with no arguments sets everything up: git, Claude Code and Codex, the two sign-ins, and Propel itself in your project. Claude Code and Codex come from the vendors' own native installers, so you need no Node, no npm and no sudo. There are two versions, and <code>propel</code> picks one by itself. On your <strong>laptop</strong> it opens a setup page in your browser, with one button per step. On a <strong>cluster</strong> (an HPC node, a container, a Jupyter terminal, anything over SSH) it runs the same steps as prompts in the terminal. Each sign-in there shows a code you approve from any device, so nothing needs forwarding.
     </p>
 
-    <p>Prefer the command line? <code>cd</code> into your project and run <code>propel init</code>.</p>
+    <p>Prefer the command line? <code>cd</code> into your project and run <code>propel init</code>. Want a specific version? <code>propel launch</code> (browser) or <code>propel setup</code> (terminal).</p>
 
     <p>
       Then start <code>claude</code> and <strong>just describe what you're working on</strong>. Propel picks a mode, fires Gate 0, and tells you what it's doing. You never have to name a skill, an agent, or a model. Run <code>/intro</code> if you'd rather see the full tour first, and see the <a href="docs/getting-started.html">Getting Started guide</a> for a complete walkthrough.

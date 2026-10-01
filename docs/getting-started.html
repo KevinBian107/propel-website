@@ -143,7 +143,7 @@
 
     <h1 class="page-title">Getting Started</h1>
     <p class="page-subtitle">
-      Install Propel, run the setup console, and start working. You will not need to learn a single command to get the pipeline running.
+      Install Propel, run setup on your laptop or your cluster, and start working. You will not need to learn a single command to get the pipeline running.
     </p>
 
     <!-- ── Install ── -->
@@ -152,42 +152,108 @@
     <pre><code>git clone https://github.com/KevinBian107/propel.git
 cd propel
 
-pipx install -e .     # or: uv tool install -e .</code></pre>
+uv tool install -e .</code></pre>
     <p>
-      This puts <code>propel</code> on your PATH in its own isolated environment, while keeping the install <em>editable</em> &mdash; changes you make to the repo take effect immediately, which matters because Propel is meant to be customized.
+      This puts <code>propel</code> on your PATH in its own isolated environment, and keeps the install <em>editable</em>: changes you make to the repo take effect immediately, which matters because Propel is meant to be customized. If you don't have uv, install it first. It needs no sudo, so it works on a cluster too:
     </p>
+    <pre><code>curl -LsSf https://astral.sh/uv/install.sh | sh</code></pre>
+    <p>Already working inside a conda env or virtualenv? Activate it and use pip instead:</p>
+    <pre><code>pip install -e .</code></pre>
     <div class="callout callout-warn">
-      <strong>Why not plain <code>pip install -e .</code>?</strong> It works fine inside an activated virtualenv or conda env. Against a Homebrew or system Python it does not: modern ones are <a href="https://peps.python.org/pep-0668/" target="_blank" rel="noopener">externally managed</a> and refuse the install, or it lands in a directory that isn't on your PATH. Either way you end up with no <code>propel</code> command and a confusing error later. <code>pipx</code> sidesteps all of it.
+      <strong>Use pip only inside an activated env.</strong> Against a Homebrew or system Python, <code>pip install -e .</code> fails: modern ones are <a href="https://peps.python.org/pep-0668/" target="_blank" rel="noopener">externally managed</a> and refuse the install, or it lands in a directory that isn't on your PATH. Either way you end up with no <code>propel</code> command and a confusing error later. <code>uv tool</code> sidesteps all of it.
     </div>
 
-    <!-- ── Launcher ── -->
-    <h2 id="launcher">2. Run the Setup Console</h2>
+    <!-- ── Setup ── -->
+    <h2 id="launcher">2. Set Up &mdash; Local or Cluster</h2>
     <p>Run <code>propel</code> with no arguments:</p>
     <pre><code>propel</code></pre>
     <p>
-      A page opens in your browser. It detects what you already have and offers a button for everything you don't:
+      It checks for git, Claude Code and Codex, installs what's missing, signs you in, and installs Propel into your project. There are two versions of this step. <code>propel</code> picks one from the machine it's running on and says which in one line. It never asks.
+    </p>
+    <table>
+      <thead>
+        <tr><th></th><th>Local</th><th>Cluster</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Where</strong></td><td>Your laptop or desktop</td><td>An HPC node, a container, a Jupyter terminal, anything over SSH (including VS Code Remote)</td></tr>
+        <tr><td><strong>Picked when</strong></td><td>There is a display</td><td>Linux with no <code>DISPLAY</code>/<code>WAYLAND_DISPLAY</code>, or an SSH session</td></tr>
+        <tr><td><strong>Force it</strong></td><td><code>propel launch</code></td><td><code>propel setup</code></td></tr>
+        <tr><td><strong>You get</strong></td><td>A setup page in your browser, one button per step</td><td>The same steps as prompts in the terminal</td></tr>
+        <tr><td><strong>Sign-in</strong></td><td>A terminal window opens for each login</td><td>Inline, with a URL and code you approve on any device</td></tr>
+      </tbody>
+    </table>
+    <p>
+      Both versions install Claude Code and Codex the same way, with the vendors' own native installers. These are single binaries in <code>~/.local/bin</code>. They need no Node, no npm and no sudo, which matters on a cluster where you can't install system packages:
+    </p>
+    <pre><code>curl -fsSL https://claude.ai/install.sh | bash          # Claude Code
+curl -fsSL https://chatgpt.com/codex/install.sh | sh    # Codex</code></pre>
+    <p>
+      Propel downloads each script to a file before running it, so a failed download is reported as a failure rather than looking like success. Node.js only matters if you want the optional <code>claude-hud</code> status-line plugin.
+    </p>
+
+    <h3 id="setup-local">Local: the Setup Console</h3>
+    <p>
+      A page opens in your browser. It shows what you already have and offers a button for everything you don't:
     </p>
     <ul>
-      <li><strong>git</strong> and <strong>Node.js 18.18+</strong> &mdash; Node is only needed for the Codex CLI</li>
-      <li><strong>Claude Code</strong> &mdash; installed via npm, and a terminal opens for <code>/login</code></li>
-      <li><strong>OpenAI Codex</strong> &mdash; the second model. A terminal opens for the OAuth flow</li>
-      <li><strong>Propel itself</strong> &mdash; one click installs it into the project you're pointed at</li>
+      <li><strong>git</strong>: installed with Homebrew when it's available, otherwise a link to the download page</li>
+      <li><strong>Claude Code</strong>: the native installer, then a terminal opens for the sign-in</li>
+      <li><strong>OpenAI Codex</strong>: the second model. Native installer, then a terminal opens for the OAuth flow</li>
+      <li><strong>Plugins</strong>: <code>claude-hud</code> and <code>code-review</code>, each with its publisher named. Never installed without a click</li>
+      <li><strong>Propel itself</strong>: one click installs it into the project you're in</li>
     </ul>
     <p>
-      The two logins genuinely need a terminal &mdash; a browser page can't provide a TTY &mdash; so the console opens a real one already running the right command, rather than pretending otherwise. If it can't (unusual desktop environment, remote host), it shows you the command to paste.
+      The two logins genuinely need a terminal. A browser page can't provide a TTY, so the console opens a real one already running the right command instead of pretending. If it can't, it shows you the command to paste.
     </p>
     <div class="callout">
-      <strong>It runs entirely on your machine.</strong> The server binds to <code>127.0.0.1</code> on a random port behind a per-process token, and it can only execute a fixed allowlist of setup commands &mdash; the page can never send it a command string. Nothing leaves your machine except the installers you click.
+      <strong>It runs entirely on your machine.</strong> The server binds to <code>127.0.0.1</code> on a random port behind a per-process token, and it can only run a fixed allowlist of setup commands. The page can never send it a command string. If you open the address without its <code>?t=</code> token, or with a token from an earlier run, you get <em>Forbidden</em> and an explanation. Use the full URL printed in the terminal.
     </div>
 
-    <h3 id="cli-init">Or use the CLI</h3>
-    <p>If you'd rather skip the console:</p>
-    <pre><code>cd /path/to/your/project
+    <h3 id="setup-cluster">Cluster: Terminal Setup</h3>
+    <p>
+      On a machine with no display, <code>propel</code> runs the same checklist in the terminal. Nothing needs to be forwarded and there's no page to open:
+    </p>
+    <pre><code>$ propel
+No display here (cluster, container or SSH), so setup runs in the terminal.
+
+  &#10003; git            git version 2.43.0
+  &#10007; Claude Code    not installed
+  &ndash; OpenAI Codex   not installed  (optional)
+  ...
+
+  Claude Code is not installed (required).
+    Installer: curl -fsSL https://claude.ai/install.sh | bash  -&gt;  ~/.local/bin
+  Install Claude Code now? [Y/n]</code></pre>
+    <p>It asks before every change, in this order:</p>
+    <ol>
+      <li><strong>Install</strong> Claude Code (required) and Codex (optional) with the native installers.</li>
+      <li><strong>PATH</strong>: Claude's installer doesn't edit your shell config. If <code>~/.local/bin</code> isn't on your PATH, setup offers to add one line to <code>~/.bashrc</code> (or <code>~/.zshrc</code>). Propel itself finds the tools there either way.</li>
+      <li><strong>Sign in, inline</strong>: <code>claude auth login</code>, then <code>codex login --device-auth</code>. Each prints a URL and a code. Open the URL on any device, your laptop included, and approve it. The cluster never needs a browser.</li>
+      <li><strong>Plugins</strong>: the default is <em>No</em>. A plugin runs its publisher's code in your sessions, so that call stays yours.</li>
+      <li><strong>Install Propel</strong> into the current project (<code>propel init</code>).</li>
+    </ol>
+    <p>
+      It's safe to re-run. Each run picks up whatever is still missing. If stdin isn't a terminal (a notebook <code>!propel</code>, a batch job, a pipe), it changes nothing: it prints the checklist and the exact commands to run, and exits 0.
+    </p>
+    <div class="callout callout-warn">
+      <strong>If Codex's device sign-in doesn't complete</strong> (for example, device-code login is turned off for your workspace), there are two other routes. One is the browser flow over a tunnel: on your laptop run <code>ssh -L 1455:localhost:1455 &lt;cluster&gt;</code>, then <code>codex login</code> on the cluster. The other is an API key: <code>printenv OPENAI_API_KEY | codex login --with-api-key</code>. Until Codex is signed in, Propel runs single-model. It never blocks.
+    </div>
+    <div class="callout">
+      <strong>Installing Propel itself on a cluster.</strong> Either route works there: <code>uv tool install -e .</code>, or <code>pip install -e .</code> inside your activated conda env (for example <code>(base)</code>). Install it as the same user who will run <code>claude</code>, because sign-ins live in that user's home directory.
+    </div>
+
+    <h3 id="cli-init">Or Do It by Hand</h3>
+    <p>Everything either version does, as commands:</p>
+    <pre><code>curl -fsSL https://claude.ai/install.sh | bash
+curl -fsSL https://chatgpt.com/codex/install.sh | sh
+claude auth login
+codex login --device-auth
+cd /path/to/your/project
 propel init</code></pre>
-    <p>Either path does the same thing:</p>
+    <p><code>propel init</code>, from any of the three paths, does the same thing:</p>
     <ul>
       <li>Copies all skills, agents, commands, hooks and scripts into <code>.claude/</code></li>
-      <li>Configures four hooks in <code>settings.local.json</code> &mdash; session context, working memory, the per-turn routing card, and the <code>PostToolUse</code> auditor dispatch that fires after every source edit</li>
+      <li>Configures four hooks in <code>settings.local.json</code>: session context, working memory, the per-turn routing card, and the <code>PostToolUse</code> auditor dispatch that fires after every source edit</li>
       <li>Seeds <code>.propel/codex.json</code> with the dual-model layer enabled</li>
       <li>Adds <code>scratch/</code>, <code>sessions/</code>, <code>.propel/</code>, <code>.claude/</code>, and <code>propel/</code> to <code>.gitignore</code></li>
     </ul>
@@ -354,8 +420,10 @@ propel init</code></pre>
   <aside class="docs-toc">
     <div class="docs-toc-title">On This Page</div>
     <a href="#install">1. Install Propel</a>
-    <a href="#launcher">2. Run the Setup Console</a>
-    <a href="#cli-init" class="toc-h3">Or use the CLI</a>
+    <a href="#launcher">2. Set Up: Local or Cluster</a>
+    <a href="#setup-local" class="toc-h3">Local: Setup Console</a>
+    <a href="#setup-cluster" class="toc-h3">Cluster: Terminal Setup</a>
+    <a href="#cli-init" class="toc-h3">Or Do It by Hand</a>
     <a href="#first-session">3. Start Claude</a>
     <a href="#mode-selection" class="toc-h3">Mode Selection</a>
     <a href="#codex-check" class="toc-h3">The Second Model</a>

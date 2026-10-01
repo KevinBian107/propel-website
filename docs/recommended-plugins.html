@@ -143,14 +143,14 @@
 
     <h1 class="page-title">Plugins</h1>
     <p class="page-subtitle">
-      Propel uses these when they're present and works without them. The setup console installs them in one click &mdash; but <code>propel init</code> never does, and that distinction is deliberate.
+      Propel uses these when they're present and works without them. <code>propel</code> setup offers them: one click in the local console, a <em>y/N</em> prompt (default No) in the cluster terminal setup. But <code>propel init</code> never installs them, and that distinction is deliberate.
     </p>
 
     <div class="admonition note">
       <div class="admonition-title">Why Propel doesn't install these for you</div>
       <p>A Claude Code plugin can ship hooks, slash commands, agents and MCP servers &mdash; it executes code in your session. Deciding whose code may run in a research environment is a judgment call, and Propel's own rule is that judgment calls go to a human. Installing third-party software as a side effect of "set up my research workflow" would be that rule broken by its own author.</p>
       <p>Two specifics sharpen it. <code>claude plugin install</code> has no <code>--version</code> or <code>--ref</code>, so an install is always whatever the source holds at that moment &mdash; meaning an unchanged Propel release would become a delivery path for whatever those plugins ship that day. And <code>--scope</code> defaults to <code>user</code>, so installing during <code>propel init</code> in one repo would enable the plugin in <em>every project on the machine</em>, not the one being initialized.</p>
-      <p style="margin-bottom: 0">So: <code>propel launch</code> offers them, one click, publisher named. Nothing installs itself.</p>
+      <p style="margin-bottom: 0">So: <code>propel</code> offers them, publisher named, and you choose. Nothing installs itself.</p>
     </div>
 
     <!-- ── Required Plugins ── -->
@@ -160,16 +160,16 @@
     <p>
       Not a plugin. Propel drives <code>codex exec --sandbox read-only</code> directly through the <a href="agents/codex-bridge.html"><code>codex-bridge</code></a> subagent, so there is no plugin layer and no slash command. Powers <a href="skills/codex-consult.html"><code>codex-consult</code></a>, the automatic dual-model layer &mdash; see <a href="codex.html">Codex &mdash; Two Models</a>.
     </p>
-    <pre><code>npm install -g @openai/codex   # needs Node 18.18+
-codex login</code></pre>
-    <p>Or click <strong>Install</strong> in <code>propel launch</code>. Without it, gates run single-model and say so once; nothing blocks.</p>
+    <pre><code>curl -fsSL https://chatgpt.com/codex/install.sh | sh   # native binary in ~/.local/bin, no Node
+codex login                    # on a cluster: codex login --device-auth</code></pre>
+    <p>Or let <code>propel</code> do it: the setup console locally, <code>propel setup</code> on a cluster. Without it, gates run single-model and say so once; nothing blocks.</p>
 
     <h3 id="claude-hud">claude-hud <span style="font-weight: 400; color: var(--color-muted);">&mdash; by jarrodwatts</span></h3>
     <p>
       <strong>Repo:</strong> <a href="https://github.com/jarrodwatts/claude-hud" target="_blank" rel="noopener">github.com/jarrodwatts/claude-hud</a>
     </p>
     <p>
-      A status line showing model, context budget, token cost and running subagents. Propel's own status line <em>wraps</em> it: hud renders first, then Propel appends a Codex task block beneath the agents line, showing consults in flight and recently finished. Install it from <code>propel launch</code>, then run <code>propel codex statusline --install</code>.
+      A status line showing model, context budget, token cost and running subagents. Propel's own status line <em>wraps</em> it: hud renders first, then Propel appends a Codex task block beneath the agents line, showing consults in flight and recently finished. It runs under Node.js, so this is the one piece of Propel's setup that needs Node. Install it from <code>propel</code> setup, then run <code>propel codex statusline --install</code>.
     </p>
     <p>
       Without it, <code>propel codex statusline</code> still works &mdash; it just prints the Codex block on its own.

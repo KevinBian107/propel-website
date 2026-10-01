@@ -308,7 +308,7 @@ propel codex statusline --remove   # undo</code></pre>
       If the <code>codex</code> CLI is missing or not authenticated, Propel says so <strong>once</strong> per session, with the fix, and then proceeds single-model.
     </p>
     <pre><code>Codex is not available (not installed / not logged in), so this gate is
-single-model. Run `propel launch` to set it up, or /disable-codex to stop
+single-model. Run `propel` to set it up, or /disable-codex to stop
 seeing this.</code></pre>
     <p>
       <strong>A missing second model never blocks a gate.</strong> Single-model review is worse than dual-model review; it is not worse than no review. The notice appears once and is not repeated &mdash; the state is recorded in <code>.propel/codex.json</code>.
@@ -336,11 +336,11 @@ seeing this.</code></pre>
     <h2 id="setup">Setup</h2>
 
     <p>
-      The easiest path is the setup console. Run <code>propel</code> with no arguments; it detects whether Codex is installed and signed in, installs it, and opens a terminal for the OAuth flow.
+      The easiest path is <code>propel</code> with no arguments. It detects whether Codex is installed and signed in, and installs it with OpenAI's native installer (a single binary, no Node). On a laptop the setup console then opens a terminal for the OAuth flow. On a cluster, the terminal setup runs <code>codex login --device-auth</code> inline, and you approve the code from any device. See <a href="getting-started.html#launcher">Getting Started</a> for both versions.
     </p>
     <p>Manually:</p>
-    <pre><code>npm install -g @openai/codex   # needs Node 18.18+
-codex login</code></pre>
+    <pre><code>curl -fsSL https://chatgpt.com/codex/install.sh | sh
+codex login                    # on a cluster: codex login --device-auth</code></pre>
     <p>
       Propel drives <code>codex exec</code> directly through <code>.claude/scripts/codex-consult.sh</code>, which carries the timeout, the enabled-check, and the auth-error handling. There is no plugin layer in between.
     </p>
