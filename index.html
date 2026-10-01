@@ -423,11 +423,11 @@
     <pre><code>git clone https://github.com/KevinBian107/propel.git
 cd propel
 
-uv tool install -e .  # or, inside an activated conda env / virtualenv: pip install -e .
+pip install -e .      # inside an activated conda env or virtualenv
 propel                # setup: browser page locally, terminal prompts on a cluster</code></pre>
 
     <p>
-      Both are editable installs, so edits to the repo take effect immediately. <code>uv tool install -e .</code> puts <code>propel</code> on your PATH in its own environment. If you don't have uv, <code>curl -LsSf https://astral.sh/uv/install.sh | sh</code> installs it with no sudo. Plain <code>pip install -e .</code> works inside an activated conda env or virtualenv, but against a Homebrew or system Python it fails with <code>externally-managed-environment</code> and leaves you without the command.
+      This is an editable install, so edits to the repo take effect immediately. Run it inside an activated conda env or virtualenv. Against a Homebrew or system Python, pip fails with <code>externally-managed-environment</code> and leaves you without the command.
     </p>
 
     <p>

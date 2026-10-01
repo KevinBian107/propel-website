@@ -152,15 +152,12 @@
     <pre><code>git clone https://github.com/KevinBian107/propel.git
 cd propel
 
-uv tool install -e .</code></pre>
+pip install -e .      # inside an activated conda env or virtualenv</code></pre>
     <p>
-      This puts <code>propel</code> on your PATH in its own isolated environment, and keeps the install <em>editable</em>: changes you make to the repo take effect immediately, which matters because Propel is meant to be customized. If you don't have uv, install it first. It needs no sudo, so it works on a cluster too:
+      The install is <em>editable</em>: changes you make to the repo take effect immediately, which matters because Propel is meant to be customized.
     </p>
-    <pre><code>curl -LsSf https://astral.sh/uv/install.sh | sh</code></pre>
-    <p>Already working inside a conda env or virtualenv? Activate it and use pip instead:</p>
-    <pre><code>pip install -e .</code></pre>
     <div class="callout callout-warn">
-      <strong>Use pip only inside an activated env.</strong> Against a Homebrew or system Python, <code>pip install -e .</code> fails: modern ones are <a href="https://peps.python.org/pep-0668/" target="_blank" rel="noopener">externally managed</a> and refuse the install, or it lands in a directory that isn't on your PATH. Either way you end up with no <code>propel</code> command and a confusing error later. <code>uv tool</code> sidesteps all of it.
+      <strong>Activate an env first.</strong> Against a Homebrew or system Python, <code>pip install -e .</code> fails: modern ones are <a href="https://peps.python.org/pep-0668/" target="_blank" rel="noopener">externally managed</a> and refuse the install, or it lands in a directory that isn't on your PATH. Either way you end up with no <code>propel</code> command and a confusing error later. Any conda env or virtualenv avoids it.
     </div>
 
     <!-- ── Setup ── -->
@@ -233,13 +230,13 @@ No display here (cluster, container or SSH), so setup runs in the terminal.
       <li><strong>Install Propel</strong> into the current project (<code>propel init</code>).</li>
     </ol>
     <p>
-      It's safe to re-run. Each run picks up whatever is still missing. If stdin isn't a terminal (a notebook <code>!propel</code>, a batch job, a pipe), it changes nothing: it prints the checklist and the exact commands to run, and exits 0.
+      There's no browser pop-up on a cluster; that's expected. If you skip a sign-in, the closing summary repeats the command to run. It's safe to re-run. Each run picks up whatever is still missing. If stdin isn't a terminal (a notebook <code>!propel</code>, a batch job, a pipe), it changes nothing: it prints the checklist and the exact commands to run, and exits 0.
     </p>
     <div class="callout callout-warn">
       <strong>If Codex's device sign-in doesn't complete</strong> (for example, device-code login is turned off for your workspace), there are two other routes. One is the browser flow over a tunnel: on your laptop run <code>ssh -L 1455:localhost:1455 &lt;cluster&gt;</code>, then <code>codex login</code> on the cluster. The other is an API key: <code>printenv OPENAI_API_KEY | codex login --with-api-key</code>. Until Codex is signed in, Propel runs single-model. It never blocks.
     </div>
     <div class="callout">
-      <strong>Installing Propel itself on a cluster.</strong> Either route works there: <code>uv tool install -e .</code>, or <code>pip install -e .</code> inside your activated conda env (for example <code>(base)</code>). Install it as the same user who will run <code>claude</code>, because sign-ins live in that user's home directory.
+      <strong>Installing Propel itself on a cluster.</strong> Run <code>pip install -e .</code> inside your activated conda env, for example <code>(base)</code>. Install it as the same user who will run <code>claude</code>, because sign-ins live in that user's home directory.
     </div>
 
     <h3 id="cli-init">Or Do It by Hand</h3>
