@@ -214,13 +214,31 @@
 
     <div class="admonition tip">
       <div class="admonition-title">Toggle or Remove</div>
-      <p style="margin-bottom: 0"><strong>Disable</strong>: Set <code>"enabled": false</code> in <code>.propel/config.json</code>. <strong>Remove</strong>: Delete the <code>.propel/</code> directory entirely. <strong>Re-enable</strong>: Say "customize Propel" to run a fresh analysis.</p>
+      <p style="margin-bottom: 0"><strong>Disable</strong>: Set <code>"enabled": false</code> in <code>.propel/config.json</code>. <strong>Remove</strong>: Delete <code>.propel/profile.md</code>, <code>conventions.md</code>, <code>domain-context.md</code> and <code>config.json</code> (not the whole <code>.propel/</code> directory, which also holds the install manifest and backups). <strong>Re-enable</strong>: Say "customize Propel" to run a fresh analysis.</p>
     </div>
+
+    <!-- ── Your Files vs Propel's ── -->
+    <h2 id="your-files">Your Files and Propel's Files</h2>
+    <p>
+      <code>propel init</code> and <code>propel update</code> record every file Propel installs in <code>.propel/manifest.json</code>. That record decides what an update may touch, so customize Propel by <strong>adding your own files</strong>, not by editing Propel's:
+    </p>
+    <table>
+      <thead><tr><th>File in <code>.claude/</code></th><th>What an update does</th></tr></thead>
+      <tbody>
+        <tr><td>A skill, agent, command or hook you added at a path Propel doesn't ship</td><td>Never touched: never rewritten, never deleted</td></tr>
+        <tr><td>One of Propel's bundled files, unedited</td><td>Replaced with the new version, or removed if Propel no longer ships it</td></tr>
+        <tr><td>One of Propel's bundled files that you edited</td><td>Replaced anyway (or removed, if retired). Your copy is backed up to <code>.propel/backup/&lt;timestamp&gt;/</code> first and named in the output</td></tr>
+        <tr><td>A file of yours at a path a new Propel release starts shipping</td><td>Once a manifest exists (after your first update with this version), your file stays and Propel's copy is skipped with a warning naming the file. On the first update from an older install, a differing file at one of Propel's paths is backed up and replaced</td></tr>
+      </tbody>
+    </table>
+    <p>
+      Your <code>.claude/CLAUDE.md</code>, everything in <code>.propel/</code> (except that <code>.propel/backup/</code> keeps only the newest 10 folders), and your permissions and own hooks in <code>settings.local.json</code> are kept too; only Propel's own outdated hook registrations are removed, after a backup. Run <code>propel init --dry-run</code> or <code>propel update --dry-run</code> to see the plan first. If you want to change how one of Propel's skills behaves, write your own skill or agent next to it, or put the rule in <code>CLAUDE.md</code> as the sections below show.
+    </p>
 
     <!-- ── Custom Agents ── -->
     <h2 id="custom-agents">Adding Custom Agents</h2>
     <p>
-      Propel's agents are defaults. You can add project-specific agents in your own <code>.claude/agents/</code> directory &mdash; they take precedence over Propel's built-in agents.
+      Propel's agents are defaults. You can add project-specific agents to <code>.claude/agents/</code> beside Propel's built-in ones. Give each its own file name: a file at the same path as one of Propel's is Propel's file, and an update replaces it.
     </p>
 
     <h3 id="agent-example">Example: PyTorch Logic Auditor</h3>
@@ -344,7 +362,7 @@ description: >
     <!-- ── Auditor Dispatch ── -->
     <h2 id="auditor-dispatch">Customizing Auditor Dispatch</h2>
     <p>
-      The <code>subagent-driven-research/auditor-dispatch.md</code> file contains the dispatch rules. To add your project-specific auditor to the dispatch:
+      Propel's default dispatch rules live in <code>.claude/skills/subagent-driven-research/auditor-dispatch.md</code>. That is one of Propel's bundled files, so an update replaces any edit you make to it (after a backup). Read it to see the defaults; put your own rules in your files instead. To add your project-specific auditor to the dispatch:
     </p>
     <ol>
       <li>Add the agent file to your <code>.claude/agents/</code> directory</li>
@@ -398,6 +416,7 @@ See propel docs for the investigation -> design -> implement -> validate pipelin
     <a href="#profile-output" class="toc-h3">Output Files</a>
     <a href="#detection-details" class="toc-h3">What Gets Detected</a>
     <a href="#delta-updates">Delta Updates</a>
+    <a href="#your-files">Your Files and Propel's Files</a>
     <a href="#custom-agents">Adding Custom Agents</a>
     <a href="#agent-design" class="toc-h3">Agent Design Principles</a>
     <a href="#custom-skills">Adding Custom Skills</a>

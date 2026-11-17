@@ -406,7 +406,7 @@
     <!-- ── How Skills Are Injected ── -->
     <h2 id="injection">How Skills Are Injected</h2>
     <p>
-      Skills are injected into Claude's context via <strong>hooks on SessionStart</strong>. When a Propel session begins, the hook system reads the current mode from <code>.propel/mode.json</code> and injects the relevant skill instruction files as system context. The <code>using-propel</code> meta-skill is always injected regardless of mode &mdash; it handles routing to the correct skill based on what the user asks.
+      Skills are injected into Claude's context via <strong>hooks on SessionStart</strong>. When a Propel session begins (and again after <code>/clear</code> and compaction), the session-start hook injects the current mode and project state, the core principles, the Codex policy, and the full <code>using-propel</code> meta-skill, which routes each request to the right skill. Other skills are not injected up front: Claude Code lists them by description and loads one when its trigger matches.
     </p>
     <p>
       Each skill file lives in the <code>skills/</code> directory as a <code>SKILL.md</code> file with YAML frontmatter containing the skill name, description, and trigger patterns. The hook reads these files and includes them in Claude's context at session initialization.
