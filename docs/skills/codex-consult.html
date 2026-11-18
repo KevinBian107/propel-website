@@ -90,6 +90,7 @@
       <a href="../skills/retrospective.html" class="sidebar-link sub">Retrospective</a>
       <a href="../skills/monitor.html" class="sidebar-link sub">Monitor</a>
       <a href="../skills/check-progress.html" class="sidebar-link sub">Check Progress</a>
+      <a href="../skills/concise.html" class="sidebar-link sub">Concise</a>
       <a href="../skills/c-review.html" class="sidebar-link sub">C-Review</a>
       <a href="../skills/frontend-design.html" class="sidebar-link sub">Frontend Design</a>
       <a href="../skills/other.html" class="sidebar-link sub">Other Skills</a>
@@ -169,7 +170,7 @@
 
     <h2 id="step0">Step 0 — Should this consult happen?</h2>
 
-    <p>It fires at eight points and nowhere else:</p>
+    <p>It fires at nine points and nowhere else:</p>
     <table>
       <thead><tr><th>Point</th><th>Fires when</th></tr></thead>
       <tbody>
@@ -181,10 +182,11 @@
         <tr><td>Classification</td><td>A bug is about to be called code / design / config</td></tr>
         <tr><td>3-strike</td><td>The third attempt at the same approach has failed</td></tr>
         <tr><td>Retrospective</td><td>Conclusions are written, before they enter the registry</td></tr>
+        <tr><td>Writeup review</td><td>A finished written artifact outside <code>scratch/</code> with no consult of its own (a docs page, a long write-up outside a gate) has had a substantive <a href="concise.html">Concise</a> rewrite (about 30 or more changed prose lines). At Gate 1, Gate 2 and Retrospective the draft-versus-rewrite question joins that gate's consult instead: one call, both questions, which counts as the writeup review</td></tr>
       </tbody>
     </table>
     <p>
-      <strong>Not</strong> at Q0/Q1 &mdash; those are questions for you, not for a model &mdash; nor on mode selection, reads, renames, formatting, trivial diffs, or anything in <code>scratch/</code>.
+      <strong>Not</strong> at Q0/Q1 &mdash; those are questions for you, not for a model &mdash; nor on mode selection, reads, renames, formatting (except inside a writeup review), trivial diffs, chat replies, or <code>scratch/</code> working notes and edits. Gate 1, Gate 2 and Retrospective still review their own artifact wherever it lives: investigation READMEs and the registry are in <code>scratch/</code> and still get their consults. A standalone Writeup review never fires on <code>scratch/</code> files.
     </p>
 
 
@@ -221,6 +223,7 @@ CONSTRAINTS
       <li><strong>Don't bias the question.</strong> "Does this look right?" gets agreement. "Name the strongest counter-approach" gets a second opinion.</li>
       <li><strong>Omit Claude's position on self-authored material</strong> &mdash; a Gate 3 diff, or a design Claude proposed. Anchoring Codex to the author's reading of their own work throws away most of the value.</li>
       <li><strong>Inline the material.</strong> Codex doesn't share Claude's context, working memory, registry, or CLAUDE.md. A brief referencing "the design we discussed" produces a hallucinated review of a design Codex has never seen.</li>
+      <li><strong>Writeup review is the one exception to inlining.</strong> It passes two paths, the draft under <code>.propel/concise/</code> and the rewrite, for Codex to read itself, and asks for the answer under <code>Writeup review:</code>. Folded into a gate's consult, the gate question's material is still inlined, and the ledger records <code>--question "&lt;gate question&gt; + writeup review"</code>. Because Codex reads those files unredacted, the question is skipped (with a note) if either holds secrets, credentials or unpublished data.</li>
       <li><strong>Redact.</strong> Keys, tokens, unpublished data. If the brief can't be written without a secret, skip the consult and say why.</li>
     </ul>
 
