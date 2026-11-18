@@ -89,6 +89,7 @@
       <a href="skills/trainer-mode.html" class="sidebar-link sub">Trainer Mode</a>
       <a href="skills/retrospective.html" class="sidebar-link sub">Retrospective</a>
       <a href="skills/monitor.html" class="sidebar-link sub">Monitor</a>
+      <a href="skills/check-progress.html" class="sidebar-link sub">Check Progress</a>
       <a href="skills/c-review.html" class="sidebar-link sub">C-Review</a>
       <a href="skills/frontend-design.html" class="sidebar-link sub">Frontend Design</a>
       <a href="skills/other.html" class="sidebar-link sub">Other Skills</a>
@@ -191,9 +192,9 @@
     <table>
       <thead><tr><th>Hook</th><th>Event</th><th>What it does</th></tr></thead>
       <tbody>
-        <tr><td><code>session-start.sh</code></td><td><code>SessionStart</code> (startup, resume, <code>/clear</code>, compaction)</td><td>Injects the core principles, the dual-model policy, the full routing skill, the active mode, and any open investigations, as plain text. Registered as seven parts (state, core, codex, routing 1&ndash;4) because Claude Code cuts any single hook's output above ~10,000 characters to a short preview</td></tr>
+        <tr><td><code>session-start.sh</code></td><td><code>SessionStart</code> (startup, resume, <code>/clear</code>, compaction)</td><td>Injects the core principles, the dual-model policy, the full routing skill, the active mode, any open investigations, and the open tasks from the task ledger (earlier-session tasks are shown and asked about, never changed automatically), as plain text. Registered as eight parts (state, tasks, core, codex, routing 1&ndash;4) because Claude Code cuts any single hook's output above ~10,000 characters to a short preview</td></tr>
         <tr><td><code>working-memory.sh</code></td><td><code>SessionStart</code> (startup, resume, <code>/clear</code>, compaction)</td><td>Injects past experiments and architectures so nothing gets re-proposed</td></tr>
-        <tr><td><code>route.sh</code></td><td><code>UserPromptSubmit</code></td><td>Re-states the active mode, the Codex state, and six routing rules &mdash; every turn, so they don't decay as context fills</td></tr>
+        <tr><td><code>route.sh</code></td><td><code>UserPromptSubmit</code></td><td>Re-states the active mode, the Codex state, and six routing rules &mdash; every turn, so they don't decay as context fills. When tasks are open it adds one line: <code>tasks: N open in this session, M from earlier sessions &mdash; run check-progress</code></td></tr>
         <tr><td><code>auditor-dispatch.sh</code></td><td><code>PostToolUse</code> on <code>Edit|Write|MultiEdit|NotebookEdit</code></td><td>Looks at the file just written and states which auditors are now required</td></tr>
       </tbody>
     </table>

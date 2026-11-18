@@ -89,6 +89,7 @@
       <a href="../skills/trainer-mode.html" class="sidebar-link sub">Trainer Mode</a>
       <a href="../skills/retrospective.html" class="sidebar-link sub">Retrospective</a>
       <a href="../skills/monitor.html" class="sidebar-link sub">Monitor</a>
+      <a href="../skills/check-progress.html" class="sidebar-link sub">Check Progress</a>
       <a href="../skills/c-review.html" class="sidebar-link sub">C-Review</a>
       <a href="../skills/frontend-design.html" class="sidebar-link sub">Frontend Design</a>
       <a href="../skills/other.html" class="sidebar-link sub">Other Skills</a>
@@ -190,7 +191,7 @@
     <ol>
       <li><strong>Confirm the command</strong> &mdash; the exact approved string. Any permitted adjustment range is its entire discretion; it does not widen it.</li>
       <li><strong>Pre-flight.</strong> Output dir writable? Disk space? GPUs visible and free? Config parses? Entry point imports? Thirty seconds here beats a failure at minute forty.</li>
-      <li><strong>Launch detached</strong> in <code>screen</code> (or <code>tmux</code>), recording the session name and log path.</li>
+      <li><strong>Launch detached</strong> in <code>screen</code> (or <code>tmux</code>): the approved command goes verbatim into <code>.propel/runs/{NAME}.sh</code>, the task is recorded in the ledger first, and the run writes <code>.propel/runs/{NAME}.log</code> and, when it ends, its exit code to <code>.propel/runs/{NAME}.exit</code>.</li>
       <li><strong>Watch</strong> at widening intervals &mdash; first loss magnitude, NaN/Inf, the failure signatures above, throughput collapse, and silence. A process that stopped writing is as informative as one that crashed.</li>
       <li><strong>Fix or escalate</strong>, per the boundary. Every adjustment is reported with whether it was inside the approved discretion.</li>
       <li><strong>Three strikes.</strong> Same failure three times &rarr; stop fixing, report a hard blocker with everything tried. Three failures of one approach means the hypothesis about the cause is wrong, and the fourth variation won't find it.</li>

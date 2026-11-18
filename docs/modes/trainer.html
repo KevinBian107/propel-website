@@ -90,6 +90,7 @@
       <a href="../skills/trainer-mode.html" class="sidebar-link sub">Trainer Mode</a>
       <a href="../skills/retrospective.html" class="sidebar-link sub">Retrospective</a>
       <a href="../skills/monitor.html" class="sidebar-link sub">Monitor</a>
+      <a href="../skills/check-progress.html" class="sidebar-link sub">Check Progress</a>
       <a href="../skills/c-review.html" class="sidebar-link sub">C-Review</a>
       <a href="../skills/frontend-design.html" class="sidebar-link sub">Frontend Design</a>
       <a href="../skills/other.html" class="sidebar-link sub">Other Skills</a>
@@ -162,7 +163,7 @@
       </thead>
       <tbody>
         <tr><td><strong>Active Gates</strong></td><td><span class="gate-tag">G4</span> <small>(runtime bugs only)</small></td></tr>
-        <tr><td><strong>Active Skills</strong></td><td>trainer-mode, systematic-debugging (runtime only), context-hygiene, verification-before-completion, project-customization</td></tr>
+        <tr><td><strong>Active Skills</strong></td><td>trainer-mode, systematic-debugging (runtime only), context-hygiene, verification-before-completion, project-customization, check-progress</td></tr>
         <tr><td><strong>Not Available</strong></td><td>investigation, deep-research, paper-extraction, research-design, writing-plans, subagent-driven-research, research-validation, using-git-worktrees</td></tr>
         <tr><td><strong>Switch Command</strong></td><td><code>/switch trainer</code></td></tr>
       </tbody>
@@ -205,8 +206,8 @@
         <div class="workflow-step-content">
           <h4>Phase 3: Launch</h4>
           <p>Training is launched in a persistent <code>screen</code> (or <code>tmux</code>) session using the <strong>exact command the user confirmed</strong>:</p>
-          <pre><code>screen -dmS propel-train-{timestamp} bash -c '{COMMAND}; exec bash'</code></pre>
-          <p>Claude reports the session name and provides attach, detach, list, and kill commands. Critical rules: no modifications to the confirmed command, no temporary folders, no disabling of wandb or logging, no wrapper scripts.</p>
+          <pre><code>screen -dmS {NAME} bash -c 'set -o pipefail; bash -o pipefail .propel/runs/{NAME}.sh 2&gt;&amp;1 | tee .propel/runs/{NAME}.log; echo $? &gt; .propel/runs/{NAME}.exit'</code></pre>
+          <p>The confirmed command is written verbatim to <code>.propel/runs/{NAME}.sh</code>, and the run is recorded in the task ledger <em>before</em> launch. Output goes to <code>.propel/runs/{NAME}.log</code>; the exit code lands in <code>.propel/runs/{NAME}.exit</code> when the command ends, and the screen session closes (no <code>exec bash</code>). That exit file is how <a href="../skills/check-progress.html">check-progress</a> tells done from failed from lost. Claude reports the session name, task id, and attach, list, log, result and kill commands. Critical rules: no modifications to the confirmed command, no temporary folders, no disabling of wandb or logging, no wrapper scripts (beyond the command file itself).</p>
         </div>
       </div>
       <div class="workflow-step">
@@ -339,10 +340,12 @@ This changes [file:line]. Okay?"</code></pre>
 
 <span style="color:#60a5fa">Claude:</span> <span style="color:#fbbf24">[Phase 3 — Launch]</span>
         Training launched in screen session: propel-train-20260328-1430
+        Task:    t260328-143002-a1b2 (the check-progress skill lists it)
 
         Attach:  screen -r propel-train-20260328-1430
         Detach:  Ctrl+A, then D
         List:    screen -ls
+        Log:     tail -n 50 .propel/runs/propel-train-20260328-1430.log
         Kill:    screen -X -S propel-train-20260328-1430 quit
 
         Monitoring first 1000 steps...
@@ -359,8 +362,8 @@ This changes [file:line]. Okay?"</code></pre>
 
 <span style="color:#10b981">User:</span>  Yes.
 
-<span style="color:#60a5fa">Claude:</span> Fixed. Relaunching in the same screen session...
-        propel-train-20260328-1430 running. Monitoring...</code></pre>
+<span style="color:#60a5fa">Claude:</span> Fixed. Relaunching as a new run (the old task is closed as failed)...
+        propel-train-20260328-1512 running. Monitoring...</code></pre>
 
     <!-- ── Prev/Next ── -->
     <nav class="docs-pager">

@@ -90,6 +90,7 @@
       <a href="skills/trainer-mode.html" class="sidebar-link sub">Trainer Mode</a>
       <a href="skills/retrospective.html" class="sidebar-link sub">Retrospective</a>
       <a href="skills/monitor.html" class="sidebar-link sub">Monitor</a>
+      <a href="skills/check-progress.html" class="sidebar-link sub">Check Progress</a>
       <a href="skills/c-review.html" class="sidebar-link sub">C-Review</a>
       <a href="skills/frontend-design.html" class="sidebar-link sub">Frontend Design</a>
       <a href="skills/other.html" class="sidebar-link sub">Other Skills</a>
@@ -412,6 +413,11 @@ propel update             # pull Propel, reinstall if needed, refresh this proje
       <li>Check the plan for where you left off: <code>scratch/{investigation}/plan.md</code></li>
       <li>Continue from the "Next Steps" section</li>
     </ol>
+    <p>
+      Training runs, plan tasks and monitor loops still in flight are listed at the start of every session, from the task ledger in <code>.propel/tasks/</code>. Ask "what's running" or "where was I" and <a href="skills/check-progress.html">check-progress</a> shows open tasks plus recently finished ones, and asks what to do about anything left open from an earlier session. From a terminal:
+    </p>
+    <pre><code>propel tasks         # open tasks only: running, blocked, lost, unknown
+propel tasks --all   # plus finished tasks from the last 10 session files (--sessions N), within 14 days</code></pre>
 
     <div class="admonition tip">
       <div class="admonition-title">Context Hygiene</div>
