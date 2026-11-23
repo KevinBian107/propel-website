@@ -251,8 +251,8 @@ cd /path/to/your/project
 propel init</code></pre>
     <p><code>propel init</code>, from any of the three paths, does the same thing:</p>
     <ul>
-      <li>Installs Propel's skills, agents, commands, hooks and scripts into <code>.claude/</code> and records them in <code>.propel/manifest.json</code>. Files you added to <code>.claude/</code> yourself are never touched</li>
-      <li>Registers its hooks in <code>settings.local.json</code>, next to your permissions and your own hooks: session context and working memory on <code>SessionStart</code>, the per-turn routing card, and the <code>PostToolUse</code> auditor dispatch that fires after every source edit</li>
+      <li>Installs Propel's skills, agents, commands, hooks, core policy and scripts (the managed directories <code>skills/</code>, <code>agents/</code>, <code>commands/</code>, <code>hooks/</code>, <code>core/</code> and <code>scripts/</code>) into <code>.claude/</code> and records them in <code>.propel/manifest.json</code>. Files you added to <code>.claude/</code> yourself are never touched</li>
+      <li>Registers its hooks in <code>settings.local.json</code>, next to your permissions and your own hooks (if <code>settings.local.json</code> is a symlink, init writes through it and keeps the link): session context and working memory on <code>SessionStart</code>, the per-turn routing card, and the <code>PostToolUse</code> auditor dispatch that fires after every source edit</li>
       <li>Seeds <code>.propel/codex.json</code> with the dual-model layer enabled</li>
       <li>Adds <code>scratch/</code>, <code>sessions/</code>, <code>.propel/</code>, <code>.claude/</code>, and <code>propel/</code> to <code>.gitignore</code></li>
     </ul>
@@ -264,7 +264,10 @@ propel init</code></pre>
 propel update --dry-run   # preview; writes no working files (it may fetch from the remote)
 propel update             # pull Propel, reinstall if needed, refresh this project</code></pre>
     <p>
-      <code>propel update</code> runs <code>git pull --ff-only</code> in your Propel clone. It refuses if the clone has uncommitted changes to tracked files, and <code>--no-pull</code> skips the pull. It reinstalls the package when <code>pyproject.toml</code> or the version file changed, then re-runs <code>propel init</code> in the current project with the new code. <code>propel --version</code> prints the version you have installed.
+      <code>propel update</code> runs <code>git pull --ff-only</code> in your Propel clone. It refuses if the clone has uncommitted changes to tracked files, and <code>--no-pull</code> skips the pull. It reinstalls the package when either (a) its pull changed <code>pyproject.toml</code> or <code>__init__.py</code>, or (b) the installed package version differs from the version in the source, so it also catches a manual <code>git pull</code> or a run with <code>--no-pull</code>. A dependency change in <code>pyproject.toml</code> with no version bump, after a manual pull, is not detected; reinstall by hand in that case. It then re-runs <code>propel init</code> in the current project with the new code. <code>propel --version</code> prints the version you have installed.
+    </p>
+    <p>
+      Hook changes load when a Claude Code session starts. When <code>propel init</code> or <code>propel update</code> changes hook registrations, it prints a hint to restart any open Claude Code sessions, and a session still running the pre-split registration (one argument-less <code>session-start.sh</code>) also sees a notice asking for a restart the next time session start fires. <code>propel status</code> also warns when Propel paths under a symlink pointing outside <code>.claude/</code> were left alone, since init never writes outside <code>.claude/</code> through a symlink (the settings file is the one exception).
     </p>
     <table>
       <thead>
@@ -272,7 +275,7 @@ propel update             # pull Propel, reinstall if needed, refresh this proje
       </thead>
       <tbody>
         <tr><td><strong>Keeps</strong></td><td>Skills, agents, commands and hooks you added yourself; your <code>CLAUDE.md</code>; everything in <code>.propel/</code>; your permissions and your own hooks in <code>settings.local.json</code></td></tr>
-        <tr><td><strong>Replaces</strong></td><td>Propel's own bundled files, even ones you edited. The edited copy is backed up first and named in the output</td></tr>
+        <tr><td><strong>Replaces</strong></td><td>Propel's own bundled files, even ones you edited. Every replaced or removed file is backed up first, and each backup is named in the output</td></tr>
         <tr><td><strong>Removes</strong></td><td>Files Propel no longer ships, and Propel's own outdated hook registrations, both backed up</td></tr>
       </tbody>
     </table>

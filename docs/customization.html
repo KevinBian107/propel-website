@@ -228,7 +228,7 @@
       <thead><tr><th>File in <code>.claude/</code></th><th>What an update does</th></tr></thead>
       <tbody>
         <tr><td>A skill, agent, command or hook you added at a path Propel doesn't ship</td><td>Never touched: never rewritten, never deleted</td></tr>
-        <tr><td>One of Propel's bundled files, unedited</td><td>Replaced with the new version, or removed if Propel no longer ships it</td></tr>
+        <tr><td>One of Propel's bundled files, unedited</td><td>Replaced with the new version, or removed if Propel no longer ships it; backed up first either way</td></tr>
         <tr><td>One of Propel's bundled files that you edited</td><td>Replaced anyway (or removed, if retired). Your copy is backed up to <code>.propel/backup/&lt;timestamp&gt;/</code> first and named in the output</td></tr>
         <tr><td>A file of yours at a path a new Propel release starts shipping</td><td>Once a manifest exists (after your first update with this version), your file stays and Propel's copy is skipped with a warning naming the file. On the first update from an older install, a differing file at one of Propel's paths is backed up and replaced</td></tr>
       </tbody>

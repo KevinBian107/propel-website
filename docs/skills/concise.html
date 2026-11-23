@@ -162,7 +162,7 @@
         <tr><th>Trigger</th><th>Details</th></tr>
       </thead>
       <tbody>
-        <tr><td><strong>Manual</strong></td><td>"make this concise", "tighten this", "too long", "cut this down", "shorter", "trim this", "write this up", "clean up the README", "clean up the write-up"</td></tr>
+        <tr><td><strong>Manual</strong></td><td>"make this concise", "tighten this", "this is too long", "cut this down", "make it shorter", "trim this", "write this up", "clean up the README", "clean up the write-up"</td></tr>
         <tr><td><strong>Automatic</strong></td><td>A finished written artifact is about to be presented: the investigation write-up at Gate 1, the design doc at Gate 2, a retrospective entry, a docs page</td></tr>
         <tr><td><strong>Every turn</strong></td><td><code>route.sh</code> carries rule 7: "Claim first, then its evidence; cut narration and restatement; never drop evidence (concise skill)." This is how the rules reach ordinary replies</td></tr>
       </tbody>
@@ -185,14 +185,14 @@
     <h2 id="procedure">Finished Write-Ups &mdash; The Procedure</h2>
     <p>Run the script from the repo root: <code>bash .claude/scripts/claim-check.sh</code> in a project that uses Propel (<code>bash scripts/claim-check.sh</code> in Propel's own source tree).</p>
     <ol>
-      <li><strong>Save the draft</strong> with <code>claim-check.sh --save-draft &lt;artifact&gt;</code>. It copies the artifact under <code>.propel/concise/</code>, naming it after the artifact's repo-relative path with every <code>/</code> replaced by <code>__</code>, plus <code>.draft.md</code>, and prints that path: <code>scratch/2026-11-18-x/README.md</code> becomes <code>.propel/concise/scratch__2026-11-18-x__README.md.draft.md</code>. If a draft for that artifact is already pending, it refuses to overwrite it (exit 1): the earlier rewrite is finished and accepted first.</li>
-      <li><strong>Rewrite</strong> the artifact in place, by the five rules.</li>
+      <li><strong>Save the draft</strong> with <code>claim-check.sh --save-draft &lt;artifact&gt;</code>. It copies the artifact under <code>.propel/concise/</code>, naming it after the artifact's repo-relative path with every <code>/</code> replaced by <code>__</code>, plus <code>.draft.md</code>, and prints that path: <code>scratch/2026-11-18-x/README.md</code> becomes <code>.propel/concise/scratch__2026-11-18-x__README.md.draft.md</code>. If a draft for that artifact is already pending, it refuses to overwrite it (exit 1). A draft is <strong>stale</strong> only when its gate is visibly answered (in the conversation, or recorded in the artifact); it is deleted and replaced. Any other pending draft, including one from an earlier session or from before a <code>/clear</code>, is the <strong>baseline</strong>: it may be the only copy of the original text, so it is kept and the rewrite is checked against it.</li>
+      <li><strong>Rewrite</strong> the artifact in place, by the five rules. A template with a fixed section order (a registry entry, the investigation README, the Gate 2 summary) keeps that order; claim-first applies within each section.</li>
       <li><strong>Check</strong>: <code>claim-check.sh &lt;draft path&gt; &lt;artifact&gt;</code> reports every evidence token the rewrite dropped.</li>
       <li><strong>Restore</strong> every missing token and re-run until exit 0. Rule 2 has no exceptions: a missing item goes back in, never "removed X".</li>
       <li><strong>Read for meaning.</strong> Compare draft and rewrite claim by claim for what no script can see: a dropped "not" or "only", a lost caveat, a swapped result, a bare integer, a unit it doesn't know.</li>
       <li><strong>Codex compares draft and rewrite</strong>, if Codex is enabled (see <a href="#codex">below</a>). Each finding is verified against the two files before anything changes.</li>
-      <li><strong>Present</strong> the rewrite. The draft is kept until you accept the rewrite.</li>
-      <li><strong>Clean up.</strong> Once you accept it, the draft is deleted. A draft left behind blocks the next <code>--save-draft</code> of that artifact, which is how an unaccepted rewrite stays visible.</li>
+      <li><strong>Present</strong> the rewrite. The draft is kept until you accept the rewrite. For a gate write-up (Gate 1, Gate 2, retrospective), answering the gate question counts as accepting the rewrite; there is no separate &ldquo;accept the rewrite?&rdquo; question next to it.</li>
+      <li><strong>Clean up.</strong> Once you accept it (for a gate write-up: right after you answer the gate), the draft is deleted. A draft left behind blocks the next <code>--save-draft</code> of that artifact, which is how an unaccepted rewrite stays visible.</li>
     </ol>
 
     <h3 id="claim-check">claim-check.sh</h3>
@@ -200,7 +200,7 @@
     <pre><code>bash .claude/scripts/claim-check.sh FILE                # list FILE's evidence tokens, with counts
 bash .claude/scripts/claim-check.sh DRAFT REWRITE       # tokens DRAFT has that REWRITE lost
 bash .claude/scripts/claim-check.sh --save-draft FILE   # copy FILE to its draft path; never overwrites</code></pre>
-    <p>It extracts backtick spans, URLs (balanced parentheses kept), attribution tags (<code>[claude]</code>, <code>[codex]</code>, <code>[both]</code>, and qualified forms like <code>[codex &middot; unverified]</code>), <code>path:line</code> references, ratios (<code>125/125</code>, <code>0/0/0</code>), commit hashes, numbers that carry a decimal point, an exponent, a sign, a <code>%</code> or a unit (<code>91.2%</code>, <code>lr=3e-4</code>, <code>3 epochs</code>, <code>12 ms</code>), and results (<code>3 failed</code>, <code>120 passed</code>). Bare integers are not tokens. Reflowing a paragraph does not change a token.</p>
+    <p>It extracts backtick spans, URLs (balanced parentheses kept), attribution tags (<code>[claude]</code>, <code>[codex]</code>, <code>[both]</code>, and qualified forms like <code>[codex &middot; unverified]</code>), <code>path:line</code> references, ratios (<code>125/125</code>, <code>0/0/0</code>), commit hashes, numbers that carry a decimal point, an exponent, a <code>%</code> or a unit (<code>91.2%</code>, <code>lr=3e-4</code>, <code>3 epochs</code>, <code>12 ms</code>), and results (<code>3 failed</code>, <code>120 passed</code>). A sign alone does not make a number a token: a leading <code>+</code> or <code>-</code> is kept as part of a number that already qualifies (<code>-0.5</code>, <code>+3%</code>), but <code>-3</code> by itself is a bare integer. Bare integers are not tokens. Reflowing a paragraph does not change a token.</p>
     <table>
       <thead>
         <tr><th>Line</th><th>Meaning</th></tr>

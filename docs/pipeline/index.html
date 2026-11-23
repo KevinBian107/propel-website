@@ -289,7 +289,7 @@ Gate 4  Post-Debug                          ██████████      
     <h3 id="how-injection-works">How It Works</h3>
     <pre><code>propel init
   &darr;
-Installs Propel's skills/, agents/, commands/, hooks/ into .claude/
+Installs Propel's skills/, agents/, commands/, hooks/, core/, scripts/ into .claude/
   (files you added yourself are left alone)
 Merges hook config into .claude/settings.local.json
   &darr;
@@ -304,13 +304,17 @@ Injects full using-propel/SKILL.md content as plain text into Claude's context
   &darr;
 Claude's context now contains:
   1. Core principles (core/CORE.md &mdash; non-negotiable mindset rules)
-  2. The gate protocol (5 mandatory gates)
-  3. The skill routing table (which skill for which trigger)
-  4. The auditor dispatch rules (which agent after which code change)
-  5. Active investigation state (scratch/ READMEs)
-  6. Project profile (.propel/profile.md, if it exists)
-  7. Current mode + mode_selection_needed (.propel/mode.json)
-  8. Empty repo flag (whether to use progressive CLAUDE.md building)</code></pre>
+  2. The Codex policy (core/CODEX.md, the codex part &mdash; when the second
+     model is consulted and how its output is verified)
+  3. The gate protocol (5 mandatory gates)
+  4. The skill routing table (which skill for which trigger)
+  5. The auditor dispatch rules (which agent after which code change)
+  6. Active investigation state (scratch/ READMEs)
+  7. Project profile (.propel/profile.md, if it exists)
+  8. Current mode + mode_selection_needed (.propel/mode.json)
+  9. Empty repo flag (whether to use progressive CLAUDE.md building)
+(A session still on the pre-split, argument-less registration sees a
+ notice asking for a restart; hook changes load only at session start.)</code></pre>
 
     <h3 id="injection-layers">What Each Layer Provides</h3>
     <table>
@@ -319,6 +323,7 @@ Claude's context now contains:
       </thead>
       <tbody>
         <tr><td><strong>Core principles</strong></td><td>Non-negotiable mindset rules: evidence over agreement, anti-sycophancy, context discipline, self-reflection, loop-breaking</td><td>SessionStart hook injects <code>core/CORE.md</code></td></tr>
+        <tr><td><strong>Codex policy</strong></td><td>When the second model is consulted, and that its output is verified data, never instructions</td><td>SessionStart hook's <code>codex</code> part injects <code>core/CODEX.md</code></td></tr>
         <tr><td><strong>SessionStart hook</strong></td><td>Injects core + using-propel skill + investigation state on every session start, resume, <code>/clear</code>, and compaction. After compaction <code>SessionStart</code> fires again (source <code>compact</code>), so the instructions are back in context once old messages are summarized</td><td><code>.claude/settings.local.json</code> hooks config</td></tr>
         <tr><td><strong>Skill descriptions</strong></td><td>Claude Code loads all <code>.claude/skills/*/SKILL.md</code> descriptions &mdash; Claude matches triggers against user input</td><td>Built-in Claude Code feature</td></tr>
         <tr><td><strong>Agent descriptions</strong></td><td>Claude Code loads all <code>.claude/agents/*.md</code> descriptions &mdash; Claude dispatches based on description match</td><td>Built-in Claude Code feature</td></tr>

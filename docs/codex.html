@@ -329,6 +329,9 @@ seeing this.</code></pre>
       </tbody>
     </table>
     <p>
+      Codex is off when <code>enabled</code> in <code>.propel/codex.json</code> is <code>false</code>, <code>null</code> or <code>0</code>, or a string that, trimmed and lowercased, is <code>"false"</code>, <code>"0"</code>, <code>"off"</code>, <code>"no"</code> or empty. A missing key (or a missing file) means on. Every Propel script that reads the file applies the same rule.
+    </p>
+    <p>
       When disabled, gates, questioners and auditors all still fire. Only the second opinion goes away. Propel prints one <code>&#9671; Codex disabled &mdash; single-model gate.</code> line at the first gate of each session, so you always know which regime you're in, and then stops mentioning it.
     </p>
     <p>

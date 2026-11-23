@@ -206,9 +206,16 @@
       <div class="workflow-step">
         <div class="workflow-step-content">
           <h4>Phase 3: Launch</h4>
-          <p>Training is launched in a persistent <code>screen</code> (or <code>tmux</code>) session using the <strong>exact command the user confirmed</strong>:</p>
-          <pre><code>screen -dmS {NAME} bash -c 'set -o pipefail; bash -o pipefail .propel/runs/{NAME}.sh 2&gt;&amp;1 | tee .propel/runs/{NAME}.log; echo $? &gt; .propel/runs/{NAME}.exit'</code></pre>
-          <p>The confirmed command is written verbatim to <code>.propel/runs/{NAME}.sh</code>, and the run is recorded in the task ledger <em>before</em> launch. Output goes to <code>.propel/runs/{NAME}.log</code>; the exit code lands in <code>.propel/runs/{NAME}.exit</code> when the command ends, and the screen session closes (no <code>exec bash</code>). That exit file is how <a href="../skills/check-progress.html">check-progress</a> tells done from failed from lost. Claude reports the session name, task id, and attach, list, log, result and kill commands. Critical rules: no modifications to the confirmed command, no temporary folders, no disabling of wandb or logging, no wrapper scripts (beyond the command file itself).</p>
+          <p>Training is launched in a persistent <code>screen</code> (or <code>tmux</code>) session using the <strong>exact command the user confirmed</strong>, in one Bash call. <code>&lt;NAME&gt;</code> is the session name, <code>propel-train-YYYYmmdd-HHMMSS</code> (written <code>{NAME}</code> below), and <code>&lt;CMD&gt;</code> is the confirmed command:</p>
+          <pre><code>O=$PWD; R=$PWD; while [ "$R" != / ] &amp;&amp; [ ! -f "$R/.claude/scripts/task-queue.sh" ]; do R=$(dirname "$R"); done; [ -f "$R/.claude/scripts/task-queue.sh" ] &amp;&amp; cd "$R"
+[ ! -e .propel/runs/&lt;NAME&gt;.sh ] || { echo "&lt;NAME&gt; is taken, pick a new name"; exit 1; }
+mkdir -p .propel/runs &amp;&amp; printf 'cd %q || exit 1\n' "$O" &gt; .propel/runs/&lt;NAME&gt;.sh &amp;&amp; cat &gt;&gt; .propel/runs/&lt;NAME&gt;.sh &lt;&lt;'PROPEL_CMD'
+&lt;CMD&gt;
+PROPEL_CMD
+ID=$(bash .claude/scripts/task-queue.sh start --kind train --title "&lt;short title&gt;" --screen &lt;NAME&gt; --log .propel/runs/&lt;NAME&gt;.log --exit-file .propel/runs/&lt;NAME&gt;.exit --cmd '&lt;CMD&gt;') || ID="not tracked in the task ledger"
+screen -dmS &lt;NAME&gt; bash -c 'set -o pipefail; bash .propel/runs/&lt;NAME&gt;.sh 2&gt;&amp;1 | tee .propel/runs/&lt;NAME&gt;.log; echo $? &gt; .propel/runs/&lt;NAME&gt;.exit' || echo "launch failed"
+echo "task: $ID"</code></pre>
+          <p>The confirmed command is written verbatim to <code>.propel/runs/{NAME}.sh</code>, after a first line that <code>cd</code>s back to the directory the command was started from, so it runs where it would have run by hand. A name that is already taken is refused. The run is recorded in the task ledger <em>before</em> launch; if the ledger is unavailable, the run launches anyway as &ldquo;not tracked in the task ledger&rdquo;. <code>pipefail</code> applies only to the outer <code>| tee</code>, so the exit code is the command's, and pipelines inside your command behave exactly as written. Python output through <code>tee</code> may be block-buffered; Claude mentions <code>PYTHONUNBUFFERED=1</code> or <code>python -u</code>, but never edits the command. Output goes to <code>.propel/runs/{NAME}.log</code>; the exit code lands in <code>.propel/runs/{NAME}.exit</code> when the command ends, and the screen session closes (no <code>exec bash</code>). That exit file is how <a href="../skills/check-progress.html">check-progress</a> tells done from failed from lost. Claude reports the session name, task id, and attach, list, log, result and kill commands. Critical rules: no modifications to the confirmed command, no temporary folders, no disabling of wandb or logging, no wrapper scripts (beyond the command file itself).</p>
         </div>
       </div>
       <div class="workflow-step">
@@ -217,6 +224,7 @@
           <p>When training crashes, Claude reads the traceback, classifies the error as runtime or logic, and applies Gate 4 lite for runtime bugs:</p>
           <pre><code>"The error is [X] because [Y]. I'll fix it by [Z].
 This changes [file:line]. Okay?"</code></pre>
+          <p>The traceback comes from <code>tail -n 100 .propel/runs/{NAME}.log</code>, since the screen session closes when the command ends. After a fix, Claude relaunches as a <strong>new</strong> run with a fresh <code>{NAME}</code> and <code>--ref &lt;OLD_ID&gt;</code>, then closes the old task with <code>done &lt;OLD_ID&gt; --status failed</code>. A name is never reused, because the old <code>.exit</code> would be read as the new run's result.</p>
           <p>If the same error recurs after 2 fixes, Claude stops and reassesses rather than trying another variation.</p>
         </div>
       </div>
@@ -250,10 +258,10 @@ This changes [file:line]. Okay?"</code></pre>
         <tr><th>Action</th><th>Command</th></tr>
       </thead>
       <tbody>
-        <tr><td>Attach to session</td><td><code>screen -r propel-train-{timestamp}</code></td></tr>
+        <tr><td>Attach to session</td><td><code>screen -r {NAME}</code></td></tr>
         <tr><td>Detach from session</td><td><kbd>Ctrl+A</kbd>, then <kbd>D</kbd></td></tr>
         <tr><td>List all sessions</td><td><code>screen -ls</code></td></tr>
-        <tr><td>Kill a session</td><td><code>screen -X -S propel-train-{timestamp} quit</code></td></tr>
+        <tr><td>Kill a session</td><td><code>screen -X -S {NAME} quit</code> (writes no exit file, so the task shows as lost)</td></tr>
       </tbody>
     </table>
 
@@ -340,21 +348,23 @@ This changes [file:line]. Okay?"</code></pre>
 <span style="color:#10b981">User:</span>  Reconstruction loss below 0.05 by 50k steps.
 
 <span style="color:#60a5fa">Claude:</span> <span style="color:#fbbf24">[Phase 3 — Launch]</span>
-        Training launched in screen session: propel-train-20260328-1430
+        Training launched in screen session: propel-train-20260328-143000
         Task:    t260328-143002-a1b2 (the check-progress skill lists it)
 
-        Attach:  screen -r propel-train-20260328-1430
+        Attach:  screen -r propel-train-20260328-143000
         Detach:  Ctrl+A, then D
         List:    screen -ls
-        Log:     tail -n 50 .propel/runs/propel-train-20260328-1430.log
-        Kill:    screen -X -S propel-train-20260328-1430 quit
+        Command: .propel/runs/propel-train-20260328-143000.sh
+        Log:     tail -n 50 .propel/runs/propel-train-20260328-143000.log
+        Result:  .propel/runs/propel-train-20260328-143000.exit (exit code; appears when the command ends)
+        Kill:    screen -X -S propel-train-20260328-143000 quit   (writes no exit file, so the task shows as lost)
 
         Monitoring first 1000 steps...
 
 <span style="color:#10b981">User:</span>  It crashed. CUDA out of memory.
 
 <span style="color:#60a5fa">Claude:</span> <span style="color:#fbbf24">[Phase 4 — Runtime Debug]</span>
-        Reading traceback...
+        Reading traceback (tail -n 100 .propel/runs/propel-train-20260328-143000.log)...
 
         The error is OOM at model forward pass because batch_size=64
         exceeds A100 40GB VRAM for this model size. I'll fix it by
@@ -363,8 +373,9 @@ This changes [file:line]. Okay?"</code></pre>
 
 <span style="color:#10b981">User:</span>  Yes.
 
-<span style="color:#60a5fa">Claude:</span> Fixed. Relaunching as a new run (the old task is closed as failed)...
-        propel-train-20260328-1512 running. Monitoring...</code></pre>
+<span style="color:#60a5fa">Claude:</span> Fixed. Relaunching as a new run, propel-train-20260328-151200,
+        with --ref t260328-143002-a1b2. The old task is closed as failed.
+        Monitoring...</code></pre>
 
     <!-- ── Prev/Next ── -->
     <nav class="docs-pager">

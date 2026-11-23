@@ -315,7 +315,7 @@
         </tr>
         <tr>
           <td><a href="concise.html"><strong>concise</strong></a></td>
-          <td>"make this concise", "tighten this", "too long", "cut this down", "shorter", "write this up"; automatic before a finished write-up is presented</td>
+          <td>"make this concise", "tighten this", "this is too long", "cut this down", "make it shorter", "write this up"; automatic before a finished write-up is presented</td>
           <td><span class="mode-badge researcher">Researcher</span> <span class="mode-badge engineer">Engineer</span> <span class="mode-badge debugger">Debugger</span> <span class="mode-badge trainer">Trainer</span></td>
         </tr>
         <tr>
@@ -421,7 +421,7 @@
       Skills are injected into Claude's context via <strong>hooks on SessionStart</strong>. When a Propel session begins (and again after <code>/clear</code> and compaction), the session-start hook injects the current mode and project state, the core principles, the Codex policy, and the full <code>using-propel</code> meta-skill, which routes each request to the right skill. Other skills are not injected up front: Claude Code lists them by description and loads one when its trigger matches.
     </p>
     <p>
-      Each skill file lives in the <code>skills/</code> directory as a <code>SKILL.md</code> file with YAML frontmatter containing the skill name, description, and trigger patterns. The hook reads these files and includes them in Claude's context at session initialization.
+      Each skill file lives in the <code>skills/</code> directory as a <code>SKILL.md</code> file with YAML frontmatter containing the skill name, description, and trigger patterns. Of these, the hook reads only <code>skills/using-propel/SKILL.md</code> and includes it in Claude's context at session initialization; the other skill files are loaded on demand when their description matches.
     </p>
 
     <!-- ── Skill Categories Explained ── -->

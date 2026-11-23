@@ -164,7 +164,7 @@
       <tbody>
         <tr><td><strong>Manual</strong></td><td>"check progress", "what's running", "status of my jobs", "what's left", "where was I", "is my training done", "did my run finish"</td></tr>
         <tr><td><strong>Contextual</strong></td><td>The session starts with open tasks from an earlier session and your first message is about continuing ("let's continue", "pick up where we left off")</td></tr>
-        <tr><td><strong>Prompted</strong></td><td>Every turn with open tasks, <code>route.sh</code> adds one line: <code>tasks: N open in this session, M from earlier sessions &mdash; run check-progress</code></td></tr>
+        <tr><td><strong>Prompted</strong></td><td>Every turn with open tasks, <code>route.sh</code> adds one line: <code>tasks: N open in this session, M from earlier sessions &mdash; run check-progress</code>, or <code>tasks: N open &mdash; run check-progress</code> when there is no session id</td></tr>
       </tbody>
     </table>
 
