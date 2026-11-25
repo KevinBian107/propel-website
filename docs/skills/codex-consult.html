@@ -91,6 +91,7 @@
       <a href="../skills/monitor.html" class="sidebar-link sub">Monitor</a>
       <a href="../skills/check-progress.html" class="sidebar-link sub">Check Progress</a>
       <a href="../skills/concise.html" class="sidebar-link sub">Concise</a>
+      <a href="../skills/make-documentations.html" class="sidebar-link sub">Make Documentations</a>
       <a href="../skills/c-review.html" class="sidebar-link sub">C-Review</a>
       <a href="../skills/frontend-design.html" class="sidebar-link sub">Frontend Design</a>
       <a href="../skills/other.html" class="sidebar-link sub">Other Skills</a>
@@ -170,7 +171,7 @@
 
     <h2 id="step0">Step 0 — Should this consult happen?</h2>
 
-    <p>It fires at nine points and nowhere else:</p>
+    <p>It fires at ten points and nowhere else:</p>
     <table>
       <thead><tr><th>Point</th><th>Fires when</th></tr></thead>
       <tbody>
@@ -182,7 +183,8 @@
         <tr><td>Classification</td><td>A bug is about to be called code / design / config</td></tr>
         <tr><td>3-strike</td><td>The third attempt at the same approach has failed</td></tr>
         <tr><td>Retrospective</td><td>Conclusions are written, before they enter the registry</td></tr>
-        <tr><td>Writeup review</td><td>A finished written artifact outside <code>scratch/</code> with no consult of its own (a docs page, a long write-up outside a gate) has had a substantive <a href="concise.html">Concise</a> rewrite (about 30 or more changed prose lines). At Gate 1, Gate 2 and Retrospective the draft-versus-rewrite question joins that gate's consult instead: one call, both questions, which counts as the writeup review</td></tr>
+        <tr><td>Docs fidelity</td><td><a href="make-documentations.html">Make Documentations</a> changed a docs page by more than a trivial edit, before the pages are presented. Asks: "Here are the doc pages at &lt;paths&gt; and the code they describe. Name every claim the code contradicts or does not support, by page and heading, or say 'no additional findings'." The writeup-review question is folded in: one call, which counts as the writeup review for those pages. Never for <code>scratch/</code></td></tr>
+        <tr><td>Writeup review</td><td>A finished written artifact outside <code>scratch/</code> with no consult of its own (a docs page, a long write-up outside a gate) has had a substantive <a href="concise.html">Concise</a> rewrite (about 30 or more changed prose lines). At Gate 1, Gate 2, Retrospective and Docs fidelity the draft-versus-rewrite question joins that consult instead: one call, both questions, which counts as the writeup review</td></tr>
       </tbody>
     </table>
     <p>
@@ -207,7 +209,7 @@
   Project:   &lt;one line&gt;
   Decision:  &lt;what is being decided right now&gt;
   Material:  &lt;the design / diff / diagnosis, inlined&gt;
-  Paths:     &lt;writeup review only: draft path + rewrite path, for Codex to read&gt;
+  Paths:     &lt;writeup review: draft + rewrite; docs fidelity: pages + code&gt;
 
 CLAUDE'S POSITION
   &lt;2-4 lines — omitted when Claude wrote the thing being reviewed&gt;
@@ -226,7 +228,8 @@ CONSTRAINTS
       <li><strong>Don't bias the question.</strong> "Does this look right?" gets agreement. "Name the strongest counter-approach" gets a second opinion.</li>
       <li><strong>Omit Claude's position on self-authored material</strong> &mdash; a Gate 3 diff, or a design Claude proposed. Anchoring Codex to the author's reading of their own work throws away most of the value.</li>
       <li><strong>Inline the material.</strong> Codex doesn't share Claude's context, working memory, registry, or CLAUDE.md. A brief referencing "the design we discussed" produces a hallucinated review of a design Codex has never seen.</li>
-      <li><strong>Writeup review is the one exception to inlining.</strong> It passes two paths, the draft under <code>.propel/concise/</code> and the rewrite, for Codex to read itself, and asks for the answer under <code>Writeup review:</code>. Folded into a gate's consult, the gate question's material is still inlined, and the ledger records <code>--question "&lt;gate question&gt; + writeup review"</code>. Because Codex reads those files unredacted, the question is skipped (with a note) if either holds secrets, credentials or unpublished data.</li>
+      <li><strong>Docs fidelity also passes paths:</strong> the docs pages and the code they describe, which Codex reads itself; it is skipped (with a note) if a page or the code holds secrets, credentials or unpublished data.</li>
+      <li><strong>Writeup review is the other exception to inlining.</strong> It passes two paths, the draft under <code>.propel/concise/</code> and the rewrite, for Codex to read itself, and asks for the answer under <code>Writeup review:</code>. Folded into a gate's consult, the gate question's material is still inlined, and the ledger records <code>--question "&lt;gate question&gt; + writeup review"</code>. Because Codex reads those files unredacted, the question is skipped (with a note) if either holds secrets, credentials or unpublished data.</li>
       <li><strong>Redact.</strong> Keys, tokens, unpublished data. If the brief can't be written without a secret, skip the consult and say why.</li>
     </ul>
 
@@ -294,6 +297,8 @@ CONSTRAINTS
       <tbody>
         <tr><td><code>/disable-codex</code></td><td>Single-model for this project until re-enabled</td></tr>
         <tr><td><code>/enable-codex</code></td><td>Turn it back on, and re-check that the CLI is reachable</td></tr>
+        <tr><td><code>/disable-make-documentations</code></td><td>Stop the <a href="make-documentations.html#off">docs questions</a>, and with them the Docs fidelity consults they lead to; an explicit docs request still works</td></tr>
+        <tr><td><code>/enable-make-documentations</code></td><td>Turn the docs questions back on</td></tr>
       </tbody>
     </table>
     <p>

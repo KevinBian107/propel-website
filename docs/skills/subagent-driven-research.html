@@ -92,6 +92,7 @@
       <a href="../skills/monitor.html" class="sidebar-link sub">Monitor</a>
       <a href="../skills/check-progress.html" class="sidebar-link sub">Check Progress</a>
       <a href="../skills/concise.html" class="sidebar-link sub">Concise</a>
+      <a href="../skills/make-documentations.html" class="sidebar-link sub">Make Documentations</a>
       <a href="../skills/c-review.html" class="sidebar-link sub">C-Review</a>
       <a href="../skills/frontend-design.html" class="sidebar-link sub">Frontend Design</a>
       <a href="../skills/other.html" class="sidebar-link sub">Other Skills</a>
@@ -247,6 +248,8 @@ Moving to next component?"</code></pre>
  &mdash; disjunctive, not yes/no]</code></pre>
 
     <p>When a component's Gate 3 passes, its ledger entry is closed with <code>done &lt;id&gt; --status done</code>. If you stop or defer the component, it is marked <code>--status blocked</code> instead, so it stays open and shows up at the next session start.</p>
+
+    <p>When a component's audits pass and docs pages (under <code>docs/</code>, <code>documentation/</code>, or a README section) reference the changed files, <a href="make-documentations.html">Make Documentations</a> asks before writing anything. Its one question rides in the same question box as Gate 3: it names the pages and what each would cover, and offers to update all of them, update only the most important one, skip this time, or stop asking (the same as <code>/disable-make-documentations</code>). Only an update answer writes the pages, which are then checked by Concise, <code>doc-check.sh</code> and the Docs fidelity consult and presented to you. Pages are written to disk, never committed.</p>
 
     <div class="admonition note">
       <div class="admonition-title">Natural Pause Points</div>

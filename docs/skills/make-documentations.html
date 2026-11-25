@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Make Documentations &mdash; Propel Documentation</title>
+  <meta name="description" content="Make Documentations skill: present-tense docs pages in one style, checked by doc-check.sh and a Codex docs-fidelity consult that compares each page with the code it describes." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&family=Noto+Sans+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="../../assets/logo-c.svg" />
+  <link rel="stylesheet" href="../docs.css" />
+</head>
+<body>
+
+<header class="docs-header">
+  <button class="sidebar-toggle" aria-label="Toggle navigation">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+  </button>
+  <a href="../../index.html" class="docs-header-logo">
+    <img src="../../assets/logo-c.svg" alt="Propel" />
+    Propel
+    <span class="logo-tag">docs</span>
+  </a>
+  <nav class="docs-header-nav">
+    <a href="../../index.html">Home</a>
+    <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">GitHub</a>
+  </nav>
+  <div class="docs-header-search">
+    <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"/></svg>
+    Search
+    <kbd>/</kbd>
+  </div>
+</header>
+
+<div class="docs-layout">
+
+  <nav class="docs-sidebar" aria-label="Documentation navigation">
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Getting Started</div>
+      <a href="../index.html" class="sidebar-link">Overview</a>
+      <a href="../getting-started.html" class="sidebar-link">Installation &amp; Setup</a>
+      <a href="../core-principles.html" class="sidebar-link">Core Principles</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">How It Works</div>
+      <a href="../automation.html" class="sidebar-link">Automatic Dispatch</a>
+      <a href="../codex.html" class="sidebar-link">Codex &mdash; Two Models</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Pipeline</div>
+      <a href="../pipeline/index.html" class="sidebar-link">Pipeline Overview</a>
+      <a href="../pipeline/gates.html" class="sidebar-link">Gates &amp; Questioners</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Modes</div>
+      <a href="../modes/index.html" class="sidebar-link">Mode System</a>
+      <a href="../modes/researcher.html" class="sidebar-link sub">Researcher</a>
+      <a href="../modes/engineer.html" class="sidebar-link sub">Engineer</a>
+      <a href="../modes/debugger.html" class="sidebar-link sub">Debugger</a>
+      <a href="../modes/trainer.html" class="sidebar-link sub">Trainer</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Skills</div>
+      <a href="../skills/index.html" class="sidebar-link">Skills Overview</a>
+      <a href="../skills/codex-consult.html" class="sidebar-link sub">Codex Consult</a>
+      <a href="../skills/investigation.html" class="sidebar-link sub">Investigation</a>
+      <a href="../skills/research-design.html" class="sidebar-link sub">Research Design</a>
+      <a href="../skills/subagent-driven-research.html" class="sidebar-link sub">Implementation</a>
+      <a href="../skills/systematic-debugging.html" class="sidebar-link sub">Systematic Debugging</a>
+      <a href="../skills/research-validation.html" class="sidebar-link sub">Validation</a>
+      <a href="../skills/deep-research.html" class="sidebar-link sub">Deep Research</a>
+      <a href="../skills/think-deeply.html" class="sidebar-link sub">Think Deeply</a>
+      <a href="../skills/context-hygiene.html" class="sidebar-link sub">Context Hygiene</a>
+      <a href="../skills/trainer-mode.html" class="sidebar-link sub">Trainer Mode</a>
+      <a href="../skills/retrospective.html" class="sidebar-link sub">Retrospective</a>
+      <a href="../skills/monitor.html" class="sidebar-link sub">Monitor</a>
+      <a href="../skills/check-progress.html" class="sidebar-link sub">Check Progress</a>
+      <a href="../skills/concise.html" class="sidebar-link sub">Concise</a>
+      <a href="../skills/make-documentations.html" class="sidebar-link sub active">Make Documentations</a>
+      <a href="../skills/c-review.html" class="sidebar-link sub">C-Review</a>
+      <a href="../skills/frontend-design.html" class="sidebar-link sub">Frontend Design</a>
+      <a href="../skills/other.html" class="sidebar-link sub">Other Skills</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Agents &mdash; Auditors</div>
+      <a href="../agents/index.html" class="sidebar-link">Agents Overview</a>
+      <a href="../agents/paper-alignment-auditor.html" class="sidebar-link sub">Paper Alignment</a>
+      <a href="../agents/silent-bug-detector.html" class="sidebar-link sub">Silent Bug Detector</a>
+      <a href="../agents/jax-logic-auditor.html" class="sidebar-link sub">JAX Logic Auditor</a>
+      <a href="../agents/regression-guard.html" class="sidebar-link sub">Regression Guard</a>
+      <a href="../agents/data-flow-tracer.html" class="sidebar-link sub">Data Flow Tracer</a>
+      <a href="../agents/failure-mode-researcher.html" class="sidebar-link sub">Failure Mode Researcher</a>
+      <a href="../agents/env-researcher.html" class="sidebar-link sub">Env Researcher</a>
+      <a href="../agents/code-reviewer.html" class="sidebar-link sub">Code Reviewer</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Agents &mdash; Workers</div>
+      <a href="../agents/codex-bridge.html" class="sidebar-link sub">Codex Bridge</a>
+      <a href="../agents/investigator.html" class="sidebar-link sub">Investigator</a>
+      <a href="../agents/implementer.html" class="sidebar-link sub">Implementer</a>
+      <a href="../agents/spec-reviewer.html" class="sidebar-link sub">Spec Reviewer</a>
+      <a href="../agents/trainer-operator.html" class="sidebar-link sub">Trainer Operator</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Reference</div>
+      <a href="../customization.html" class="sidebar-link">Customization</a>
+      <a href="../recommended-plugins.html" class="sidebar-link">Plugins</a>
+      <a href="../pitfalls.html" class="sidebar-link">Common Pitfalls</a>
+    </div>
+
+  </nav>
+
+  <article class="docs-content">
+
+    <div class="breadcrumbs">
+      <a href="../index.html">Docs</a>
+      <span class="sep">&#8250;</span>
+      <a href="index.html">Skills</a>
+      <span class="sep">&#8250;</span>
+      Make Documentations
+    </div>
+
+    <h1 class="page-title">Make Documentations</h1>
+    <p class="page-subtitle">
+      Docs that describe the code as it is. Propel asks before it writes a page. Pages are written in one style, checked mechanically by <code>doc-check.sh</code>, and compared with the code by a second model before you see them.
+    </p>
+
+    <div class="admonition note">
+      <div class="admonition-title">The Docs State the Present</div>
+      <p style="margin-bottom: 0">Versioned docs hold the current design, results and status. History stays in <code>scratch/</code>: a page may say that history exists outside version control, but it never links into it and never copies text from it. Unbuilt work appears only as &ldquo;To build: &hellip;&rdquo;.</p>
+    </div>
+
+    <h2 id="overview">Overview</h2>
+    <p>
+      Make Documentations writes and updates a project's README, hub, section index pages, component and method pages, results write-ups and runbooks. It is active in all four modes. Its automatic triggers never write a page without your answer: each one asks a single question first, and <code>/disable-make-documentations</code> turns those questions off. Each page it writes goes through <a href="concise.html">Concise</a> and <code>doc-check.sh</code>; a page changed by more than a trivial edit then gets a Codex <strong>Docs fidelity</strong> consult (skipped, with one line, when Codex is off or unavailable) that names every claim the code contradicts or does not support. The skill writes pages to disk and never commits them.
+    </p>
+
+    <h2 id="triggers">When It Triggers</h2>
+    <p>An explicit request writes. Every automatic trigger <a href="#asks-first">asks first</a>.</p>
+    <table>
+      <thead>
+        <tr><th>Trigger</th><th>Details</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Manual</strong></td><td>"document this", "write the docs", "update the docs", "make documentation", "write a results page", "document the results", "write a runbook", "docs are stale". Skips the question about whether to write; if the scope is unclear, it asks which pages</td></tr>
+        <tr><td><strong>After Gate 3</strong></td><td><a href="subagent-driven-research.html">Implementation</a>: when a component's audits pass and docs pages reference the changed files, the docs question rides in the same question box as Gate 3</td></tr>
+        <tr><td><strong>After validation</strong></td><td><a href="research-validation.html">Validation</a>: when all gates pass and the docs have a results page for the component, the docs question rides in the same question box as the pass</td></tr>
+        <tr><td><strong>After a retrospective</strong></td><td><a href="retrospective.html">Retrospective</a>: when the entry changes what a results or runbook page states, the docs question is asked; if the fold-in question is asked at the same moment, it rides in the same question box</td></tr>
+        <tr><td><strong>After an edit</strong></td><td>The <a href="../automation.html#hooks">auditor-dispatch hook</a> adds a <code>[propel:docs]</code> line naming up to 3 pages under <code>docs/</code> or <code>documentation/</code> that mention the edited file. The line leads to the docs question, not to a write. With docs prompts off, the hook adds no line</td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="asks-first">It Asks Before Writing</h2>
+    <p>Each automatic trigger leads to one question in Claude Code's question UI, and no page is written until you answer it. The question names every page that would be created or updated and what each would cover. For example:</p>
+    <pre><code>Docs: 2 pages cover what this change touched.
+  docs/methods/&lt;component&gt;.md  the new &lt;input&gt; and its shape
+  docs/results/&lt;study&gt;.md      the headline number after this change
+
+  1. Update all 2 pages
+  2. Update only docs/methods/&lt;component&gt;.md
+  3. Skip this time
+  4. Stop asking (same as /disable-make-documentations)</code></pre>
+    <table>
+      <thead>
+        <tr><th>Answer</th><th>What happens</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Update all N pages</strong></td><td>Writes every named page, then runs <a href="#procedure">the procedure</a>: Concise, <code>doc-check.sh</code>, the Docs fidelity consult, and the pages are presented</td></tr>
+        <tr><td><strong>Update only the most important page</strong></td><td>The same, for that one page</td></tr>
+        <tr><td><strong>Skip this time</strong></td><td>No page is written</td></tr>
+        <tr><td><strong>Stop asking</strong></td><td>Same as <code>/disable-make-documentations</code>: no page is written, and Propel stops asking about docs in this project until you <a href="#off">turn the prompts back on</a></td></tr>
+      </tbody>
+    </table>
+    <p>When a gate question is asked at the same moment, the docs question rides in the same question box, so one round of answers covers both. Only &ldquo;Update all&rdquo; or &ldquo;Update only&rdquo; writes a page.</p>
+    <p>An explicit request (&ldquo;document this&rdquo;, &ldquo;write the docs&rdquo;) skips the question about whether to write, because the request already answers it. If the request leaves the scope unclear, the one question is which pages.</p>
+
+    <h2 id="off">Turning the Prompts Off</h2>
+    <table>
+      <thead>
+        <tr><th>Command</th><th>Effect</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>/disable-make-documentations</code></td><td>Writes <code>{"enabled": false}</code> to <code>.propel/docs.json</code>. Propel never asks about docs or documents automatically until the prompts are turned back on</td></tr>
+        <tr><td><code>/enable-make-documentations</code></td><td>Writes <code>{"enabled": true}</code> to <code>.propel/docs.json</code>. The automatic triggers ask again</td></tr>
+      </tbody>
+    </table>
+    <p>The setting belongs to the project and persists across conversations, like <a href="../codex.html#controls"><code>/disable-codex</code></a>. While it is off:</p>
+    <ul>
+      <li>the auditor-dispatch hook adds no <code>[propel:docs]</code> line;</li>
+      <li>the per-turn routing card from <code>route.sh</code> shows a <code>docs prompts: off</code> line, so the model stays quiet about docs;</li>
+      <li>the first trigger in a session prints one line: <code>&#9671; Docs prompts off &mdash; /enable-make-documentations to turn them back on.</code></li>
+      <li>an explicit request for docs still works.</li>
+    </ul>
+    <p>Off values follow the <a href="../codex.html#controls">Codex rule</a>: the prompts are off when <code>enabled</code> is <code>false</code>, <code>null</code> or <code>0</code>, or a string that, trimmed and lowercased, is <code>"false"</code>, <code>"0"</code>, <code>"off"</code>, <code>"no"</code> or empty. A missing file means on.</p>
+
+    <h2 id="contract">The Style Contract</h2>
+    <table>
+      <thead>
+        <tr><th>#</th><th>Rule</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td><strong>Two layers.</strong> Docs hold the present; <code>scratch/</code> holds history. No links into <code>scratch/</code>.</td></tr>
+        <tr><td>2</td><td><strong>Layered entry points.</strong> README &rarr; hub &rarr; section index pages (a paragraph and a Page | Question table) &rarr; leaf pages, one per component, method, dataset, metric, results write-up or runbook.</td></tr>
+        <tr><td>3</td><td><strong>One leaf anatomy.</strong> H1 &ldquo;Name: essence&rdquo;, a 3-6 sentence overview, 3-8 noun- or question-named sections, optional known limits, references, and a dated <strong>Status</strong> with a 2-3 sentence <strong>Why this design</strong> at the bottom.</td></tr>
+        <tr><td>4</td><td><strong>A choice carries its reason as a consequence:</strong> &ldquo;&lt;choice&gt;, so that &lt;inference&gt;; a failure would mean &lt;x&gt;, not &lt;y&gt;.&rdquo;</td></tr>
+        <tr><td>5</td><td><strong>No number stands alone.</strong> Its baseline, floor or ceiling sits beside it, with n, seeds and interval status.</td></tr>
+        <tr><td>6</td><td><strong>Calibrated claims.</strong> Observation first, then &ldquo;our reading is&rdquo;. Study-wide limits go in the README and hub too.</td></tr>
+        <tr><td>7</td><td><strong>Checkable code fidelity.</strong> Resolving relative links, backticked paths and function names in a &ldquo;Code:&rdquo; paragraph, named tests, docstrings that link back. No line numbers.</td></tr>
+        <tr><td>8</td><td><strong>Config pages</strong> show an annotated tree, one config in full, a key table, what raises instead of defaulting, drift between code defaults and recorded runs, and a precedence rule.</td></tr>
+        <tr><td>9</td><td><strong>Shapes inline</strong> as <code>[B, T, D]</code> where a tensor is transformed; a silent pitfall is named with the assertion that guards it.</td></tr>
+        <tr><td>10</td><td><strong>Results pages read like short papers:</strong> numbered questions, claim-stating headings, one captioned figure per claim, a shared &ldquo;How to read the figures&rdquo; block, a numbered discussion.</td></tr>
+        <tr><td>11</td><td><strong>Plain tone.</strong> First person plural, no emoji, no marketing, no TODO/TBD, ASCII diagrams; a superseded design gets one sentence.</td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="page-types">Page Types</h2>
+    <p>The skill carries a template for each page type, with generic placeholders only.</p>
+    <table>
+      <thead>
+        <tr><th>Page</th><th>What it holds</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Project README</td><td>What the project is and its main result beside a baseline, study-wide limits, where to start, a quick start, a dated status</td></tr>
+        <tr><td>Hub page</td><td>How the docs are organized, study-wide limits, a Section | Question table, conventions</td></tr>
+        <tr><td>Section index</td><td>One paragraph with an up-link and a Page | Question table</td></tr>
+        <tr><td>Component or method</td><td>Overview, inputs and outputs with a Shape (dtype) table, how it works, a reader's question, known limits, references, Code and Tests paragraphs, Status and Why this design</td></tr>
+        <tr><td>Results write-up</td><td>Overview with the headline number beside its baseline, how to read the figures, numbered claim-stating questions with captioned figures, a numbered discussion, known limits</td></tr>
+        <tr><td>Runbook or config</td><td>Config tree, one config in full, a key table, what raises instead of defaulting, drift and precedence, the commands to run</td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="procedure">The Procedure</h2>
+    <ol>
+      <li><strong>Find the docs root:</strong> an existing <code>docs/</code> or <code>documentation/</code>, otherwise the README. If there is none, one question: create <code>docs/</code> with a hub page, or keep it to a README section, with what each costs.</li>
+      <li><strong>Pick the pages:</strong> the one you asked for, or the pages that cover the changed files.</li>
+      <li><strong>Ask, unless you asked:</strong> on an automatic trigger, the <a href="#asks-first">docs question</a>; the procedure continues only after &ldquo;Update all&rdquo; or &ldquo;Update only&rdquo;. An explicit request skips it, or asks which pages when its scope is unclear.</li>
+      <li><strong>Write or update them</strong> from the templates: present tense, no <code>scratch/</code> paths, code paths in a &ldquo;Code:&rdquo; paragraph, the dated Status and Why this design rewritten together with the body.</li>
+      <li><strong>Run <a href="concise.html">Concise</a></strong> on each page: save the draft, rewrite, check with <code>claim-check.sh</code>.</li>
+      <li><strong>Run <code>doc-check.sh</code></strong> on the pages and fix every line it prints.</li>
+      <li><strong>Docs fidelity consult</strong> when a page changed by more than a trivial edit (see <a href="#fidelity">below</a>).</li>
+      <li><strong>Present</strong> the pages with the fidelity card. You accept them or edit them.</li>
+    </ol>
+
+    <h3 id="doc-check">doc-check.sh</h3>
+    <p>A bash-and-awk script (no <code>python3</code>, no network), run from the repo root:</p>
+    <pre><code>bash .claude/scripts/doc-check.sh [--root DIR] FILE...</code></pre>
+    <table>
+      <thead>
+        <tr><th>Kind</th><th>Reported when</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>link</code></td><td>A relative link's target does not exist (resolved from the page's directory; a leading <code>/</code> from the root)</td></tr>
+        <tr><td><code>anchor</code></td><td>A <code>#anchor</code> into a <code>.md</code> page matches none of its headings, slugged GitHub-style</td></tr>
+        <tr><td><code>path</code></td><td>A backticked repo path (contains <code>/</code>, ends in a file extension or <code>/</code>) does not exist under the root</td></tr>
+        <tr><td><code>scratch</code></td><td>Any link, backticked path or bare path into <code>scratch/</code></td></tr>
+        <tr><td><code>marker</code></td><td><code>TODO</code>, <code>TBD</code> or <code>FIXME</code> as a word</td></tr>
+        <tr><td><code>emoji</code></td><td>Any emoji</td></tr>
+        <tr><td><code>status</code></td><td>A leaf page (anything but <code>README.md</code> and <code>index.md</code>) has no <strong>Status</strong> line with a YYYY-MM-DD date</td></tr>
+      </tbody>
+    </table>
+    <p>Each problem is one line, <code>FILE:LINE: KIND: DETAIL</code>. Fenced code blocks are exempt from every check except emoji. Exit 0 means clean, 1 means problems were found, 2 is a usage error.</p>
+
+    <h2 id="fidelity">The Docs Fidelity Consult</h2>
+    <p>The last step is a Codex consult, announced like every other, with two questions in one call:</p>
+    <ul>
+      <li>&ldquo;Here are the doc pages at &lt;paths&gt; and the code they describe. Name every claim the code contradicts or does not support, by page and heading, or say 'no additional findings'.&rdquo;</li>
+      <li>The <a href="concise.html#codex">writeup-review question</a>, comparing each page's draft with its rewrite. This call counts as the writeup review for those pages.</li>
+    </ul>
+    <p>Both questions pass paths, which Codex reads itself, so the consult is skipped (and Claude says so) if a page or the code holds secrets, credentials or unpublished data. It never fires for <code>scratch/</code> or a trivial edit. Findings come back verified and attributed; see <a href="codex-consult.html">Codex Consult</a>.</p>
+
+    <h2 id="guardrails">Guardrails</h2>
+    <table>
+      <thead>
+        <tr><th>Guardrail</th><th>Why</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Never write a page on an automatic trigger without an answer</td><td>Which pages change is your decision; the trigger only finds the pages that may be stale.</td></tr>
+        <tr><td>Never document unbuilt work, except as &ldquo;To build: &hellip;&rdquo;</td><td>A page that describes a plan as if it were code is the drift this skill exists to prevent.</td></tr>
+        <tr><td>Never copy text from <code>scratch/</code></td><td>History is written for the session it came from; the docs restate the present from the code.</td></tr>
+        <tr><td>A superseded design gets one sentence</td><td>The current design stays readable; version history holds the rest.</td></tr>
+        <tr><td>Rewrite Status and Why this design with the body</td><td>A Status box that drifts from the body is the style's most common failure.</td></tr>
+        <tr><td>Never present a page whose <code>doc-check.sh</code> run did not exit 0</td><td>Broken links and missing paths are cheap to find mechanically.</td></tr>
+        <tr><td>Never commit</td><td>Pages are written to disk; what goes into version control is your decision.</td></tr>
+      </tbody>
+    </table>
+
+    <nav class="docs-pager">
+      <a href="concise.html">
+        <span class="pager-label">&larr; Previous</span>
+        <span class="pager-title">Concise</span>
+      </a>
+      <a href="codex-consult.html" class="next">
+        <span class="pager-label">Next &rarr;</span>
+        <span class="pager-title">Codex Consult</span>
+      </a>
+    </nav>
+
+    <footer class="docs-footer">
+      <p>
+        <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">Propel</a> is open source under the MIT License.
+        Built by <a href="https://kbian.org" target="_blank" rel="noopener">Kaiwen Bian</a> &amp; <a href="https://yuertang.dev/" target="_blank" rel="noopener">Yuer Tang</a>.
+      </p>
+    </footer>
+
+  </article>
+
+  <aside class="docs-toc">
+    <div class="docs-toc-title">On This Page</div>
+    <a href="#overview">Overview</a>
+    <a href="#triggers">When It Triggers</a>
+    <a href="#asks-first">It Asks Before Writing</a>
+    <a href="#off">Turning the Prompts Off</a>
+    <a href="#contract">The Style Contract</a>
+    <a href="#page-types">Page Types</a>
+    <a href="#procedure">The Procedure</a>
+    <a href="#doc-check" class="toc-h3">doc-check.sh</a>
+    <a href="#fidelity">The Docs Fidelity Consult</a>
+    <a href="#guardrails">Guardrails</a>
+  </aside>
+
+</div>
+
+<script src="../docs.js"></script>
+</body>
+</html>

@@ -148,7 +148,7 @@
     <div class="features-grid">
       <div class="feature-card">
         <h3>Where it fires</h3>
-        <p>Gate 0 scope, Gate 1 findings, Gate 2 design, Gate 3 audit, Gate 4 diagnosis, bug classification, 3-strike breaks, retrospective conclusions, and writeup review of a finished write-up. Not on trivia &mdash; over-firing turns the announcement into noise, which is worse than not firing at all.</p>
+        <p>Gate 0 scope, Gate 1 findings, Gate 2 design, Gate 3 audit, Gate 4 diagnosis, bug classification, 3-strike breaks, retrospective conclusions, docs fidelity (docs pages checked against the code), and writeup review of a finished write-up. Not on trivia &mdash; over-firing turns the announcement into noise, which is worse than not firing at all.</p>
       </div>
       <div class="feature-card">
         <h3>What it never does</h3>
@@ -223,6 +223,7 @@
         <tr><td>Any gate about to be presented</td><td>A Codex consult via <code>codex-bridge</code>, verified against the repo</td></tr>
         <tr><td>An approved plan</td><td><code>implementer</code> then <code>spec-reviewer</code>, one component at a time</td></tr>
         <tr><td>Any source edit</td><td>A hook names the required auditors &mdash; the dispatch is deterministic, not remembered</td></tr>
+        <tr><td>A change that passed its gate, when docs pages cover it</td><td>One <code>make-documentations</code> question, in the gate's question box: update the pages, only the most important one, skip, or stop asking. Pages it writes are checked against the code by Codex and never committed; <code>/disable-make-documentations</code> turns the question off</td></tr>
         <tr><td>An approved training command</td><td><code>trainer-operator</code>, which keeps thousands of log lines out of your session</td></tr>
         <tr><td>Three failed attempts</td><td>The 3-strike break: stop, and ask what assumption all three share</td></tr>
       </tbody>
@@ -233,7 +234,7 @@
     </blockquote>
 
     <p>
-      Twenty-two skills and thirteen subagents sit behind that table. You never name one &mdash; but if you want to see exactly what exists and what triggers it, the full references are in the documentation:
+      Twenty-three skills and thirteen subagents sit behind that table. You never name one &mdash; but if you want to see exactly what exists and what triggers it, the full references are in the documentation:
       <a href="docs/skills/index.html">all skills</a>, by category, with triggers and the modes each is active in &middot;
       <a href="docs/agents/index.html">all agents</a>, split into read-only auditors and the workers that do the building.
     </p>
@@ -423,11 +424,15 @@
     <pre><code>git clone https://github.com/KevinBian107/propel.git
 cd propel
 
-pip install -e .      # inside an activated conda env or virtualenv
-propel                # setup: browser page locally, terminal prompts on a cluster</code></pre>
+# one of:
+pip install -e .                                              # inside an activated conda env or virtualenv
+uv venv &amp;&amp; source .venv/bin/activate &amp;&amp; uv pip install -e .   # a uv venv in the clone
+uv tool install --editable .                                  # uv, isolated, propel on PATH everywhere
+
+propel   # setup: browser page locally, terminal prompts on a cluster</code></pre>
 
     <p>
-      This is an editable install, so edits to the repo take effect immediately. Run it inside an activated conda env or virtualenv. Against a Homebrew or system Python, pip fails with <code>externally-managed-environment</code> and leaves you without the command.
+      All three are editable installs, so edits to the repo take effect immediately, and <code>propel update</code> keeps whichever you chose up to date. With pip, work inside an activated conda env or virtualenv: against a Homebrew or system Python, pip fails with <code>externally-managed-environment</code> and leaves you without the command.
     </p>
 
     <p>

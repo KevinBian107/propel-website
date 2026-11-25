@@ -91,6 +91,7 @@
       <a href="skills/monitor.html" class="sidebar-link sub">Monitor</a>
       <a href="skills/check-progress.html" class="sidebar-link sub">Check Progress</a>
       <a href="skills/concise.html" class="sidebar-link sub">Concise</a>
+      <a href="skills/make-documentations.html" class="sidebar-link sub">Make Documentations</a>
       <a href="skills/c-review.html" class="sidebar-link sub">C-Review</a>
       <a href="skills/frontend-design.html" class="sidebar-link sub">Frontend Design</a>
       <a href="skills/other.html" class="sidebar-link sub">Other Skills</a>
@@ -181,7 +182,8 @@
         <tr><td><strong>Bug classification</strong></td><td>"Argue against this classification."</td></tr>
         <tr><td><strong>3-strike break</strong></td><td>"Three attempts failed. What assumption do all three share?"</td></tr>
         <tr><td><strong>Retrospective</strong></td><td>"Which of these conclusions does the evidence not actually support?"</td></tr>
-        <tr><td><strong>Writeup review</strong> &mdash; finished docs page or long write-up outside <code>scratch/</code>, with no consult of its own, rewritten by about 30 or more prose lines</td><td>"Compare the draft and the rewrite: is any claim, caveat or evidence item lost or changed, and where does a reader meet evidence before the claim it supports?" At Gate 1, Gate 2 and Retrospective this question joins that gate's consult instead (one call). It is the only question that passes file paths rather than inlined material, and it is skipped if either file holds secrets. See <a href="skills/concise.html">Concise</a>.</td></tr>
+        <tr><td><strong>Docs fidelity</strong> &mdash; end of <a href="skills/make-documentations.html">Make Documentations</a>, when a docs page changed by more than a trivial edit; never <code>scratch/</code></td><td>"Here are the doc pages at &lt;paths&gt; and the code they describe. Name every claim the code contradicts or does not support, by page and heading, or say 'no additional findings'." The writeup-review question is folded in: one call. Like the writeup review, it passes paths, and it is skipped if a page or the code holds secrets.</td></tr>
+        <tr><td><strong>Writeup review</strong> &mdash; finished docs page or long write-up outside <code>scratch/</code>, with no consult of its own, rewritten by about 30 or more prose lines</td><td>"Compare the draft and the rewrite: is any claim, caveat or evidence item lost or changed, and where does a reader meet evidence before the claim it supports?" At Gate 1, Gate 2, Retrospective and Docs fidelity this question joins that consult instead (one call). It and Docs fidelity are the questions that pass file paths rather than inlined material, and it is skipped if either file holds secrets. See <a href="skills/concise.html">Concise</a>.</td></tr>
       </tbody>
     </table>
     <p>
@@ -320,12 +322,14 @@ seeing this.</code></pre>
 
     <h2 id="controls">Turning It Off</h2>
 
-    <p>There is no invoke command, because there is nothing to invoke. The only two controls are switches:</p>
+    <p>There is no invoke command, because there is nothing to invoke. The only controls are switches:</p>
     <table>
       <thead><tr><th>Command</th><th>Effect</th></tr></thead>
       <tbody>
         <tr><td><code>/disable-codex</code></td><td>Single-model for this project until re-enabled. Writes <code>{"enabled": false}</code> to <code>.propel/codex.json</code>.</td></tr>
         <tr><td><code>/enable-codex</code></td><td>Turn the dual-model layer back on, and re-check whether the CLI is actually reachable.</td></tr>
+        <tr><td><code>/disable-make-documentations</code></td><td>Stop the <a href="skills/make-documentations.html#off">docs questions</a> for this project, and with them the Docs fidelity consults they lead to; an explicit docs request still works. Writes <code>{"enabled": false}</code> to <code>.propel/docs.json</code>.</td></tr>
+        <tr><td><code>/enable-make-documentations</code></td><td>Turn the docs questions back on.</td></tr>
       </tbody>
     </table>
     <p>
