@@ -91,6 +91,7 @@
       <a href="skills/monitor.html" class="sidebar-link sub">Monitor</a>
       <a href="skills/check-progress.html" class="sidebar-link sub">Check Progress</a>
       <a href="skills/concise.html" class="sidebar-link sub">Concise</a>
+      <a href="skills/make-documentations.html" class="sidebar-link sub">Make Documentations</a>
       <a href="skills/c-review.html" class="sidebar-link sub">C-Review</a>
       <a href="skills/frontend-design.html" class="sidebar-link sub">Frontend Design</a>
       <a href="skills/other.html" class="sidebar-link sub">Other Skills</a>
@@ -174,7 +175,8 @@
         <tr><td>Findings assembled</td><td>Codex consult, then Gate 1</td></tr>
         <tr><td>Design complete</td><td>Codex consult, then Gate 2</td></tr>
         <tr><td>An approved plan</td><td><a href="agents/implementer.html"><code>implementer</code></a>, then <a href="agents/spec-reviewer.html"><code>spec-reviewer</code></a>, one component at a time</td></tr>
-        <tr><td>Any source edit</td><td>A <code>PostToolUse</code> hook names the required auditors</td></tr>
+        <tr><td>Any source edit</td><td>A <code>PostToolUse</code> hook names the required auditors, and any docs pages that mention the file (unless docs prompts are off)</td></tr>
+        <tr><td>Audits pass, validation passes or a retrospective is accepted while docs cover the change, or the edit hook names docs pages</td><td>One <a href="skills/make-documentations.html#asks-first"><code>make-documentations</code> question</a>, in the same question box as a gate question asked then: update all the pages, only the most important one, skip this time, or stop asking. Only an update answer writes pages, followed by a Docs fidelity Codex consult. <code>/disable-make-documentations</code> turns the question off</td></tr>
         <tr><td>An approved training command</td><td><a href="agents/trainer-operator.html"><code>trainer-operator</code></a>, in its own context</td></tr>
         <tr><td>A root cause identified</td><td>Codex consult, then Gate 4</td></tr>
         <tr><td>Three failed attempts</td><td>The 3-strike break: stop, and ask what assumption all three share</td></tr>
@@ -195,12 +197,12 @@
       <tbody>
         <tr><td><code>session-start.sh</code></td><td><code>SessionStart</code> (startup, resume, <code>/clear</code>, compaction)</td><td>Injects the core principles, the dual-model policy, the full routing skill, the active mode, any open investigations, and the open tasks from the task ledger (earlier-session tasks are shown and asked about, never changed automatically), as plain text. Registered as eight parts (state, tasks, core, codex, routing 1&ndash;4) because Claude Code cuts any single hook's output above ~10,000 characters to a short preview. A session still running the pre-split hook registration (one argument-less <code>session-start.sh</code>) sees a notice asking for a restart the next time session start fires (<code>/clear</code>, compaction, resume); otherwise the restart hint is printed in the terminal by <code>propel init</code> / <code>propel update</code></td></tr>
         <tr><td><code>working-memory.sh</code></td><td><code>SessionStart</code> (startup, resume, <code>/clear</code>, compaction)</td><td>Injects past experiments and architectures so nothing gets re-proposed</td></tr>
-        <tr><td><code>route.sh</code></td><td><code>UserPromptSubmit</code></td><td>Re-states the active mode, the Codex state, and seven routing rules (the seventh: claim first, then its evidence; never drop evidence) &mdash; every turn, so they don't decay as context fills. When tasks are open it adds one line: <code>tasks: N open in this session, M from earlier sessions &mdash; run check-progress</code>, or <code>tasks: N open &mdash; run check-progress</code> when there is no session id</td></tr>
-        <tr><td><code>auditor-dispatch.sh</code></td><td><code>PostToolUse</code> on <code>Edit|Write|MultiEdit|NotebookEdit</code></td><td>Looks at the file just written and states which auditors are now required</td></tr>
+        <tr><td><code>route.sh</code></td><td><code>UserPromptSubmit</code></td><td>Re-states the active mode, the Codex state, and seven routing rules (the seventh: claim first, then its evidence; never drop evidence) &mdash; every turn, so they don't decay as context fills. When tasks are open it adds one line: <code>tasks: N open in this session, M from earlier sessions &mdash; run check-progress</code>, or <code>tasks: N open &mdash; run check-progress</code> when there is no session id. While docs prompts are off it adds <code>docs prompts: off</code>, so the model stays quiet about docs</td></tr>
+        <tr><td><code>auditor-dispatch.sh</code></td><td><code>PostToolUse</code> on <code>Edit|Write|MultiEdit|NotebookEdit</code></td><td>Looks at the file just written and states which auditors are now required, and which docs pages mention that file (not while docs prompts are off)</td></tr>
       </tbody>
     </table>
     <p>
-      The dispatch hook inspects the path and the file contents: <code>silent-bug-detector</code> for model / loss / data / training surfaces, <code>jax-logic-auditor</code> when JAX transforms are actually present in the file, <code>env-researcher</code> for environment wrappers, <code>regression-guard</code> for everything. It skips <code>scratch/</code>, <code>.claude/</code>, <code>sessions/</code> and non-source files entirely.
+      The dispatch hook inspects the path and the file contents: <code>silent-bug-detector</code> for model / loss / data / training surfaces, <code>jax-logic-auditor</code> when JAX transforms are actually present in the file, <code>env-researcher</code> for environment wrappers, <code>regression-guard</code> for everything. It skips <code>scratch/</code>, <code>.claude/</code>, <code>sessions/</code> and non-source files entirely. When pages under <code>docs/</code> or <code>documentation/</code> mention the edited file's path (a fixed-string search of at most 200 pages), it adds one <code>[propel:docs]</code> line naming the <a href="skills/make-documentations.html">Make Documentations</a> skill and up to 3 of those pages. The line leads to that skill's one question, never straight to a write, and it is not added while <code>/disable-make-documentations</code> is in effect. An edit to a markdown page never triggers it.
     </p>
     <div class="callout">
       <strong>The hook states the requirement; the model still has to satisfy it.</strong> That's a meaningful improvement over pure memory, not a guarantee &mdash; which is why the auditors' findings appear in the Gate 3 card where you can see whether they actually ran.
@@ -245,6 +247,8 @@
       <tbody>
         <tr><td><code>/switch &lt;mode&gt;</code></td><td>Override the automatically selected mode. Marks it <code>selected_by: user</code>, which makes Propel ask before auto-switching away from it.</td></tr>
         <tr><td><code>/disable-codex</code></td><td>Single-model gates for this project.</td></tr>
+        <tr><td><code>/disable-make-documentations</code></td><td>Stop the docs questions for this project; an explicit request for docs still works.</td></tr>
+        <tr><td><code>/enable-make-documentations</code></td><td>Turn the docs questions back on.</td></tr>
         <tr><td><code>/intro</code></td><td>The full tour, including the four-mode menu, if you'd rather choose explicitly.</td></tr>
         <tr><td><code>/primer</code></td><td>Reload project context after a <code>/clear</code>.</td></tr>
       </tbody>

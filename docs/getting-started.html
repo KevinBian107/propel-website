@@ -92,6 +92,7 @@
       <a href="skills/monitor.html" class="sidebar-link sub">Monitor</a>
       <a href="skills/check-progress.html" class="sidebar-link sub">Check Progress</a>
       <a href="skills/concise.html" class="sidebar-link sub">Concise</a>
+      <a href="skills/make-documentations.html" class="sidebar-link sub">Make Documentations</a>
       <a href="skills/c-review.html" class="sidebar-link sub">C-Review</a>
       <a href="skills/frontend-design.html" class="sidebar-link sub">Frontend Design</a>
       <a href="skills/other.html" class="sidebar-link sub">Other Skills</a>
@@ -150,14 +151,27 @@
 
     <!-- ── Install ── -->
     <h2 id="install">1. Install Propel</h2>
-    <p>Clone the repository and install it in editable mode:</p>
+    <p>Clone the repository and install it in editable mode, with pip or with uv:</p>
     <pre><code>git clone https://github.com/KevinBian107/propel.git
 cd propel
 
-pip install -e .      # inside an activated conda env or virtualenv</code></pre>
+# pick one of the three
+pip install -e .                                              # pip, inside an activated conda env or virtualenv
+uv venv &amp;&amp; source .venv/bin/activate &amp;&amp; uv pip install -e .   # uv, in a .venv inside the clone
+uv tool install --editable .                                  # uv, isolated, propel on PATH (like pipx)
+
+propel</code></pre>
     <p>
-      The install is <em>editable</em>: changes you make to the repo take effect immediately, which matters because Propel is meant to be customized.
+      All three are <em>editable</em> installs, so changes you make to the repo take effect immediately, and all three are supported equally.
     </p>
+    <table>
+      <thead><tr><th>Install</th><th>Pick it when</th><th><code>propel update</code> reinstalls with</th></tr></thead>
+      <tbody>
+        <tr><td><code>pip install -e .</code></td><td>You already work in a conda env or virtualenv, e.g. your cluster's <code>(base)</code></td><td><code>python -m pip install -e &lt;clone&gt;</code></td></tr>
+        <tr><td><code>uv venv</code> + <code>uv pip install -e .</code></td><td>You use uv and want Propel in a venv you activate; <code>propel</code> is on PATH only while <code>.venv</code> is active</td><td><code>uv pip install --python &lt;env python&gt; -e &lt;clone&gt;</code></td></tr>
+        <tr><td><code>uv tool install --editable .</code></td><td>You want <code>propel</code> on PATH everywhere without activating anything. It lands in <code>uv tool dir --bin</code> (usually <code>~/.local/bin</code>); <code>uv tool update-shell</code> adds that to PATH</td><td><code>uv tool install --reinstall --editable &lt;clone&gt;</code></td></tr>
+      </tbody>
+    </table>
     <div class="callout callout-warn">
       <strong>Activate an env first.</strong> Against a Homebrew or system Python, <code>pip install -e .</code> fails: modern ones are <a href="https://peps.python.org/pep-0668/" target="_blank" rel="noopener">externally managed</a> and refuse the install, or it lands in a directory that isn't on your PATH. Either way you end up with no <code>propel</code> command and a confusing error later. Any conda env or virtualenv avoids it.
     </div>
@@ -182,6 +196,9 @@ pip install -e .      # inside an activated conda env or virtualenv</code></pre>
       </tbody>
     </table>
     <p>
+      On a cluster the terminal setup is the simpler route. The browser page also works over an SSH tunnel (<code>propel launch --no-browser</code> on the cluster, then <code>ssh -L &lt;port&gt;:localhost:&lt;port&gt;</code> from your laptop), at the cost of a port and a token to manage.
+    </p>
+    <p>
       Both versions install Claude Code and Codex the same way, with the vendors' own native installers. These are single binaries in <code>~/.local/bin</code>. They need no Node, no npm and no sudo, which matters on a cluster where you can't install system packages:
     </p>
     <pre><code>curl -fsSL https://claude.ai/install.sh | bash          # Claude Code
@@ -199,7 +216,7 @@ curl -fsSL https://chatgpt.com/codex/install.sh | sh    # Codex</code></pre>
       <li><strong>Claude Code</strong>: the native installer, then a terminal opens for the sign-in</li>
       <li><strong>OpenAI Codex</strong>: the second model. Native installer, then a terminal opens for the OAuth flow</li>
       <li><strong>Plugins</strong>: <code>claude-hud</code> and <code>code-review</code>, each with its publisher named. Never installed without a click</li>
-      <li><strong>Propel itself</strong>: one click installs it into the project you're in</li>
+      <li><strong>Propel itself</strong>: one click installs it into the project you're in. Once installed, the page shows the installed and available versions; when an update is available it lists what will change (files to add, replace or remove, hook registrations to add, edited files backed up first, your own files kept) and offers an <em>Update</em> button that runs <code>propel init</code> in this project (it does not pull or reinstall; that is what <code>propel update</code> adds). If the settings file can't be read, the button is disabled and the page says why</li>
     </ul>
     <p>
       The two logins genuinely need a terminal. A browser page can't provide a TTY, so the console opens a real one already running the right command instead of pretending. If it can't, it shows you the command to paste.
@@ -238,12 +255,13 @@ No display here (cluster, container or SSH), so setup runs in the terminal.
       <strong>If Codex's device sign-in fails</strong> (for example, <code>503 Service Unavailable</code>, or device-code login turned off for your account), the error comes from OpenAI's sign-in service, not from your cluster. The most reliable route is to copy a login you already have. Codex keeps it in <code>~/.codex/auth.json</code>, so from a signed-in laptop run <code>scp ~/.codex/auth.json &lt;cluster&gt;:~/.codex/</code>. With no SSH into the pod, upload the file through Jupyter, move it to <code>~/.codex/auth.json</code> and <code>chmod 600</code> it. It's a credential, so don't leave a copy on shared storage. Two other routes: the browser flow over a tunnel (<code>ssh -L 1455:localhost:1455 &lt;cluster&gt;</code> on your laptop, then <code>codex login</code> on the cluster), or an API key (<code>printenv OPENAI_API_KEY | codex login --with-api-key</code>). Until Codex is signed in, Propel runs single-model. It never blocks.
     </div>
     <div class="callout">
-      <strong>Installing Propel itself on a cluster.</strong> Run <code>pip install -e .</code> inside your activated conda env, for example <code>(base)</code>. Install it as the same user who will run <code>claude</code>, because sign-ins live in that user's home directory.
+      <strong>Installing Propel itself on a cluster.</strong> Use any of the three installs above; with pip, run <code>pip install -e .</code> inside your activated conda env, for example <code>(base)</code>. Install it as the same user who will run <code>claude</code>, because sign-ins live in that user's home directory.
     </div>
 
     <h3 id="cli-init">Or Do It by Hand</h3>
     <p>Everything either version does, as commands:</p>
-    <pre><code>curl -fsSL https://claude.ai/install.sh | bash
+    <pre><code># Propel itself: one of the three installs in step 1
+curl -fsSL https://claude.ai/install.sh | bash
 curl -fsSL https://chatgpt.com/codex/install.sh | sh
 claude auth login
 codex login --device-auth
@@ -264,7 +282,7 @@ propel init</code></pre>
 propel update --dry-run   # preview; writes no working files (it may fetch from the remote)
 propel update             # pull Propel, reinstall if needed, refresh this project</code></pre>
     <p>
-      <code>propel update</code> runs <code>git pull --ff-only</code> in your Propel clone. It refuses if the clone has uncommitted changes to tracked files, and <code>--no-pull</code> skips the pull. It reinstalls the package when either (a) its pull changed <code>pyproject.toml</code> or <code>__init__.py</code>, or (b) the installed package version differs from the version in the source, so it also catches a manual <code>git pull</code> or a run with <code>--no-pull</code>. A dependency change in <code>pyproject.toml</code> with no version bump, after a manual pull, is not detected; reinstall by hand in that case. It then re-runs <code>propel init</code> in the current project with the new code. <code>propel --version</code> prints the version you have installed.
+      <code>propel update</code> runs <code>git pull --ff-only</code> in your Propel clone. It refuses if the clone has uncommitted changes to tracked files, and <code>--no-pull</code> skips the pull. It reinstalls the package, choosing the installer itself: pip if the env has it, otherwise uv (uv-made envs ship without pip), using the command in the table in step 1, and it prints which one it used. It reinstalls when either (a) its pull changed <code>pyproject.toml</code> or <code>__init__.py</code>, or (b) the installed package version differs from the <code>__version__</code> in the clone, so it also catches a manual <code>git pull</code> or a run with <code>--no-pull</code>. A dependency change in <code>pyproject.toml</code> with no version bump, after a manual pull, is not detected; reinstall by hand in that case. If neither pip nor uv is available, it prints every reinstall command (pip, uv venv, uv tool, pipx), still re-runs <code>propel init</code>, and exits 1. It then re-runs <code>propel init</code> in the current project with the new code. <code>propel --version</code> prints the version you have installed.
     </p>
     <p>
       Hook changes load when a Claude Code session starts. When <code>propel init</code> or <code>propel update</code> changes hook registrations, it prints a hint to restart any open Claude Code sessions, and a session still running the pre-split registration (one argument-less <code>session-start.sh</code>) also sees a notice asking for a restart the next time session start fires. <code>propel status</code> also warns when Propel paths under a symlink pointing outside <code>.claude/</code> were left alone, since init never writes outside <code>.claude/</code> through a symlink (the settings file is the one exception).
@@ -402,6 +420,8 @@ propel update             # pull Propel, reinstall if needed, refresh this proje
         <tr><td><code>/switch [mode]</code></td><td>Override the automatically selected mode</td></tr>
         <tr><td><code>/disable-codex</code></td><td>Turn off the automatic second model for this project</td></tr>
         <tr><td><code>/enable-codex</code></td><td>Turn it back on</td></tr>
+        <tr><td><code>/disable-make-documentations</code></td><td>Stop Propel asking about docs updates for this project</td></tr>
+        <tr><td><code>/enable-make-documentations</code></td><td>Turn the docs questions back on</td></tr>
         <tr><td><code>/c-review</code></td><td>Merged review: Anthropic plugin + Propel auditors + Codex, one card</td></tr>
         <tr><td><code>/primer</code></td><td>Load project context after /clear</td></tr>
         <tr><td><code>/new-session [description]</code></td><td>Start a tracked session</td></tr>

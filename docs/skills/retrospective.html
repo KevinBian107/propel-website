@@ -92,6 +92,7 @@
       <a href="../skills/monitor.html" class="sidebar-link sub">Monitor</a>
       <a href="../skills/check-progress.html" class="sidebar-link sub">Check Progress</a>
       <a href="../skills/concise.html" class="sidebar-link sub">Concise</a>
+      <a href="../skills/make-documentations.html" class="sidebar-link sub">Make Documentations</a>
       <a href="../skills/c-review.html" class="sidebar-link sub">C-Review</a>
       <a href="../skills/frontend-design.html" class="sidebar-link sub">Frontend Design</a>
       <a href="../skills/other.html" class="sidebar-link sub">Other Skills</a>
@@ -228,6 +229,7 @@ survive a context reset."</code></pre>
     <!-- ── Before It's Final ── -->
     <h2 id="before-final">Before an Entry Is Final</h2>
     <p>The entry goes through <a href="concise.html">Concise</a>, then gets an automatic Codex consult with two questions in one call: "Which of these conclusions does the evidence not actually support?" on the inlined conclusions, and the writeup review, which compares the saved draft against the entry by their paths and is answered under <code>Writeup review:</code> (dropped if either file holds secrets). Registry entries are surfaced automatically by later investigations, so what goes into one is your decision. The Codex card is shown first, verified and <code>[codex &middot; unverified]</code> items alike. Then one disjunctive question asks which verified findings to fold in (for example: fold all three, fold only the one about the warmup schedule, or fold none and keep the entry as drafted), with what each choice changes in the entry. Only the findings you pick are written into the entry, each tagged <code>[codex]</code>; a <code>[codex &middot; unverified]</code> item is never written into the entry and stays in the card. The concise check is then re-run on the draft against the final entry so the fold-in drops no evidence, and the draft is deleted, because your answer is the acceptance. With Codex disabled or its CLI missing, the retrospective proceeds single-model and says so once.</p>
+    <p>If the project has docs and the entry changes what a results or runbook page states, <a href="make-documentations.html">Make Documentations</a> asks one question before writing: it names the pages and what each would cover, and offers to update all of them, update only the most important one, skip this time, or stop asking (the same as <code>/disable-make-documentations</code>). When the fold-in question is asked at the same moment, the docs question rides in the same question box. Only an update answer writes the pages, which then go through Concise, <code>doc-check.sh</code> and the Docs fidelity consult and are presented with their card.</p>
 
     <!-- ── How It Feeds Back ── -->
     <h2 id="feedback">How It Feeds Back</h2>

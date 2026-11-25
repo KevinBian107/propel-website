@@ -89,6 +89,7 @@
       <a href="../skills/monitor.html" class="sidebar-link sub">Monitor</a>
       <a href="../skills/check-progress.html" class="sidebar-link sub">Check Progress</a>
       <a href="../skills/concise.html" class="sidebar-link sub active">Concise</a>
+      <a href="../skills/make-documentations.html" class="sidebar-link sub">Make Documentations</a>
       <a href="../skills/c-review.html" class="sidebar-link sub">C-Review</a>
       <a href="../skills/frontend-design.html" class="sidebar-link sub">Frontend Design</a>
       <a href="../skills/other.html" class="sidebar-link sub">Other Skills</a>
@@ -235,6 +236,7 @@ bash .claude/scripts/claim-check.sh --save-draft FILE   # copy FILE to its draft
       </thead>
       <tbody>
         <tr><td>Investigation findings (Gate 1), design doc (Gate 2), retrospective entry</td><td>Folded into that gate's own consult: one call, two questions, and it counts as the writeup review. The gate's material is inlined as before; only the writeup question gets paths. The ledger records <code>--question "&lt;gate question&gt; + writeup review"</code></td></tr>
+        <tr><td>A docs page written by <a href="make-documentations.html">Make Documentations</a></td><td>Folded into that skill's Docs fidelity consult: one call, two questions, and it counts as the writeup review</td></tr>
         <tr><td>A finished docs page, or a long write-up outside <code>scratch/</code>, with no consult of its own</td><td>A standalone <strong>Writeup review</strong> consult, only when the rewrite changed about 30 or more lines of prose (the Gate 3 threshold)</td></tr>
         <tr><td><code>scratch/</code> working notes, trivial or formatting-only edits, chat replies</td><td>Never. The same rewrite is never reviewed twice</td></tr>
       </tbody>
@@ -249,6 +251,7 @@ bash .claude/scripts/claim-check.sh --save-draft FILE   # copy FILE to its draft
       <tbody>
         <tr><td><a href="investigation.html">Investigation</a></td><td>The README's Findings section, before Gate 1 (the rest of the living README stays as written)</td></tr>
         <tr><td><a href="research-design.html">Research Design</a></td><td>The design doc presented at Gate 2</td></tr>
+        <tr><td><a href="make-documentations.html">Make Documentations</a></td><td>Every docs page it writes or updates, before <code>doc-check.sh</code> and the Docs fidelity consult. On an automatic trigger, that is only after you answer its docs question with an update</td></tr>
         <tr><td><a href="retrospective.html">Retrospective</a></td><td>The registry entry, which also gets the &ldquo;Retrospective conclusions&rdquo; Codex consult; the check is re-run after verified Codex findings are folded in</td></tr>
       </tbody>
     </table>
@@ -274,9 +277,9 @@ bash .claude/scripts/claim-check.sh --save-draft FILE   # copy FILE to its draft
         <span class="pager-label">&larr; Previous</span>
         <span class="pager-title">Check Progress</span>
       </a>
-      <a href="codex-consult.html" class="next">
+      <a href="make-documentations.html" class="next">
         <span class="pager-label">Next &rarr;</span>
-        <span class="pager-title">Codex Consult</span>
+        <span class="pager-title">Make Documentations</span>
       </a>
     </nav>
 
