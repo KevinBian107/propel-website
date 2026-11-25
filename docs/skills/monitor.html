@@ -87,6 +87,8 @@
       <a href="../skills/trainer-mode.html" class="sidebar-link sub">Trainer Mode</a>
       <a href="../skills/retrospective.html" class="sidebar-link sub">Retrospective</a>
       <a href="../skills/monitor.html" class="sidebar-link sub active">Monitor</a>
+      <a href="../skills/check-progress.html" class="sidebar-link sub">Check Progress</a>
+      <a href="../skills/concise.html" class="sidebar-link sub">Concise</a>
       <a href="../skills/c-review.html" class="sidebar-link sub">C-Review</a>
       <a href="../skills/frontend-design.html" class="sidebar-link sub">Frontend Design</a>
       <a href="../skills/other.html" class="sidebar-link sub">Other Skills</a>
@@ -192,6 +194,15 @@
     <h2 id="phase-3">Phase 3 &mdash; Exit Protocol</h2>
     <p>On exit (success, failure, or budget exhaustion), the skill always produces: outcome, final checklist marks, what was done, what's left, and suggested next step. If the run produced learnings, it recommends <code>/retrospective</code>.</p>
 
+    <h2 id="task-ledger">The Task Ledger</h2>
+    <p>Each loop is recorded in the session's task ledger, so <a href="check-progress.html">check-progress</a> and the next session start can see it. The ledger is advisory: if recording fails, the skill says &ldquo;not tracked in the task ledger&rdquo; once and the loop carries on.</p>
+    <ul>
+      <li><strong>Start.</strong> When you say go and confirm the plan, the loop runs <code>task-queue.sh start --kind monitor --title "&lt;goal&gt;"</code> and notes the task id at the top of <code>log.md</code>. Each iteration can record <code>update &lt;id&gt; --progress "&lt;n&gt;/&lt;m&gt; criteria met"</code>.</li>
+      <li><strong>Exit.</strong> The entry is closed with <code>done &lt;id&gt; --status &lt;status&gt;</code>, mapping the outcome: met &rarr; <code>done</code>, partial or timeout &rarr; <code>blocked</code>, failed &rarr; <code>failed</code>.</li>
+      <li><strong>Blocked stays open on purpose.</strong> A blocked task reappears at every session start until someone carries or abandons it, because what to do with an unmet goal is your decision.</li>
+      <li><strong>Carried tasks.</strong> A task carried into a later session is closed with <code>done</code> when its follow-up finishes.</li>
+    </ul>
+
     <h2 id="guardrails">Guardrails</h2>
     <table>
       <thead>
@@ -210,9 +221,9 @@
         <span class="pager-label">&larr; Previous</span>
         <span class="pager-title">Retrospective</span>
       </a>
-      <a href="codex-consult.html" class="next">
+      <a href="check-progress.html" class="next">
         <span class="pager-label">Next &rarr;</span>
-        <span class="pager-title">Codex Consult</span>
+        <span class="pager-title">Check Progress</span>
       </a>
     </nav>
 
@@ -232,6 +243,7 @@
     <a href="#phase-1">Phase 1 &mdash; Clarify</a>
     <a href="#phase-2">Phase 2 &mdash; The Loop</a>
     <a href="#phase-3">Phase 3 &mdash; Exit</a>
+    <a href="#task-ledger">Task Ledger</a>
     <a href="#guardrails">Guardrails</a>
   </aside>
 

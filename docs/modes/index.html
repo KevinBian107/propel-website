@@ -90,6 +90,8 @@
       <a href="../skills/trainer-mode.html" class="sidebar-link sub">Trainer Mode</a>
       <a href="../skills/retrospective.html" class="sidebar-link sub">Retrospective</a>
       <a href="../skills/monitor.html" class="sidebar-link sub">Monitor</a>
+      <a href="../skills/check-progress.html" class="sidebar-link sub">Check Progress</a>
+      <a href="../skills/concise.html" class="sidebar-link sub">Concise</a>
       <a href="../skills/c-review.html" class="sidebar-link sub">C-Review</a>
       <a href="../skills/frontend-design.html" class="sidebar-link sub">Frontend Design</a>
       <a href="../skills/other.html" class="sidebar-link sub">Other Skills</a>
@@ -230,10 +232,10 @@
       <code>selected_by</code> distinguishes an inferred mode from one you chose. An <code>auto</code> mode can be switched away from freely, with a one-line notice. A <code>user</code> mode is a statement of intent &mdash; Propel prefers to ask before auto-switching away from it.
     </p>
     <p>
-      This file <strong>survives <code>/clear</code></strong>. When the session-start hook fires (on every session start, resume, and compaction), it reads <code>.propel/mode.json</code> and injects the current mode into Claude's context. Your mode choice persists across context resets.
+      This file <strong>survives <code>/clear</code></strong>. When the session-start hook fires (on every session start, resume, <code>/clear</code>, and compaction), it reads <code>.propel/mode.json</code> and injects the current mode into Claude's context. Your mode choice persists across context resets.
     </p>
     <p>
-      If <code>.propel/mode.json</code> does not exist, the hook sets <code>"mode_selection_needed": true</code>, and Claude infers the mode from your first message rather than presenting a menu. A second hook (<code>route.sh</code>, on <code>UserPromptSubmit</code>) re-states the active mode every turn, so the routing doesn't quietly decay as the session fills up.
+      If <code>.propel/mode.json</code> does not exist, the hook injects the plain-text line <code>mode_selection_needed: true</code>, and Claude infers the mode from your first message rather than presenting a menu. A second hook (<code>route.sh</code>, on <code>UserPromptSubmit</code>) re-states the active mode every turn, so the routing doesn't quietly decay as the session fills up.
     </p>
 
     <!-- ── Comparison Table ── -->

@@ -89,6 +89,8 @@
       <a href="../skills/trainer-mode.html" class="sidebar-link sub">Trainer Mode</a>
       <a href="../skills/retrospective.html" class="sidebar-link sub">Retrospective</a>
       <a href="../skills/monitor.html" class="sidebar-link sub">Monitor</a>
+      <a href="../skills/check-progress.html" class="sidebar-link sub">Check Progress</a>
+      <a href="../skills/concise.html" class="sidebar-link sub">Concise</a>
       <a href="../skills/c-review.html" class="sidebar-link sub">C-Review</a>
       <a href="../skills/frontend-design.html" class="sidebar-link sub">Frontend Design</a>
       <a href="../skills/other.html" class="sidebar-link sub">Other Skills</a>
@@ -190,10 +192,11 @@
     <ol>
       <li><strong>Confirm the command</strong> &mdash; the exact approved string. Any permitted adjustment range is its entire discretion; it does not widen it.</li>
       <li><strong>Pre-flight.</strong> Output dir writable? Disk space? GPUs visible and free? Config parses? Entry point imports? Thirty seconds here beats a failure at minute forty.</li>
-      <li><strong>Launch detached</strong> in <code>screen</code> (or <code>tmux</code>), recording the session name and log path.</li>
-      <li><strong>Watch</strong> at widening intervals &mdash; first loss magnitude, NaN/Inf, the failure signatures above, throughput collapse, and silence. A process that stopped writing is as informative as one that crashed.</li>
-      <li><strong>Fix or escalate</strong>, per the boundary. Every adjustment is reported with whether it was inside the approved discretion.</li>
+      <li><strong>Launch detached</strong> in <code>screen</code> (or <code>tmux</code>): the approved command goes verbatim into <code>.propel/runs/{NAME}.sh</code>, the task is recorded in the ledger first, and the run writes <code>.propel/runs/{NAME}.log</code> and, when it ends, its exit code to <code>.propel/runs/{NAME}.exit</code>. The run file's first line <code>cd</code>s back to the directory the launch started in, so the command runs where it would have run by hand. <code>pipefail</code> applies only to the outer <code>| tee</code>, so the recorded exit code is the command's own; pipelines inside the approved command behave exactly as written. If Python block-buffers the piped output, the report says <code>PYTHONUNBUFFERED=1</code> or <code>python -u</code> would make the log live, and leaves the decision to the human. The launch block is the one on the <a href="../skills/trainer-mode.html#phase-2">Trainer Mode skill page</a>.</li>
+      <li><strong>Watch</strong> at widening intervals &mdash; first loss magnitude, NaN/Inf, the failure signatures above, throughput collapse, and silence. A process that stopped writing is as informative as one that crashed. The run has ended when <code>.propel/runs/{NAME}.exit</code> exists; the session closes with it, so it reads the log, not the session.</li>
+      <li><strong>Fix or escalate</strong>, per the boundary. Every adjustment is reported with whether it was inside the approved discretion. After a runtime fix it relaunches as a <strong>new</strong> run: a new <code>{NAME}</code> with <code>--ref &lt;old id&gt;</code> added to <code>start</code>, then <code>done &lt;old id&gt; --status failed --note "&lt;error signature&gt;; relaunched as &lt;new id&gt;"</code>. It never reuses a name or a task id, because the old <code>.exit</code> would be read as the new run's result.</li>
       <li><strong>Three strikes.</strong> Same failure three times &rarr; stop fixing, report a hard blocker with everything tried. Three failures of one approach means the hypothesis about the cause is wrong, and the fourth variation won't find it.</li>
+      <li><strong>Close the ledger entry before returning</strong>, with <code>done &lt;id&gt; --status &hellip;</code>: <code>completed</code> &rarr; done, <code>crashed</code> &rarr; failed, and <code>blocked</code> &rarr; failed with the escalation in <code>--note</code>, because a blocked run has ended. A run still <code>running</code> records nothing; the ledger reads it from the session and the exit file.</li>
     </ol>
 
 
@@ -201,7 +204,9 @@
 
     <pre><code>TRAINING STATUS — &lt;run name&gt;
 
-COMMAND / SESSION / LOG / STATE
+COMMAND / SESSION / LOG / TASK / STATE
+                     TASK is the ledger id, or "not tracked
+                     in the task ledger"
 PRE-FLIGHT           each check with its actual value
 PROGRESS             step, loss, throughput — and whether the
                      first loss is plausible for this setup

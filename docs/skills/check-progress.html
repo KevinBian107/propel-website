@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Check Progress &mdash; Propel Documentation</title>
+  <meta name="description" content="Check Progress skill: a read-only view of the task ledger &mdash; training runs, plan tasks and monitor loops in flight &mdash; with evidence-derived status and a human decision for anything left open." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&family=Noto+Sans+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="../../assets/logo-c.svg" />
+  <link rel="stylesheet" href="../docs.css" />
+</head>
+<body>
+
+<header class="docs-header">
+  <button class="sidebar-toggle" aria-label="Toggle navigation">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+  </button>
+  <a href="../../index.html" class="docs-header-logo">
+    <img src="../../assets/logo-c.svg" alt="Propel" />
+    Propel
+    <span class="logo-tag">docs</span>
+  </a>
+  <nav class="docs-header-nav">
+    <a href="../../index.html">Home</a>
+    <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">GitHub</a>
+  </nav>
+  <div class="docs-header-search">
+    <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"/></svg>
+    Search
+    <kbd>/</kbd>
+  </div>
+</header>
+
+<div class="docs-layout">
+
+  <nav class="docs-sidebar" aria-label="Documentation navigation">
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Getting Started</div>
+      <a href="../index.html" class="sidebar-link">Overview</a>
+      <a href="../getting-started.html" class="sidebar-link">Installation &amp; Setup</a>
+      <a href="../core-principles.html" class="sidebar-link">Core Principles</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">How It Works</div>
+      <a href="../automation.html" class="sidebar-link">Automatic Dispatch</a>
+      <a href="../codex.html" class="sidebar-link">Codex &mdash; Two Models</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Pipeline</div>
+      <a href="../pipeline/index.html" class="sidebar-link">Pipeline Overview</a>
+      <a href="../pipeline/gates.html" class="sidebar-link">Gates &amp; Questioners</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Modes</div>
+      <a href="../modes/index.html" class="sidebar-link">Mode System</a>
+      <a href="../modes/researcher.html" class="sidebar-link sub">Researcher</a>
+      <a href="../modes/engineer.html" class="sidebar-link sub">Engineer</a>
+      <a href="../modes/debugger.html" class="sidebar-link sub">Debugger</a>
+      <a href="../modes/trainer.html" class="sidebar-link sub">Trainer</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Skills</div>
+      <a href="../skills/index.html" class="sidebar-link">Skills Overview</a>
+      <a href="../skills/codex-consult.html" class="sidebar-link sub">Codex Consult</a>
+      <a href="../skills/investigation.html" class="sidebar-link sub">Investigation</a>
+      <a href="../skills/research-design.html" class="sidebar-link sub">Research Design</a>
+      <a href="../skills/subagent-driven-research.html" class="sidebar-link sub">Implementation</a>
+      <a href="../skills/systematic-debugging.html" class="sidebar-link sub">Systematic Debugging</a>
+      <a href="../skills/research-validation.html" class="sidebar-link sub">Validation</a>
+      <a href="../skills/deep-research.html" class="sidebar-link sub">Deep Research</a>
+      <a href="../skills/think-deeply.html" class="sidebar-link sub">Think Deeply</a>
+      <a href="../skills/context-hygiene.html" class="sidebar-link sub">Context Hygiene</a>
+      <a href="../skills/trainer-mode.html" class="sidebar-link sub">Trainer Mode</a>
+      <a href="../skills/retrospective.html" class="sidebar-link sub">Retrospective</a>
+      <a href="../skills/monitor.html" class="sidebar-link sub">Monitor</a>
+      <a href="../skills/check-progress.html" class="sidebar-link sub active">Check Progress</a>
+      <a href="../skills/concise.html" class="sidebar-link sub">Concise</a>
+      <a href="../skills/c-review.html" class="sidebar-link sub">C-Review</a>
+      <a href="../skills/frontend-design.html" class="sidebar-link sub">Frontend Design</a>
+      <a href="../skills/other.html" class="sidebar-link sub">Other Skills</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Agents &mdash; Auditors</div>
+      <a href="../agents/index.html" class="sidebar-link">Agents Overview</a>
+      <a href="../agents/paper-alignment-auditor.html" class="sidebar-link sub">Paper Alignment</a>
+      <a href="../agents/silent-bug-detector.html" class="sidebar-link sub">Silent Bug Detector</a>
+      <a href="../agents/jax-logic-auditor.html" class="sidebar-link sub">JAX Logic Auditor</a>
+      <a href="../agents/regression-guard.html" class="sidebar-link sub">Regression Guard</a>
+      <a href="../agents/data-flow-tracer.html" class="sidebar-link sub">Data Flow Tracer</a>
+      <a href="../agents/failure-mode-researcher.html" class="sidebar-link sub">Failure Mode Researcher</a>
+      <a href="../agents/env-researcher.html" class="sidebar-link sub">Env Researcher</a>
+      <a href="../agents/code-reviewer.html" class="sidebar-link sub">Code Reviewer</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Agents &mdash; Workers</div>
+      <a href="../agents/codex-bridge.html" class="sidebar-link sub">Codex Bridge</a>
+      <a href="../agents/investigator.html" class="sidebar-link sub">Investigator</a>
+      <a href="../agents/implementer.html" class="sidebar-link sub">Implementer</a>
+      <a href="../agents/spec-reviewer.html" class="sidebar-link sub">Spec Reviewer</a>
+      <a href="../agents/trainer-operator.html" class="sidebar-link sub">Trainer Operator</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Reference</div>
+      <a href="../customization.html" class="sidebar-link">Customization</a>
+      <a href="../recommended-plugins.html" class="sidebar-link">Plugins</a>
+      <a href="../pitfalls.html" class="sidebar-link">Common Pitfalls</a>
+    </div>
+
+  </nav>
+
+  <article class="docs-content">
+
+    <div class="breadcrumbs">
+      <a href="../index.html">Docs</a>
+      <span class="sep">&#8250;</span>
+      <a href="index.html">Skills</a>
+      <span class="sep">&#8250;</span>
+      Check Progress
+    </div>
+
+    <h1 class="page-title">Check Progress</h1>
+    <p class="page-subtitle">
+      One read of the task ledger, shown as-is: which training runs, plan tasks and monitor loops are still open, and which of them need a decision. Read-only &mdash; every state change is the user's call.
+    </p>
+
+    <div class="admonition note">
+      <div class="admonition-title">Information, Not a Decision</div>
+      <p style="margin-bottom: 0">The skill never restarts a job, never kills one, never edits code, and never changes a task's state without the user's answer. It shows the table, names what needs attention, and asks. If you want a run supervised until it finishes, that's <a href="monitor.html">Monitor</a>; if you want it relaunched, that's <a href="trainer-mode.html">Trainer Mode</a>.</p>
+    </div>
+
+    <h2 id="overview">Overview</h2>
+    <p>
+      Work that outlives a turn &mdash; a training run in <code>screen</code>, an implementation task from an approved plan, a monitor loop &mdash; is recorded in a per-session ledger, <code>.propel/tasks/&lt;session&gt;.jsonl</code>. The ledger is written only by <code>scripts/task-queue.sh</code>, not by the model, so a task Claude claims to have started but never recorded simply isn't there. Check Progress is how you read it. It is active in all four modes.
+    </p>
+
+    <h2 id="triggers">When It Triggers</h2>
+    <table>
+      <thead>
+        <tr><th>Trigger</th><th>Details</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Manual</strong></td><td>"check progress", "what's running", "status of my jobs", "what's left", "where was I", "is my training done", "did my run finish"</td></tr>
+        <tr><td><strong>Contextual</strong></td><td>The session starts with open tasks from an earlier session and your first message is about continuing ("let's continue", "pick up where we left off")</td></tr>
+        <tr><td><strong>Prompted</strong></td><td>Every turn with open tasks, <code>route.sh</code> adds one line: <code>tasks: N open in this session, M from earlier sessions &mdash; run check-progress</code>, or <code>tasks: N open &mdash; run check-progress</code> when there is no session id</td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="table">Step 1 &mdash; Show the Table</h2>
+    <p>One script call, printed unchanged &mdash; no reordering, summarizing or dropped rows. It lists every open task, plus finished tasks from the last 10 session files written within 14 days:</p>
+    <pre><code>bash .claude/scripts/task-queue.sh list --table --sessions 10</code></pre>
+    <pre><code>| ID | Task | Kind | Status | Progress | Started | Session |
+|---|---|---|---|---|---|---|
+| t261118-193056-fd4d | watch sweep | monitor | running |  | 11-18 19:30Z | s2 (this) |
+| t261118-193056-7a8c | ppo baseline seed 0 | train | lost |  | 11-18 19:30Z | s1 |</code></pre>
+    <p>In the Session column, <code>(this)</code> is the current session, <code>(carried here)</code> was carried into it, and an unmarked row belongs to an earlier session. Open tasks are always listed, however old. If the script exits 5, part of the ledger couldn't be read: the table is partial (even when it says "No tasks recorded."), and the skill shows it and quotes the error line.</p>
+
+    <h3 id="statuses">Statuses</h3>
+    <p>A task's status is recorded by the script, and for training runs it is <em>derived from evidence</em> &mdash; never "running" just because nobody said otherwise:</p>
+    <table>
+      <thead>
+        <tr><th>Status</th><th>Meaning</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>running</code></td><td>Recorded as running; for a train task, its <code>screen</code>/<code>tmux</code> session is alive</td></tr>
+        <tr><td><code>done</code> / <code>failed</code></td><td>Finished. For a train task, read from the run's exit file (<code>.propel/runs/&lt;NAME&gt;.exit</code>: 0 is done, anything else failed) and recorded on read</td></tr>
+        <tr><td><code>blocked</code></td><td>The goal wasn't met and someone has to choose the next step</td></tr>
+        <tr><td><code>lost</code></td><td>Train task whose session is gone with no exit file (killed, node rebooted)</td></tr>
+        <tr><td><code>unknown</code></td><td>Train task with no evidence either way: no exit file, and no <code>screen</code>/<code>tmux</code> session name recorded (or neither tool installed to check it)</td></tr>
+        <tr><td><code>abandoned</code></td><td>Closed by the user's decision; it no longer appears at session start</td></tr>
+      </tbody>
+    </table>
+    <p><strong>Open</strong> means running, blocked, lost or unknown.</p>
+
+    <h2 id="decision">Step 2 &mdash; Flag What Needs a Decision</h2>
+    <p>In at most three lines, the skill names the ids that are <code>lost</code>, <code>unknown</code>, <code>failed</code> or <code>blocked</code>, skipping any status with no rows &mdash; or says "Nothing needs a decision." For a train task, the log path comes from the task's start event in <code>.propel/tasks/*.jsonl</code>; that is where to look first for a lost or failed run.</p>
+
+    <h2 id="earlier-sessions">Step 3 &mdash; Earlier-Session Tasks: Ask, Don't Act</h2>
+    <p>The <code>tasks</code> part of the SessionStart hook lists open tasks at the start of every session (at most 20 rows). Tasks from an earlier session are shown and asked about, never changed automatically. Check Progress asks one disjunctive question per batch:</p>
+    <table>
+      <thead>
+        <tr><th>Choice</th><th>What it does</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Carry</strong></td><td><code>task-queue.sh carry ID</code> &mdash; resume here; the task shows as <code>(carried here)</code> and this session owns the follow-up. Offered only when this session's id is known (<code>PROPEL_SESSION</code> is set); otherwise the choice is abandon or leave open</td></tr>
+        <tr><td><strong>Abandon</strong></td><td><code>task-queue.sh abandon ID --note "&lt;why&gt;"</code> &mdash; close it for good. Nothing is killed, but the record stops prompting anyone</td></tr>
+        <tr><td><strong>Leave open</strong></td><td>No change. It appears at every session start until someone decides</td></tr>
+      </tbody>
+    </table>
+    <p>No answer means leave open. Only the ids the user named are touched. If a carry or abandon finds the ledger busy (exit 3), the skill says so and offers a retry.</p>
+
+    <h2 id="terminal">In the Terminal</h2>
+    <p>Outside Claude, <code>propel tasks</code> reads the same ledger. By default it shows <em>open</em> tasks only; <code>--all</code> adds finished ones:</p>
+    <pre><code>propel tasks                  # open tasks: running, blocked, lost, unknown
+propel tasks --all            # plus finished tasks (done, failed, abandoned)
+propel tasks --all --sessions N   # finished tasks from the last N session files (default 10), within 14 days</code></pre>
+    <p>Open tasks always show, whatever <code>--sessions</code> says.</p>
+
+    <h2 id="guardrails">Guardrails</h2>
+    <table>
+      <thead>
+        <tr><th>Guardrail</th><th>Why</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Print the table unchanged</td><td>A summary is a second claim on top of the evidence; the table is the evidence.</td></tr>
+        <tr><td>Never carry or abandon without the user's answer</td><td>What an unfinished run means is a judgment, not bookkeeping.</td></tr>
+        <tr><td>Never restart, relaunch or kill anything</td><td>Relaunching is Trainer Mode's job, behind its own confirmation.</td></tr>
+        <tr><td>Never run <code>task-queue.sh unlock</code> unprompted</td><td>The lock is never cleared automatically; <code>unlock</code> is a manual recovery the user asks for.</td></tr>
+        <tr><td>Partial read (exit 5): show what was read and quote the error</td><td>An incomplete table, labelled as incomplete, beats a silent gap.</td></tr>
+      </tbody>
+    </table>
+
+    <nav class="docs-pager">
+      <a href="monitor.html">
+        <span class="pager-label">&larr; Previous</span>
+        <span class="pager-title">Monitor</span>
+      </a>
+      <a href="concise.html" class="next">
+        <span class="pager-label">Next &rarr;</span>
+        <span class="pager-title">Concise</span>
+      </a>
+    </nav>
+
+    <footer class="docs-footer">
+      <p>
+        <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">Propel</a> is open source under the MIT License.
+        Built by <a href="https://kbian.org" target="_blank" rel="noopener">Kaiwen Bian</a> &amp; <a href="https://yuertang.dev/" target="_blank" rel="noopener">Yuer Tang</a>.
+      </p>
+    </footer>
+
+  </article>
+
+  <aside class="docs-toc">
+    <div class="docs-toc-title">On This Page</div>
+    <a href="#overview">Overview</a>
+    <a href="#triggers">When It Triggers</a>
+    <a href="#table">Step 1 &mdash; The Table</a>
+    <a href="#statuses" class="toc-h3">Statuses</a>
+    <a href="#decision">Step 2 &mdash; Needs a Decision</a>
+    <a href="#earlier-sessions">Step 3 &mdash; Earlier Sessions</a>
+    <a href="#terminal">In the Terminal</a>
+    <a href="#guardrails">Guardrails</a>
+  </aside>
+
+</div>
+
+<script src="../docs.js"></script>
+</body>
+</html>

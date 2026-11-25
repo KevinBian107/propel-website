@@ -90,6 +90,8 @@
       <a href="../skills/trainer-mode.html" class="sidebar-link sub active">Trainer Mode</a>
       <a href="../skills/retrospective.html" class="sidebar-link sub">Retrospective</a>
       <a href="../skills/monitor.html" class="sidebar-link sub">Monitor</a>
+      <a href="../skills/check-progress.html" class="sidebar-link sub">Check Progress</a>
+      <a href="../skills/concise.html" class="sidebar-link sub">Concise</a>
       <a href="../skills/c-review.html" class="sidebar-link sub">C-Review</a>
       <a href="../skills/frontend-design.html" class="sidebar-link sub">Frontend Design</a>
       <a href="../skills/other.html" class="sidebar-link sub">Other Skills</a>
@@ -175,22 +177,44 @@
 
     <!-- ── Phase 2 ── -->
     <h2 id="phase-2">Phase 2: Screen Session Management</h2>
-    <p>Training runs in a named, persistent screen session:</p>
+    <p>The confirmed command is written verbatim to <code>.propel/runs/{NAME}.sh</code>, the run is recorded in the task ledger, and only then is it launched in a named screen session. The whole launch is one Bash call, because shell variables do not survive between calls. <code>&lt;NAME&gt;</code> is the session name (<code>{NAME}</code> on the rest of this page) and <code>&lt;CMD&gt;</code> is the exact confirmed command:</p>
 
-    <pre><code>screen -dmS propel-train-{timestamp} bash -c '{COMMAND}; exec bash'</code></pre>
+    <pre><code>O=$PWD; R=$PWD; while [ "$R" != / ] &amp;&amp; [ ! -f "$R/.claude/scripts/task-queue.sh" ]; do R=$(dirname "$R"); done; [ -f "$R/.claude/scripts/task-queue.sh" ] &amp;&amp; cd "$R"
+[ ! -e .propel/runs/&lt;NAME&gt;.sh ] || { echo "&lt;NAME&gt; is taken, pick a new name"; exit 1; }
+mkdir -p .propel/runs &amp;&amp; printf 'cd %q || exit 1\n' "$O" &gt; .propel/runs/&lt;NAME&gt;.sh &amp;&amp; cat &gt;&gt; .propel/runs/&lt;NAME&gt;.sh &lt;&lt;'PROPEL_CMD'
+&lt;CMD&gt;
+PROPEL_CMD
+ID=$(bash .claude/scripts/task-queue.sh start --kind train --title "&lt;short title&gt;" --screen &lt;NAME&gt; --log .propel/runs/&lt;NAME&gt;.log --exit-file .propel/runs/&lt;NAME&gt;.exit --cmd '&lt;CMD&gt;') || ID="not tracked in the task ledger"
+screen -dmS &lt;NAME&gt; bash -c 'set -o pipefail; bash .propel/runs/&lt;NAME&gt;.sh 2&gt;&amp;1 | tee .propel/runs/&lt;NAME&gt;.log; echo $? &gt; .propel/runs/&lt;NAME&gt;.exit' || echo "launch failed"
+echo "task: $ID"</code></pre>
+
+    <ul>
+      <li><strong>The run file starts with a <code>cd</code></strong> back to the directory the command was started from, so it runs where it would have run by hand. The block itself then moves to the project root for the ledger and the <code>.propel/runs/</code> files.</li>
+      <li><strong>A name is never reused.</strong> If <code>.propel/runs/{NAME}.sh</code> already exists, the block stops and asks for a new name.</li>
+      <li><strong><code>start</code> runs first</strong>, before the exit file can exist, and never gates the launch. If the ledger fails for any reason, the block prints &ldquo;not tracked in the task ledger&rdquo; and launches anyway.</li>
+      <li><strong><code>pipefail</code> applies only to the outer <code>| tee</code></strong>, so the recorded exit code is the command's, not <code>tee</code>'s. Pipelines inside your own command behave exactly as written.</li>
+    </ul>
+
+    <p>Output goes to <code>.propel/runs/{NAME}.log</code>, the exit code to <code>.propel/runs/{NAME}.exit</code>, and the screen session closes when the command ends (no <code>exec bash</code>). The exit file is the evidence <a href="check-progress.html">check-progress</a> uses to report a run as done, failed or lost. If the block prints &ldquo;launch failed&rdquo;, the task is closed with <code>done &lt;ID&gt; --status failed --note "launch failed"</code>.</p>
+
+    <p>Output piped through <code>tee</code> may be block-buffered by Python, so the log can lag behind the run. The skill tells you that <code>PYTHONUNBUFFERED=1</code> or <code>python -u</code> fixes this, but it never edits the confirmed command to add either.</p>
 
     <div class="admonition warning">
       <div class="admonition-title">Critical Rules</div>
-      <p style="margin-bottom: 0">Execute the EXACT command the user confirmed &mdash; no modifications. Do NOT create temporary folders, disable wandb, add wrapper scripts, or modify environment variables unless the user explicitly requests it.</p>
+      <p style="margin-bottom: 0">Execute the EXACT command the user confirmed &mdash; no modifications. Do NOT create temporary folders, disable wandb, add wrapper scripts (the only exception is <code>.propel/runs/{NAME}.sh</code>, which holds the confirmed command verbatim), or modify environment variables unless the user explicitly requests it.</p>
     </div>
 
     <p>After launching, the user receives session management commands:</p>
-    <pre><code>Training launched in screen session: propel-train-{timestamp}
+    <pre><code>Training launched in screen session: {NAME}
+Task:    {task id} (the check-progress skill lists it)
 
-Attach:  screen -r propel-train-{timestamp}
+Attach:  screen -r {NAME}
 Detach:  Ctrl+A, then D
 List:    screen -ls
-Kill:    screen -X -S propel-train-{timestamp} quit</code></pre>
+Command: .propel/runs/{NAME}.sh
+Log:     tail -n 50 .propel/runs/{NAME}.log
+Result:  .propel/runs/{NAME}.exit (exit code; appears when the command ends)
+Kill:    screen -X -S {NAME} quit   (writes no exit file, so the task shows as lost)</code></pre>
 
     <p>If <code>screen</code> is not available, the skill falls back to <code>tmux</code> with equivalent commands.</p>
 
@@ -229,9 +253,9 @@ Kill:    screen -X -S propel-train-{timestamp} quit</code></pre>
 
     <h3 id="fixing-process">Fixing Process</h3>
     <ol>
-      <li><strong>Read the traceback</strong> &mdash; get the full error output from the screen session</li>
+      <li><strong>Read the traceback</strong> from the log with <code>tail -n 100 .propel/runs/{NAME}.log</code>. The screen session closes when the command ends, and <code>{NAME}.exit</code> holds the exit code.</li>
       <li><strong>Classify</strong>: runtime bug or logic change?</li>
-      <li><strong>If runtime bug</strong>: Present a "Gate 4 lite" diagnosis ("The error is [X] because [Y]. I'll fix it by [Z]. This changes [file:line]. Okay?"), wait for confirmation, apply minimal fix, restart training</li>
+      <li><strong>If runtime bug</strong>: Present a "Gate 4 lite" diagnosis ("The error is [X] because [Y]. I'll fix it by [Z]. This changes [file:line]. Okay?"), wait for confirmation, apply the minimal fix, then relaunch as a <strong>new</strong> run: a fresh <code>{NAME}</code> (new timestamp) and the Phase 2 block with <code>--ref &lt;OLD_ID&gt;</code> added to <code>start</code>. The old task is closed with <code>done &lt;OLD_ID&gt; --status failed --note "&lt;error signature&gt;; relaunched as &lt;NEW_ID&gt;"</code>. A name is never reused, because the old <code>.exit</code> would be read as the new run's result.</li>
       <li><strong>If same error recurs after 2 fixes</strong>: Stop and reassess before trying again</li>
     </ol>
 

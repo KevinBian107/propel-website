@@ -89,6 +89,8 @@
       <a href="skills/trainer-mode.html" class="sidebar-link sub">Trainer Mode</a>
       <a href="skills/retrospective.html" class="sidebar-link sub">Retrospective</a>
       <a href="skills/monitor.html" class="sidebar-link sub">Monitor</a>
+      <a href="skills/check-progress.html" class="sidebar-link sub">Check Progress</a>
+      <a href="skills/concise.html" class="sidebar-link sub">Concise</a>
       <a href="skills/c-review.html" class="sidebar-link sub">C-Review</a>
       <a href="skills/frontend-design.html" class="sidebar-link sub">Frontend Design</a>
       <a href="skills/other.html" class="sidebar-link sub">Other Skills</a>
@@ -179,13 +181,14 @@
         <tr><td><strong>Bug classification</strong></td><td>"Argue against this classification."</td></tr>
         <tr><td><strong>3-strike break</strong></td><td>"Three attempts failed. What assumption do all three share?"</td></tr>
         <tr><td><strong>Retrospective</strong></td><td>"Which of these conclusions does the evidence not actually support?"</td></tr>
+        <tr><td><strong>Writeup review</strong> &mdash; finished docs page or long write-up outside <code>scratch/</code>, with no consult of its own, rewritten by about 30 or more prose lines</td><td>"Compare the draft and the rewrite: is any claim, caveat or evidence item lost or changed, and where does a reader meet evidence before the claim it supports?" At Gate 1, Gate 2 and Retrospective this question joins that gate's consult instead (one call). It is the only question that passes file paths rather than inlined material, and it is skipped if either file holds secrets. See <a href="skills/concise.html">Concise</a>.</td></tr>
       </tbody>
     </table>
     <p>
       Notice that none of these questions can be answered with agreement. "Does this look right?" gets you a yes; "name the strongest counter-approach" gets you a second opinion. Every scheduled question is phrased so that a useful answer is a disagreement.
     </p>
     <div class="callout callout-warn">
-      <strong>It does not fire on trivia.</strong> Not on Q0/Q1 (those are questions <em>for you</em>), not on mode selection, not on formatting or a three-line edit, not on anything confined to <code>scratch/</code>. Over-firing turns the <code>&#9670; Consulting Codex</code> line into noise you scroll past &mdash; at which point the second model has stopped working even though it is still running and still costing you time.
+      <strong>It does not fire on trivia.</strong> Not on Q0/Q1 (those are questions <em>for you</em>), not on mode selection, not on formatting or a three-line edit, not on chat replies, not on <code>scratch/</code> working notes. (Gate 1, Gate 2 and Retrospective still review their own artifact wherever it lives: the investigation README and the retrospective registry are in <code>scratch/</code>. A standalone Writeup review never fires on <code>scratch/</code> files.) Over-firing turns the <code>&#9670; Consulting Codex</code> line into noise you scroll past &mdash; at which point the second model has stopped working even though it is still running and still costing you time.
     </div>
 
 
@@ -325,6 +328,9 @@ seeing this.</code></pre>
         <tr><td><code>/enable-codex</code></td><td>Turn the dual-model layer back on, and re-check whether the CLI is actually reachable.</td></tr>
       </tbody>
     </table>
+    <p>
+      Codex is off when <code>enabled</code> in <code>.propel/codex.json</code> is <code>false</code>, <code>null</code> or <code>0</code>, or a string that, trimmed and lowercased, is <code>"false"</code>, <code>"0"</code>, <code>"off"</code>, <code>"no"</code> or empty. A missing key (or a missing file) means on. Every Propel script that reads the file applies the same rule.
+    </p>
     <p>
       When disabled, gates, questioners and auditors all still fire. Only the second opinion goes away. Propel prints one <code>&#9671; Codex disabled &mdash; single-model gate.</code> line at the first gate of each session, so you always know which regime you're in, and then stops mentioning it.
     </p>

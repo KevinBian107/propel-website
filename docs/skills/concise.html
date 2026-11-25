@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Concise &mdash; Propel Documentation</title>
+  <meta name="description" content="Concise skill: claim before evidence, every evidence item survives the rewrite, checked by claim-check.sh and a Codex draft-versus-rewrite comparison for finished write-ups." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&family=Noto+Sans+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="../../assets/logo-c.svg" />
+  <link rel="stylesheet" href="../docs.css" />
+</head>
+<body>
+
+<header class="docs-header">
+  <button class="sidebar-toggle" aria-label="Toggle navigation">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+  </button>
+  <a href="../../index.html" class="docs-header-logo">
+    <img src="../../assets/logo-c.svg" alt="Propel" />
+    Propel
+    <span class="logo-tag">docs</span>
+  </a>
+  <nav class="docs-header-nav">
+    <a href="../../index.html">Home</a>
+    <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">GitHub</a>
+  </nav>
+  <div class="docs-header-search">
+    <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"/></svg>
+    Search
+    <kbd>/</kbd>
+  </div>
+</header>
+
+<div class="docs-layout">
+
+  <nav class="docs-sidebar" aria-label="Documentation navigation">
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Getting Started</div>
+      <a href="../index.html" class="sidebar-link">Overview</a>
+      <a href="../getting-started.html" class="sidebar-link">Installation &amp; Setup</a>
+      <a href="../core-principles.html" class="sidebar-link">Core Principles</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">How It Works</div>
+      <a href="../automation.html" class="sidebar-link">Automatic Dispatch</a>
+      <a href="../codex.html" class="sidebar-link">Codex &mdash; Two Models</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Pipeline</div>
+      <a href="../pipeline/index.html" class="sidebar-link">Pipeline Overview</a>
+      <a href="../pipeline/gates.html" class="sidebar-link">Gates &amp; Questioners</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Modes</div>
+      <a href="../modes/index.html" class="sidebar-link">Mode System</a>
+      <a href="../modes/researcher.html" class="sidebar-link sub">Researcher</a>
+      <a href="../modes/engineer.html" class="sidebar-link sub">Engineer</a>
+      <a href="../modes/debugger.html" class="sidebar-link sub">Debugger</a>
+      <a href="../modes/trainer.html" class="sidebar-link sub">Trainer</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Skills</div>
+      <a href="../skills/index.html" class="sidebar-link">Skills Overview</a>
+      <a href="../skills/codex-consult.html" class="sidebar-link sub">Codex Consult</a>
+      <a href="../skills/investigation.html" class="sidebar-link sub">Investigation</a>
+      <a href="../skills/research-design.html" class="sidebar-link sub">Research Design</a>
+      <a href="../skills/subagent-driven-research.html" class="sidebar-link sub">Implementation</a>
+      <a href="../skills/systematic-debugging.html" class="sidebar-link sub">Systematic Debugging</a>
+      <a href="../skills/research-validation.html" class="sidebar-link sub">Validation</a>
+      <a href="../skills/deep-research.html" class="sidebar-link sub">Deep Research</a>
+      <a href="../skills/think-deeply.html" class="sidebar-link sub">Think Deeply</a>
+      <a href="../skills/context-hygiene.html" class="sidebar-link sub">Context Hygiene</a>
+      <a href="../skills/trainer-mode.html" class="sidebar-link sub">Trainer Mode</a>
+      <a href="../skills/retrospective.html" class="sidebar-link sub">Retrospective</a>
+      <a href="../skills/monitor.html" class="sidebar-link sub">Monitor</a>
+      <a href="../skills/check-progress.html" class="sidebar-link sub">Check Progress</a>
+      <a href="../skills/concise.html" class="sidebar-link sub active">Concise</a>
+      <a href="../skills/c-review.html" class="sidebar-link sub">C-Review</a>
+      <a href="../skills/frontend-design.html" class="sidebar-link sub">Frontend Design</a>
+      <a href="../skills/other.html" class="sidebar-link sub">Other Skills</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Agents &mdash; Auditors</div>
+      <a href="../agents/index.html" class="sidebar-link">Agents Overview</a>
+      <a href="../agents/paper-alignment-auditor.html" class="sidebar-link sub">Paper Alignment</a>
+      <a href="../agents/silent-bug-detector.html" class="sidebar-link sub">Silent Bug Detector</a>
+      <a href="../agents/jax-logic-auditor.html" class="sidebar-link sub">JAX Logic Auditor</a>
+      <a href="../agents/regression-guard.html" class="sidebar-link sub">Regression Guard</a>
+      <a href="../agents/data-flow-tracer.html" class="sidebar-link sub">Data Flow Tracer</a>
+      <a href="../agents/failure-mode-researcher.html" class="sidebar-link sub">Failure Mode Researcher</a>
+      <a href="../agents/env-researcher.html" class="sidebar-link sub">Env Researcher</a>
+      <a href="../agents/code-reviewer.html" class="sidebar-link sub">Code Reviewer</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Agents &mdash; Workers</div>
+      <a href="../agents/codex-bridge.html" class="sidebar-link sub">Codex Bridge</a>
+      <a href="../agents/investigator.html" class="sidebar-link sub">Investigator</a>
+      <a href="../agents/implementer.html" class="sidebar-link sub">Implementer</a>
+      <a href="../agents/spec-reviewer.html" class="sidebar-link sub">Spec Reviewer</a>
+      <a href="../agents/trainer-operator.html" class="sidebar-link sub">Trainer Operator</a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Reference</div>
+      <a href="../customization.html" class="sidebar-link">Customization</a>
+      <a href="../recommended-plugins.html" class="sidebar-link">Plugins</a>
+      <a href="../pitfalls.html" class="sidebar-link">Common Pitfalls</a>
+    </div>
+
+  </nav>
+
+  <article class="docs-content">
+
+    <div class="breadcrumbs">
+      <a href="../index.html">Docs</a>
+      <span class="sep">&#8250;</span>
+      <a href="index.html">Skills</a>
+      <span class="sep">&#8250;</span>
+      Concise
+    </div>
+
+    <h1 class="page-title">Concise</h1>
+    <p class="page-subtitle">
+      Fewer words per fact, not fewer facts. The claim comes first and its evidence follows; restatement, narration and empty hedges go; every evidence item in the draft survives the rewrite.
+    </p>
+
+    <div class="admonition note">
+      <div class="admonition-title">Shorter Is Not the Goal</div>
+      <p style="margin-bottom: 0">A rewrite that drops a <code>file:line</code>, a number or a caveat is not concise, it is lossy. For a finished write-up the skill checks this with a script and, where Codex is enabled, a second model compares the draft against the rewrite. Neither check decides anything: a missing item is restored, and you read the result.</p>
+    </div>
+
+    <h2 id="overview">Overview</h2>
+    <p>
+      Concise is a writing discipline for responses and written artifacts: investigation READMEs, design docs, retrospective entries, docs pages and other long write-ups. It is active in all four modes. For chat replies the rules are self-applied, with no script and no Codex. For a finished write-up the skill saves the draft, rewrites it, checks with <code>claim-check.sh</code> that no extracted evidence token went missing, and has Codex compare the draft against the rewrite &mdash; inside the consult the artifact already gets at its gate, or as a standalone Writeup review for a substantively rewritten docs page or long write-up outside <code>scratch/</code>.
+    </p>
+
+    <h2 id="triggers">When It Triggers</h2>
+    <table>
+      <thead>
+        <tr><th>Trigger</th><th>Details</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Manual</strong></td><td>"make this concise", "tighten this", "this is too long", "cut this down", "make it shorter", "trim this", "write this up", "clean up the README", "clean up the write-up"</td></tr>
+        <tr><td><strong>Automatic</strong></td><td>A finished written artifact is about to be presented: the investigation write-up at Gate 1, the design doc at Gate 2, a retrospective entry, a docs page</td></tr>
+        <tr><td><strong>Every turn</strong></td><td><code>route.sh</code> carries rule 7: "Claim first, then its evidence; cut narration and restatement; never drop evidence (concise skill)." This is how the rules reach ordinary replies</td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="rules">The Rules</h2>
+    <table>
+      <thead>
+        <tr><th>#</th><th>Rule</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td><strong>Claim before evidence.</strong> Lead with the claim; the evidence follows it, never the reverse.</td></tr>
+        <tr><td>2</td><td><strong>Every evidence item survives.</strong> <code>file:line</code> references, numbers, test results, command output, decisions, attributions (<code>[claude]</code>, <code>[codex]</code>) and links stay in the rewrite.</td></tr>
+        <tr><td>3</td><td><strong>Cut what carries nothing.</strong> Restatement, narration of process ("I then looked at&hellip;"), hedges with no information, preamble and recap, adjectives doing no work.</td></tr>
+        <tr><td>4</td><td><strong>One idea per sentence.</strong> Tables for parallel facts; bullets nested no deeper than two levels.</td></tr>
+        <tr><td>5</td><td><strong>Keep uncertainty that informs.</strong> "unverified" and "not tested on tmux" are evidence about the claim, not hedges.</td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="procedure">Finished Write-Ups &mdash; The Procedure</h2>
+    <p>Run the script from the repo root: <code>bash .claude/scripts/claim-check.sh</code> in a project that uses Propel (<code>bash scripts/claim-check.sh</code> in Propel's own source tree).</p>
+    <ol>
+      <li><strong>Save the draft</strong> with <code>claim-check.sh --save-draft &lt;artifact&gt;</code>. It copies the artifact under <code>.propel/concise/</code>, naming it after the artifact's repo-relative path with every <code>/</code> replaced by <code>__</code>, plus <code>.draft.md</code>, and prints that path: <code>scratch/2026-11-18-x/README.md</code> becomes <code>.propel/concise/scratch__2026-11-18-x__README.md.draft.md</code>. If a draft for that artifact is already pending, it refuses to overwrite it (exit 1). A draft is <strong>stale</strong> only when its gate is visibly answered (in the conversation, or recorded in the artifact); it is deleted and replaced. Any other pending draft, including one from an earlier session or from before a <code>/clear</code>, is the <strong>baseline</strong>: it may be the only copy of the original text, so it is kept and the rewrite is checked against it.</li>
+      <li><strong>Rewrite</strong> the artifact in place, by the five rules. A template with a fixed section order (a registry entry, the investigation README, the Gate 2 summary) keeps that order; claim-first applies within each section.</li>
+      <li><strong>Check</strong>: <code>claim-check.sh &lt;draft path&gt; &lt;artifact&gt;</code> reports every evidence token the rewrite dropped.</li>
+      <li><strong>Restore</strong> every missing token and re-run until exit 0. Rule 2 has no exceptions: a missing item goes back in, never "removed X".</li>
+      <li><strong>Read for meaning.</strong> Compare draft and rewrite claim by claim for what no script can see: a dropped "not" or "only", a lost caveat, a swapped result, a bare integer, a unit it doesn't know.</li>
+      <li><strong>Codex compares draft and rewrite</strong>, if Codex is enabled (see <a href="#codex">below</a>). Each finding is verified against the two files before anything changes.</li>
+      <li><strong>Present</strong> the rewrite. The draft is kept until you accept the rewrite. For a gate write-up (Gate 1, Gate 2, retrospective), answering the gate question counts as accepting the rewrite; there is no separate &ldquo;accept the rewrite?&rdquo; question next to it.</li>
+      <li><strong>Clean up.</strong> Once you accept it (for a gate write-up: right after you answer the gate), the draft is deleted. A draft left behind blocks the next <code>--save-draft</code> of that artifact, which is how an unaccepted rewrite stays visible.</li>
+    </ol>
+
+    <h3 id="claim-check">claim-check.sh</h3>
+    <p>A bash-and-awk script (no <code>python3</code>), so "every evidence item survives" is checked, not remembered:</p>
+    <pre><code>bash .claude/scripts/claim-check.sh FILE                # list FILE's evidence tokens, with counts
+bash .claude/scripts/claim-check.sh DRAFT REWRITE       # tokens DRAFT has that REWRITE lost
+bash .claude/scripts/claim-check.sh --save-draft FILE   # copy FILE to its draft path; never overwrites</code></pre>
+    <p>It extracts backtick spans, URLs (balanced parentheses kept), attribution tags (<code>[claude]</code>, <code>[codex]</code>, <code>[both]</code>, and qualified forms like <code>[codex &middot; unverified]</code>), <code>path:line</code> references, ratios (<code>125/125</code>, <code>0/0/0</code>), commit hashes, numbers that carry a decimal point, an exponent, a <code>%</code> or a unit (<code>91.2%</code>, <code>lr=3e-4</code>, <code>3 epochs</code>, <code>12 ms</code>), and results (<code>3 failed</code>, <code>120 passed</code>). A sign alone does not make a number a token: a leading <code>+</code> or <code>-</code> is kept as part of a number that already qualifies (<code>-0.5</code>, <code>+3%</code>), but <code>-3</code> by itself is a bare integer. Bare integers are not tokens. Reflowing a paragraph does not change a token.</p>
+    <table>
+      <thead>
+        <tr><th>Line</th><th>Meaning</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>missing</code></td><td>The token is gone from the rewrite; printed with its class and first draft line. The only kind that changes the exit status</td></tr>
+        <tr><td><code>fewer</code></td><td>Informational: the token is kept with a lower count, as cutting a restatement does</td></tr>
+        <tr><td><code>unquoted</code></td><td>Informational: a backtick span lost its backticks, but its text is still there</td></tr>
+      </tbody>
+    </table>
+    <table>
+      <thead>
+        <tr><th>Exit</th><th>Meaning</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>0</code></td><td>No extracted token is missing (<code>--save-draft</code>: saved)</td></tr>
+        <tr><td><code>1</code></td><td>Some token is missing from the rewrite (<code>--save-draft</code>: a draft is already pending)</td></tr>
+        <tr><td><code>2</code></td><td>Usage error, or a file is missing or unreadable</td></tr>
+        <tr><td><code>3</code></td><td>Internal error</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-warn">
+      <strong>Exit 0 is not proof that nothing was lost.</strong> A rewrite can keep every token and still invert the meaning (&ldquo;<code>fast</code> failed; <code>safe</code> passed&rdquo; with the two swapped), and words like &ldquo;not&rdquo; or &ldquo;only&rdquo;, a caveat, or a bare integer are not tokens. The script catches dropped evidence; changed meaning is what the Codex comparison and your own reading are for.
+    </div>
+
+    <h2 id="codex">The Codex Comparison</h2>
+    <p>The writeup-review question: is any claim, caveat or evidence item lost or changed, and where does a reader meet evidence before the claim it supports? It is the one Codex question that passes <em>paths</em>, the saved draft and the rewrite, because a review of the final text alone cannot see what was dropped. Codex reads both files in the repository and answers under the heading <code>Writeup review:</code>. Because Codex reads those files directly, bypassing redaction, the question is skipped (and Claude says so) if either holds secrets, credentials or unpublished data.</p>
+    <table>
+      <thead>
+        <tr><th>Artifact</th><th>How Codex sees it</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Investigation findings (Gate 1), design doc (Gate 2), retrospective entry</td><td>Folded into that gate's own consult: one call, two questions, and it counts as the writeup review. The gate's material is inlined as before; only the writeup question gets paths. The ledger records <code>--question "&lt;gate question&gt; + writeup review"</code></td></tr>
+        <tr><td>A finished docs page, or a long write-up outside <code>scratch/</code>, with no consult of its own</td><td>A standalone <strong>Writeup review</strong> consult, only when the rewrite changed about 30 or more lines of prose (the Gate 3 threshold)</td></tr>
+        <tr><td><code>scratch/</code> working notes, trivial or formatting-only edits, chat replies</td><td>Never. The same rewrite is never reviewed twice</td></tr>
+      </tbody>
+    </table>
+    <p>Findings come back verified and attributed like every other consult; see <a href="codex-consult.html">Codex Consult</a>. With Codex disabled, the script and the reading still run and the gate is single-model.</p>
+
+    <h2 id="callers">Where It Runs</h2>
+    <table>
+      <thead>
+        <tr><th>Caller</th><th>Artifact</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><a href="investigation.html">Investigation</a></td><td>The README's Findings section, before Gate 1 (the rest of the living README stays as written)</td></tr>
+        <tr><td><a href="research-design.html">Research Design</a></td><td>The design doc presented at Gate 2</td></tr>
+        <tr><td><a href="retrospective.html">Retrospective</a></td><td>The registry entry, which also gets the &ldquo;Retrospective conclusions&rdquo; Codex consult; the check is re-run after verified Codex findings are folded in</td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="guardrails">Guardrails</h2>
+    <table>
+      <thead>
+        <tr><th>Guardrail</th><th>Why</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Restore every missing token</td><td>"Concise" means fewer words per fact; a dropped fact is a lost result, not a tighter sentence.</td></tr>
+        <tr><td>Treat exit 0 as "no token missing", never as "nothing lost"</td><td>Tokens survive a meaning inversion; the script cannot read.</td></tr>
+        <tr><td>Keep informative uncertainty</td><td>Cutting "unverified" turns a hypothesis into a claim.</td></tr>
+        <tr><td>Give Codex both paths for the writeup question; skip it if either file holds secrets</td><td>Only the draft shows what the rewrite dropped, and Codex reads the files unredacted.</td></tr>
+        <tr><td>Keep the draft until the rewrite is accepted; never overwrite a pending one</td><td>The draft is the evidence of what was there.</td></tr>
+        <tr><td>Rewrite prose only &mdash; never code, quoted output or logs</td><td>Evidence is copied verbatim, not paraphrased.</td></tr>
+        <tr><td>No script and no Codex for chat replies or <code>scratch/</code> notes</td><td>The per-turn rule is enough there; a consult per reply would be noise.</td></tr>
+      </tbody>
+    </table>
+
+    <nav class="docs-pager">
+      <a href="check-progress.html">
+        <span class="pager-label">&larr; Previous</span>
+        <span class="pager-title">Check Progress</span>
+      </a>
+      <a href="codex-consult.html" class="next">
+        <span class="pager-label">Next &rarr;</span>
+        <span class="pager-title">Codex Consult</span>
+      </a>
+    </nav>
+
+    <footer class="docs-footer">
+      <p>
+        <a href="https://github.com/KevinBian107/propel" target="_blank" rel="noopener">Propel</a> is open source under the MIT License.
+        Built by <a href="https://kbian.org" target="_blank" rel="noopener">Kaiwen Bian</a> &amp; <a href="https://yuertang.dev/" target="_blank" rel="noopener">Yuer Tang</a>.
+      </p>
+    </footer>
+
+  </article>
+
+  <aside class="docs-toc">
+    <div class="docs-toc-title">On This Page</div>
+    <a href="#overview">Overview</a>
+    <a href="#triggers">When It Triggers</a>
+    <a href="#rules">The Rules</a>
+    <a href="#procedure">Finished Write-Ups</a>
+    <a href="#claim-check" class="toc-h3">claim-check.sh</a>
+    <a href="#codex">The Codex Comparison</a>
+    <a href="#callers">Where It Runs</a>
+    <a href="#guardrails">Guardrails</a>
+  </aside>
+
+</div>
+
+<script src="../docs.js"></script>
+</body>
+</html>

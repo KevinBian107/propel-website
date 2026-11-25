@@ -90,6 +90,8 @@
       <a href="skills/trainer-mode.html" class="sidebar-link sub">Trainer Mode</a>
       <a href="skills/retrospective.html" class="sidebar-link sub">Retrospective</a>
       <a href="skills/monitor.html" class="sidebar-link sub">Monitor</a>
+      <a href="skills/check-progress.html" class="sidebar-link sub">Check Progress</a>
+      <a href="skills/concise.html" class="sidebar-link sub">Concise</a>
       <a href="skills/c-review.html" class="sidebar-link sub">C-Review</a>
       <a href="skills/frontend-design.html" class="sidebar-link sub">Frontend Design</a>
       <a href="skills/other.html" class="sidebar-link sub">Other Skills</a>
@@ -249,11 +251,40 @@ cd /path/to/your/project
 propel init</code></pre>
     <p><code>propel init</code>, from any of the three paths, does the same thing:</p>
     <ul>
-      <li>Copies all skills, agents, commands, hooks and scripts into <code>.claude/</code></li>
-      <li>Configures four hooks in <code>settings.local.json</code>: session context, working memory, the per-turn routing card, and the <code>PostToolUse</code> auditor dispatch that fires after every source edit</li>
+      <li>Installs Propel's skills, agents, commands, hooks, core policy and scripts (the managed directories <code>skills/</code>, <code>agents/</code>, <code>commands/</code>, <code>hooks/</code>, <code>core/</code> and <code>scripts/</code>) into <code>.claude/</code> and records them in <code>.propel/manifest.json</code>. Files you added to <code>.claude/</code> yourself are never touched</li>
+      <li>Registers its hooks in <code>settings.local.json</code>, next to your permissions and your own hooks (if <code>settings.local.json</code> is a symlink, init writes through it and keeps the link): session context and working memory on <code>SessionStart</code>, the per-turn routing card, and the <code>PostToolUse</code> auditor dispatch that fires after every source edit</li>
       <li>Seeds <code>.propel/codex.json</code> with the dual-model layer enabled</li>
       <li>Adds <code>scratch/</code>, <code>sessions/</code>, <code>.propel/</code>, <code>.claude/</code>, and <code>propel/</code> to <code>.gitignore</code></li>
     </ul>
+    <p>Add <code>--dry-run</code> to see what it would change without writing anything.</p>
+
+    <h3 id="updating">Updating Propel</h3>
+    <p>From inside your project:</p>
+    <pre><code>propel status             # installed vs. available version, what would change, hook registrations pending
+propel update --dry-run   # preview; writes no working files (it may fetch from the remote)
+propel update             # pull Propel, reinstall if needed, refresh this project</code></pre>
+    <p>
+      <code>propel update</code> runs <code>git pull --ff-only</code> in your Propel clone. It refuses if the clone has uncommitted changes to tracked files, and <code>--no-pull</code> skips the pull. It reinstalls the package when either (a) its pull changed <code>pyproject.toml</code> or <code>__init__.py</code>, or (b) the installed package version differs from the version in the source, so it also catches a manual <code>git pull</code> or a run with <code>--no-pull</code>. A dependency change in <code>pyproject.toml</code> with no version bump, after a manual pull, is not detected; reinstall by hand in that case. It then re-runs <code>propel init</code> in the current project with the new code. <code>propel --version</code> prints the version you have installed.
+    </p>
+    <p>
+      Hook changes load when a Claude Code session starts. When <code>propel init</code> or <code>propel update</code> changes hook registrations, it prints a hint to restart any open Claude Code sessions, and a session still running the pre-split registration (one argument-less <code>session-start.sh</code>) also sees a notice asking for a restart the next time session start fires. <code>propel status</code> also warns when Propel paths under a symlink pointing outside <code>.claude/</code> were left alone, since init never writes outside <code>.claude/</code> through a symlink (the settings file is the one exception).
+    </p>
+    <table>
+      <thead>
+        <tr><th>An update&hellip;</th><th>What</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Keeps</strong></td><td>Skills, agents, commands and hooks you added yourself; your <code>CLAUDE.md</code>; everything in <code>.propel/</code>; your permissions and your own hooks in <code>settings.local.json</code></td></tr>
+        <tr><td><strong>Replaces</strong></td><td>Propel's own bundled files, even ones you edited. Every replaced or removed file is backed up first, and each backup is named in the output</td></tr>
+        <tr><td><strong>Removes</strong></td><td>Files Propel no longer ships, and Propel's own outdated hook registrations, both backed up</td></tr>
+      </tbody>
+    </table>
+    <p>
+      Backups go to <code>.propel/backup/&lt;timestamp&gt;/</code>, and the newest 10 are kept. If you have a file of your own at a path a new Propel release starts shipping: once a manifest exists (after your first update with this version), your file stays and Propel's copy is skipped with a warning; on the first update from an older install, a differing file at one of Propel's paths is backed up and replaced. A <code>settings.local.json</code> that isn't valid JSON stops init before anything is written. To customize Propel, add your own files instead of editing Propel's; see <a href="customization.html">Customization</a>.
+    </p>
+    <p>
+      The terminal setup (<code>propel setup</code>) also tells you when this project is behind the Propel clone you have and offers to bring it up to date. That step re-runs <code>propel init</code> and does not pull; pulling is what <code>propel update</code> adds.
+    </p>
 
     <!-- ── First Session ── -->
     <h2 id="first-session">3. Start Claude and Describe Your Problem</h2>
@@ -386,6 +417,11 @@ propel init</code></pre>
       <li>Check the plan for where you left off: <code>scratch/{investigation}/plan.md</code></li>
       <li>Continue from the "Next Steps" section</li>
     </ol>
+    <p>
+      Training runs, plan tasks and monitor loops still in flight are listed at the start of every session, from the task ledger in <code>.propel/tasks/</code>. Ask "what's running" or "where was I" and <a href="skills/check-progress.html">check-progress</a> shows open tasks plus recently finished ones, and asks what to do about anything left open from an earlier session. From a terminal:
+    </p>
+    <pre><code>propel tasks         # open tasks only: running, blocked, lost, unknown
+propel tasks --all   # plus finished tasks from the last 10 session files (--sessions N), within 14 days</code></pre>
 
     <div class="admonition tip">
       <div class="admonition-title">Context Hygiene</div>
@@ -421,6 +457,7 @@ propel init</code></pre>
     <a href="#setup-local" class="toc-h3">Local: Setup Console</a>
     <a href="#setup-cluster" class="toc-h3">Cluster: Terminal Setup</a>
     <a href="#cli-init" class="toc-h3">Or Do It by Hand</a>
+    <a href="#updating" class="toc-h3">Updating Propel</a>
     <a href="#first-session">3. Start Claude</a>
     <a href="#mode-selection" class="toc-h3">Mode Selection</a>
     <a href="#codex-check" class="toc-h3">The Second Model</a>
